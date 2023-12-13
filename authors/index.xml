@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on Neryx&#39;s Blog</title>
+    <link>https://neryx.github.io/authors/</link>
+    <description>Recent content in Authors on Neryx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 Nov 2023 02:00:20 +0800</lastBuildDate>
+    <atom:link href="https://neryx.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Neryx</title>
+      <link>https://neryx.github.io/authors/neryx/</link>
+      <pubDate>Mon, 20 Nov 2023 02:00:20 +0800</pubDate>
+      <guid>https://neryx.github.io/authors/neryx/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
