@@ -6,7 +6,7 @@
     <description>Recent content in 主页 on Neryx&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Nov 2023 02:00:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Dec 2023 02:00:20 +0800</lastBuildDate>
     <atom:link href="https://neryx.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>归档</title>
@@ -21,6 +21,34 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://neryx.github.io/about/</guid>
       <description>记录和分享</description>
+    </item>
+    <item>
+      <title>Shiro-550</title>
+      <link>https://neryx.github.io/docs/java/vulrecurrent/shiro-550/</link>
+      <pubDate>Tue, 12 Dec 2023 02:00:20 +0800</pubDate>
+      <guid>https://neryx.github.io/docs/java/vulrecurrent/shiro-550/</guid>
+      <description>Shiro-550 环境搭建 Shiro1.2.4：https://github.com/apache/shiro/releases/tag/shiro-root-1.2.4
+编辑 shiro/web 目录下的 pom.xml，将 jstl 的版本修改为1.2
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jstl&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; IDEA导入 mvn 项目，配置 tomcat 环境
+漏洞分析 根据漏洞描述，Shiro≤1.2.4 版本默认使用 CookieRememberMeManager，当获取用户请求时，大致的关键处理过程如下：
+获取Cookie中rememberMe的值 对rememberMe进行Base64解码 使用AES进行解密 对解密的值进行反序列化 由于AES加密的Key是硬编码的默认Key，因此攻击者可通过使用默认的Key对恶意构造的序列化数据进行加密，当 CookieRememberMeManager 对恶意的 rememberMe 进行以上过程处理时，最终会对恶意数据进行反序列化，从而导致反序列化漏洞
+抓包分析 勾选 Remember Me
+服务器会返回一个 rememberMe Cookie
+之后的请求也会带上这个Cookie
+源码分析 查找 Cookie 相关操作类
+CookieRememberMeManager 类里有序列化和get序列化的方法
+getRememberedSerializedIdentity() 查找调用
+convertBytesToPrincipals() 执行解密和反序列化
+deserialize() [DefaultSerializer类中]
+解密分析 decrypt()
+接口
+找到 decryptionCipherKey 赋值的地方
+常量 decryptionCipherKey
+加密分析 convertPrincipalsToBytes()
+encrypt()
+可以知道加密算法为 AES的CBC模式
+加解密脚本
+import base64 import uuid from Crypto.</description>
     </item>
     <item>
       <title>CC3</title>
