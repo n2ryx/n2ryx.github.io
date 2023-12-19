@@ -7,7 +7,7 @@ defineTransletClasses() private，继续找
 父类是 ABSTRACT_TRANSLET 常量就赋一个值；否则会用 put 方法，_auxClasses 为空，就会报空指针错误
 getTransletInstance() newInstance()，初始化后，可以动态执行代码
 newTransformer() public
-CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl; import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl; import java.lang.reflect.Field; import java.nio.file.Files; import java.nio.file.Paths; import java.util.Base64; public class CC3_Test { public static void main(String[] args) throws Exception { TemplatesImpl templates = new TemplatesImpl(); Class tc = templates.getClass(); Field nameField = tc.getDeclaredField(&#34;_name&#34;); nameField.setAccessible(true); nameField.set(templates,&#34;aaa&#34;); Field byteCodesField = tc.getDeclaredField(&#34;_bytecodes&#34;); byteCodesField.setAccessible(true); byte[] code = Files.readAllBytes(Paths.get(&#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&#34;)); // byte[] code = Base64.'>
+CC3_Test package Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl; import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl; import java.lang.reflect.Field; import java.nio.file.Files; import java.nio.file.Paths; import java.util.Base64; public class CC3_Test { public static void main(String[] args) throws Exception { TemplatesImpl templates = new TemplatesImpl(); Class tc = templates.getClass(); Field nameField = tc.getDeclaredField(&#34;_name&#34;); nameField.setAccessible(true); nameField.set(templates,&#34;aaa&#34;); Field byteCodesField = tc.getDeclaredField(&#34;_bytecodes&#34;); byteCodesField.setAccessible(true); byte[] code = Files.readAllBytes(Paths.get(&#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&#34;)); // byte[] code = Base64.'>
 <meta name='theme-color' content='#00ffff'>
 
 <meta property='og:title' content='CC3 • '>
@@ -16,7 +16,7 @@ defineTransletClasses() private，继续找
 父类是 ABSTRACT_TRANSLET 常量就赋一个值；否则会用 put 方法，_auxClasses 为空，就会报空指针错误
 getTransletInstance() newInstance()，初始化后，可以动态执行代码
 newTransformer() public
-CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl; import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl; import java.lang.reflect.Field; import java.nio.file.Files; import java.nio.file.Paths; import java.util.Base64; public class CC3_Test { public static void main(String[] args) throws Exception { TemplatesImpl templates = new TemplatesImpl(); Class tc = templates.getClass(); Field nameField = tc.getDeclaredField(&#34;_name&#34;); nameField.setAccessible(true); nameField.set(templates,&#34;aaa&#34;); Field byteCodesField = tc.getDeclaredField(&#34;_bytecodes&#34;); byteCodesField.setAccessible(true); byte[] code = Files.readAllBytes(Paths.get(&#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&#34;)); // byte[] code = Base64.'>
+CC3_Test package Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl; import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl; import java.lang.reflect.Field; import java.nio.file.Files; import java.nio.file.Paths; import java.util.Base64; public class CC3_Test { public static void main(String[] args) throws Exception { TemplatesImpl templates = new TemplatesImpl(); Class tc = templates.getClass(); Field nameField = tc.getDeclaredField(&#34;_name&#34;); nameField.setAccessible(true); nameField.set(templates,&#34;aaa&#34;); Field byteCodesField = tc.getDeclaredField(&#34;_bytecodes&#34;); byteCodesField.setAccessible(true); byte[] code = Files.readAllBytes(Paths.get(&#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&#34;)); // byte[] code = Base64.'>
 <meta property='og:url' content='https://neryx.github.io/docs/java/javagadget/cc3/'>
 <meta property='og:site_name' content='Neryx&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='JavaGadget'><meta property='article:published_time' content='2023-11-20T02:00:20&#43;08:00'/><meta property='article:modified_time' content='2023-11-20T02:00:20&#43;08:00'/><meta name='twitter:card' content='summary'>
@@ -89,7 +89,7 @@ CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.
 
   <div class='container list-container'>
   <ul class='list taxonomy-cloud'><li>
-        <a href='/tags/javabase/' style='font-size:1.4em'>JavaBase</a>
+        <a href='/tags/javabase/' style='font-size:1.6em'>JavaBase</a>
       </li><li>
         <a href='/tags/javagadget/' style='font-size:2em'>JavaGadget</a>
       </li><li>
@@ -223,7 +223,7 @@ CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.
 <p>public</p>
 <p><img src="https://cdn.jsdelivr.net/gh/N2ryx/Picture-bed@master/typora/image-20231120173014158.png" alt="image-20231120173014158"></p>
 <h4 id="cc3_test">CC3_Test</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> xyz.Gadget.CC3;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC3;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
@@ -256,7 +256,7 @@ CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Test.java 构建成 Test.class</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> xyz.Gadget.CC3;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC3;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.DOM;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.TransletException;
@@ -313,7 +313,7 @@ CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.
 <h4 id="transform">transform()</h4>
 <p><img src="https://cdn.jsdelivr.net/gh/N2ryx/Picture-bed@master/typora/image-20231121211629321.png" alt="image-20231121211629321"></p>
 <h3 id="poc">POC</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> xyz.Gadget.CC3;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC3;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
@@ -385,7 +385,7 @@ CC3_Test package xyz.Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="cc3cc6">CC3+CC6</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> xyz.Gadget.CC3;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC3;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;

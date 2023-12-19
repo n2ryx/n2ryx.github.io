@@ -6,8 +6,20 @@
     <description>Recent content in JavaBase on Neryx&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Oct 2023 02:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Nov 2023 02:00:20 +0800</lastBuildDate>
     <atom:link href="https://neryx.github.io/tags/javabase/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebGoat-Java反序列化</title>
+      <link>https://neryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Fri, 10 Nov 2023 02:00:20 +0800</pubDate>
+      <guid>https://neryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>WebGoat-Java反序列化 源项目：webgoat-server-8.2.2（https://github.com/WebGoat/WebGoat/releases）
+Jdk：&amp;gt;=15（11不行）
+启动命令：
+java -jar webgoat-server-8.2.2.jar http://127.0.0.1:8080/WebGoat/login
+题目java文件：webgoat-server-8.2.2.jar 解包，webgoat-server-8.2.2/BOOT-INF/lib/insecure-deserialization-8.2.2.jar再次解包，org/org.owasp.webgoat.deserialization下的文件
+分析源码 // InsecureDeserializationTask package org.owasp.webgoat.deserialization; import java.io.ByteArrayInputStream; import java.io.IOException; import java.io.InvalidClassException; import java.io.ObjectInputStream; import java.util.Base64; import org.dummy.insecure.framework.VulnerableTaskHolder; import org.owasp.webgoat.assignments.AssignmentEndpoint; import org.owasp.webgoat.assignments.AssignmentHints; import org.owasp.webgoat.assignments.AttackResult; import org.springframework.web.bind.annotation.PostMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.ResponseBody; import org.springframework.web.bind.annotation.RestController; @RestController @AssignmentHints({&amp;#34;insecure-deserialization.hints.1&amp;#34;, &amp;#34;insecure-deserialization.hints.2&amp;#34;, &amp;#34;insecure-deserialization.hints.3&amp;#34;}) public class InsecureDeserializationTask extends AssignmentEndpoint { public InsecureDeserializationTask() { } @PostMapping({&amp;#34;/InsecureDeserialization/task&amp;#34;}) @ResponseBody public AttackResult completed(@RequestParam String token) throws IOException { String b64token = token.replace(&amp;#39;-&amp;#39;, &amp;#39;+&amp;#39;).replace(&amp;#39;_&amp;#39;, &amp;#39;/&amp;#39;); long before; long after; try { label71: { // base64解码，通过字节流反序列化对象 ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(Base64.</description>
+    </item>
     <item>
       <title>Java反序列化原理</title>
       <link>https://neryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86/</link>
