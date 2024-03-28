@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JavaBase on n2ryx&#39;s Blog</title>
+    <link>https://n2ryx.github.io/tags/javabase/</link>
+    <description>Recent content in JavaBase on n2ryx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://n2ryx.github.io/tags/javabase/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebGoat-Java反序列化</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Fri, 10 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>WebGoat-Java反序列化 源项目：webgoat-server-8.2.2（https://github.com/WebGoat/WebGoat/releases）
+Jdk：&amp;gt;=15（11不行）
+启动命令：
+java -jar webgoat-server-8.2.2.jar http://127.0.0.1:8080/WebGoat/login
+题目java文件：webgoat-server-8.2.2.jar 解包，webgoat-server-8.2.2/BOOT-INF/lib/insecure-deserialization-8.2.2.jar再次解包，org/org.owasp.webgoat.deserialization下的文件
+分析源码 // InsecureDeserializationTask package org.owasp.webgoat.deserialization; import java.io.ByteArrayInputStream; import java.io.IOException; import java.io.InvalidClassException; import java.io.ObjectInputStream; import java.util.Base64; import org.dummy.insecure.framework.VulnerableTaskHolder; import org.owasp.webgoat.assignments.AssignmentEndpoint; import org.owasp.webgoat.assignments.AssignmentHints; import org.owasp.webgoat.assignments.AttackResult; import org.springframework.web.bind.annotation.PostMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.ResponseBody; import org.springframework.web.bind.annotation.RestController; @RestController @AssignmentHints({&amp;#34;insecure-deserialization.hints.1&amp;#34;, &amp;#34;insecure-deserialization.hints.2&amp;#34;, &amp;#34;insecure-deserialization.hints.3&amp;#34;}) public class InsecureDeserializationTask extends AssignmentEndpoint { public InsecureDeserializationTask() { } @PostMapping({&amp;#34;/InsecureDeserialization/task&amp;#34;}) @ResponseBody public AttackResult completed(@RequestParam String token) throws IOException { String b64token = token.replace(&amp;#39;-&amp;#39;, &amp;#39;+&amp;#39;).replace(&amp;#39;_&amp;#39;, &amp;#39;/&amp;#39;); long before; long after; try { label71: { // base64解码，通过字节流反序列化对象 ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(Base64.</description>
+    </item>
+    <item>
+      <title>Java反序列化原理</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86/</guid>
+      <description>Java反序列化原理 Serializable 接口的使用 类需要被序列化和反序列化，需要实现接口 java.io.Serializable
+Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量
+public interface Serializable { } import java.io.Serializable; public class Example implements Serializable{ private String name; .... } 序列化 调用 ObjectOutputStream 类的 writeObject 方法
+反序列化 调用 ObjectInputStream 类的 readObject 方法
+注意：
+只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。
+它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量 一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口） 一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化 序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性） transient 标识的对象成员变量不参与序列化 Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片 **注：**JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面
+Person package net.Seck2y.a01; import java.io.IOException; import java.io.ObjectInputStream; import java.io.Serializable; public class Person implements Serializable { private String name; private int age; public Person() {} public Person(String name, int age) { this.</description>
+    </item>
+    <item>
+      <title>Java反射&amp;动态代理</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>Java反射&amp;amp;动态代理 反射机制 Java 反射（Reflection）是一种机制，它允许 Java 程序在运行时获取和操作它本身的数据结构，比如类、方法、属性等。通过反射，我们可以动态地创建对象、调用方法、访问属性等，而无需在编译时知道这些信息。
+Java 反射主要包括以下几个核心类：
+Class 类：表示一个类或接口，包含了获取类信息的方法，如获取类名、父类、接口、属性、方法等。 Constructor 类：表示一个构造函数，包含了获取构造函数信息的方法，如获取构造函数名、参数列表等。 Field 类：表示一个属性，包含了获取属性信息的方法，如获取属性名、类型、访问权限等。 Method 类：表示一个方法，包含了获取方法信息的方法，如获取方法名、参数列表、返回类型等。 以下是一些 Java 反射的常见用法：
+获取类信息：通过 Class.forName() 方法获取某个类的 Class 对象，然后使用 Class 对象的各种方法获取类的信息，如 getName() 获取类名，getDeclaredMethods() 获取所有方法等。 创建对象：通过 Class 对象的 getConstructor() 或 getDeclaredConstructor() 方法获取指定构造函数的引用，然后使用 newInstance() 或 newInstance() 方法创建对象。 访问属性：通过 Class 对象的 getDeclaredField() 方法获取指定属性的引用，然后使用 set() 或 get() 方法设置或获取属性的值。 调用方法：通过 Class 对象的 getDeclaredMethod() 方法获取指定方法的引用，然后使用 invoke() 方法调用方法并传递参数。 动态代理：通过 Java 反射实现动态代理，可以在运行时创建一个实现了指定接口的代理类，并实现指定的方法逻辑。 Class类就是通过Field和Method来描述类中的字段和方法
+代码 Person 类
+package net.Seck2y.a02; public class Person { private String name = &amp;#34;zhangsan&amp;#34;; private int age = 23; public Person(){} public Person(String name, int age) { this.</description>
+    </item>
+    <item>
+      <title>Java基础</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%9F%BA%E7%A1%80/</guid>
+      <description>Java基础 Hello World 编译运行
+java源文件 -&amp;gt; class字节码文件 -&amp;gt; java运行class文件javac java文件 # 输出class字节码文件java class文件 Hello World
+public class HelloWord { // 与文件名一致 public static void main(String[] args) { // 主函数 System.out.println(&amp;#34;Hello World&amp;#34;); } } 主函数
+public static void main(String[] args){ } 输入输出
+输入 import java.util.Scanner Scanner sc = new Scanner(System.in); int q = sc.nextInt(); String c = sc.next(); 输出 System.out.println(值); // 换行 sout // 匹配 System.out.print(值); // 不换行 注释</description>
+    </item>
+  </channel>
+</rss>

