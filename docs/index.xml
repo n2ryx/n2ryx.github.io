@@ -6,21 +6,63 @@
     <description>Recent content in 文档 on n2ryx&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 12 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://n2ryx.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>HTB-Headless</title>
-      <link>https://n2ryx.github.io/docs/pentest/htb-headless/</link>
+      <title>HTB-SolarLab</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-solarlab/</link>
+      <pubDate>Wed, 31 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-solarlab/</guid>
+      <description>SolarLab (Windows · Medium) CVE-2023-33733 + CVE-2023-32315 + openfire_decrypt&#xA;信息收集 添加hosts&#xA;10.10.11.16&#x9;solarLab.htb namp&#xA;nmap -A -p- -v -T4 solarlab.htb&#xD;Nmap scan report for solarlab.htb (10.10.11.16)&#xD;Host is up (0.28s latency).&#xD;Not shown: 65530 filtered tcp ports (no-response)&#xD;PORT STATE SERVICE VERSION&#xD;80/tcp open http nginx 1.24.0&#xD;|_http-server-header: nginx/1.24.0&#xD;|_http-title: SolarLab Instant Messenger&#xD;135/tcp open msrpc Microsoft Windows RPC&#xD;139/tcp open netbios-ssn Microsoft Windows netbios-ssn&#xD;445/tcp open microsoft-ds?&#xD;6791/tcp open http nginx 1.</description>
+    </item>
+    <item>
+      <title>HTB-IClean</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-iclean/</link>
+      <pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-iclean/</guid>
+      <description>IClean (Linux · Medium) XSS + SSTI + hashcat +sudo&#xA;信息收集 nmap&#xA;nmap -A -v -T4 10.10.11.12&#xD;Nmap scan report for capiclean.htb (10.10.11.12)&#xD;Host is up (0.28s latency).&#xD;Not shown: 976 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)&#xD;| ssh-hostkey: | 256 2c:f9:07:77:e3:f1:3a:36:db:f2:3b:94:e3:b7:cf:b2 (ECDSA)&#xD;|_ 256 4a:91:9f:f2:74:c0:41:81:52:4d:f1:ff:2d:01:78:6b (ED25519)&#xD;80/tcp open http Apache httpd 2.4.52 ((Ubuntu))&#xD;|_http-favicon: Unknown favicon MD5: 59A6DBEA095D69E461CAC2D85CE6999A&#xD;| http-methods: |_ Supported Methods: HEAD OPTIONS GET&#xD;|_http-title: Capiclean&#xD;| http-server-header: | Apache/2.</description>
+    </item>
+    <item>
+      <title>HTB-TwoMillion</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-twomillion/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-twomillion/</guid>
+      <description>TwoMillion (Linux · Easy) Js反混淆 + api利用 + CVE-2023-0386&#xA;信息收集 nmap&#xA;nmap -A -p- -v -T4 -Pn 10.10.11.211&#xD;Nmap scan report for bogon (10.10.11.221)&#xD;Host is up (0.28s latency).&#xD;Not shown: 998 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)&#xD;| ssh-hostkey: | 256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)&#xD;|_ 256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)&#xD;80/tcp open http nginx&#xD;| http-methods: |_ Supported Methods: GET HEAD POST OPTIONS&#xD;|_http-title: Did not follow redirect to http://2million.</description>
+    </item>
+    <item>
+      <title>HTB-PermX</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-permx/</link>
+      <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-permx/</guid>
+      <description>PermX (Linux · Easy) CVE-2023-4220 + sudo提权(符号链接)&#xA;信息收集 Nmap&#xA;nmap -sC -sV -sT -T4 10.10.11.23&#xD;Nmap scan report for permx.htb (10.10.11.23)&#xD;Host is up (0.10s latency).&#xD;Not shown: 998 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)&#xD;| ssh-hostkey: | 256 e2:5c:5d:8c:47:3e:d8:72:f7:b4:80:03:49:86:6d:ef (ECDSA)&#xD;|_ 256 1f:41:02:8e:6b:17:18:9c:a0:ac:54:23:e9:71:30:17 (ED25519)&#xD;80/tcp open http Apache httpd 2.4.52&#xD;|_http-title: eLEARNING&#xD;|_http-server-header: Apache/2.4.52 (Ubuntu)&#xD;Service Info: Host: 127.</description>
+    </item>
+    <item>
+      <title>HTB-BoardLight</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-boardlight/</link>
+      <pubDate>Wed, 22 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-boardlight/</guid>
+      <description>BoardLight (Linux · Easy) CVE-2023-30253 + CVE-2022-37706&#xA;信息收集 nmap&#xA;nmap -A -Pn -v -T4 10.10.11.11&#xD;Nmap scan report for board.htb (10.10.11.11)&#xD;Host is up (0.29s latency).&#xD;Not shown: 998 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)&#xD;| ssh-hostkey: | 3072 06:2d:3b:85:10:59:ff:73:66:27:7f:0e:ae:03:ea:f4 (RSA)&#xD;| 256 59:03:dc:52:87:3a:35:99:34:44:74:33:78:31:35:fb (ECDSA)&#xD;|_ 256 ab:13:38:e4:3e:e0:24:b4:69:38:a9:63:82:38:dd:f4 (ED25519)&#xD;80/tcp open http Apache httpd 2.4.41 ((Ubuntu))&#xD;| http-methods: |_ Supported Methods: GET POST OPTIONS&#xD;|_http-server-header: Apache/2.</description>
+    </item>
+    <item>
+      <title>HTB-Lame</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-lame/</link>
+      <pubDate>Mon, 20 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-lame/</guid>
+      <description>Lame (Linux · Easy) SMB&#xA;信息收集 nmap&#xA;nmap -A -v -p- -T4 -Pn 10.10.10.3&#xD;Nmap scan report for bogon (10.10.10.3)&#xD;Host is up (0.32s latency).&#xD;Not shown: 65530 filtered tcp ports (no-response)&#xD;PORT STATE SERVICE VERSION&#xD;21/tcp open ftp vsftpd 2.3.4&#xD;|_ftp-anon: Anonymous FTP login allowed (FTP code 230)&#xD;| ftp-syst: | STAT: | FTP server status:&#xD;| Connected to 10.10.16.38&#xD;| Logged in as ftp&#xD;| TYPE: ASCII&#xD;| No session bandwidth limit&#xD;| Session timeout in seconds is 300&#xD;| Control connection is plain text&#xD;| Data connections will be plain text&#xD;| vsFTPd 2.</description>
+    </item>
+    <item>
+      <title>HTB-Perfection</title>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-perfection/</link>
       <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://n2ryx.github.io/docs/pentest/htb-headless/</guid>
-      <description>HTB-Headless RubySSTI+hashcat&#xA;信息收集 Nmap&#xA;nmap -sC -sV -sT -T4 10.10.11.253 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-04-29 08:20 EDT Warning: 10.10.11.253 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.11.253 (10.10.11.253) Host is up (0.26s latency). Not shown: 984 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 6/tcp filtered unknown 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA) |_ 256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519) 33/tcp filtered dsp 80/tcp open http nginx |_http-title: Weighted Grade Calculator 1010/tcp filtered surf 1151/tcp filtered unizensus 1277/tcp filtered miva-mqs 1352/tcp filtered lotusnotes 3221/tcp filtered xnm-clear-text 5431/tcp filtered park-agent 6129/tcp filtered unknown 6566/tcp filtered sane-port 6792/tcp filtered unknown 10616/tcp filtered unknown 10629/tcp filtered unknown 41511/tcp filtered unknown Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 目录扫描</description>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-perfection/</guid>
+      <description>Perfection (Linux · Easy) RubySSTI+hashcat&#xA;信息收集 Nmap&#xA;nmap -sC -sV -sT -T4 10.10.11.253&#xD;Nmap scan report for 10.10.11.253 (10.10.11.253)&#xD;Host is up (0.26s latency).&#xD;Not shown: 984 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;6/tcp filtered unknown&#xD;22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)&#xD;| ssh-hostkey: | 256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)&#xD;|_ 256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)&#xD;33/tcp filtered dsp&#xD;80/tcp open http nginx&#xD;|_http-title: Weighted Grade Calculator&#xD;1010/tcp filtered surf&#xD;1151/tcp filtered unizensus&#xD;1277/tcp filtered miva-mqs&#xD;1352/tcp filtered lotusnotes&#xD;3221/tcp filtered xnm-clear-text&#xD;5431/tcp filtered park-agent&#xD;6129/tcp filtered unknown&#xD;6566/tcp filtered sane-port&#xD;6792/tcp filtered unknown&#xD;10616/tcp filtered unknown&#xD;10629/tcp filtered unknown&#xD;41511/tcp filtered unknown&#xD;Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel 目录扫描</description>
     </item>
     <item>
       <title>HTB-Headless</title>
-      <link>https://n2ryx.github.io/docs/pentest/htb-headless/</link>
+      <link>https://n2ryx.github.io/docs/pentest/htb/htb-headless/</link>
       <pubDate>Fri, 10 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://n2ryx.github.io/docs/pentest/htb-headless/</guid>
-      <description>HTB-Headless XSS+SUID提权&#xA;信息收集 Nmap&#xA;nmap -sC -sT -sV - 10.10.11.8 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-04-28 03:28 EDT Nmap scan report for 10.10.11.8 (10.10.11.8) Host is up (0.23s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0) | ssh-hostkey: | 256 90:02:94:28:3d:ab:22:74:df:0e:a3:b2:0f:2b:c6:17 (ECDSA) |_ 256 2e:b9:08:24:02:1b:60:94:60:b3:84:a9:9e:1a:60:ca (ED25519) 5000/tcp open upnp? | fingerprint-strings: | GetRequest: | HTTP/1.1 200 OK | Server: Werkzeug/2.</description>
+      <guid>https://n2ryx.github.io/docs/pentest/htb/htb-headless/</guid>
+      <description>Headless (Linux · Easy) XSS+SUID提权&#xA;信息收集 Nmap&#xA;nmap -sC -sT -sV - 10.10.11.8&#xD;Nmap scan report for 10.10.11.8 (10.10.11.8)&#xD;Host is up (0.23s latency).&#xD;Not shown: 998 closed tcp ports (conn-refused)&#xD;PORT STATE SERVICE VERSION&#xD;22/tcp open ssh OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)&#xD;| ssh-hostkey: | 256 90:02:94:28:3d:ab:22:74:df:0e:a3:b2:0f:2b:c6:17 (ECDSA)&#xD;|_ 256 2e:b9:08:24:02:1b:60:94:60:b3:84:a9:9e:1a:60:ca (ED25519)&#xD;5000/tcp open upnp?&#xD;| fingerprint-strings: | GetRequest: | HTTP/1.1 200 OK&#xD;| Server: Werkzeug/2.2.2 Python/3.11.2&#xD;| Date: Sun, 28 Apr 2024 07:24:48 GMT&#xD;| Content-Type: text/html; charset=utf-8&#xD;| Content-Length: 2799&#xD;| Set-Cookie: is_admin=InVzZXIi.</description>
     </item>
     <item>
       <title>Fastjson 远程命令执行漏洞(CVE-2017-18349)</title>
