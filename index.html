@@ -95,7 +95,7 @@
 		  
 		  <li>
 			<a href="/tool" title="All the tools.">
-			  <i class="fa fa-plane"></i>Tool
+			  <i class="fa fa-terminal"></i>Tool
 			</a>
 		  </li>
 		  
@@ -137,7 +137,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/09/12/Tool/ligolo-ng/" >Ligolo-ng Note</a>
+			<a href="/2024/09/12/Tool/ligolo-ng/" >Ligolo-ng Usage</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -151,15 +151,15 @@
   <div class="row">
 	
 	
-		<h1 id="Ligolo-ng-Note"><a href="#Ligolo-ng-Note" class="headerlink" title="Ligolo-ng Note"></a>Ligolo-ng Note</h1><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@main/main/202409131435521.png" alt="image"></p>
-<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><h3 id="Single-Pivoting"><a href="#Single-Pivoting" class="headerlink" title="Single Pivoting"></a>Single Pivoting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">sudo ./proxy -selfcert</span><br><span class="line">ssh -R 11601:localhost:11601 root@vps</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">远程端口转发: 将远程服务器的一个端口转发到本地机器的某个地址和端口</span></span><br><span class="line">ssh -R [远程端口]:[本地地址]:[本地端口] [用户名]@[服务器地址]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target</span></span><br><span class="line">./agent -connect 2.2.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun utun9</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[Agent : SESSION] » ifconfig 查看网络信息</span></span><br><span class="line">sudo ifconfig utun9 alias 192.168.9.9 255.255.255.0</span><br><span class="line">sudo route add -net 192.168.9.0/24 -interface utun9</span><br></pre></td></tr></table></figure>
+		<h1 id="ligolo-ng"><a href="#ligolo-ng" class="headerlink" title="ligolo-ng"></a>ligolo-ng</h1><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@main/main/202409131435521.png" alt="image"></p>
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><h3 id="Single-Pivoting"><a href="#Single-Pivoting" class="headerlink" title="Single Pivoting"></a>Single Pivoting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">sudo ./proxy -selfcert</span><br><span class="line">ssh -R 11601:localhost:11601 root@2.2.2.2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">远程端口转发: 将远程服务器的一个端口转发到本地机器的某个地址和端口</span></span><br><span class="line">ssh -R [远程端口]:[本地地址]:[本地端口] [用户名]@[服务器地址]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target</span></span><br><span class="line">./agent -connect 2.2.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun utun9</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[Agent : SESSION] » ifconfig 查看网络信息</span></span><br><span class="line">sudo ifconfig utun9 alias 192.168.9.9 255.255.255.0</span><br><span class="line">sudo route add -net 192.168.9.0/24 -interface utun9</span><br></pre></td></tr></table></figure>
 
 <h3 id="Double-Pivot"><a href="#Double-Pivot" class="headerlink" title="Double Pivot"></a>Double Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">ligolo-ng » listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target02</span></span><br><span class="line">./agent- connect 2.2.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">[Agent : SESSION] » session # 切换会话</span><br><span class="line">[Agent : SESSION-2] » start --tun utun8</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">sudo ifconfig utun8 alias 192.168.8.	8 255.255.255.0</span><br><span class="line">sudo route add -net 192.168.8.0/24 -interface utun8</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">[Agent : SESSION] » listener_add --addr 0.0.0.0:8888 --to 127.0.0.1:8888 --tcp # 映射8888</span><br><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure>
 
 <h3 id="Triple-Pivot"><a href="#Triple-Pivot" class="headerlink" title="Triple Pivot"></a>Triple Pivot</h3><p>……</p>
 <h3 id="Network-setting"><a href="#Network-setting" class="headerlink" title="Network setting"></a>Network setting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重制 utun 接口</span></span><br><span class="line">sudo ifconfig utun10 inet 0.0.0.0 netmask 255.255.255.0</span><br></pre></td></tr></table></figure>
 
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Single-Pivoting-1"><a href="#Single-Pivoting-1" class="headerlink" title="Single Pivoting"></a>Single Pivoting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">./proxy -selfcert</span><br><span class="line">ligolo-ng » interface_create --name &quot;evil-cha&quot;</span><br><span class="line">ssh -R 11601:localhost:11601 root@vps</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target</span></span><br><span class="line">./agent -connect 2.2.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun evil-cha</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[Agent : SESSION] » ifconfig 查看网络信息</span></span><br><span class="line">sudo ip route add 192.168.9.0/24 dev ligolo</span><br><span class="line">或</span><br><span class="line">[Agent : SESSION] » interface_add_route --name evil-cha --route 192.168.9.0/24</span><br></pre></td></tr></table></figure>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Single-Pivoting-1"><a href="#Single-Pivoting-1" class="headerlink" title="Single Pivoting"></a>Single Pivoting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line">./proxy -selfcert</span><br><span class="line">ligolo-ng » interface_create --name &quot;evil-cha&quot;</span><br><span class="line">ssh -R 11601:localhost:11601 root@2.2.2.2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target</span></span><br><span class="line">./agent -connect 2.2.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun evil-cha</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[Agent : SESSION] » ifconfig 查看网络信息</span></span><br><span class="line">sudo ip route add 192.168.9.0/24 dev ligolo</span><br><span class="line">或</span><br><span class="line">[Agent : SESSION] » interface_add_route --name evil-cha --route 192.168.9.0/24</span><br></pre></td></tr></table></figure>
 
 <p>……</p>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>……</p>
@@ -330,43 +330,41 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/CTFshow/">CTFshow<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/Upload/">Upload<span>1</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
-		
-			<li><a href="/tags/Protocol/">Protocol<span>2</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Upload/">Upload<span>1</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Protocol/">Protocol<span>2</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -380,7 +378,7 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Note</a>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng Usage</a>
       </li>
     
       <li>
