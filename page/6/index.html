@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 6 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Wish everything.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/05/12/Pentest/HTB/HTB Perfection/" >HTB Perfection</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Perfection-Linux-·-Easy"><a href="#Perfection-Linux-·-Easy" class="headerlink" title="Perfection (Linux · Easy)"></a>Perfection (Linux · Easy)</h1><p>RubySSTI+hashcat</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sV -sT -T4 10.10.11.253</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.253 (10.10.11.253)</span><br><span class="line">Host is up (0.26s latency).</span><br><span class="line">Not shown: 984 closed tcp ports (conn-refused)</span><br><span class="line">PORT      STATE    SERVICE        VERSION</span><br><span class="line">6/tcp     filtered unknown</span><br><span class="line">22/tcp    open     ssh            OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)</span><br><span class="line">|_  256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)</span><br><span class="line">33/tcp    filtered dsp</span><br><span class="line">80/tcp    open     http           nginx</span><br><span class="line">|_http-title: Weighted Grade Calculator</span><br><span class="line">1010/tcp  filtered surf</span><br><span class="line">1151/tcp  filtered unizensus</span><br><span class="line">1277/tcp  filtered miva-mqs</span><br><span class="line">1352/tcp  filtered lotusnotes</span><br><span class="line">3221/tcp  filtered xnm-clear-text</span><br><span class="line">5431/tcp  filtered park-agent</span><br><span class="line">6129/tcp  filtered unknown</span><br><span class="line">6566/tcp  filtered sane-port</span><br><span class="line">6792/tcp  filtered unknown</span><br><span class="line">10616/tcp filtered unknown</span><br><span class="line">10629/tcp filtered unknown</span><br><span class="line">41511/tcp filtered unknown</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240429203253429.png" alt="image-20240429203253429"></p>
+<p>网页底部，提供了相关信息，Ruby Web</p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240430134229759.png" alt="image-20240430134229759"></p>
+<p>&#x2F;weighted-grade，在此测试</p>
+	
+	</div>
+  <a type="button" href="/2024/05/12/Pentest/HTB/HTB Perfection/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/05/10/Pentest/HTB/HTB Headless/" >HTB Headless</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Headless-Linux-·-Easy"><a href="#Headless-Linux-·-Easy" class="headerlink" title="Headless (Linux · Easy)"></a>Headless (Linux · Easy)</h1><p>XSS+SUID提权</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sT -sV - 10.10.11.8</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.8 (10.10.11.8)</span><br><span class="line">Host is up (0.23s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 90:02:94:28:3d:ab:22:74:df:0e:a3:b2:0f:2b:c6:17 (ECDSA)</span><br><span class="line">|_  256 2e:b9:08:24:02:1b:60:94:60:b3:84:a9:9e:1a:60:ca (ED25519)</span><br><span class="line">5000/tcp open  upnp?</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   GetRequest: </span><br><span class="line">|     HTTP/1.1 200 OK</span><br><span class="line">|     Server: Werkzeug/2.2.2 Python/3.11.2</span><br><span class="line">|     Date: Sun, 28 Apr 2024 07:24:48 GMT</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 2799</span><br><span class="line">|     Set-Cookie: is_admin=InVzZXIi.uAlmXlTvm8vyihjNaPDWnvB_Zfs; Path=/</span><br><span class="line">|     Connection: close</span><br><span class="line">|     &lt;!DOCTYPE html&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">|     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Under Construction&lt;/title&gt;</span><br><span class="line">|     &lt;style&gt;</span><br><span class="line">|     body &#123;</span><br><span class="line">|     font-family: &#x27;Arial&#x27;, sans-serif;</span><br><span class="line">|     background-color: #f7f7f7;</span><br><span class="line">|     margin: 0;</span><br><span class="line">|     padding: 0;</span><br><span class="line">|     display: flex;</span><br><span class="line">|     justify-content: center;</span><br><span class="line">|     align-items: center;</span><br><span class="line">|     height: 100vh;</span><br><span class="line">|     .container &#123;</span><br><span class="line">|     text-align: center;</span><br><span class="line">|     background-color: #fff;</span><br><span class="line">|     border-radius: 10px;</span><br><span class="line">|     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     &lt;!DOCTYPE HTML&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Error response&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;Error response&lt;/h1&gt;</span><br><span class="line">|     &lt;p&gt;Error code: 400&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Message: Bad request version (&#x27;RTSP/1.0&#x27;).&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Error code explanation: 400 - Bad request syntax or unsupported method.&lt;/p&gt;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://10.10.11.8:5000/">http://10.10.11.8:5000/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428182551382.png" alt="image-20240428182551382"></p>
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://cdn.jsdelivr.net/gh/n2ryx/Picture-bed@master/typora/image-20240428182842525.png" alt="image-20240428182842525"></p>
+<p>&#x2F;support</p>
+	
+	</div>
+  <a type="button" href="/2024/05/10/Pentest/HTB/HTB Headless/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/5/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/7/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+		
+			<li><a href="/categories/Linux/">Linux<span>1</span></a></li>
+		
+			<li><a href="/categories/Mysql/">Mysql<span>2</span></a></li>
+		
+			<li><a href="/categories/Other/">Other<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>10</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>5</span></a></li>
+		
+			<li><a href="/categories/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/categories/Tool/">Tool<span>1</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>5</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Upload/">Upload<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Protocol/">Protocol<span>2</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Inject/">Inject<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/09/12/Tool/ligolo-ng/" ><i class="fa fa-file-o"></i>Ligolo-ng 使用</a>
+      </li>
+    
+      <li>
+        <a href="/2024/08/02/Pentest/HTB/HTB Runner/" ><i class="fa fa-file-o"></i>HTB Runner</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/31/Pentest/HTB/HTB SolarLab/" ><i class="fa fa-file-o"></i>HTB SolarLab</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/26/Pentest/HTB/HTB IClean/" ><i class="fa fa-file-o"></i>HTB IClean</a>
+      </li>
+    
+      <li>
+        <a href="/2024/07/24/Pentest/HTB/HTB TwoMillion/" ><i class="fa fa-file-o"></i>HTB TwoMillion</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://n2ryx.github.io/" title="" target="_blank"]);"></a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

