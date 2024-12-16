@@ -1,0 +1,502 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Notes Site.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" >Windows Privilege Escalation</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-30  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Windows 权限提升的总体目标是进一步将系统的访问权限提升到 <code>Local Administrators</code> 组或 <code>NT AUTHORITY\SYSTEM</code> <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/services/localsystem-account">LocalSystem</a> 账户。</p>
+<p><strong>Privilege Escalation Ways</strong></p>
+<table>
+<thead>
+<tr>
+<th>Privilege</th>
+<th>Escalation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Abusing Windows group privileges</td>
+<td>滥用 Windows 组权限</td>
+</tr>
+<tr>
+<td>Abusing Windows user privileges</td>
+<td>滥用 Windows 用户权限</td>
+</tr>
+<tr>
+<td>Bypassing User Account Control</td>
+<td>绕过用户账户控制</td>
+</tr>
+<tr>
+<td>Abusing weak service&#x2F;file permissions</td>
+<td>滥用弱服务&#x2F;文件权限</td>
+</tr>
+<tr>
+<td>Leveraging unpatched kernel exploits</td>
+<td>利用未修补的内核漏洞</td>
+</tr>
+<tr>
+<td>Credential theft</td>
+<td>凭证盗窃</td>
+</tr>
+<tr>
+<td>Traffic Capture</td>
+<td>流量捕获</td>
+</tr>
+<tr>
+<td>and more.</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p><strong>Tools</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/GhostPack/Seatbelt">Seatbelt</a></td>
+<td>用于执行各种本地特权升级检查的 C# 项目</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS">winPEAS</a></td>
+<td>WinPEAS 是一个脚本，用于搜索在 Windows 主机上提升权限的可能路径。所有检查均<a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation">在此处说明</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1">PowerUp.ps1</a></td>
+<td>PowerShell 脚本用于查找依赖于错误配置的常见 Windows 特权提升向量。它还可用于利用发现的一些问题</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/GhostPack/SharpUp">SharpUp</a></td>
+<td>C# 版本的 PowerUp</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/411Hall/JAWS">JAWS</a></td>
+<td>使用 PowerShell 2.0 编写的用于枚举特权升级向量的 PowerShell 脚本</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/Arvanaghi/SessionGopher">SessionGopher</a></td>
+<td>SessionGopher 是一个 PowerShell 工具，用于查找和解密远程访问工具的已保存会话信息。它提取 PuTTY、WinSCP、SuperPuTTY、FileZilla 和 RDP 已保存的会话信息</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/rasta-mouse/Watson">Watson</a></td>
+<td>Watson 是一个 .NET 工具，旨在枚举缺失的 KB 并建议利用权限提升漏洞。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/AlessandroZ/LaZagne">LaZagne</a></td>
+<td>用于从 Web 浏览器、聊天工具、数据库、Git、电子邮件、内存转储、PHP、系统管理工具、无线网络配置、内部 Windows 密码存储机制等检索存储在本地机器上的密码的工具</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/bitsadmin/wesng">Windows Exploit Suggester - Next Generation</a></td>
+<td>WES-NG 是一款基于 Windows<code>systeminfo</code>实用程序输出的工具，它提供了操作系统易受攻击的漏洞列表，包括针对这些漏洞的任何攻击。Windows XP 和 Windows 10 之间的所有 Windows 操作系统（包括其 Windows Server 对应版本）均受支持</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite">sysinternals-suite</a></td>
+<td>将在枚举中使用 Sysinternals 的几种工具，包括<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/accesschk">AccessChk</a>、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/pipelist">PipeList</a>和<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/psservice">PsService</a></td>
+</tr>
+</tbody></table>
+<p>已编译好的项目 <a target="_blank" rel="noopener" href="https://github.com/r3motecontrol/Ghostpack-CompiledBinaries">https://github.com/r3motecontrol/Ghostpack-CompiledBinaries</a></p>
+<h1 id="Situational-Awareness"><a href="#Situational-Awareness" class="headerlink" title="Situational Awareness"></a>Situational Awareness</h1><h2 id="Network-Information"><a href="#Network-Information" class="headerlink" title="Network Information"></a>Network Information</h2><h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt; <span class="title">ipconfig</span> /<span class="title">all</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet1</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . :</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">vmxnet3</span> <span class="title">Ethernet</span> <span class="title">Adapter</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-<span class="title">C5</span>-4<span class="title">B</span></span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">No</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">f055:fefd</span>:<span class="title">b1b</span>:9919%9(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 192.168.20.56(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.255.0</span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : 192.168.20.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 151015510</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet0</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . : .\</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">Intel</span>(<span class="title">R</span>) 82574<span class="title">L</span> <span class="title">Gigabit</span> <span class="title">Network</span> <span class="title">Connection</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">IPv6</span> <span class="title">Address</span>. . . . . . . . . . . : <span class="title">dead:beef</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>%4(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 10.129.43.8(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.0.0</span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Obtained</span>. . . . . . . . . . : <span class="title">Thursday</span>, <span class="title">March</span> 25, 2021 9:24:45 <span class="title">AM</span></span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Expires</span> . . . . . . . . . . : <span class="title">Monday</span>, <span class="title">March</span> 29, 2021 1:28:44 <span class="title">PM</span></span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : <span class="title">fe80</span>::250:56<span class="title">ff:feb9</span>:4<span class="title">ddf</span>%4</span></span><br><span class="line"><span class="function">                                       10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Server</span> . . . . . . . . . . . : 10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 50352214</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 1.1.1.1</span></span><br><span class="line"><span class="function">                                       8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function">   </span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" >Linux Privilege Escalation</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-25  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Linux 系统上的 root 帐户提供对操作系统的完全管理级别访问权限。在评估期间，可能会在 Linux 主机上获得低权限 shell，并需要将权限提升到 root 帐户。</p>
+<h1 id="Environment-Enumeration"><a href="#Environment-Enumeration" class="headerlink" title="Environment Enumeration"></a>Environment Enumeration</h1><p>枚举是特权提升的关键。有多个辅助脚本（如<a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPEAS</a>和<a target="_blank" rel="noopener" href="https://github.com/rebootuser/LinEnum">LinEnum）</a>可用于协助枚举。</p>
+<h2 id="Operating-system-and-version"><a href="#Operating-system-and-version" class="headerlink" title="Operating system and version"></a>Operating system and version</h2><p><a target="_blank" rel="noopener" href="https://ubuntu.com/about/release-cycle">Ubuntu 维护周期</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/os-release</span><br><span class="line"></span><br><span class="line">NAME=&quot;Ubuntu&quot;</span><br><span class="line">VERSION=&quot;20.04.4 LTS (Focal Fossa)&quot;</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">PRETTY_NAME=&quot;Ubuntu 20.04.4 LTS&quot;</span><br><span class="line">VERSION_ID=&quot;20.04&quot;</span><br><span class="line">HOME_URL=&quot;https://www.ubuntu.com/&quot;</span><br><span class="line">SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;</span><br><span class="line">BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;</span><br><span class="line">PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span><br><span class="line">VERSION_CODENAME=focal</span><br><span class="line">UBUNTU_CODENAME=focal</span><br></pre></td></tr></table></figure>
+
+<h2 id="PATH"><a href="#PATH" class="headerlink" title="PATH"></a>PATH</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PATH</span><br><span class="line"></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="env"><a href="#env" class="headerlink" title="env"></a>env</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ env</span><br><span class="line"></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PWD=/home/htb-student</span><br><span class="line">LOGNAME=htb-student</span><br><span class="line">XDG_SESSION_TYPE=tty</span><br><span class="line">MOTD_SHOWN=pam</span><br><span class="line">HOME=/home/htb-student</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line"></span><br><span class="line">&lt;SNIP&gt;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+           <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+        
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/2/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+		
+			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>2</span></a></li>
+		
+			<li><a href="/categories/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>21</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/18/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://n2ryx.github.io/" title="" target="_blank"]);"></a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

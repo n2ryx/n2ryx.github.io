@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>HTB TwoMillion | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="TwoMillion (Linux · Easy)Js反混淆 + api利用 + CVE-2023-0386
+枚举nmap12345678910111213141516nmap -A -p- -v -T4 -Pn 10.10.11.211Nmap scan report for bogon (10.10.11.221)Host is up (0.28s latency).Not shown: 998 closed tcp ports (conn-refused)PORT   STATE SERVICE VERSION22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: |   256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)|_  256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)80/tcp open  http    nginx| http-methods: |_  Supported Methods: GET HEAD POST OPTIONS|_http-title: Did not follow redirect to http://2million.htb/Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+添加hosts
+1echo &amp;quot;10.10.11.221 2million.htb&amp;quot; | sudo tee -a /etc/hosts
+
+dirsearch123dirsearch -u http://2million.htb	/login	/register
+
+ 页面交互跳转 &amp;#x2F;invite"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTB TwoMillion"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> HTB TwoMillion</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="TwoMillion-Linux-·-Easy"><a href="#TwoMillion-Linux-·-Easy" class="headerlink" title="TwoMillion (Linux · Easy)"></a>TwoMillion (Linux · Easy)</h1><p>Js反混淆 + api利用 + CVE-2023-0386</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -p- -v -T4 -Pn 10.10.11.211</span><br><span class="line"></span><br><span class="line">Nmap scan report for bogon (10.10.11.221)</span><br><span class="line">Host is up (0.28s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)</span><br><span class="line">|_  256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)</span><br><span class="line">80/tcp open  http    nginx</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: GET HEAD POST OPTIONS</span><br><span class="line">|_http-title: Did not follow redirect to http://2million.htb/</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>添加hosts</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.221 2million.htb&quot; | sudo tee -a /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://2million.htb</span><br><span class="line">	/login</span><br><span class="line">	/register</span><br></pre></td></tr></table></figure>
+
+<p> 页面交互跳转 &#x2F;invite</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724141849108.png" alt="image-20240724141849108"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724142749664.png" alt="image-20240724142749664"></p>
+<p>简略，邀请码正确，将被重定向到 &#x2F;register</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    $(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        $(<span class="string">&#x27;#verifyForm&#x27;</span>).<span class="title function_">submit</span>(<span class="keyword">function</span>(<span class="params">e</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            e.<span class="title function_">preventDefault</span>();  <span class="comment">// 阻止表单的默认提交行为</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> code = $(<span class="string">&#x27;#code&#x27;</span>).<span class="title function_">val</span>();  <span class="comment">// 获取表单中输入的邀请代码</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> formData = &#123; <span class="string">&quot;code&quot;</span>: code &#125;;  <span class="comment">// 将邀请代码封装到对象中</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">data</span>: formData,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">url</span>: <span class="string">&#x27;/api/v1/invite/verify&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;  <span class="comment">// 请求成功的回调函数</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span> (response[<span class="number">0</span>] === <span class="number">200</span> &amp;&amp; response.<span class="property">success</span> === <span class="number">1</span> &amp;&amp; response.<span class="property">data</span>.<span class="property">message</span> === <span class="string">&quot;Invite code is valid!&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="comment">// 邀请码验证成功</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;inviteCode&#x27;</span>, code);  <span class="comment">// 将邀请代码存储到 localStorage</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&#x27;/register&#x27;</span>;  <span class="comment">// 重定向到注册页面</span></span></span><br><span class="line"><span class="language-javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">alert</span>(<span class="string">&quot;Invalid invite code. Please try again.&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">error</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;  <span class="comment">// 请求失败的回调函数</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">alert</span>(<span class="string">&quot;An error occurred. Please try again.&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>inviteapi.min.js，代码似乎被混淆</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)&#123;e=<span class="keyword">function</span>(<span class="params">c</span>)&#123;<span class="keyword">return</span> c.<span class="title function_">toString</span>(<span class="number">36</span>)&#125;;<span class="keyword">if</span>(!<span class="string">&#x27;&#x27;</span>.<span class="title function_">replace</span>(<span class="regexp">/^/</span>,<span class="title class_">String</span>))&#123;<span class="keyword">while</span>(c--)&#123;d[c.<span class="title function_">toString</span>(a)]=k[c]||c.<span class="title function_">toString</span>(a)&#125;k=[<span class="keyword">function</span>(<span class="params">e</span>)&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">return</span><span class="string">&#x27;\\w+&#x27;</span>&#125;;c=<span class="number">1</span>&#125;;<span class="keyword">while</span>(c--)&#123;<span class="keyword">if</span>(k[c])&#123;p=p.<span class="title function_">replace</span>(<span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;\\b&#x27;</span>+<span class="title function_">e</span>(c)+<span class="string">&#x27;\\b&#x27;</span>,<span class="string">&#x27;g&#x27;</span>),k[c])&#125;&#125;<span class="keyword">return</span> p&#125;(<span class="string">&#x27;1 i(4)&#123;h 8=&#123;&quot;4&quot;:4&#125;;$.9(&#123;a:&quot;7&quot;,5:&quot;6&quot;,g:8,b:\&#x27;/d/e/n\&#x27;,c:1(0)&#123;3.2(0)&#125;,f:1(0)&#123;3.2(0)&#125;&#125;)&#125;1 j()&#123;$.9(&#123;a:&quot;7&quot;,5:&quot;6&quot;,b:\&#x27;/d/e/k/l/m\&#x27;,c:1(0)&#123;3.2(0)&#125;,f:1(0)&#123;3.2(0)&#125;&#125;)&#125;&#x27;</span>,<span class="number">24</span>,<span class="number">24</span>,<span class="string">&#x27;response|function|log|console|code|dataType|json|POST|formData|ajax|type|url|success|api/v1|invite|error|data|var|verifyInviteCode|makeInviteCode|how|to|generate|verify&#x27;</span>.<span class="title function_">split</span>(<span class="string">&#x27;|&#x27;</span>),<span class="number">0</span>,&#123;&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>ChatGPT&#x2F;Tools 反混淆后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">verifyInviteCode</span>(<span class="params">code</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> formData = &#123;<span class="string">&quot;code&quot;</span>: code&#125;;</span><br><span class="line">    $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">data</span>: formData,</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;/api/v1/invite/verify&#x27;</span>,</span><br><span class="line">        <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">error</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">makeInviteCode</span>(<span class="params"></span>) &#123;</span><br><span class="line">    $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">        <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;/api/v1/invite/how/to/generate&#x27;</span>,</span><br><span class="line">        <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">error</span>: <span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>makeInviteCode()</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -sX POST http://2million.htb/api/v1/invite/how/to/generate | jq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">jq Json美化</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;0&quot;: 200,</span><br><span class="line">  &quot;success&quot;: 1,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;data&quot;: &quot;Va beqre gb trarengr gur vaivgr pbqr, znxr n CBFG erdhrfg gb /ncv/i1/vaivgr/trarengr&quot;,                                                                   </span><br><span class="line">    &quot;enctype&quot;: &quot;ROT13&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;hint&quot;: &quot;Data is encrypted ... We should probbably check the encryption type in order to decrypt it...&quot;                                                             </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据hint信息，对data进行ROT13解码</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724151706582.png" alt="image-20240724151706582"></p>
+<p>根据解码信息，请求获得code</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">curl -sX POST http://2million.htb/api/v1/invite/generate | jq</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;0&quot;: 200,</span><br><span class="line">  &quot;success&quot;: 1,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;code&quot;: &quot;TkU0TEctUE83OFItQlU5V0otVlZRVTM=&quot;,</span><br><span class="line">    &quot;format&quot;: &quot;encoded&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo &#x27;TkU0TEctUE83OFItQlU5V0otVlZRVTM=&#x27; | base64 -d</span><br><span class="line">NE4LG-PO78R-BU9WJ-VVQU3</span><br></pre></td></tr></table></figure>
+
+<p>输入邀请码，进入 &#x2F;register</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724152658043.png" alt="image-20240724152658043"></p>
+<p>注册登入</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724163220581.png" alt="image-20240724163220581"></p>
+<p>查看其他的一些api</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724163137864.png" alt="image-20240724163137864"></p>
+<p>admin api</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724163831358.png" alt="image-20240724163831358"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724163916784.png" alt="image-20240724163916784"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724163856589.png" alt="image-20240724163856589"></p>
+<p>似乎可以根据<code> /api/v1/admin/settings/update</code>的信息进一步深入，最后完整的请求</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724165531488.png" alt="image-20240724165531488"></p>
+<p>请求<code>/api/v1/admin/auth</code>查看信息，成功跟改为管理员</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724165649491.png" alt="image-20240724165649491"></p>
+<p>再来看<code>/api/v1/admin/vpn/generate</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724170543884.png" alt="image-20240724170543884"></p>
+<p>根据返回的信息发送请求</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724170808567.png" alt="image-20240724170808567"></p>
+<p>为用户admin生成了一个VPN配置文件 已经打印出来了，如果这个VPN是通过exec或系统Php函数生成的，则有可能存在命令执行漏洞</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724171503949.png" alt="image-20240724171503949"></p>
+<p>反弹shell</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724171821776.png" alt="image-20240724171821776"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724172050337.png" alt="image-20240724172050337"></p>
+<p>数据库</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724172732008.png" alt="image-20240724172732008"></p>
+<p>密码可能重用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh admin@2million.htb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724172459242.png" alt="image-20240724172459242"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>还得是信息收集，&#x2F; FUSE</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724173753949.png" alt="image-20240724173753949"></p>
+<p>Google search</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724174215821.png" alt="image-20240724174215821"></p>
+<p>kali 下载打包，scp 传过去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp cve.tar.gz admin@2million.htb:/tmp</span><br></pre></td></tr></table></figure>
+
+<p>然后执行他，需要两个终端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://github.com/xkaneiki/CVE-2023-0386</span></span><br><span class="line">make all</span><br><span class="line">shell01: ./fuse ./ovlcap/lower ./gc</span><br><span class="line">shell02: ./exp</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724175903673.png" alt="image-20240724175903673"></p>
+<p>thank_you.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;encoding&quot;</span><span class="punctuation">:</span> <span class="string">&quot;url&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="string">&quot;%7B%22encoding%22:%20%22hex%22,%20%22data%22:%20%227b22656e6372797074696f6e223a2022786f72222c2022656e6372707974696f6e5f6b6579223a20224861636b546865426f78222c2022656e636f64696e67223a2022626173653634222c202264617461223a20224441514347585167424345454c43414549515173534359744168553944776f664c5552765344676461414152446e51634454414746435145423073674230556a4152596e464130494d556745596749584a51514e487a7364466d494345535145454238374267426942685a6f4468595a6441494b4e7830574c526844487a73504144594848547050517a7739484131694268556c424130594d5567504c525a594b513848537a4d614244594744443046426b6430487742694442306b4241455a4e527741596873514c554543434477424144514b4653305046307337446b557743686b7243516f464d306858596749524a41304b424470494679634347546f4b41676b344455553348423036456b4a4c4141414d4d5538524a674952446a41424279344b574334454168393048776f334178786f44777766644141454e4170594b67514742585159436a456345536f4e426b736a41524571414130385151594b4e774246497745636141515644695952525330424857674f42557374427842735a58494f457777476442774e4a30384f4c524d61537a594e4169734246694550424564304941516842437767424345454c45674e497878594b6751474258514b45437344444767554577513653424571436c6771424138434d5135464e67635a50454549425473664353634c4879314245414d31476777734346526f416777484f416b484c52305a5041674d425868494243774c574341414451386e52516f73547830774551595a5051304c495170594b524d47537a49644379594f4653305046776f345342457454776774457841454f676b4a596734574c4545544754734f414445634553635041676430447863744741776754304d2f4f7738414e6763644f6b31444844464944534d5a48576748444267674452636e4331677044304d4f4f68344d4d4141574a51514e48335166445363644857674944515537486751324268636d515263444a6745544a7878594b5138485379634444433444433267414551353041416f734368786d5153594b4e7742464951635a4a41304742544d4e525345414654674e4268387844456c6943686b7243554d474e51734e4b7745646141494d425355644144414b48475242416755775341413043676f78515241415051514a59674d644b524d4e446a424944534d635743734f4452386d4151633347783073515263456442774e4a3038624a773050446a63634444514b57434550467734344241776c4368597242454d6650416b5259676b4e4c51305153794141444446504469454445516f36484555684142556c464130434942464c534755734a304547436a634152534d42484767454651346d45555576436855714242464c4f7735464e67636461436b434344383844536374467a424241415135425241734267777854554d6650416b4c4b5538424a785244445473615253414b4553594751777030474151774731676e42304d6650414557596759574b784d47447a304b435364504569635545515578455574694e68633945304d494f7759524d4159615052554b42446f6252536f4f4469314245414d314741416d5477776742454d644d526f6359676b5a4b684d4b4348514841324941445470424577633148414d744852566f414130506441454c4d5238524f67514853794562525459415743734f445238394268416a4178517851516f464f676354497873646141414e4433514e4579304444693150517a777853415177436c67684441344f4f6873414c685a594f424d4d486a424943695250447941414630736a4455557144673474515149494e7763494d674d524f776b47443351634369554b44434145455564304351736d547738745151594b4d7730584c685a594b513858416a634246534d62485767564377353043776f334151776b424241596441554d4c676f4c5041344e44696449484363625744774f51776737425142735a5849414242454f637874464e67425950416b47537a6f4e48545a504779414145783878476b6c694742417445775a4c497731464e5159554a45454142446f6344437761485767564445736b485259715477776742454d4a4f78304c4a67344b49515151537a734f525345574769305445413433485263724777466b51516f464a78674d4d41705950416b47537a6f4e48545a504879305042686b31484177744156676e42304d4f4941414d4951345561416b434344384e467a464457436b50423073334767416a4778316f41454d634f786f4a4a6b385049415152446e514443793059464330464241353041525a69446873724242415950516f4a4a30384d4a304543427a6847623067344554774a517738784452556e4841786f4268454b494145524e7773645a477470507a774e52516f4f47794d3143773457427831694f78307044413d3d227d%22%7D&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>urldecode -&gt; hex decode -&gt;</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240724182617204.png" alt="image-20240724182617204"></p>
+<h2 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Dear HackTheBox Community,</span><br><span class="line"></span><br><span class="line">We are thrilled to announce a momentous milestone in our journey together. With immense joy and gratitude, we celebrate the achievement of reaching 2 million remarkable users! This incredible feat would not have been possible without each and every one of you.</span><br><span class="line"></span><br><span class="line">From the very beginning, HackTheBox has been built upon the belief that knowledge sharing, collaboration, and hands-on experience are fundamental to personal and professional growth. Together, we have fostered an environment where innovation thrives and skills are honed. Each challenge completed, each machine conquered, and every skill learned has contributed to the collective intelligence that fuels this vibrant community.</span><br><span class="line"></span><br><span class="line">To each and every member of the HackTheBox community, thank you for being a part of this incredible journey. Your contributions have shaped the very fabric of our platform and inspired us to continually innovate and evolve. We are immensely proud of what we have accomplished together, and we eagerly anticipate the countless milestones yet to come.</span><br><span class="line"></span><br><span class="line">Here&#x27;s to the next chapter, where we will continue to push the boundaries of cybersecurity, inspire the next generation of ethical hackers, and create a world where knowledge is accessible to all.</span><br><span class="line"></span><br><span class="line">With deepest gratitude,</span><br><span class="line"></span><br><span class="line">The HackTheBox Team</span><br></pre></td></tr></table></figure>
+
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/07/26/writeup/htb/HTB IClean/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/07/22/writeup/htb/HTB PermX/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-07-24 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#TwoMillion-Linux-%C2%B7-Easy"><span class="toc-article-text">TwoMillion (Linux · Easy)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-article-text">枚举</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#dirsearch"><span class="toc-article-text">dirsearch</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Shell"><span class="toc-article-text">Shell</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-article-text">权限提升</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Finally"><span class="toc-article-text">Finally</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

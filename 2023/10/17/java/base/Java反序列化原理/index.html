@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Java反序列化原理 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Java反序列化原理Serializable 接口的使用类需要被序列化和反序列化，需要实现接口 java.io.Serializable
+Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量
+12public interface Serializable &amp;#123; &amp;#125;
+
+123456import java.io.Serializable;public class Example implements Serializable&amp;#123;    private String name;    ....&amp;#125;
+
+
+序列化 调用 ObjectOutputStream 类的 writeObject  方法
+反序列化 调用 ObjectInputStream 类的 readObject  方法
+
+注意：
+
+只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。
+
+它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量
+一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口）
+一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化
+序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性）
+transient 标识的对象成员变量不参与序列化
+Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片
+
+注：JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面
+
+Person"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java反序列化原理"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Java反序列化原理</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="Java反序列化原理"><a href="#Java反序列化原理" class="headerlink" title="Java反序列化原理"></a>Java反序列化原理</h2><h3 id="Serializable-接口的使用"><a href="#Serializable-接口的使用" class="headerlink" title="Serializable 接口的使用"></a>Serializable 接口的使用</h3><p>类需要被序列化和反序列化，需要实现接口 <code>java.io.Serializable</code></p>
+<p>Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Serializable</span> &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>序列化 调用 <code>ObjectOutputStream</code> 类的 <code>writeObject </code> 方法</p>
+<p>反序列化 调用 <code>ObjectInputStream</code> 类的 <code>readObject </code> 方法</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。</p>
+<ol>
+<li>它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量</li>
+<li>一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口）</li>
+<li>一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化</li>
+<li>序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性）</li>
+<li>transient 标识的对象成员变量不参与序列化</li>
+<li>Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片</li>
+</ol>
+<p><strong>注：</strong>JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面</p>
+</blockquote>
+<h4 id="Person"><a href="#Person" class="headerlink" title="Person"></a>Person</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 重写 toString，规定打印格式，不规定会输出类和地址</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span>+</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&quot;&#x27;&quot;</span>+</span><br><span class="line">                <span class="string">&quot;, age=&#x27;&quot;</span> + age + <span class="string">&quot;&#x27;&#125;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 入口类的 readObject 直接调用危险方法，造成反序列化漏洞</span></span><br><span class="line"><span class="comment">// 运行反序列化操作，弹出记事本</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream ois)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        ois.defaultReadObject();</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;notepad&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="SerializableTest"><a href="#SerializableTest" class="headerlink" title="SerializableTest"></a>SerializableTest</h4><p>序列化 Person 形成 ser.txt文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerializableTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">serialize</span><span class="params">(Object obj)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        ObjectOutputStream oos= <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;ser.txt&quot;</span>));</span><br><span class="line">        oos.writeObject(obj);</span><br><span class="line">        oos.close();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;zhangsan&quot;</span>,<span class="number">23</span>);</span><br><span class="line"><span class="comment">//        System.out.println(s);  打印输出以 toString方法 格式输出</span></span><br><span class="line">        serialize(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ser.txt</code> 乱码，这是必然的，因为java原生反序列化产生的就是字节序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> sr net.Seck2y.a01.Person皰膭顿h� I ageL namet Ljava/lang/String;xp   t zhangsan</span><br></pre></td></tr></table></figure>
+
+<p><strong>转16进制</strong></p>
+<p>原生类16进制是以 aced00057372 开头</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aced0005737200156e65742e5365636b32792e6130312e506572736f6eb092c484b6d968ce0200024900036167654c00046e616d657400124c6a6176612f6c616e672f537472696e673b7870000000177400087a68616e6773616e</span><br></pre></td></tr></table></figure>
+
+<p><strong>转base64</strong></p>
+<p>原生类base64是以 rO0ABXNy 开头</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rO0ABXNyABVuZXQuU2VjazJ5LmEwMS5QZXJzb26wksSEttlozgIAAkkAA2FnZUwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cAAAABd0AAh6aGFuZ3Nhbg==</span><br></pre></td></tr></table></figure>
+
+<h4 id="SerializationDumper"><a href="#SerializationDumper" class="headerlink" title="SerializationDumper"></a>SerializationDumper</h4><p>将序列化的16进制转码格式输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">D:\CTF\Web\Java\SerializationDumper-v1.13&gt;java -jar SerializationDumper-v1.13.jar &quot;aced0005737200156e65742e5365636b32792e6130312e506572736f6eb092c484b6d968ce0200024900036167654c00046e616d657400124c6a6176612f6c616e672f537472696e673b7870000000177400087a68616e6773616e&quot;</span><br><span class="line"></span><br><span class="line">STREAM_MAGIC - 0xac ed</span><br><span class="line">STREAM_VERSION - 0x00 05</span><br><span class="line">Contents</span><br><span class="line">  TC_OBJECT - 0x73</span><br><span class="line">    TC_CLASSDESC - 0x72</span><br><span class="line">      className</span><br><span class="line">        Length - 21 - 0x00 15</span><br><span class="line">        Value - net.Seck2y.a01.Person - 0x6e65742e5365636b32792e6130312e506572736f6e</span><br><span class="line">      serialVersionUID - 0xb0 92 c4 84 b6 d9 68 ce</span><br><span class="line">      newHandle 0x00 7e 00 00</span><br><span class="line">      classDescFlags - 0x02 - SC_SERIALIZABLE</span><br><span class="line">      fieldCount - 2 - 0x00 02</span><br><span class="line">      Fields</span><br><span class="line">        0:</span><br><span class="line">          Int - I - 0x49</span><br><span class="line">          fieldName</span><br><span class="line">            Length - 3 - 0x00 03</span><br><span class="line">            Value - age - 0x616765</span><br><span class="line">        1:</span><br><span class="line">          Object - L - 0x4c</span><br><span class="line">          fieldName</span><br><span class="line">            Length - 4 - 0x00 04</span><br><span class="line">            Value - name - 0x6e616d65</span><br><span class="line">          className1</span><br><span class="line">            TC_STRING - 0x74</span><br><span class="line">              newHandle 0x00 7e 00 01</span><br><span class="line">              Length - 18 - 0x00 12</span><br><span class="line">              Value - Ljava/lang/String; - 0x4c6a6176612f6c616e672f537472696e673b</span><br><span class="line">      classAnnotations</span><br><span class="line">        TC_ENDBLOCKDATA - 0x78</span><br><span class="line">      superClassDesc</span><br><span class="line">        TC_NULL - 0x70</span><br><span class="line">    newHandle 0x00 7e 00 02</span><br><span class="line">    classdata</span><br><span class="line">      net.Seck2y.a01.Person</span><br><span class="line">        values</span><br><span class="line">          age</span><br><span class="line">            (int)23 - 0x00 00 00 17</span><br><span class="line">          name</span><br><span class="line">            (object)</span><br><span class="line">              TC_STRING - 0x74</span><br><span class="line">                newHandle 0x00 7e 00 03</span><br><span class="line">                Length - 8 - 0x00 08</span><br><span class="line">                Value - zhangsan - 0x7a68616e6773616e</span><br></pre></td></tr></table></figure>
+
+<h4 id="UnserializableTest"><a href="#UnserializableTest" class="headerlink" title="UnserializableTest"></a>UnserializableTest</h4><p>读取 ser.bin 文件 进行反序列化，再返回</p>
+<p>但 readObject 已经被重写，便会执行重写的 readObject 终端运行命令打开 notepad</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.Seck2y.a01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UnserializableTest</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">unserialize</span><span class="params">(String Filename)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(Filename));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> ois.readObject();</span><br><span class="line">        ois.close();</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">s</span> <span class="operator">=</span> (Person)unserialize(<span class="string">&quot;ser.txt&quot;</span>);</span><br><span class="line"><span class="comment">//        System.out.println(s);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<ol>
+<li>只有实现了 <code>Serializable </code>或者 <code>Externalizable </code>接口的类的对象才能被序列化为字节序列，否则会抛出异常</li>
+<li><code>Java.io.ObjectOutputStream</code>代表对象输出流，它的<code>writeObject(Object obj)</code>方法可对参数指定的 obj 对象进行序列化，把得到的字节序列写到一个目标输出流中</li>
+<li><code>Java.io.ObjectInputStream</code>代表对象输入流，它的<code>readObject()</code>方法从一个源输 入流中读取字节序列，再把它们反序列化为一个对象，并将其返回</li>
+<li>Java原生序列化的数据特征：16进制是以<code>aced00057372 </code>开头（一般认为是aced0005）；base64编码是以<code>rO0ABXNy</code>开头（一般认为是rO0AB）</li>
+<li>反序列化产生漏洞的形式，有以下几种：</li>
+</ol>
+<ul>
+<li>入口类的 readObject 直接调用危险方法</li>
+<li>入口类参数中包含可控类，该类有危险方法，readObject 时调用</li>
+<li>入口类参数中包含可控类，该类又调用其他有危险方法的类，readObject 时调用</li>
+<li>构造函数&#x2F;静态代码块等类加载时隐式执行</li>
+</ul>
+<p><strong>Serializable接口的六个特点：</strong></p>
+<ol>
+<li><p>它是 Java 提供的序列化接口，是一个空接口，没有成员方法和变量</p>
+</li>
+<li><p>一个类要想序列化就必须继承 java.io.Serializable 接口，同时它的子类也可以序列化（不用再继承Serializable 接口）</p>
+</li>
+<li><p>一个实现 Serializable 接口的子类也是可以被序列化的</p>
+</li>
+<li><p>序列化只能保存对象的非静态成员变量</p>
+</li>
+<li><p>transient 标识的对象成员变量不参与序列化</p>
+</li>
+<li><p>Serializable 在序列化和反序列化过程中大量使用了反射</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h3><p>反序列化时会检测 serialVersionUID 是否一致，不一致会导致异常</p>
+<blockquote>
+<p>serialVersionUID 发生改变有三种情况：</p>
+<ol>
+<li>手动去修改导致当前的 serialVersionUID 与序列化前的不一样</li>
+<li>我们根本就没有手动去写这个 serialVersionUID 常量，那么 JVM 内部会根据类结构去计算得到这个 serialVersionUID 值，在类结构发生改变时(属性增加，删除或者类型修改了)这种也是会导致 serialVersionUID 发生变化</li>
+<li>假如类结构没有发生改变，并且没有定义 serialVersionUID ，但是反序列和序列化操作的虚拟机不一样也可能导致计算出来的 serialVersionUID 不一样</li>
+</ol>
+<p>JVM 规范强烈建议我们手动声明一个版本号，这个数字可以是随机的，只要固定不变就可以。同时最好是 private 和 final 的，尽量保证不变</p>
+</blockquote>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/11/10/java/base/Java反序列化-WebGoat/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/10/13/java/base/Java反射&动态代理/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-10-17 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>12</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Base/">Base<span>5</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-article-text">Java反序列化原理</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Serializable-%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-article-text">Serializable 接口的使用</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Person"><span class="toc-article-text">Person</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#SerializableTest"><span class="toc-article-text">SerializableTest</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#SerializationDumper"><span class="toc-article-text">SerializationDumper</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#UnserializableTest"><span class="toc-article-text">UnserializableTest</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-article-text">总结</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#serialVersionUID"><span class="toc-article-text">serialVersionUID</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

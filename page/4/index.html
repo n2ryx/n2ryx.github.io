@@ -1,0 +1,528 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 4 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Notes Site.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/10/10/pentest/web-pentest/File Inclusion/" >File Inclusion</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="File-Inclusion"><a href="#File-Inclusion" class="headerlink" title="File Inclusion"></a>File Inclusion</h1><p>下表显示了哪些函数可以执行文件以及哪些函数只能读取文件内容：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>阅读内容</th>
+<th>执行</th>
+<th>远程 URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PHP</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>include()</code>&#x2F;<code>include_once()</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>require()</code>&#x2F;<code>require_once()</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>file_get_contents()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>fopen()</code>&#x2F;<code>file()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>NodeJS</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fs.readFile()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>fs.sendFile()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>res.render()</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Java</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>include</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>import</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>.NET</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>@Html.Partial()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>@Html.RemotePartial()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Response.WriteFile()</code></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>include</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<p>常见可读文件<code>C:\Windows\boot.ini</code> 和 <code>/etc/passwd</code>，结合FUZZ技术测试。</p>
+<h2 id="Baisc-bypass"><a href="#Baisc-bypass" class="headerlink" title="Baisc bypass"></a>Baisc bypass</h2><h3 id="双写"><a href="#双写" class="headerlink" title="双写"></a>双写</h3><p>针对 LFI 的最基本过滤器之一是搜索和替换过滤器，它只是删除 ( <code>../</code>) 的子字符串以避免路径遍历（非递归）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$point = str_replace(&#x27;../&#x27;, &#x27;&#x27;, $_GET[&#x27;point&#x27;]);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">....//</span><br></pre></td></tr></table></figure>
+
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3>
+	
+	</div>
+  <a type="button" href="/2024/10/10/pentest/web-pentest/File Inclusion/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/10/07/pentest/service/Attacking Common Services/" >Attacking Common Services</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-07  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h1><p>TCP 445  用于直接通过 TCP&#x2F;IP 传输的 SMB（常见于 SMBv2 和 SMBv3）</p>
+<p>TCP&#x2F;UDP 137-139 用于基于 NetBIOS 的 SMB（通常为 SMBv1）</p>
+<h2 id="Interact"><a href="#Interact" class="headerlink" title="Interact"></a>Interact</h2><h3 id="运行-文件夹"><a href="#运行-文件夹" class="headerlink" title="运行 | 文件夹"></a>运行 | 文件夹</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\192.168.220.129\share\</span><br></pre></td></tr></table></figure>
+
+<h3 id="cmd-powershell"><a href="#cmd-powershell" class="headerlink" title="cmd | powershell"></a>cmd | powershell</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt; <span class="title">dir</span> \\192.168.220.129\<span class="title">share</span>\</span></span><br><span class="line"><span class="function"><span class="title">PS</span> <span class="title">C</span>:\&gt; <span class="title">Get</span>-<span class="title">ChildItem</span> \\192.168.220.129\<span class="title">share</span>\</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Mount-SMB-CMD"><a href="#Mount-SMB-CMD" class="headerlink" title="Mount SMB - CMD"></a>Mount SMB - CMD</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 连接到文件共享并将其内容映射到驱动器号 n</span><br><span class="line"><span class="function">C:\&gt; <span class="title">net</span> <span class="title">use</span> <span class="title">n</span>: \\192.168.220.129\<span class="title">share</span> [/<span class="title">user:uname</span> <span class="title">passwd</span>]</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"># 统计文件数量</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">htb</span>&gt; <span class="title">dir</span> <span class="title">n</span>: /<span class="title">a</span>-<span class="title">d</span> /<span class="title">s</span> /<span class="title">b</span> | <span class="title">find</span> /<span class="title">c</span> &quot;:\&quot;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"># 查找特定文件</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\&gt; <span class="title">dir</span> <span class="title">n</span>:\*<span class="title">cred</span>* /<span class="title">s</span> /<span class="title">b</span></span></span><br><span class="line"><span class="function"># <span class="title">or</span></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\&gt; <span class="title">findstr</span> /<span class="title">s</span> /<span class="title">i</span> <span class="title">cred</span> <span class="title">n</span>:\*.*</span></span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/10/07/pentest/service/Attacking Common Services/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/3/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/5/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+		
+			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>2</span></a></li>
+		
+			<li><a href="/categories/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>21</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/18/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://n2ryx.github.io/" title="" target="_blank"]);"></a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

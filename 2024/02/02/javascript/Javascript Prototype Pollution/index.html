@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>JavaScript Prototype Pollution | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="JavaScript Prototype PollutionJavaScript中的原型链污染是指攻击者通过覆盖或修改对象的原型链上的属性，从而改变对象的行为或者访问不应该访问的属性或方法
+原型链污染通常发生在JavaScript对象的继承机制中，因为JavaScript是一种基于原型的语言，对象会继承其原型链上的所有属性和方法
+JS原型链污染分，客户端原型污染、服务端原型污染
+JavaScript 原型JavaScript 中的原型是一个对象，它在创建新对象时被用来作为新对象的初始属性
+1234567username = &amp;quot;&amp;quot;username.__proto__username[&amp;#x27;__proto__&amp;#x27;]username.__proto__                        // String.prototypeusername.__proto__.__proto__              // Object.prototypeusername.__proto__.__proto__.__proto__    // null
+
+
+原型链实现继承当一个新对象被创建时，它会从构造函数的 prototype 属性指向的对象那里继承属性和方法"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JavaScript Prototype Pollution"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> JavaScript Prototype Pollution</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="JavaScript-Prototype-Pollution"><a href="#JavaScript-Prototype-Pollution" class="headerlink" title="JavaScript Prototype Pollution"></a>JavaScript Prototype Pollution</h2><p>JavaScript中的原型链污染是指攻击者通过覆盖或修改对象的原型链上的属性，从而改变对象的行为或者访问不应该访问的属性或方法</p>
+<p>原型链污染通常发生在JavaScript对象的继承机制中，因为JavaScript是一种基于原型的语言，对象会继承其原型链上的所有属性和方法</p>
+<p>JS原型链污染分，客户端原型污染、服务端原型污染</p>
+<h3 id="JavaScript-原型"><a href="#JavaScript-原型" class="headerlink" title="JavaScript 原型"></a>JavaScript 原型</h3><p>JavaScript 中的原型是一个对象，它在创建新对象时被用来作为新对象的初始属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">username = <span class="string">&quot;&quot;</span></span><br><span class="line">username.<span class="property">__proto__</span></span><br><span class="line">username[<span class="string">&#x27;__proto__&#x27;</span>]</span><br><span class="line"></span><br><span class="line">username.<span class="property">__proto__</span>                        <span class="comment">// String.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>              <span class="comment">// Object.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>.<span class="property">__proto__</span>    <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/prototype-pollution-prototype-chain.svg" alt="JavaScript 原型链"></p>
+<h3 id="原型链实现继承"><a href="#原型链实现继承" class="headerlink" title="原型链实现继承"></a>原型链实现继承</h3><p>当一个新对象被创建时，它会从构造函数的 <code>prototype</code> 属性指向的对象那里继承属性和方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;xxxx&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getName</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Parent</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> <span class="title class_">Child</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(child1.<span class="title function_">getName</span>()) <span class="comment">// xxxx</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="prototype-proto"><a href="#prototype-proto" class="headerlink" title="prototype  &amp; proto"></a>prototype  &amp; <strong>proto</strong></h3><ol>
+<li>prototype<ul>
+<li><code>prototype</code> 是函数对象特有的属性，每个函数都有一个 <code>prototype</code> 属性，这个prototype属性是一个指向原型对象的指针，它包含了可以由该函数的实例继承的属性和方法</li>
+<li>当你创建一个新的函数时，JavaScript 自动为该函数创建一个 <code>prototype</code> 对象，并赋值给 <code>prototype</code> 属性</li>
+<li>通过 <code>prototype</code> 对象，你可以定义函数的共享属性和方法，它将被该函数的所有实例所共享</li>
+</ul>
+</li>
+<li><strong>proto</strong><ul>
+<li><code>__proto__</code> 是每个对象都具有的属性，用于指向其构造函数的原型。它是一个指向该对象的原型链上一层的链接</li>
+<li><code>__proto__</code> 属性是非标准的，尽管大多数现代浏览器都支持它，但它已经被 ECMAScript 6 标准中的 <code>Object.getPrototypeOf</code> 方法所替代</li>
+<li><code>__proto__</code> 主要用于获取和设置对象的原型</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object = &#123;&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(object.<span class="property">__proto__</span> === <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(object) === <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>) <span class="comment">// true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总结一下：</p>
+<ol>
+<li><code>prototype</code>是一个类的属性，所有类对象在实例化的时候将会拥有<code>prototype</code>中的属性和方法</li>
+<li>一个对象的<code>__proto__</code>属性，指向这个对象所在的类的<code>prototype</code>属性</li>
+</ol>
+<h3 id="JSON-parse"><a href="#JSON-parse" class="headerlink" title="JSON.parse()"></a>JSON.parse()</h3><p><code>JSON.parse()</code>还将 JSON 对象中的任何键视为任意字符串，包括<code>__proto__</code>这为原型污染提供了一个潜在载体</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objectLiteral = &#123;<span class="attr">__proto__</span>: &#123;<span class="attr">evilProperty</span>: <span class="string">&#x27;payload&#x27;</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">const</span> objectFromJson = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="string">&#x27;&#123;&quot;__proto__&quot;: &#123;&quot;evilProperty&quot;: &quot;payload&quot;&#125;&#125;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">objectLiteral.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;__proto__&#x27;</span>);     <span class="comment">// false</span></span><br><span class="line">objectFromJson.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;__proto__&#x27;</span>);    <span class="comment">// true</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+
+<p>Node.js，<code>hasOwnProperty</code>函数用于检查对象自身是否包含指定的属性（即不包括从原型链继承的属性）</p>
+<h3 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h3><p>哪些情况下我们可以设置<code>__proto__</code>的值呢？其实找找能够控制数组（对象）的“键名”的操作即可：</p>
+<ul>
+<li>对象merge</li>
+<li>对象clone（其实内核就是将待操作的对象merge到一个空对象中）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">merge</span>(<span class="params">target, source</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> source) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key <span class="keyword">in</span> source &amp;&amp; key <span class="keyword">in</span> target) &#123;</span><br><span class="line">            <span class="comment">// 如果target与source有相同的键名，则让target的键值为source的键值</span></span><br><span class="line">            <span class="title function_">merge</span>(target[key], source[key])</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果target与source没有相通的键名，则直接在target新建键名并赋给键值</span></span><br><span class="line">            target[key] = source[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> o1 = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> o2 =  <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="string">&#x27;&#123;&quot;a&quot;: 1, &quot;__proto__&quot;: &#123;&quot;b&quot;: 2&#125;&#125;&#x27;</span>)</span><br><span class="line"><span class="title function_">merge</span>(o1, o2)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o1.<span class="property">a</span>, o1.<span class="property">b</span>)	<span class="comment">// 1 2</span></span><br><span class="line"></span><br><span class="line">o3 = &#123;&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o3.<span class="property">b</span>) <span class="comment">// 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>example</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240523091004879.png" alt="image-20240523091004879"></p>
+<h3 id="绕过filter"><a href="#绕过filter" class="headerlink" title="绕过filter"></a>绕过filter</h3><p>每个构造函数(constructor)都有一个原型对象(prototype) <code>constructor.prototype</code> &#x3D;&#x3D;&#x3D;&#x3D; <code>__proto__</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;__proto__&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;isAdmin&quot;</span>:<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;constructor&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;prototype&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;isAdmin&quot;</span>:<span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// payload，修改 Content-Type: application/json</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JSON-空格覆盖"><a href="#JSON-空格覆盖" class="headerlink" title="JSON 空格覆盖"></a>JSON 空格覆盖</h4><p>Express 框架提供了一个<code>json spaces</code>选项，使您能够配置用于缩进响应中任何 JSON 数据的空格数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;__proto__&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;json spaces&quot;</span>:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/02/20/python/Python Prototype Pollution/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/01/30/writeup/ciscn/2023CISCN华北分区/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-02-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#JavaScript-Prototype-Pollution"><span class="toc-article-text">JavaScript Prototype Pollution</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#JavaScript-%E5%8E%9F%E5%9E%8B"><span class="toc-article-text">JavaScript 原型</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF"><span class="toc-article-text">原型链实现继承</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#prototype-proto"><span class="toc-article-text">prototype  &amp; proto</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#JSON-parse"><span class="toc-article-text">JSON.parse()</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93"><span class="toc-article-text">原型链污染</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%BB%95%E8%BF%87filter"><span class="toc-article-text">绕过filter</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#JSON-%E7%A9%BA%E6%A0%BC%E8%A6%86%E7%9B%96"><span class="toc-article-text">JSON 空格覆盖</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

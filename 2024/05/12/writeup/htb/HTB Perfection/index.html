@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>HTB Perfection | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Perfection (Linux · Easy)RubySSTI+hashcat
+枚举nmap12345678910111213141516171819202122232425262728nmap -sC -sV -sT -T4 10.10.11.253Nmap scan report for 10.10.11.253 (10.10.11.253)Host is up (0.26s latency).Not shown: 984 closed tcp ports (conn-refused)PORT      STATE    SERVICE        VERSION6/tcp     filtered unknown22/tcp    open     ssh            OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: |   256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)|_  256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)33/tcp    filtered dsp80/tcp    open     http           nginx|_http-title: Weighted Grade Calculator1010/tcp  filtered surf1151/tcp  filtered unizensus1277/tcp  filtered miva-mqs1352/tcp  filtered lotusnotes3221/tcp  filtered xnm-clear-text5431/tcp  filtered park-agent6129/tcp  filtered unknown6566/tcp  filtered sane-port6792/tcp  filtered unknown10616/tcp filtered unknown10629/tcp filtered unknown41511/tcp filtered unknownService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+dirsearch
+网页底部，提供了相关信息，Ruby Web
+
+&amp;#x2F;weighted-grade，在此测试"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTB Perfection"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> HTB Perfection</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Perfection-Linux-·-Easy"><a href="#Perfection-Linux-·-Easy" class="headerlink" title="Perfection (Linux · Easy)"></a>Perfection (Linux · Easy)</h1><p>RubySSTI+hashcat</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sV -sT -T4 10.10.11.253</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.253 (10.10.11.253)</span><br><span class="line">Host is up (0.26s latency).</span><br><span class="line">Not shown: 984 closed tcp ports (conn-refused)</span><br><span class="line">PORT      STATE    SERVICE        VERSION</span><br><span class="line">6/tcp     filtered unknown</span><br><span class="line">22/tcp    open     ssh            OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)</span><br><span class="line">|_  256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)</span><br><span class="line">33/tcp    filtered dsp</span><br><span class="line">80/tcp    open     http           nginx</span><br><span class="line">|_http-title: Weighted Grade Calculator</span><br><span class="line">1010/tcp  filtered surf</span><br><span class="line">1151/tcp  filtered unizensus</span><br><span class="line">1277/tcp  filtered miva-mqs</span><br><span class="line">1352/tcp  filtered lotusnotes</span><br><span class="line">3221/tcp  filtered xnm-clear-text</span><br><span class="line">5431/tcp  filtered park-agent</span><br><span class="line">6129/tcp  filtered unknown</span><br><span class="line">6566/tcp  filtered sane-port</span><br><span class="line">6792/tcp  filtered unknown</span><br><span class="line">10616/tcp filtered unknown</span><br><span class="line">10629/tcp filtered unknown</span><br><span class="line">41511/tcp filtered unknown</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240429203253429.png" alt="image-20240429203253429"></p>
+<p>网页底部，提供了相关信息，Ruby Web</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430134229759.png" alt="image-20240430134229759"></p>
+<p>&#x2F;weighted-grade，在此测试</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430134406811.png" alt="image-20240430134406811"></p>
+<p>恶意输入被阻止，fuzz</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140345271.png" alt="image-20240430140345271"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140505438.png" alt="image-20240430140505438"></p>
+<p>SSTI测试，<a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#erb-ruby">https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#erb-ruby</a></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140704412.png" alt="image-20240430140704412"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430141704261.png" alt="image-20240430141704261"></p>
+<p>反弹shell</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142218162.png" alt="image-20240430142218162"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142333239.png" alt="image-20240430142333239"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>sudo suid 没什么好利用的</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142930032.png" alt="image-20240430142930032"></p>
+<p>下载PEASS-ng进行提权分析</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430143443896.png" alt="image-20240430143443896"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x linpeas.sh</span><br><span class="line">./linpeas.sh</span><br></pre></td></tr></table></figure>
+
+<p>Files with Interesting Permissions</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430144613273.png" alt="image-20240430144613273"></p>
+<p>&#x2F;var&#x2F;mail&#x2F;susan</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430144855377.png" alt="image-20240430144855377"></p>
+<p>译：由于学生路径数据泄露，我们将过渡到木星年级，我认为我们也应该迁移我们的证书（包括其他学生在我们班上）到新平台。我还建议制定一个新的密码规范，让每个人都能更轻松地使用。密码格式为：<br><code>&#123;firstname&#125;_｛名字倒过来｝_｛随机生成的1到1000000000之间的整数&#125;</code><br>请注意，名字的所有字母都应该转换成小写字母。请尽可能向我提供有关迁移的最新信息。我目前正在该平台上注册我们的大学。<br>-Tina，你可爱的学生</p>
+<p>&#x2F;home&#x2F;susan&#x2F;Migration&#x2F;pupilpath_credentials.db</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430145154409.png" alt="image-20240430145154409"></p>
+<p>显示不全，传过来用sqlite工具打开</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430145853820.png" alt="image-20240430145853820"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150010098.png" alt="image-20240430150010098"></p>
+<h3 id="hash-identifier"><a href="#hash-identifier" class="headerlink" title="hash-identifier"></a>hash-identifier</h3><p>识别哈希加密类型</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150306305.png" alt="image-20240430150306305"></p>
+<h3 id="hashcat"><a href="#hashcat" class="headerlink" title="hashcat"></a>hashcat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -a 3 -m 1400 abeb6f8eb5722b8ca3b45f6f72a0cf17c7028d62a15a30199347d9d74f39023f  &quot;susan_nasus_?d?d?d?d?d?d?d?d?d&quot;</span><br></pre></td></tr></table></figure>
+
+<p>-m 1400 是 sha-256</p>
+<p>-a 3 是掩码攻击，知道密码是9位长，设定一个掩码<code>?d?d?d?d?d?d?d?d?d</code> (字母l，任意a)</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150758897.png" alt="image-20240430150758897"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh susan@10.10.11.253</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430151550277.png" alt="image-20240430151550277"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/05/20/writeup/htb/HTB Lame/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/05/10/writeup/htb/HTB Headless/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-05-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Perfection-Linux-%C2%B7-Easy"><span class="toc-article-text">Perfection (Linux · Easy)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-article-text">枚举</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#dirsearch"><span class="toc-article-text">dirsearch</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Shell"><span class="toc-article-text">Shell</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-article-text">权限提升</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#hash-identifier"><span class="toc-article-text">hash-identifier</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#hashcat"><span class="toc-article-text">hashcat</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

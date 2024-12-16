@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 6 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Notes Site.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/09/25/pentest/web-pentest/XXE/" >XML External Entity (XXE)</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-25  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>当 XML 数据未经适当清理或安全解析而从用户控制的输入中获取时，就会出现 <code>XML External Entity (XXE)</code> 漏洞。</p>
+<h1 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h1><p><code>Extensible Markup Language (XML)</code>是一种通用标记语言（类似于 HTML 和 SGML），旨在各种类型的应用程序中灵活地传输和存储数据和文档。</p>
+<h2 id="XML-Document"><a href="#XML-Document" class="headerlink" title="XML Document"></a>XML Document</h2><p>XML 文档的基本示例：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">email</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">date</span>&gt;</span>01-01-2022<span class="tag">&lt;/<span class="name">date</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">time</span>&gt;</span>10:00 am UTC<span class="tag">&lt;/<span class="name">time</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">sender</span>&gt;</span>john@inlanefreight.com<span class="tag">&lt;/<span class="name">sender</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">recipients</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span>HR@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">cc</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">to</span>&gt;</span>billing@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">to</span>&gt;</span>payslips@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">cc</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">recipients</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span><br><span class="line">  Hello,  </span><br><span class="line">      Kindly share with me the invoice for the payment made on January 1, 2022.  </span><br><span class="line">  Regards,  </span><br><span class="line">  John  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>XML 文档的一些关键元素：</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Definition</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Tag</code></td>
+<td>XML 文档的键，通常用 ( <code>&lt;</code>&#x2F; <code>&gt;</code>) 字符括起来。</td>
+<td><code>&lt;date&gt;</code></td>
+</tr>
+<tr>
+<td><code>Entity</code></td>
+<td>XML 变量，通常用 ( <code>&amp;</code>&#x2F; <code>;</code>) 字符括起来。</td>
+<td><code>&amp;lt;</code></td>
+</tr>
+<tr>
+<td><code>Element</code></td>
+<td>根元素或其任何子元素，其值存储在开始标记和结束标记之间。</td>
+<td><code>&lt;date&gt;01-01-2022&lt;/date&gt;</code></td>
+</tr>
+<tr>
+<td><code>Attribute</code></td>
+<td>存储在标签中的任何元素的可选规范，可供 XML 解析器使用。</td>
+<td><code>version=&quot;1.0&quot;</code>&#x2F;<code>encoding=&quot;UTF-8&quot;</code></td>
+</tr>
+<tr>
+<td><code>Declaration</code></td>
+<td>通常是 XML 文档的第一行，定义解析时使用的 XML 版本和编码。</td>
+<td><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</code></td>
+</tr>
+</tbody></table>
+<h2 id="XML-Document-Type-Definition-DTD"><a href="#XML-Document-Type-Definition-DTD" class="headerlink" title="XML Document Type Definition (DTD)"></a>XML Document Type Definition (DTD)</h2><p><code>XML Document Type Definition (DTD)</code> 允许根据预定义的文档结构验证 XML 文档。预定义的文档结构可以在文档本身或外部文件中定义。</p>
+	
+	</div>
+  <a type="button" href="/2024/09/25/pentest/web-pentest/XXE/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/09/20/pentest/web-pentest/HTTP Verb Tampering/" >HTTP Verb Tampering</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><a target="_blank" rel="noopener" href="https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/03-Testing_for_HTTP_Verb_Tampering">HTTP Verb Tampering</a>利用接受 HTTP 动词和方法的 Web 服务器。可以通过使用意外方法发送恶意请求来利用此攻击，这可能导致绕过 Web 应用程序的授权机制，甚至绕过其针对其他 Web 攻击的安全控制。</p>
+<p>HTTP 有<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">9 种不同的动词</a>，常用的 HTTP Verb</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET</code></td>
+<td>请求特定资源。可以通过 URL 中的查询字符串将附加数据传递给服务器（例如<code>?param=value</code>）。</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>将数据发送到服务器。它可以处理多种类型的输入，例如文本、PDF 和其他形式的二进制数据。此数据附加在标头后面的请求正文中。POST 方法通常用于发送信息（例如表单&#x2F;登录）或将数据（例如图像或文档）上传到网站。</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>请求向服务器发出 GET 请求时返回的标头。它不返回请求正文，通常用于在下载资源之前检查响应长度。</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>在服务器上创建新资源。如果在未进行适当控制的情况下允许此方法，则会导致上传恶意资源。</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>删除 Web 服务器上的现有资源。如果没有得到妥善保护，可能会因删除 Web 服务器上的关键文件而导致拒绝服务 (DoS)。</td>
+</tr>
+<tr>
+<td><code>OPTIONS</code></td>
+<td>返回有关服务器的信息，例如其接受的方法。</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>对指定位置的资源应用部分修改。</td>
+</tr>
+<tr>
+<td><code>TRACE</code></td>
+<td>回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td><code>CONNECT</code></td>
+<td>HTTP&#x2F;1.1协议中预留给能够将连接改为隧道方式的代理服务器。通常用于SSL加密服务器的连接（经由非加密的HTTP代理服务器）。</td>
+</tr>
+</tbody></table>
+<h1 id="Insecure-Configurations"><a href="#Insecure-Configurations" class="headerlink" title="Insecure Configurations"></a>Insecure Configurations</h1><p>Web 服务器的身份验证配置可能仅限于特定的 HTTP 方法，这会导致某些 HTTP 方法无需身份验证即可访问。</p>
+<h2 id="Apache-Web"><a href="#Apache-Web" class="headerlink" title="Apache Web"></a>Apache Web</h2><p> Apache Web 服务器存在漏洞的配置示例，该配置位于站点配置文件（例如 <code>000-default.conf</code>）或 <code>.htaccess</code> 网页配置文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;/var/www/html/admin&quot;&gt;  </span><br><span class="line">    AuthType Basic  </span><br><span class="line">    AuthName &quot;Admin Panel&quot;  </span><br><span class="line">    AuthUserFile /etc/apache2/.htpasswd  </span><br><span class="line">    &lt;Limit GET&gt;  </span><br><span class="line">        Require valid-user  </span><br><span class="line">    &lt;/Limit&gt;  </span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此配置正在设置管理 Web 目录的授权配置。但是，由于使用了 <code>&lt;Limit GET&gt;</code> 关键字，<code>Require valid-user</code> 设置仅适用于 GET 请求，因此页面只能通过 <code>POST</code> 请求访问。即使同时指定了 <code>GET</code> 和 <code>POST</code>，页面也只能通过其他方法访问，例如 <code>HEAD</code> 或 <code>OPTIONS</code>。</p>
+<h2 id="Tomcat-Web"><a href="#Tomcat-Web" class="headerlink" title="Tomcat Web"></a>Tomcat Web</h2>
+	
+	</div>
+  <a type="button" href="/2024/09/20/pentest/web-pentest/HTTP Verb Tampering/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/5/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/7/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+		
+			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>2</span></a></li>
+		
+			<li><a href="/categories/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>21</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/18/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://n2ryx.github.io/" title="" target="_blank"]);"></a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

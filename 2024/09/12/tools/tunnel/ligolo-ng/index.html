@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>ligolo-ng | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142ligolo-ng » help    __    _             __                          / /   (_)___ _____  / /___        ____  ____ _  / /   / / __ `/ __ \/ / __ \______/ __ \/ __ `/ / /___/ / /_/ / /_/ / / /_/ /_____/ / / / /_/ / /_____/_/\__, /\____/_/\____/     /_/ /_/\__, /          /____/                          /____/     Made in France ♥            by @Nicocha30!  Version: 0.6.2Ligolo-ng - An advanced, yet simple tunneling toolCommands:=========  certificate_fingerprint   Show the current selfcert fingerprint  clear                     clear the screen  connect_agent             Attempt to connect to a bind agent  exit                      exit the shell  help                      use &amp;#x27;help [command]&amp;#x27; for command help  ifconfig                  Show agent interfaces  session                   Change the current relay agentInterfaces==========  interface_create, ifcreate                Create a new tuntap interface  interface_delete, ifdel                   Delete a tuntap interface  interface_list, iflist, route_list        List available tun interfaces  route_add, add_route, interface_route_add, interface_add_route  Add a route to a network interface  route_del, del_route, interface_route_del, interface_del_route  Delete a routeListeners=========  listener_add          Listen on the agent and redirect connections to the desired address  listener_list         List currently running listeners  listener_stop         Stop a listenerTunneling=========  tunnel_list           List active tunnels  tunnel_start, start   Start relaying connection to the current agent  tunnel_stop, stop     Stop the tunnel
+
+Environment1234Attack Host: 172.16.2.2/16Target Host1: 172.16.2.3/16 | 192.168.3.3/24Target Host2: 192.168.3.4/24 | 192.168.4.4/24...
+
+LinuxPivot1234567891011121314151617# Attack Hostsudo ./proxy -selfcert [-laddr 0.0.0.0:11601]ligolo-ng » ifcreate --name ligolo1# Target Host1./agent -connect 172.16.2.2:11601 -ignore-cert# Attack Host ligolo-ngligolo-ng » INFO[0008] Agent joined ......ligolo-ng » session[Agent : SESSION] » start --tun ligolo1[Agent : SESSION] » ifconfig  # 查看 Target Interface # Attack Hostsudo ip route add 192.168.3.0/24 dev ligolo1# OR[Agent : SESSION] » route_add --name ligolo1 --route 192.168.3.0/24
+
+Double Pivot1234567891011121314151617# Attack Host# 添加 Interfaceligolo-ng » ifcreate --name ligolo2# 添加监听器，将此 Agent:11601 端口的流量转发到 Proxy:11601 端口[Agent : SESSION] » listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp# Target Host2./agent- connect 192.168.3.3:11601 -ignore-cert# Attack Host ligolo-ng[Agent : SESSION] » session  # 切换会话[Agent : SESSION-2] » start --tun ligolo2# Attack Hostsudo ip route add 192.168.4.0/24 dev ligolo2# OR[Agent : SESSION] » route_add --name ligolo2 --route 192.168.4.0/24
+
+Setting12345678910111213141516# listener 将此 Agent:2222 端口的流量转发到 Proxy:2222 端口[Agent : SESSION] » listener_add --addr 0.0.0.0:2222 --to 127.0.0.1:2222 --tcp # File Transfer or ...$ python3 -m http.server 2222# Bind Pivot Box# 访问 240.0.0.1 可直接与绑定的 Pivot 交互sudo ip route add 240.0.0.1/32 dev ligolo# Delete Interfaceligolo-ng » interface_delete --name ligolo#ORsudo ip link delete ligolo# ORsudo ifconfig ligolo downsudo ifconfig ligolo delete"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ligolo-ng"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> ligolo-ng</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">ligolo-ng » help</span><br><span class="line">    __    _             __                       </span><br><span class="line">   / /   (_)___ _____  / /___        ____  ____ _</span><br><span class="line">  / /   / / __ `/ __ \/ / __ \______/ __ \/ __ `/</span><br><span class="line"> / /___/ / /_/ / /_/ / / /_/ /_____/ / / / /_/ / </span><br><span class="line">/_____/_/\__, /\____/_/\____/     /_/ /_/\__, /  </span><br><span class="line">        /____/                          /____/   </span><br><span class="line"></span><br><span class="line">  Made in France ♥            by @Nicocha30!</span><br><span class="line">  Version: 0.6.2</span><br><span class="line"></span><br><span class="line">Ligolo-ng - An advanced, yet simple tunneling tool</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">=========</span><br><span class="line">  certificate_fingerprint   Show the current selfcert fingerprint</span><br><span class="line">  clear                     clear the screen</span><br><span class="line">  connect_agent             Attempt to connect to a bind agent</span><br><span class="line">  exit                      exit the shell</span><br><span class="line">  help                      use &#x27;help [command]&#x27; for command help</span><br><span class="line">  ifconfig                  Show agent interfaces</span><br><span class="line">  session                   Change the current relay agent</span><br><span class="line"></span><br><span class="line">Interfaces</span><br><span class="line">==========</span><br><span class="line">  interface_create, ifcreate                Create a new tuntap interface</span><br><span class="line">  interface_delete, ifdel                   Delete a tuntap interface</span><br><span class="line">  interface_list, iflist, route_list        List available tun interfaces</span><br><span class="line">  route_add, add_route, interface_route_add, interface_add_route  Add a route to a network interface</span><br><span class="line">  route_del, del_route, interface_route_del, interface_del_route  Delete a route</span><br><span class="line"></span><br><span class="line">Listeners</span><br><span class="line">=========</span><br><span class="line">  listener_add          Listen on the agent and redirect connections to the desired address</span><br><span class="line">  listener_list         List currently running listeners</span><br><span class="line">  listener_stop         Stop a listener</span><br><span class="line"></span><br><span class="line">Tunneling</span><br><span class="line">=========</span><br><span class="line">  tunnel_list           List active tunnels</span><br><span class="line">  tunnel_start, start   Start relaying connection to the current agent</span><br><span class="line">  tunnel_stop, stop     Stop the tunnel</span><br></pre></td></tr></table></figure>
+
+<h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Attack Host: 172.16.2.2/16</span><br><span class="line">Target Host1: 172.16.2.3/16 | 192.168.3.3/24</span><br><span class="line">Target Host2: 192.168.3.4/24 | 192.168.4.4/24</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Pivot"><a href="#Pivot" class="headerlink" title="Pivot"></a>Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ./proxy -selfcert [-laddr 0.0.0.0:11601]</span><br><span class="line">ligolo-ng » ifcreate --name ligolo1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target Host1</span></span><br><span class="line">./agent -connect 172.16.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun ligolo1</span><br><span class="line">[Agent : SESSION] » ifconfig  # 查看 Target Interface</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ip route add 192.168.3.0/24 dev ligolo1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">[Agent : SESSION] » route_add --name ligolo1 --route 192.168.3.0/24</span><br></pre></td></tr></table></figure>
+
+<h3 id="Double-Pivot"><a href="#Double-Pivot" class="headerlink" title="Double Pivot"></a>Double Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Interface</span></span><br><span class="line">ligolo-ng » ifcreate --name ligolo2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加监听器，将此 Agent:11601 端口的流量转发到 Proxy:11601 端口</span></span><br><span class="line">[Agent : SESSION] » listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target Host2</span></span><br><span class="line">./agent- connect 192.168.3.3:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host ligolo-ng</span></span><br><span class="line">[Agent : SESSION] » session  # 切换会话</span><br><span class="line">[Agent : SESSION-2] » start --tun ligolo2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ip route add 192.168.4.0/24 dev ligolo2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">[Agent : SESSION] » route_add --name ligolo2 --route 192.168.4.0/24</span><br></pre></td></tr></table></figure>
+
+<h3 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">listener 将此 Agent:2222 端口的流量转发到 Proxy:2222 端口</span></span><br><span class="line">[Agent : SESSION] » listener_add --addr 0.0.0.0:2222 --to 127.0.0.1:2222 --tcp </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">File Transfer or ...</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">python3 -m http.server 2222</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Bind Pivot Box</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">访问 240.0.0.1 可直接与绑定的 Pivot 交互</span></span><br><span class="line">sudo ip route add 240.0.0.1/32 dev ligolo</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Delete Interface</span></span><br><span class="line">ligolo-ng » interface_delete --name ligolo</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">OR</span></span><br><span class="line">sudo ip link delete ligolo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">sudo ifconfig ligolo down</span><br><span class="line">sudo ifconfig ligolo delete</span><br></pre></td></tr></table></figure>
+
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><h3 id="Pivot-1"><a href="#Pivot-1" class="headerlink" title="Pivot"></a>Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ./proxy -selfcert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target Host1</span></span><br><span class="line">./agent -connect 172.16.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun utun3</span><br><span class="line">[Agent : SESSION] » ifconfig  # 查看网络信息</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ifconfig utun3 alias 192.168.3.33 255.255.255.0</span><br><span class="line">sudo route add -net 192.168.3.0/24 -interface utun3</span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+<h3 id="Setting-1"><a href="#Setting-1" class="headerlink" title="Setting"></a>Setting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Delete Interface</span></span><br><span class="line">sudo ifconfig utun3 inet 0.0.0.0 netmask 255.255.255.0</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Delete IP</span></span><br><span class="line">sudo ifconfig utun3 delete 192.168.9.9</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Delete Route</span></span><br><span class="line">sudo route delete -net 192.168.9.1/24 -interface utun3</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/09/20/pentest/web-pentest/HTTP Verb Tampering/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/09/09/tools/crack/hydra/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-09-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Environment"><span class="toc-article-text">Environment</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Linux"><span class="toc-article-text">Linux</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Pivot"><span class="toc-article-text">Pivot</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Double-Pivot"><span class="toc-article-text">Double Pivot</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Setting"><span class="toc-article-text">Setting</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#MacOS"><span class="toc-article-text">MacOS</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Pivot-1"><span class="toc-article-text">Pivot</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Setting-1"><span class="toc-article-text">Setting</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

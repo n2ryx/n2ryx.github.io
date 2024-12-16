@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>ffuf | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374Usage: ffuf">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ffuf"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> ffuf</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">Usage: ffuf [command...]</span><br><span class="line"></span><br><span class="line">HTTP选项:</span><br><span class="line">-H          			请求头&#x27;Name:Value&#x27;用冒号分隔。可接受多个标志</span><br><span class="line">-X          			要使用的HTTP方法。如get,post</span><br><span class="line">-b          			Cookie数据`&quot;NAME1=VALUE1; NAME2=VALUE2&quot;`</span><br><span class="line">-d          			POST 数据</span><br><span class="line">-http2      			使用HTTP2协议（默认值：false）</span><br><span class="line">-ignore-body			不要获取响应内容。（默认值：false）</span><br><span class="line">-r          			遵循重定向（默认值：false）</span><br><span class="line">-recursion  			递归扫描，只支持FUZZ关键字，并且-u结尾（默认值：false）</span><br><span class="line">-recursion-depth        最大递归深度。（默认值：0）</span><br><span class="line">-replay-proxy   		使用此代理重播匹配的请求</span><br><span class="line">-timeout        		HTTP请求超时（秒）。（默认值：10）</span><br><span class="line">-u          			目标url</span><br><span class="line">-x          			代理URL（SOCKS5或HTTP）。例如：http://127.0.0.1:8080或socks5://127.0.0.1:8080</span><br><span class="line"></span><br><span class="line">常规选项</span><br><span class="line">-V          			显示版本信息（默认值：false）</span><br><span class="line">-ac         			自动校准过滤选项（默认值：false）</span><br><span class="line">-acc        			自定义自动校准字符串。可以多次使用。含义-ac</span><br><span class="line">-ach        			每主机自动校准（默认值：false）</span><br><span class="line">-ack        			自动校准关键字（默认值：FUZZ）</span><br><span class="line">-acs        			自动校准策略：“基本”或“高级”（默认值：基本）</span><br><span class="line">-c          			将输出着色。（默认值：false）</span><br><span class="line">-config     			从文件加载配置</span><br><span class="line">-json       			json输出，打印换行分隔的json记录（默认值：false）</span><br><span class="line">-maxtime    			整个进程的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-maxtime-job    		作业每个作业的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-noninteractive 		非交互式禁用交互式控制台功能（默认值：false）</span><br><span class="line">-p          			请求之间的“延迟”秒数，或一系列随机延迟。例如“0.1”或“0.1-2.0”</span><br><span class="line">-rate       			每秒请求的速率（默认值：0）</span><br><span class="line">-s          			不打印附加信息（静默模式）（默认值：false）</span><br><span class="line">-sa         			在所有错误情况下停止。暗示-sf和-se。（默认值：false）</span><br><span class="line">-se         			在出现虚假错误时停止（默认值：false）</span><br><span class="line">-sf         			当&gt;95%的响应返回403 Forbidden时停止（默认值：false）</span><br><span class="line">-t          			并发线程数。（默认值：40）</span><br><span class="line">-v          			详细输出，打印完整的URL和重定向位置（如果有）以及结果。（默认值：false）</span><br><span class="line"></span><br><span class="line">匹配器选项</span><br><span class="line">-mc         			匹配HTTP状态代码，或“全部”表示所有内容。（默认值：200,204,301,302,307,403,404,500）</span><br><span class="line">-ml         			匹配响应行数</span><br><span class="line">-mmode      			匹配器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-mr         			匹配正则表达式</span><br><span class="line">-ms         			匹配HTTP响应大小</span><br><span class="line">-mt         			匹配第一个响应字节的毫秒数，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-mw         			匹配响应的单词数量</span><br><span class="line"></span><br><span class="line">过滤器选项</span><br><span class="line">-fc         			从响应中筛选HTTP状态代码。代码和范围的逗号分隔列表</span><br><span class="line">-fl         			根据响应的行数进行过滤。行计数和范围的逗号分隔列表</span><br><span class="line">-fmode      			筛选器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-fr         			筛选器正则表达式</span><br><span class="line">-fs         			筛选器HTTP响应大小。大小和范围的逗号分隔列表</span><br><span class="line">-ft         			根据到第一个响应字节的毫秒数进行筛选，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-fw         			按响应的字数进行筛选。以逗号分隔的单词计数和响铃列表</span><br><span class="line"></span><br><span class="line">输入选项</span><br><span class="line">-D          			DirSearch单词列表兼容模式。与-e标志一起使用。（默认值：false）</span><br><span class="line">-e          			扩展名的逗号分隔列表，复制字典并添加扩展</span><br><span class="line">-ic         			忽略单词列表注释（默认值：false）</span><br><span class="line">-input-cmd      		要测试的输入数。与--input cmd一起使用。（默认值：100）</span><br><span class="line">-input-shell    		用于运行命令的外壳</span><br><span class="line">-mode       			多单词列表操作模式。可用模式：clusterbomb,pitchfork,sniper(default: clusterbomb)</span><br><span class="line">-request    			包含原始http请求的文件</span><br><span class="line">-request-proto          与原始请求一起使用的协议（默认值：https）</span><br><span class="line">-w          			用冒号分隔的单词列表文件路径和（可选）关键字</span><br><span class="line"></span><br><span class="line">输出选项</span><br><span class="line">-debug-log      		将所有内部日志记录写入指定的文件。</span><br><span class="line">-o              		将输出写入文件</span><br><span class="line">-od             		将匹配结果存储到的目录路径</span><br><span class="line">-of             		输出文件格式。可用格式:json、ejson、html、md、csv、ecsv(或所有格式的“all”)(默认值：json)</span><br><span class="line">-or             		如果没有结果，就不要创建输出文件（默认值：false）</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Web fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目录</span></span><br><span class="line">ffuf -w /path/to/seclists/dict/SecLists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名类型</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/web-extensions.txt -u http://SERVER_IP:PORT/indexFUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ.php</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">递归</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Subdomain fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://FUZZ.example.htb/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Vhost</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://example.htb -H &#x27;Host: FUZZ.example.htb&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Param fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GET</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -u http://example.htb/get.php?FUZZ=key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POST</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -X POST -H &#x27;Content-Type: application/x-www-form-urlencoded&#x27; -d &#x27;FUZZ=key&#x27; -u http://example.htb/post.php</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/09/09/tools/crack/medusa/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/09/08/tools/enum/nmap/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-09-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

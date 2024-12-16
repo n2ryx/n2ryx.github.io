@@ -1,0 +1,501 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Page 8 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>n2ryx&#39;s Blog<span class="blink-fast">|</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		Notes Site.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/09/09/tools/crack/medusa/" >medusa</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">medusa [-h 主机名|-H 文件] [-u 用户名|-U 文件] [-p 密码|-P 文件] [-C 文件] -M 模块 [选项]</span><br><span class="line"></span><br><span class="line">-h [TEXT]    : 目标主机名或IP地址</span><br><span class="line">-H [FILE]    : 包含目标主机名或IP地址的文件</span><br><span class="line">-u [TEXT]    : 要测试的用户名</span><br><span class="line">-U [FILE]    : 包含要测试的用户名的文件</span><br><span class="line">-p [TEXT]    : 要测试的密码</span><br><span class="line">-P [FILE]    : 包含要测试的密码的文件</span><br><span class="line">-C [FILE]    : 包含组合项的文件。更多信息见README。</span><br><span class="line">-O [FILE]    : 将日志信息附加到指定文件</span><br><span class="line">-e [n/s/ns]  : 额外的密码检查选项（`n` 无密码，`s` 密码 = 用户名）</span><br><span class="line">-M [TEXT]    : 要执行的模块名称（不包括 `.mod` 扩展名）</span><br><span class="line">-m [TEXT]    : 传递给模块的参数。可以多次传递不同参数（如 `-m 参数1 -m 参数2` 等）</span><br><span class="line">-d           : 列出所有已知的模块</span><br><span class="line">-n [NUM]     : 使用非默认的TCP端口号</span><br><span class="line">-s           : 启用SSL</span><br><span class="line">-g [NUM]     : 连接超时的最大等待时间，单位为秒（默认 3 秒）</span><br><span class="line">-r [NUM]     : 重试之间的睡眠时间，单位为秒（默认 3 秒）</span><br><span class="line">-R [NUM]     : 重试次数，达到该次数后放弃，总尝试次数为 `NUM + 1`</span><br><span class="line">-c [NUM]     : 验证套接字可用时的等待时间，单位为微秒（默认 500 微秒）</span><br><span class="line">-t [NUM]     : 同时测试的登录数量</span><br><span class="line">-T [NUM]     : 同时测试的主机数量</span><br><span class="line">-L           : 每个线程使用一个用户名并行登录。默认是先处理所有用户名后再进行</span><br><span class="line">-f           : 找到第一个有效的用户名/密码后停止扫描主机</span><br><span class="line">-F           : 找到任何主机上的第一个有效用户名/密码后停止审计</span><br><span class="line">-b           : 屏蔽启动横幅</span><br><span class="line">-q           : 显示模块的使用信息</span><br><span class="line">-v [NUM]     : 设置详细输出级别 [0 - 6，数字越大越详细]</span><br><span class="line">-w [NUM]     : 错误调试输出级别 [0 - 10，数字越大越详细]</span><br><span class="line">-V           : 显示版本信息</span><br><span class="line">-Z [TEXT]    : 根据先前扫描的结果图恢复扫描</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th align="left">模块</th>
+<th>服务&#x2F;协议</th>
+<th>描述</th>
+<th>使用示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FTP</td>
+<td>文件传输协议</td>
+<td>暴力破解 FTP 登录凭据，用于通过网络传输文件。</td>
+<td><code>medusa -M ftp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">HTTP</td>
+<td>超文本传输协议</td>
+<td>通过 HTTP（GET&#x2F;POST）对 Web 应用程序上的登录表单进行暴力破解。</td>
+<td><code>medusa -M http -h www.example.com -U users.txt -P passwords.txt -m DIR:/login.php -m FORM:username=^USER^&amp;password=^PASS^</code></td>
+</tr>
+<tr>
+<td align="left">IMAP</td>
+<td>互联网消息访问协议</td>
+<td>暴力破解 IMAP 登录，通常用于访问电子邮件服务器。</td>
+<td><code>medusa -M imap -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">MySQL</td>
+<td>MySQL 数据库</td>
+<td>暴力破解 MySQL 数据库凭证，常用于 Web 应用程序和数据库。</td>
+<td><code>medusa -M mysql -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">POP3</td>
+<td>邮局协议 3</td>
+<td>强制 POP3 登录，通常用于从邮件服务器检索电子邮件。</td>
+<td><code>medusa -M pop3 -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">RDP</td>
+<td>远程桌面协议</td>
+<td>暴力破解 RDP 登录，常用于 Windows 系统的远程桌面访问。</td>
+<td><code>medusa -M rdp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SSH</td>
+<td>安全外壳 (SSH)</td>
+<td>暴力破解 SSH 登录，常用于安全远程访问。</td>
+<td><code>medusa -M ssh -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SVN</td>
+<td>版本控制系统</td>
+<td>强制使用 Subversion（SVN）存储库进行版本控制。</td>
+<td><code>medusa -M svn -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Telnet</td>
+<td>Telnet 协议</td>
+<td>在旧系统上强制执行 Telnet 服务以执行远程命令。</td>
+<td><code>medusa -M telnet -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">vnc</td>
+<td>虚拟网络计算</td>
+<td>强制获取远程桌面访问的 VNC 登录凭据。</td>
+<td><code>medusa -M vnc -h 192.168.1.100 -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Web form</td>
+<td>暴力破解 Web 登录表单</td>
+<td>使用 HTTP POST 请求强制破解网站上的登录表单。</td>
+<td><code>medusa -M web-form -h www.example.com -U users.txt -P passwords.txt -m FORM:&quot;username=^USER^&amp;password=^PASS^:F=Invalid&quot;</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">爆破 ssh</span></span><br><span class="line">medusa -h 192.168.0.100 -U usernames.txt -P passwords.txt -M ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">medusa -H web_servers.txt -U usernames.txt -P passwords.txt -M http -m GET</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试空密码</span></span><br><span class="line">medusa -h 10.0.0.5 -U usernames.txt -e ns -M service_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	
+	</div>
+  <a type="button" href="/2024/09/09/tools/crack/medusa/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/09/08/tools/enum/ffuf/" >ffuf</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-08  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">Usage: ffuf [command...]</span><br><span class="line"></span><br><span class="line">HTTP选项:</span><br><span class="line">-H          			请求头&#x27;Name:Value&#x27;用冒号分隔。可接受多个标志</span><br><span class="line">-X          			要使用的HTTP方法。如get,post</span><br><span class="line">-b          			Cookie数据`&quot;NAME1=VALUE1; NAME2=VALUE2&quot;`</span><br><span class="line">-d          			POST 数据</span><br><span class="line">-http2      			使用HTTP2协议（默认值：false）</span><br><span class="line">-ignore-body			不要获取响应内容。（默认值：false）</span><br><span class="line">-r          			遵循重定向（默认值：false）</span><br><span class="line">-recursion  			递归扫描，只支持FUZZ关键字，并且-u结尾（默认值：false）</span><br><span class="line">-recursion-depth        最大递归深度。（默认值：0）</span><br><span class="line">-replay-proxy   		使用此代理重播匹配的请求</span><br><span class="line">-timeout        		HTTP请求超时（秒）。（默认值：10）</span><br><span class="line">-u          			目标url</span><br><span class="line">-x          			代理URL（SOCKS5或HTTP）。例如：http://127.0.0.1:8080或socks5://127.0.0.1:8080</span><br><span class="line"></span><br><span class="line">常规选项</span><br><span class="line">-V          			显示版本信息（默认值：false）</span><br><span class="line">-ac         			自动校准过滤选项（默认值：false）</span><br><span class="line">-acc        			自定义自动校准字符串。可以多次使用。含义-ac</span><br><span class="line">-ach        			每主机自动校准（默认值：false）</span><br><span class="line">-ack        			自动校准关键字（默认值：FUZZ）</span><br><span class="line">-acs        			自动校准策略：“基本”或“高级”（默认值：基本）</span><br><span class="line">-c          			将输出着色。（默认值：false）</span><br><span class="line">-config     			从文件加载配置</span><br><span class="line">-json       			json输出，打印换行分隔的json记录（默认值：false）</span><br><span class="line">-maxtime    			整个进程的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-maxtime-job    		作业每个作业的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-noninteractive 		非交互式禁用交互式控制台功能（默认值：false）</span><br><span class="line">-p          			请求之间的“延迟”秒数，或一系列随机延迟。例如“0.1”或“0.1-2.0”</span><br><span class="line">-rate       			每秒请求的速率（默认值：0）</span><br><span class="line">-s          			不打印附加信息（静默模式）（默认值：false）</span><br><span class="line">-sa         			在所有错误情况下停止。暗示-sf和-se。（默认值：false）</span><br><span class="line">-se         			在出现虚假错误时停止（默认值：false）</span><br><span class="line">-sf         			当&gt;95%的响应返回403 Forbidden时停止（默认值：false）</span><br><span class="line">-t          			并发线程数。（默认值：40）</span><br><span class="line">-v          			详细输出，打印完整的URL和重定向位置（如果有）以及结果。（默认值：false）</span><br><span class="line"></span><br><span class="line">匹配器选项</span><br><span class="line">-mc         			匹配HTTP状态代码，或“全部”表示所有内容。（默认值：200,204,301,302,307,403,404,500）</span><br><span class="line">-ml         			匹配响应行数</span><br><span class="line">-mmode      			匹配器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-mr         			匹配正则表达式</span><br><span class="line">-ms         			匹配HTTP响应大小</span><br><span class="line">-mt         			匹配第一个响应字节的毫秒数，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-mw         			匹配响应的单词数量</span><br><span class="line"></span><br><span class="line">过滤器选项</span><br><span class="line">-fc         			从响应中筛选HTTP状态代码。代码和范围的逗号分隔列表</span><br><span class="line">-fl         			根据响应的行数进行过滤。行计数和范围的逗号分隔列表</span><br><span class="line">-fmode      			筛选器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-fr         			筛选器正则表达式</span><br><span class="line">-fs         			筛选器HTTP响应大小。大小和范围的逗号分隔列表</span><br><span class="line">-ft         			根据到第一个响应字节的毫秒数进行筛选，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-fw         			按响应的字数进行筛选。以逗号分隔的单词计数和响铃列表</span><br><span class="line"></span><br><span class="line">输入选项</span><br><span class="line">-D          			DirSearch单词列表兼容模式。与-e标志一起使用。（默认值：false）</span><br><span class="line">-e          			扩展名的逗号分隔列表，复制字典并添加扩展</span><br><span class="line">-ic         			忽略单词列表注释（默认值：false）</span><br><span class="line">-input-cmd      		要测试的输入数。与--input cmd一起使用。（默认值：100）</span><br><span class="line">-input-shell    		用于运行命令的外壳</span><br><span class="line">-mode       			多单词列表操作模式。可用模式：clusterbomb,pitchfork,sniper(default: clusterbomb)</span><br><span class="line">-request    			包含原始http请求的文件</span><br><span class="line">-request-proto          与原始请求一起使用的协议（默认值：https）</span><br><span class="line">-w          			用冒号分隔的单词列表文件路径和（可选）关键字</span><br><span class="line"></span><br><span class="line">输出选项</span><br><span class="line">-debug-log      		将所有内部日志记录写入指定的文件。</span><br><span class="line">-o              		将输出写入文件</span><br><span class="line">-od             		将匹配结果存储到的目录路径</span><br><span class="line">-of             		输出文件格式。可用格式:json、ejson、html、md、csv、ecsv(或所有格式的“all”)(默认值：json)</span><br><span class="line">-or             		如果没有结果，就不要创建输出文件（默认值：false）</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Web fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目录</span></span><br><span class="line">ffuf -w /path/to/seclists/dict/SecLists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名类型</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/web-extensions.txt -u http://SERVER_IP:PORT/indexFUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ.php</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">递归</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Subdomain fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://FUZZ.example.htb/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Vhost</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://example.htb -H &#x27;Host: FUZZ.example.htb&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Param fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GET</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -u http://example.htb/get.php?FUZZ=key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POST</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -X POST -H &#x27;Content-Type: application/x-www-form-urlencoded&#x27; -d &#x27;FUZZ=key&#x27; -u http://example.htb/post.php</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	
+	</div>
+  <a type="button" href="/2024/09/08/tools/enum/ffuf/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+     <a href="/page/7/" type="button" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> Prev</a>
+      
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/9/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Java/">Java<span>12</span></a></li>
+		
+			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
+		
+			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+		
+			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+		
+			<li><a href="/categories/Php/">Php<span>2</span></a></li>
+		
+			<li><a href="/categories/Python/">Python<span>1</span></a></li>
+		
+			<li><a href="/categories/Tools/">Tools<span>8</span></a></li>
+		
+			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+		
+			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>21</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/18/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="false"></i><a href="https://n2ryx.github.io/" title="" target="_blank"]);"></a></li>
+	
+	</ul>
+</div>
+
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

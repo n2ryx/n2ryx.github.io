@@ -1,0 +1,922 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Php Hash Compare | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="Php Hash Compare散列算法（Hash Algorithm），是一种从任意文件中创造小的数字「指纹」的方法。常见 Hash 算法有 MD5 和 SHA 系列：MD5 和 SHA1 ，SHA2-256 算法。
+Php 特性Php字符串比较字符串 与 字符串：判断值是否相等。
+字符串 与 数值：判断字符串第一个字母前的数字是否与比较的数值相等。
+12var_dump(&amp;quot;123a&amp;quot;==123)   //bool(ture)var_dump(&amp;quot;123a&amp;quot;==&amp;quot;123&amp;quot;) //bool(false) 
+
+松散比较 (&amp;#x3D;&amp;#x3D;)
+
+
+松散
+TRUE
+FALSE
+1
+0
+-1
+“1”
+“0”
+“-1”
+NULL
+array()
+“php”
+“”
+
+
+
+TRUE
+TRUE
+FALSE
+TRUE
+FALSE
+TRUE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+
+
+FALSE
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+TRUE
+TRUE
+FALSE
+TRUE
+
+
+1
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+
+
+0
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+TRUE
+TRUE
+
+
+-1
+TRUE
+FALSE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+
+
+“1”
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+
+
+“0”
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+
+
+“-1”
+TRUE
+FALSE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+
+
+NULL
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+TRUE
+TRUE
+FALSE
+TRUE
+
+
+array()
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+TRUE
+TRUE
+FALSE
+FALSE
+
+
+“php”
+TRUE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+FALSE
+TRUE
+FALSE
+
+
+“”
+FALSE
+TRUE
+FALSE
+TRUE
+FALSE
+FALSE
+FALSE
+FALSE
+TRUE
+FALSE
+FALSE
+TRUE
+
+
+严格比较 (&amp;#x3D;&amp;#x3D;&amp;#x3D;)"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Php Hash Compare"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Php Hash Compare</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Php-Hash-Compare"><a href="#Php-Hash-Compare" class="headerlink" title="Php Hash Compare"></a>Php Hash Compare</h1><p><strong>散列算法（Hash Algorithm）</strong>，是一种从任意文件中创造小的数字「指纹」的方法。常见 Hash 算法有 MD5 和 SHA 系列：MD5 和 SHA1 ，SHA2-256 算法。</p>
+<h2 id="Php-特性"><a href="#Php-特性" class="headerlink" title="Php 特性"></a>Php 特性</h2><h3 id="Php字符串比较"><a href="#Php字符串比较" class="headerlink" title="Php字符串比较"></a>Php字符串比较</h3><p>字符串 与 字符串：判断值是否相等。</p>
+<p>字符串 与 数值：判断字符串第一个字母前的数字是否与比较的数值相等。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="number">123</span>)   <span class="comment">//bool(ture)</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="string">&quot;123&quot;</span>) <span class="comment">//bool(false) </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较 (&#x3D;&#x3D;)"></a>松散比较 (&#x3D;&#x3D;)</h3><table>
+<thead>
+<tr>
+<th align="left">松散</th>
+<th align="left"><strong><code>TRUE</code></strong></th>
+<th align="left"><strong><code>FALSE</code></strong></th>
+<th align="left"><em>1</em></th>
+<th align="left"><em>0</em></th>
+<th align="left"><em>-1</em></th>
+<th align="left"><em>“1”</em></th>
+<th align="left"><em>“0”</em></th>
+<th align="left"><em>“-1”</em></th>
+<th align="left"><strong><code>NULL</code></strong></th>
+<th align="left"><em>array()</em></th>
+<th align="left"><em>“php”</em></th>
+<th align="left"><em>“”</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>1</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>0</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>-1</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“1”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“0”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“-1”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>NULL</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>array()</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“php”</em></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+</tbody></table>
+<h3 id="严格比较"><a href="#严格比较" class="headerlink" title="严格比较 (&#x3D;&#x3D;&#x3D;)"></a>严格比较 (&#x3D;&#x3D;&#x3D;)</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"><strong><code>FALSE</code></strong></th>
+<th align="left"><em>1</em></th>
+<th align="left"><em>0</em></th>
+<th align="left"><em>-1</em></th>
+<th align="left"><em>“1”</em></th>
+<th align="left"><em>“0”</em></th>
+<th align="left"><em>“-1”</em></th>
+<th align="left"><strong><code>NULL</code></strong></th>
+<th align="left"><em>array()</em></th>
+<th align="left"><em>“php”</em></th>
+<th align="left"><em>“”</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>1</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>0</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>-1</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“1”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“0”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“-1”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><strong><code>NULL</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>array()</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“php”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>TRUE</code></strong></td>
+</tr>
+<tr>
+<td align="left"><em>“”</em></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+<td align="left"><strong><code>FALSE</code></strong></td>
+</tr>
+</tbody></table>
+<h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><h3 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h3><p>对于php强比较和弱比较：md5()，sha1()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL，也就是相等的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$b</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span>!==<span class="variable">$b</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>)===<span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahaha&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?a[]=1&amp;b[]=2</span><br></pre></td></tr></table></figure>
+
+<h3 id="0e绕过弱比较"><a href="#0e绕过弱比较" class="headerlink" title="0e绕过弱比较"></a>0e绕过弱比较</h3><p>对于某些特殊的字符串加密后得到的密文以0e开头，PHP会当作科学计数法来处理，也就是0的n次方，得到的值比较的时候都相同</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$b</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span>!==<span class="variable">$b</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$a</span>)==<span class="title function_ invoke__">md5</span>(<span class="variable">$b</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hahaha&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>md5</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">240610708:0e462097431906509019562988736854</span><br><span class="line">QLTHNDT:0e405967825401955372549139051580</span><br><span class="line">QNKCDZO:0e830400451993494058024219903391</span><br><span class="line">PJNPDWY:0e291529052894702774557631701704</span><br><span class="line">NWWKITQ:0e763082070976038347657360817689</span><br><span class="line">NOOPCJF:0e818888003657176127862245791911</span><br><span class="line">MMHUWUV:0e701732711630150438129209816536</span><br><span class="line">MAUXXQC:0e478478466848439040434801845361</span><br></pre></td></tr></table></figure>
+
+<p><strong>sha1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">10932435112: 0e07766915004133176347055865026311692244</span><br><span class="line">aaroZmOk: 0e66507019969427134894567494305185566735</span><br><span class="line">aaK1STfY: 0e76658526655756207688271159624026011393</span><br><span class="line">aaO8zKZF: 0e89257456677279068558073954252716165668</span><br><span class="line">aa3OFF9m: 0e36977786278517984959260394024281014729</span><br><span class="line">0e1290633704: 0e19985187802402577070739524195726831799</span><br></pre></td></tr></table></figure>
+
+<h3 id="md5-md5-a-0e绕过"><a href="#md5-md5-a-0e绕过" class="headerlink" title="md5(md5($a))0e绕过"></a>md5(md5($a))0e绕过</h3><p>以下字符串进行两次md5后以0e开头</p>
+<p>7r4lGXCH2Ksu2JNT3BYM<br>CbDLytmyGm2xQyaLNhWn<br>770hQgrBOjrcqftrlaZk</p>
+<h3 id="a-md5-a"><a href="#a-md5-a" class="headerlink" title="$a&#x3D;&#x3D;md5($a)"></a>$a&#x3D;&#x3D;md5($a)</h3><p>0e215962017 的 MD5 值也是由 0e 开头，在 PHP 弱类型比较中相等</p>
+<h3 id="md5绕过SQL"><a href="#md5绕过SQL" class="headerlink" title="md5绕过SQL"></a>md5绕过SQL</h3><p><code>ffifdyop</code>，经过md5函数后结果为 ‘or’6\xc9]\x99\xe9!r,\xf9\xedb\x1c；</p>
+<p>129581926211651571912466741651878684928，经过md5函数后结果为 \x06\xdaT0D\x9f\x8fo#\xdf\xc1’or’8；</p>
+<h3 id="NaN-和-INF"><a href="#NaN-和-INF" class="headerlink" title="NaN 和 INF"></a>NaN 和 INF</h3><p>NAN和INF，分别为非数字和无穷大，但是var_dump一下它们的数据类型却是double，那么在md5函数处理它们的时候，是将其直接转换为字符串”NAN”和字符串”INF”使用的，但是它们拥有特殊的性质，它们与任何数据类型（除了true）做强类型或弱类型比较均为false，甚至NaN&#x3D;&#x3D;&#x3D;NaN都是false，但md5(‘NaN’)&#x3D;&#x3D;&#x3D;md5(‘NaN’)为true。</p>
+<h3 id="md5-和-sha1碰撞"><a href="#md5-和-sha1碰撞" class="headerlink" title="md5 和 sha1碰撞"></a>md5 和 sha1碰撞</h3><p>使用碰撞可以绕过不同字符串，相同md5&#x2F;sha1的强比较</p>
+<h3 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a><strong>MD5碰撞</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2   </span><br><span class="line">b=M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2   </span><br><span class="line"></span><br><span class="line">a=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line">b=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%</span><br><span class="line"></span><br><span class="line">a=&quot;\x4d\xc9\x68\xff\x0e\xe3\x5c\x20\x95\x72\xd4\x77\x7b\x72\x15\x87\xd3\x6f\xa7\xb2\x1b\xdc\x56\xb7\x4a\x3d\xc0\x78\x3e\x7b\x95\x18\xaf\xbf\xa2\x00\xa8\x28\x4b\xf3\x6e\x8e\x4b\x55\xb3\x5f\x42\x75\x93\xd8\x49\x67\x6d\xa0\xd1\x55\x5d\x83\x60\xfb\x5f\x07\xfe\xa2&quot;;</span><br><span class="line">b=&quot;\x4d\xc9\x68\xff\x0e\xe3\x5c\x20\x95\x72\xd4\x77\x7b\x72\x15\x87\xd3\x6f\xa7\xb2\x1b\xdc\x56\xb7\x4a\x3d\xc0\x78\x3e\x7b\x95\x18\xaf\xbf\xa2\x02\xa8\x28\x4b\xf3\x6e\x8e\x4b\x55\xb3\x5f\x42\x75\x93\xd8\x49\x67\x6d\xa0\xd1\xd5\x5d\x83\x60\xfb\x5f\x07\xfe\xa2&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>linux</strong></p>
+<p>使用md5collgen碰撞生成两个md5值相同但内容不同的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5collgen -o 1.bin 2.bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>windows</strong></p>
+<p>可以下载fastcoll，碰撞生成两个md5值相同但内容不同的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcoll.exe -p 123.txt -o 1.txt 2.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>sha1 碰撞</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1</span><br><span class="line">b=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1</span><br></pre></td></tr></table></figure>
+
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/06/25/others/IP Spoofing/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2022/12/31/hello/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-06-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Php/">Php<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Php-Hash-Compare"><span class="toc-article-text">Php Hash Compare</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Php-%E7%89%B9%E6%80%A7"><span class="toc-article-text">Php 特性</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Php%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83"><span class="toc-article-text">Php字符串比较</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%9D%BE%E6%95%A3%E6%AF%94%E8%BE%83"><span class="toc-article-text">松散比较 (&#x3D;&#x3D;)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%B8%A5%E6%A0%BC%E6%AF%94%E8%BE%83"><span class="toc-article-text">严格比较 (&#x3D;&#x3D;&#x3D;)</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Bypass"><span class="toc-article-text">Bypass</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="toc-article-text">数组绕过</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#0e%E7%BB%95%E8%BF%87%E5%BC%B1%E6%AF%94%E8%BE%83"><span class="toc-article-text">0e绕过弱比较</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#md5-md5-a-0e%E7%BB%95%E8%BF%87"><span class="toc-article-text">md5(md5($a))0e绕过</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#a-md5-a"><span class="toc-article-text">$a&#x3D;&#x3D;md5($a)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#md5%E7%BB%95%E8%BF%87SQL"><span class="toc-article-text">md5绕过SQL</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#NaN-%E5%92%8C-INF"><span class="toc-article-text">NaN 和 INF</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#md5-%E5%92%8C-sha1%E7%A2%B0%E6%92%9E"><span class="toc-article-text">md5 和 sha1碰撞</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#MD5%E7%A2%B0%E6%92%9E"><span class="toc-article-text">MD5碰撞</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2024 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
