@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/08/tools/enum/gobuster/" >gobuster</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-08  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Usage: gobuster [command...]</span><br><span class="line">-t, --thread                    设置线程（默认10）</span><br><span class="line">-v, --verbose                   详细输出</span><br><span class="line">-z, --no-progress               不显示进度</span><br><span class="line">-q, --quiet                     不打印横幅，安静模式</span><br><span class="line">-o, --output                    将结果写入的输出文件</span><br><span class="line">-x, --extensions                指定枚举的扩展名</span><br><span class="line">-k, --no-tls-validation         跳过TLS证书验证</span><br><span class="line">-C, --cookie                    请求中使用的cookie</span><br><span class="line">-H, --headers                   指定请求头</span><br><span class="line">-n, --no-status                 不打印状态码</span><br><span class="line">-s, --status-codes              肯定的状态码</span><br><span class="line">-b, --status-codes-blacklist    负面的状态码</span><br><span class="line">-U, --username                  Basic验证用户名</span><br><span class="line">-P, --password                  Basic验证密码</span><br><span class="line">-c, --show-cname                显示CNAME记录，不能和-i一起使用</span><br><span class="line">-i, --show-ip                   显示IP地址</span><br><span class="line">-r, --resolver                  自定义DNS服务器</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">dir</span></span></span><br><span class="line">gobuster dir -u http://example.htb/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -k</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">dns</span></span><br><span class="line">gobuster dns -d example.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -t 100</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vhost</span></span><br><span class="line">gobuster vhost -u http://example.htb --append-domain -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt  -t 100</span><br></pre></td></tr></table></figure>
+
+
+
+	
+	</div>
+  <a type="button" href="/2024/09/08/tools/enum/gobuster/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/08/tools/enum/sqlmap/" >sqlmap</a>
 		</h3>
 		</div>
@@ -322,42 +356,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/07/tools/general/curl/" >curl</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-07  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Usage: curl [options...] &lt;url&gt;</span><br><span class="line">-X,	--request &lt;method&gt;          设置请求方法</span><br><span class="line">-d,	--data &lt;data&gt;               POST data</span><br><span class="line">-H,	--header &lt;header&gt;           设置请求头</span><br><span class="line">-A,	--user-agent &lt;name&gt;         设置User-Agent</span><br><span class="line">-b, --cookie &lt;data|file&gt;        设置Cookie</span><br><span class="line">-u,	--user &lt;user:passwd&gt;        Server user and passwd</span><br><span class="line">-I, --head                      输出响应头</span><br><span class="line">-i, --include                   输出响应包</span><br><span class="line">-o,	--output &lt;file&gt;             写入文件</span><br><span class="line">-O,	--remote-name               下载文件</span><br><span class="line">-T,	--upload-file &lt;file&gt;        上传文件(PUT)</span><br><span class="line">-F,	--form &lt;file=@/file;type=*;filename=*; | field=value&gt;    上传文件(POST)</span><br><span class="line">-s,	--silent                    Silent mode, 无进度或错误信息</span><br><span class="line">-k,	--insecure                  忽略 SSL 证书验证</span><br><span class="line">-L,	--location                  跟随重定向</span><br><span class="line">-v,	--verbose                   显示详细信息</span><br><span class="line">--http2                         启用HTTP/2支持</span><br><span class="line">--retry &lt;1-5&gt;                   设置重试次数</span><br><span class="line">--max-time &lt;seconds&gt;            设置执行超时时间</span><br><span class="line">--connect-timeout &lt;seconds&gt;     设置连接超时时间</span><br><span class="line">--trace -                       查看请求的所有细节 (包括请求体和响应体)</span><br><span class="line">-x,	--proxy	&lt;&lt;http|socks5&gt;://[user:passwd@]host:port&gt;    设置代理</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传表单</span></span><br><span class="line">curl -X POST -F &quot;file=@/path/to/your/file.txt&quot; http://example.com/upload</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[-H <span class="string">&quot;Content-Type: multipart/form-data&quot;</span>]</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-F 选项会自动设置 Content-Type: multipart/form-data</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传多个表单</span></span><br><span class="line">curl -X POST -F &quot;file1=@/path/to/file1.txt&quot; -F &quot;file2=@/path/to/file2.txt&quot; http://example.com/upload</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传流文件</span></span><br><span class="line">curl -X POST --data-binary @/path/to/file.bin http://example.com/upload</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[-H <span class="string">&quot;Content-Type: application/octet-stream&quot;</span>]</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Json格式</span></span><br><span class="line">curl -X POST -H &quot;Content-Type: application/json&quot; -d &#x27;&#123;&quot;key&quot;:&quot;value&quot;&#125;&#x27; http://example.com/api</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">data数据</span></span><br><span class="line">curl -X POST -d &quot;key1=value1&amp;key2=value2&quot; http://example.com/api</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">授权请求头</span></span><br><span class="line">-H &quot;Authorization: Bearer YOUR_TOKEN&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>…</p>
-
-	
-	</div>
-  <a type="button" href="/2024/09/07/tools/general/curl/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -432,45 +430,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -486,6 +484,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -499,10 +501,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -532,7 +530,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

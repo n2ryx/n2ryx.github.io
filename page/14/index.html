@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/07/20/writeup/htb/HTB Cap/" >HTB Cap</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-07-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Cap-Linux-·-Easy"><a href="#Cap-Linux-·-Easy" class="headerlink" title="Cap (Linux · Easy)"></a>Cap (Linux · Easy)</h1><h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -v -T4 -Pn 10.10.10.245</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.10.245</span><br><span class="line">Host is up (1.1s latency).</span><br><span class="line">Not shown: 655 closed tcp ports (conn-refused), 342 filtered tcp ports (no-response)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">21/tcp open  ftp     vsftpd 3.0.3</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|_  256 3f:d0:ff:91:eb:3b:f6:e1:9f:2e:8d:de:b3:de:b2:18 (ED25519)</span><br><span class="line">80/tcp open  http    gunicorn</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   FourOhFourRequest: </span><br><span class="line">|     HTTP/1.0 404 NOT FOUND</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:40 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 232</span><br><span class="line">|   GetRequest: </span><br><span class="line">|     HTTP/1.0 200 OK</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:14 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 19386</span><br><span class="line">|     &lt;!DOCTYPE html&gt;</span><br><span class="line">|     &lt;html class=&quot;no-js&quot; lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">|     &lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Security Dashboard&lt;/title&gt;</span><br><span class="line">|     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;/static/images/icon/favicon.ico&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/bootstrap.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/font-awesome.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/themify-icons.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/metisMenu.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/owl.carousel.min.css&quot;&gt;</span><br><span class="line">|     &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/slicknav.min.css&quot;&gt;</span><br><span class="line">|     &lt;!-- amchar</span><br><span class="line">|   HTTPOptions: </span><br><span class="line">|     HTTP/1.0 200 OK</span><br><span class="line">|     Server: gunicorn</span><br><span class="line">|     Date: Mon, 19 Aug 2024 06:33:20 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Allow: GET, HEAD, OPTIONS</span><br><span class="line">|     Content-Length: 0</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     HTTP/1.1 400 Bad Request</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html</span><br><span class="line">|     Content-Length: 196</span><br><span class="line">|     &lt;html&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;title&gt;Bad Request&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;&lt;p&gt;Bad Request&lt;/p&gt;&lt;/h1&gt;</span><br><span class="line">|     Invalid HTTP Version &amp;#x27;Invalid HTTP Version: &amp;#x27;RTSP/1.0&amp;#x27;&amp;#x27;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line">|_http-server-header: gunicorn</span><br><span class="line">Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+
+<h3 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ftp 10.10.10.245</span><br><span class="line">anonymous</span><br><span class="line"># 匿名登不上</span><br></pre></td></tr></table></figure>
+
+<p>http</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052553382.png" alt="截屏2024-08-19 15.10.01"></p>
+<p>&#x2F;data&#x2F;7 ，此处可以下载pcap文件</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1724052616299.png" alt="截屏2024-08-19 15.21.47"></p>
+	
+	</div>
+  <a type="button" href="/2024/07/20/writeup/htb/HTB Cap/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/06/20/writeup/ciscn/2024CISCN初赛/" >2024CISCN初赛</a>
 		</h3>
 		</div>
@@ -166,41 +200,6 @@
 	
 	</div>
   <a type="button" href="/2024/06/20/writeup/ciscn/2024CISCN初赛/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/05/22/writeup/htb/HTB BoardLight/" >HTB BoardLight</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-05-22  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="BoardLight-Linux-·-Easy"><a href="#BoardLight-Linux-·-Easy" class="headerlink" title="BoardLight (Linux · Easy)"></a>BoardLight (Linux · Easy)</h1><p>CVE-2023-30253 + CVE-2022-37706</p>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -Pn -v -T4 10.10.11.11</span><br><span class="line"></span><br><span class="line">Nmap scan report for board.htb (10.10.11.11)</span><br><span class="line">Host is up (0.29s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   3072 06:2d:3b:85:10:59:ff:73:66:27:7f:0e:ae:03:ea:f4 (RSA)</span><br><span class="line">|   256 59:03:dc:52:87:3a:35:99:34:44:74:33:78:31:35:fb (ECDSA)</span><br><span class="line">|_  256 ab:13:38:e4:3e:e0:24:b4:69:38:a9:63:82:38:dd:f4 (ED25519)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: GET POST OPTIONS</span><br><span class="line">|_http-server-header: Apache/2.4.41 (Ubuntu)</span><br><span class="line">|_http-title: Site doesn&#x27;t have a title (text/html; charset=UTF-8).</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kerne</span><br></pre></td></tr></table></figure>
-
-<p>添加hosts</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.11 board.htb&quot; | sudo tee -a /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<h3 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster vhost -u http://board.htb --append-domain -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726151133860.png" alt="image-20240726151133860"></p>
-	
-	</div>
-  <a type="button" href="/2024/05/22/writeup/htb/HTB BoardLight/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -278,37 +277,35 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
@@ -317,6 +314,8 @@
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -332,6 +331,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -345,10 +348,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -378,7 +377,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

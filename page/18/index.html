@@ -137,6 +137,42 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/03/27/java/JNDI/" >JNDI</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-27  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的<strong>命名服务</strong>和<strong>目录服务</strong>，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240320194727812.png" alt="image-20240320194727812"></p>
+<h4 id="命名服务（Naming-Server）"><a href="#命名服务（Naming-Server）" class="headerlink" title="命名服务（Naming Server）"></a>命名服务（Naming Server）</h4><p>命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。</p>
+<p>在命名服务中，有几个重要的概念。</p>
+<ul>
+<li><strong>Bindings</strong>：表示一个名称和对应对象的绑定关系，比如在在 DNS 中域名绑定到对应的 IP，在RMI中远程对象绑定到对应的name,文件系统中文件名绑定到对应的文件。</li>
+<li><strong>Context</strong>：上下文，一个上下文中对应着<strong>一组名称到对象的绑定关系</strong>，我们可以在指定上下文中查找名称对应的对象。比如在文件系统中，一个目录就是一个上下文，可以在该目录中查找文件，其中子目录也可以称为子上下文 (SubContext)。</li>
+<li><strong>References</strong>：在一个实际的名称服务中，有些对象可能无法直接存储在系统内，这时它们便以引用的形式进行存储，可以理解为 C&#x2F;C++ 中的指针。引用中包含了获取实际对象所需的信息，甚至对象的实际状态。比如文件系统中实际根据名称打开的文件是一个整数 fd (file descriptor)，这就是一个引用，内核根据这个引用值去找到磁盘中的对应位置和读写偏移。</li>
+</ul>
+<h4 id="目录服务（Directory-Service）"><a href="#目录服务（Directory-Service）" class="headerlink" title="目录服务（Directory Service）"></a>目录服务（Directory Service）</h4><p>简单来说，目录服务是命名服务的扩展，除了名称服务中已有的名称到对象的关联信息外，还允许对象拥有属性（Attributes）信息。由此，我们不仅可以根据名称去查找（Lookup）对象(并获取其对应属性)，还可以根据属性值去搜索（Search）对象。</p>
+	
+	</div>
+  <a type="button" href="/2024/03/27/java/JNDI/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/03/20/java/RMI/" >RMI</a>
 		</h3>
 		</div>
@@ -168,41 +204,6 @@
 	
 	</div>
   <a type="button" href="/2024/03/20/java/RMI/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/02/20/python/Python Prototype Pollution/" >Python Prototype Pollution</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-02-20  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Python-Prototype-Pollution"><a href="#Python-Prototype-Pollution" class="headerlink" title="Python Prototype Pollution"></a>Python Prototype Pollution</h2><p>Python原型链污染通常是指通过某种方式非法地修改了对象的原型链，导致对象访问到了不应该访问到的属性或方法，或者对象的属性被非法地修改</p>
-<p>Python中，这通常意味着通过修改类的<code>__dict__</code>或对象的<code>__class__</code>属性，来实现对类或对象属性的非法修改</p>
-<h3 id="基类"><a href="#基类" class="headerlink" title="基类"></a>基类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__) <span class="comment"># &lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">function</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__) <span class="comment"># &lt;class &#x27;function&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">father</span>:</span><br><span class="line">    secret = <span class="string">&quot;xxxx&quot;</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_a</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_b</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将源字典 src 中的键值对合并到目标对象 dst 中</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">src, dst</span>):</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> src.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(dst, <span class="string">&#x27;__getitem__&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> dst.get(k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">                merge(v, dst.get(k))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dst[k] = v</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">hasattr</span>(dst, k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">            merge(v, <span class="built_in">getattr</span>(dst, k))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">setattr</span>(dst, k, v)</span><br><span class="line"></span><br><span class="line">instance = son_b()</span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">&quot;__class__&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;__base__&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;secret&quot;</span>: <span class="string">&quot;no&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># xxxx</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># xxxx</span></span><br><span class="line"></span><br><span class="line">merge(payload, instance)</span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># no</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 污染内置属性</span></span><br><span class="line"><span class="comment"># payload = &#123;</span></span><br><span class="line"><span class="comment">#     &quot;__class__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#         &quot;__base__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#             &quot;__str__&quot; : &quot;Polluted&quot;</span></span><br><span class="line"><span class="comment">#         &#125;</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># print(father.__str__) #&lt;slot wrapper &#x27;__str__&#x27; of &#x27;object&#x27; objects&gt;</span></span><br><span class="line"><span class="comment"># merge(payload, instance)</span></span><br><span class="line"><span class="comment"># print(father.__str__) #Polluted</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="无法污染的Object"><a href="#无法污染的Object" class="headerlink" title="无法污染的Object"></a>无法污染的Object</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge(payload, <span class="built_in">object</span>)</span><br><span class="line"><span class="comment"># 报错：TypeError: can&#x27;t set attributes of built-in/extension type &#x27;object&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="全局变量获取"><a href="#全局变量获取" class="headerlink" title="全局变量获取"></a>全局变量获取</h3>
-	
-	</div>
-  <a type="button" href="/2024/02/20/python/Python Prototype Pollution/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -280,45 +281,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -334,6 +335,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -347,10 +352,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -380,7 +381,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

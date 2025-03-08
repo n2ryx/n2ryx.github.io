@@ -137,6 +137,63 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/10/12/pentest/web-pentest/XSS/" >Cross-Site Scripting (XSS)</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>XSS 漏洞主要有三种类型：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Stored (Persistent) XSS</code></td>
+<td>最严重的 XSS 类型，发生在用户输入存储在后端数据库并在检索时显示（例如，帖子或评论）时</td>
+</tr>
+<tr>
+<td><code>Reflected (Non-Persistent) XSS</code></td>
+<td>用户输入经过后端服务器处理后显示在页面上，但未被存储（例如搜索结果或错误信息）时发生</td>
+</tr>
+<tr>
+<td><code>DOM-based XSS</code></td>
+<td>另一种非持久性 XSS 类型，当用户输入直接显示在浏览器中并完全在客户端处理，而无需到达后端服务器（例如，通过客户端 HTTP 参数或锚标记）时发生</td>
+</tr>
+</tbody></table>
+<h1 id="污染页面元素"><a href="#污染页面元素" class="headerlink" title="污染页面元素"></a>污染页面元素</h1><p>更改背景</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span> = <span class="string">&quot;#141d2b&quot;</span>&lt;/script&gt;  </span><br><span class="line">  </span><br><span class="line"># or  </span><br><span class="line">  </span><br><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span> = <span class="string">&quot;https://www.hackthebox.eu/images/logo-htb.svg&quot;</span>&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更改标题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&#x27;HackTheBox Academy&#x27;</span>&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更改文本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;todo&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;New Text&quot;</span>  </span><br><span class="line">  </span><br><span class="line"># or  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;body&#x27;</span>)[<span class="number">0</span>].<span class="property">innerHTML</span> = <span class="string">&quot;New Text&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> XSS payload</p>
+	
+	</div>
+  <a type="button" href="/2024/10/12/pentest/web-pentest/XSS/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/10/10/pentest/web-pentest/File Inclusion/" >File Inclusion</a>
 		</h3>
 		</div>
@@ -277,39 +334,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/10/07/pentest/service/Attacking Common Services/" >Attacking Common Services</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-10-07  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h1><p>TCP 445  用于直接通过 TCP&#x2F;IP 传输的 SMB（常见于 SMBv2 和 SMBv3）</p>
-<p>TCP&#x2F;UDP 137-139 用于基于 NetBIOS 的 SMB（通常为 SMBv1）</p>
-<h2 id="Interact"><a href="#Interact" class="headerlink" title="Interact"></a>Interact</h2><h3 id="运行-文件夹"><a href="#运行-文件夹" class="headerlink" title="运行 | 文件夹"></a>运行 | 文件夹</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\192.168.220.129\share\</span><br></pre></td></tr></table></figure>
-
-<h3 id="cmd-powershell"><a href="#cmd-powershell" class="headerlink" title="cmd | powershell"></a>cmd | powershell</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt; <span class="title">dir</span> \\192.168.220.129\<span class="title">share</span>\</span></span><br><span class="line"><span class="function"><span class="title">PS</span> <span class="title">C</span>:\&gt; <span class="title">Get</span>-<span class="title">ChildItem</span> \\192.168.220.129\<span class="title">share</span>\</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Mount-SMB-CMD"><a href="#Mount-SMB-CMD" class="headerlink" title="Mount SMB - CMD"></a>Mount SMB - CMD</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 连接到文件共享并将其内容映射到驱动器号 n</span><br><span class="line"><span class="function">C:\&gt; <span class="title">net</span> <span class="title">use</span> <span class="title">n</span>: \\192.168.220.129\<span class="title">share</span> [/<span class="title">user:uname</span> <span class="title">passwd</span>]</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"># 统计文件数量</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\<span class="title">htb</span>&gt; <span class="title">dir</span> <span class="title">n</span>: /<span class="title">a</span>-<span class="title">d</span> /<span class="title">s</span> /<span class="title">b</span> | <span class="title">find</span> /<span class="title">c</span> &quot;:\&quot;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"># 查找特定文件</span></span><br><span class="line"><span class="function"><span class="title">C</span>:\&gt; <span class="title">dir</span> <span class="title">n</span>:\*<span class="title">cred</span>* /<span class="title">s</span> /<span class="title">b</span></span></span><br><span class="line"><span class="function"># <span class="title">or</span></span></span><br><span class="line"><span class="function"><span class="title">C</span>:\&gt; <span class="title">findstr</span> /<span class="title">s</span> /<span class="title">i</span> <span class="title">cred</span> <span class="title">n</span>:\*.*</span></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2024/10/07/pentest/service/Attacking Common Services/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -384,43 +408,43 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
 			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
@@ -438,6 +462,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -451,10 +479,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -484,7 +508,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

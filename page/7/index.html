@@ -137,6 +137,84 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/20/pentest/web-pentest/HTTP Verb Tampering/" >HTTP Verb Tampering</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p><a target="_blank" rel="noopener" href="https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/03-Testing_for_HTTP_Verb_Tampering">HTTP Verb Tampering</a>利用接受 HTTP 动词和方法的 Web 服务器。可以通过使用意外方法发送恶意请求来利用此攻击，这可能导致绕过 Web 应用程序的授权机制，甚至绕过其针对其他 Web 攻击的安全控制。</p>
+<p>HTTP 有<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">9 种不同的动词</a>，常用的 HTTP Verb</p>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET</code></td>
+<td>请求特定资源。可以通过 URL 中的查询字符串将附加数据传递给服务器（例如<code>?param=value</code>）。</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>将数据发送到服务器。它可以处理多种类型的输入，例如文本、PDF 和其他形式的二进制数据。此数据附加在标头后面的请求正文中。POST 方法通常用于发送信息（例如表单&#x2F;登录）或将数据（例如图像或文档）上传到网站。</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>请求向服务器发出 GET 请求时返回的标头。它不返回请求正文，通常用于在下载资源之前检查响应长度。</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>在服务器上创建新资源。如果在未进行适当控制的情况下允许此方法，则会导致上传恶意资源。</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>删除 Web 服务器上的现有资源。如果没有得到妥善保护，可能会因删除 Web 服务器上的关键文件而导致拒绝服务 (DoS)。</td>
+</tr>
+<tr>
+<td><code>OPTIONS</code></td>
+<td>返回有关服务器的信息，例如其接受的方法。</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>对指定位置的资源应用部分修改。</td>
+</tr>
+<tr>
+<td><code>TRACE</code></td>
+<td>回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td><code>CONNECT</code></td>
+<td>HTTP&#x2F;1.1协议中预留给能够将连接改为隧道方式的代理服务器。通常用于SSL加密服务器的连接（经由非加密的HTTP代理服务器）。</td>
+</tr>
+</tbody></table>
+<h1 id="Insecure-Configurations"><a href="#Insecure-Configurations" class="headerlink" title="Insecure Configurations"></a>Insecure Configurations</h1><p>Web 服务器的身份验证配置可能仅限于特定的 HTTP 方法，这会导致某些 HTTP 方法无需身份验证即可访问。</p>
+<h2 id="Apache-Web"><a href="#Apache-Web" class="headerlink" title="Apache Web"></a>Apache Web</h2><p> Apache Web 服务器存在漏洞的配置示例，该配置位于站点配置文件（例如 <code>000-default.conf</code>）或 <code>.htaccess</code> 网页配置文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;/var/www/html/admin&quot;&gt;  </span><br><span class="line">    AuthType Basic  </span><br><span class="line">    AuthName &quot;Admin Panel&quot;  </span><br><span class="line">    AuthUserFile /etc/apache2/.htpasswd  </span><br><span class="line">    &lt;Limit GET&gt;  </span><br><span class="line">        Require valid-user  </span><br><span class="line">    &lt;/Limit&gt;  </span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此配置正在设置管理 Web 目录的授权配置。但是，由于使用了 <code>&lt;Limit GET&gt;</code> 关键字，<code>Require valid-user</code> 设置仅适用于 GET 请求，因此页面只能通过 <code>POST</code> 请求访问。即使同时指定了 <code>GET</code> 和 <code>POST</code>，页面也只能通过其他方法访问，例如 <code>HEAD</code> 或 <code>OPTIONS</code>。</p>
+<h2 id="Tomcat-Web"><a href="#Tomcat-Web" class="headerlink" title="Tomcat Web"></a>Tomcat Web</h2>
+	
+	</div>
+  <a type="button" href="/2024/09/20/pentest/web-pentest/HTTP Verb Tampering/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/12/tools/tunnel/ligolo-ng/" >ligolo-ng</a>
 		</h3>
 		</div>
@@ -163,110 +241,6 @@
 	
 	</div>
   <a type="button" href="/2024/09/12/tools/tunnel/ligolo-ng/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/09/tools/crack/hydra/" >hydra</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-09  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">Syntax: hydra [-l LOGIN|-L FILE] [-p PASS|-P FILE] [service://server[:PORT][/OPT]｜-M FILE]</span><br><span class="line">	service	指定服务名，支持的服务和协议</span><br><span class="line">	server	目标:DNS、IP或192.168.0.0/24(这个或-M选项)</span><br><span class="line">	</span><br><span class="line">Options:</span><br><span class="line">-l LOGIN or -L FILE     使用指定登录名登录，或者使用文件加载多个登录名</span><br><span class="line">-p PASS or -P FILE      使用指定密码登录，或者使用文件加载多个密码</span><br><span class="line">-C FILE                 使用冒号分割格式，例如“登录名:密码”来代替 -L/-P 参数</span><br><span class="line">-M FILE                 要攻击的服务器列表，每行一个条目，&#x27;:&#x27;指定端口</span><br><span class="line">-R                      恢复先前终止/崩溃的会话</span><br><span class="line">-I                      忽略现有的还原文件(不要等待10秒)</span><br><span class="line">-S                      执行SSL连接</span><br><span class="line">-s PORT                 如果服务在不同的默认端口上，则在这里定义它</span><br><span class="line">-x MIN:MAX:CHARSET      密码暴力生成, 使用’-x -h‘获取帮助</span><br><span class="line">-y                      暴力破解时忽略符号</span><br><span class="line">-e nsr                  可选选项，n:空密码试探，s:使用指定用户和密码试探，或“r”反向登录</span><br><span class="line">-u                      循环用户，而不是密码(有效!用-x表示)</span><br><span class="line">-o FILE                 将找到的登录名/密码对写入FILE而不是输出</span><br><span class="line">-b FORMAT               指定-o文件的格式:text(默认)，json, jsonv1</span><br><span class="line">-f / -F                 当找到login/pass对时退出(-M: -f per host， -f global)</span><br><span class="line">-t TASKS                同时运行的线程数，默认为16</span><br><span class="line">-T TASKS                运行线程 (默认64)</span><br><span class="line">-w / -W TIME            设置最大超时的时间，单位秒，默认是30s</span><br><span class="line">-c TIME                 所有线程上每次登录尝试的等待时间(强制执行-t 1)</span><br><span class="line">-4 / -6                 使用IPv4(默认)/ IPv6地址(将always放在[]中，也放在-M中)</span><br><span class="line">-v / -V / -d            详细模式/每次尝试显示登录+通过/调试模式</span><br><span class="line">-O                      使用旧的SSL v2和v3</span><br><span class="line">-K                      不重做失败的尝试(适用于-M批量扫描)</span><br><span class="line">-q                      不打印有关连接错误的消息</span><br><span class="line">-U                      服务模块使用详情</span><br><span class="line">-m OPT                  选项特定于模块，请参见-U output获取信息</span><br><span class="line"># OPT 一些服务模块支持额外输入(-U表示模块帮助)</span><br><span class="line"></span><br><span class="line"># ftp</span><br><span class="line">hydra -l user -P passlist.txt ftp://192.168.0.1</span><br><span class="line"></span><br><span class="line"># ftp IP-segment</span><br><span class="line">hydra -l admin -p password ftp://[192.168.0.0/24]/</span><br><span class="line"></span><br><span class="line"># imap</span><br><span class="line">hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN</span><br><span class="line"></span><br><span class="line"># pop3</span><br><span class="line">hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5</span><br><span class="line"></span><br><span class="line"># ssh</span><br><span class="line">hydra -L logins.txt -P pws.txt -M targets.txt ssh</span><br></pre></td></tr></table></figure>
-
-
-
-<table>
-<thead>
-<tr>
-<th>服务</th>
-<th>服务&#x2F;协议</th>
-<th>描述</th>
-<th>示例命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>FTP</td>
-<td>文件传输协议 (FTP)</td>
-<td>用于强制获取 FTP 服务的登录凭据，通常用于通过网络传输文件。</td>
-<td><code>hydra -l admin -P /path/to/password_list.txt ftp://192.168.1.100</code></td>
-</tr>
-<tr>
-<td>SSH</td>
-<td>安全外壳 (SSH)</td>
-<td>针对 SSH 服务进行暴力破解凭证，通常用于安全远程登录系统。</td>
-<td><code>hydra -l root -P /path/to/password_list.txt ssh://192.168.1.100</code></td>
-</tr>
-<tr>
-<td>http-post-fom</td>
-<td>HTTP Web 服务</td>
-<td>用于通过 GET 或 POST 请求强制获取 HTTP Web 登录表单的登录凭据。</td>
-<td><code>hydra -l admin -P /path/to/password_list.txt http-post-form &quot;/login.php:user=^USER^&amp;pass=^PASS^:F=incorrect&quot;</code></td>
-</tr>
-<tr>
-<td>smtp</td>
-<td>简单邮件传输协议</td>
-<td>通过暴力破解通常用于发送电子邮件的 SMTP 登录凭据来攻击电子邮件服务器。</td>
-<td><code>hydra -l admin -P /path/to/password_list.txt smtp://mail.server.com</code></td>
-</tr>
-<tr>
-<td>pop3</td>
-<td>邮局协议 (POP3)</td>
-<td>以电子邮件检索服务为目标，暴力破解 POP3 登录凭证。</td>
-<td><code>hydra -l user@example.com -P /path/to/password_list.txt pop3://mail.server.com</code></td>
-</tr>
-<tr>
-<td>imap</td>
-<td>互联网消息访问协议</td>
-<td>用于强制获取 IMAP 服务的凭证，从而允许用户远程访问他们的电子邮件。</td>
-<td><code>hydra -l user@example.com -P /path/to/password_list.txt imap://mail.server.com</code></td>
-</tr>
-<tr>
-<td>mysql</td>
-<td>MySQL 数据库</td>
-<td>尝试强制获取 MySQL 数据库的登录凭据。</td>
-<td><code>hydra -l root -P /path/to/password_list.txt mysql://192.168.1.100</code></td>
-</tr>
-<tr>
-<td>mssql</td>
-<td>微软 SQL 服务器</td>
-<td>以 Microsoft SQL 服务器为目标，暴力破解数据库登录凭据。</td>
-<td><code>hydra -l sa -P /path/to/password_list.txt mssql://192.168.1.100</code></td>
-</tr>
-<tr>
-<td>vnc</td>
-<td>虚拟网络计算 (VNC)</td>
-<td>暴力破解 VNC 服务，用于远程桌面访问。</td>
-<td><code>hydra -P /path/to/password_list.txt vnc://192.168.1.100</code></td>
-</tr>
-<tr>
-<td>rdp</td>
-<td>远程桌面协议 (RDP)</td>
-<td>针对 Microsoft RDP 服务进行远程登录暴力破解。</td>
-<td><code>hydra -l admin -P /path/to/password_list.txt rdp://192.168.1.100</code></td>
-</tr>
-</tbody></table>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">hydra -l root -p toor -M targets.txt ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP GET</span></span><br><span class="line">hydra -L usernames.txt -P passwords.txt www.example.com http-get</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP POST-Form</span></span><br><span class="line">hydra -L top-usernames-shortlist.txt -P 2023-200_most_used_passwords.txt -f IP -s 5000 http-post-form &quot;/:username=^USER^&amp;password=^PASS^:F=Invalid credentials&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">F=Field 指示尝试失败</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">S=302 指示登录成功</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以指定Respond包中的字符串</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">密码组合 密码策略由6到8个字符组成，包括小写字母、大写字母和数字</span></span><br><span class="line">hydra -l administrator -x 6:8:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 rdp://192.168.1.100</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP Authorization: Basic YWxpY2U6c2VjcmV0MTIz</span></span><br><span class="line">hydra -l basic-auth-user -P passwords.txt 10.10.10.10 -s 81 http-get /</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SSH</span></span><br><span class="line">hydra -l admin -P /path/to/password_list.txt ssh://192.168.1.1</span><br><span class="line">hydra -L /path/to/usernames.txt -P /path/to/password_list.txt ssh://192.168.1.1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">FTP</span></span><br><span class="line">hydra -l &lt;username&gt; -P &lt;password_list&gt; ftp://&lt;target_ip&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RDP</span></span><br><span class="line">hydra -l administrator -P 密码字典 192.168.31.173 rdp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SMB</span></span><br><span class="line">hydra -l administrator -P 密码字典 192.168.31.173 smb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POP3</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 pop3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mssql</span></span><br><span class="line">hydra -l sa -P 密码字典 192.168.31.173 mssql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mysql</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 mysql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Redis</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 oracle</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PgSQL</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 postgresql</span><br></pre></td></tr></table></figure>
-
-<p>…</p>
-
-	
-	</div>
-  <a type="button" href="/2024/09/09/tools/crack/hydra/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -344,45 +318,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -398,6 +372,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -411,10 +389,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -444,7 +418,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

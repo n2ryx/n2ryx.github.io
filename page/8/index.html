@@ -137,6 +137,110 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/09/tools/crack/hydra/" >hydra</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">Syntax: hydra [-l LOGIN|-L FILE] [-p PASS|-P FILE] [service://server[:PORT][/OPT]｜-M FILE]</span><br><span class="line">	service	指定服务名，支持的服务和协议</span><br><span class="line">	server	目标:DNS、IP或192.168.0.0/24(这个或-M选项)</span><br><span class="line">	</span><br><span class="line">Options:</span><br><span class="line">-l LOGIN or -L FILE     使用指定登录名登录，或者使用文件加载多个登录名</span><br><span class="line">-p PASS or -P FILE      使用指定密码登录，或者使用文件加载多个密码</span><br><span class="line">-C FILE                 使用冒号分割格式，例如“登录名:密码”来代替 -L/-P 参数</span><br><span class="line">-M FILE                 要攻击的服务器列表，每行一个条目，&#x27;:&#x27;指定端口</span><br><span class="line">-R                      恢复先前终止/崩溃的会话</span><br><span class="line">-I                      忽略现有的还原文件(不要等待10秒)</span><br><span class="line">-S                      执行SSL连接</span><br><span class="line">-s PORT                 如果服务在不同的默认端口上，则在这里定义它</span><br><span class="line">-x MIN:MAX:CHARSET      密码暴力生成, 使用’-x -h‘获取帮助</span><br><span class="line">-y                      暴力破解时忽略符号</span><br><span class="line">-e nsr                  可选选项，n:空密码试探，s:使用指定用户和密码试探，或“r”反向登录</span><br><span class="line">-u                      循环用户，而不是密码(有效!用-x表示)</span><br><span class="line">-o FILE                 将找到的登录名/密码对写入FILE而不是输出</span><br><span class="line">-b FORMAT               指定-o文件的格式:text(默认)，json, jsonv1</span><br><span class="line">-f / -F                 当找到login/pass对时退出(-M: -f per host， -f global)</span><br><span class="line">-t TASKS                同时运行的线程数，默认为16</span><br><span class="line">-T TASKS                运行线程 (默认64)</span><br><span class="line">-w / -W TIME            设置最大超时的时间，单位秒，默认是30s</span><br><span class="line">-c TIME                 所有线程上每次登录尝试的等待时间(强制执行-t 1)</span><br><span class="line">-4 / -6                 使用IPv4(默认)/ IPv6地址(将always放在[]中，也放在-M中)</span><br><span class="line">-v / -V / -d            详细模式/每次尝试显示登录+通过/调试模式</span><br><span class="line">-O                      使用旧的SSL v2和v3</span><br><span class="line">-K                      不重做失败的尝试(适用于-M批量扫描)</span><br><span class="line">-q                      不打印有关连接错误的消息</span><br><span class="line">-U                      服务模块使用详情</span><br><span class="line">-m OPT                  选项特定于模块，请参见-U output获取信息</span><br><span class="line"># OPT 一些服务模块支持额外输入(-U表示模块帮助)</span><br><span class="line"></span><br><span class="line"># ftp</span><br><span class="line">hydra -l user -P passlist.txt ftp://192.168.0.1</span><br><span class="line"></span><br><span class="line"># ftp IP-segment</span><br><span class="line">hydra -l admin -p password ftp://[192.168.0.0/24]/</span><br><span class="line"></span><br><span class="line"># imap</span><br><span class="line">hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN</span><br><span class="line"></span><br><span class="line"># pop3</span><br><span class="line">hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5</span><br><span class="line"></span><br><span class="line"># ssh</span><br><span class="line">hydra -L logins.txt -P pws.txt -M targets.txt ssh</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>服务&#x2F;协议</th>
+<th>描述</th>
+<th>示例命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP</td>
+<td>文件传输协议 (FTP)</td>
+<td>用于强制获取 FTP 服务的登录凭据，通常用于通过网络传输文件。</td>
+<td><code>hydra -l admin -P /path/to/password_list.txt ftp://192.168.1.100</code></td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>安全外壳 (SSH)</td>
+<td>针对 SSH 服务进行暴力破解凭证，通常用于安全远程登录系统。</td>
+<td><code>hydra -l root -P /path/to/password_list.txt ssh://192.168.1.100</code></td>
+</tr>
+<tr>
+<td>http-post-fom</td>
+<td>HTTP Web 服务</td>
+<td>用于通过 GET 或 POST 请求强制获取 HTTP Web 登录表单的登录凭据。</td>
+<td><code>hydra -l admin -P /path/to/password_list.txt http-post-form &quot;/login.php:user=^USER^&amp;pass=^PASS^:F=incorrect&quot;</code></td>
+</tr>
+<tr>
+<td>smtp</td>
+<td>简单邮件传输协议</td>
+<td>通过暴力破解通常用于发送电子邮件的 SMTP 登录凭据来攻击电子邮件服务器。</td>
+<td><code>hydra -l admin -P /path/to/password_list.txt smtp://mail.server.com</code></td>
+</tr>
+<tr>
+<td>pop3</td>
+<td>邮局协议 (POP3)</td>
+<td>以电子邮件检索服务为目标，暴力破解 POP3 登录凭证。</td>
+<td><code>hydra -l user@example.com -P /path/to/password_list.txt pop3://mail.server.com</code></td>
+</tr>
+<tr>
+<td>imap</td>
+<td>互联网消息访问协议</td>
+<td>用于强制获取 IMAP 服务的凭证，从而允许用户远程访问他们的电子邮件。</td>
+<td><code>hydra -l user@example.com -P /path/to/password_list.txt imap://mail.server.com</code></td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>MySQL 数据库</td>
+<td>尝试强制获取 MySQL 数据库的登录凭据。</td>
+<td><code>hydra -l root -P /path/to/password_list.txt mysql://192.168.1.100</code></td>
+</tr>
+<tr>
+<td>mssql</td>
+<td>微软 SQL 服务器</td>
+<td>以 Microsoft SQL 服务器为目标，暴力破解数据库登录凭据。</td>
+<td><code>hydra -l sa -P /path/to/password_list.txt mssql://192.168.1.100</code></td>
+</tr>
+<tr>
+<td>vnc</td>
+<td>虚拟网络计算 (VNC)</td>
+<td>暴力破解 VNC 服务，用于远程桌面访问。</td>
+<td><code>hydra -P /path/to/password_list.txt vnc://192.168.1.100</code></td>
+</tr>
+<tr>
+<td>rdp</td>
+<td>远程桌面协议 (RDP)</td>
+<td>针对 Microsoft RDP 服务进行远程登录暴力破解。</td>
+<td><code>hydra -l admin -P /path/to/password_list.txt rdp://192.168.1.100</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">hydra -l root -p toor -M targets.txt ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP GET</span></span><br><span class="line">hydra -L usernames.txt -P passwords.txt www.example.com http-get</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP POST-Form</span></span><br><span class="line">hydra -L top-usernames-shortlist.txt -P 2023-200_most_used_passwords.txt -f IP -s 5000 http-post-form &quot;/:username=^USER^&amp;password=^PASS^:F=Invalid credentials&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">F=Field 指示尝试失败</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">S=302 指示登录成功</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以指定Respond包中的字符串</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">密码组合 密码策略由6到8个字符组成，包括小写字母、大写字母和数字</span></span><br><span class="line">hydra -l administrator -x 6:8:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 rdp://192.168.1.100</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP Authorization: Basic YWxpY2U6c2VjcmV0MTIz</span></span><br><span class="line">hydra -l basic-auth-user -P passwords.txt 10.10.10.10 -s 81 http-get /</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SSH</span></span><br><span class="line">hydra -l admin -P /path/to/password_list.txt ssh://192.168.1.1</span><br><span class="line">hydra -L /path/to/usernames.txt -P /path/to/password_list.txt ssh://192.168.1.1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">FTP</span></span><br><span class="line">hydra -l &lt;username&gt; -P &lt;password_list&gt; ftp://&lt;target_ip&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">RDP</span></span><br><span class="line">hydra -l administrator -P 密码字典 192.168.31.173 rdp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">SMB</span></span><br><span class="line">hydra -l administrator -P 密码字典 192.168.31.173 smb</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POP3</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 pop3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mssql</span></span><br><span class="line">hydra -l sa -P 密码字典 192.168.31.173 mssql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mysql</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 mysql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Redis</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 oracle</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PgSQL</span></span><br><span class="line">hydra -l 用户名 -P 密码字典 192.168.31.173 postgresql</span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+
+	
+	</div>
+  <a type="button" href="/2024/09/09/tools/crack/hydra/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/09/tools/crack/medusa/" >medusa</a>
 		</h3>
 		</div>
@@ -243,46 +347,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/08/tools/enum/ffuf/" >ffuf</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-08  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">Usage: ffuf [command...]</span><br><span class="line"></span><br><span class="line">HTTP选项:</span><br><span class="line">-H          			请求头&#x27;Name:Value&#x27;用冒号分隔。可接受多个标志</span><br><span class="line">-X          			要使用的HTTP方法。如get,post</span><br><span class="line">-b          			Cookie数据`&quot;NAME1=VALUE1; NAME2=VALUE2&quot;`</span><br><span class="line">-d          			POST 数据</span><br><span class="line">-http2      			使用HTTP2协议（默认值：false）</span><br><span class="line">-ignore-body			不要获取响应内容。（默认值：false）</span><br><span class="line">-r          			遵循重定向（默认值：false）</span><br><span class="line">-recursion  			递归扫描，只支持FUZZ关键字，并且-u结尾（默认值：false）</span><br><span class="line">-recursion-depth        最大递归深度。（默认值：0）</span><br><span class="line">-replay-proxy   		使用此代理重播匹配的请求</span><br><span class="line">-timeout        		HTTP请求超时（秒）。（默认值：10）</span><br><span class="line">-u          			目标url</span><br><span class="line">-x          			代理URL（SOCKS5或HTTP）。例如：http://127.0.0.1:8080或socks5://127.0.0.1:8080</span><br><span class="line"></span><br><span class="line">常规选项</span><br><span class="line">-V          			显示版本信息（默认值：false）</span><br><span class="line">-ac         			自动校准过滤选项（默认值：false）</span><br><span class="line">-acc        			自定义自动校准字符串。可以多次使用。含义-ac</span><br><span class="line">-ach        			每主机自动校准（默认值：false）</span><br><span class="line">-ack        			自动校准关键字（默认值：FUZZ）</span><br><span class="line">-acs        			自动校准策略：“基本”或“高级”（默认值：基本）</span><br><span class="line">-c          			将输出着色。（默认值：false）</span><br><span class="line">-config     			从文件加载配置</span><br><span class="line">-json       			json输出，打印换行分隔的json记录（默认值：false）</span><br><span class="line">-maxtime    			整个进程的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-maxtime-job    		作业每个作业的最大运行时间（以秒为单位）。（默认值：0）</span><br><span class="line">-noninteractive 		非交互式禁用交互式控制台功能（默认值：false）</span><br><span class="line">-p          			请求之间的“延迟”秒数，或一系列随机延迟。例如“0.1”或“0.1-2.0”</span><br><span class="line">-rate       			每秒请求的速率（默认值：0）</span><br><span class="line">-s          			不打印附加信息（静默模式）（默认值：false）</span><br><span class="line">-sa         			在所有错误情况下停止。暗示-sf和-se。（默认值：false）</span><br><span class="line">-se         			在出现虚假错误时停止（默认值：false）</span><br><span class="line">-sf         			当&gt;95%的响应返回403 Forbidden时停止（默认值：false）</span><br><span class="line">-t          			并发线程数。（默认值：40）</span><br><span class="line">-v          			详细输出，打印完整的URL和重定向位置（如果有）以及结果。（默认值：false）</span><br><span class="line"></span><br><span class="line">匹配器选项</span><br><span class="line">-mc         			匹配HTTP状态代码，或“全部”表示所有内容。（默认值：200,204,301,302,307,403,404,500）</span><br><span class="line">-ml         			匹配响应行数</span><br><span class="line">-mmode      			匹配器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-mr         			匹配正则表达式</span><br><span class="line">-ms         			匹配HTTP响应大小</span><br><span class="line">-mt         			匹配第一个响应字节的毫秒数，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-mw         			匹配响应的单词数量</span><br><span class="line"></span><br><span class="line">过滤器选项</span><br><span class="line">-fc         			从响应中筛选HTTP状态代码。代码和范围的逗号分隔列表</span><br><span class="line">-fl         			根据响应的行数进行过滤。行计数和范围的逗号分隔列表</span><br><span class="line">-fmode      			筛选器集运算符。以下任一项：和或（默认值：或）</span><br><span class="line">-fr         			筛选器正则表达式</span><br><span class="line">-fs         			筛选器HTTP响应大小。大小和范围的逗号分隔列表</span><br><span class="line">-ft         			根据到第一个响应字节的毫秒数进行筛选，大于或小于。例如：&gt;100或&lt;100</span><br><span class="line">-fw         			按响应的字数进行筛选。以逗号分隔的单词计数和响铃列表</span><br><span class="line"></span><br><span class="line">输入选项</span><br><span class="line">-D          			DirSearch单词列表兼容模式。与-e标志一起使用。（默认值：false）</span><br><span class="line">-e          			扩展名的逗号分隔列表，复制字典并添加扩展</span><br><span class="line">-ic         			忽略单词列表注释（默认值：false）</span><br><span class="line">-input-cmd      		要测试的输入数。与--input cmd一起使用。（默认值：100）</span><br><span class="line">-input-shell    		用于运行命令的外壳</span><br><span class="line">-mode       			多单词列表操作模式。可用模式：clusterbomb,pitchfork,sniper(default: clusterbomb)</span><br><span class="line">-request    			包含原始http请求的文件</span><br><span class="line">-request-proto          与原始请求一起使用的协议（默认值：https）</span><br><span class="line">-w          			用冒号分隔的单词列表文件路径和（可选）关键字</span><br><span class="line"></span><br><span class="line">输出选项</span><br><span class="line">-debug-log      		将所有内部日志记录写入指定的文件。</span><br><span class="line">-o              		将输出写入文件</span><br><span class="line">-od             		将匹配结果存储到的目录路径</span><br><span class="line">-of             		输出文件格式。可用格式:json、ejson、html、md、csv、ecsv(或所有格式的“all”)(默认值：json)</span><br><span class="line">-or             		如果没有结果，就不要创建输出文件（默认值：false）</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Web fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">目录</span></span><br><span class="line">ffuf -w /path/to/seclists/dict/SecLists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名类型</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/web-extensions.txt -u http://SERVER_IP:PORT/indexFUZZ</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩展名</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ.php</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">递归</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -u http://SERVER_IP:PORT/FUZZ -recursion -recursion-depth 1 -e .php -v</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Subdomain fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">HTTP</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://FUZZ.example.htb/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Vhost</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u http://example.htb -H &#x27;Host: FUZZ.example.htb&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Param fuzz</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">GET</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -u http://example.htb/get.php?FUZZ=key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">POST</span></span><br><span class="line">ffuf -w /path/to/seclists/Discovery/Web-Content/burp-parameter-names.txt -X POST -H &#x27;Content-Type: application/x-www-form-urlencoded&#x27; -d &#x27;FUZZ=key&#x27; -u http://example.htb/post.php</span><br></pre></td></tr></table></figure>
-
-
-
-<p>…</p>
-
-	
-	</div>
-  <a type="button" href="/2024/09/08/tools/enum/ffuf/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -357,45 +421,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -411,6 +475,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -424,10 +492,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -457,7 +521,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

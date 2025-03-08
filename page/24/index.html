@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/11/12/java/cc/CC1-TransformedMap/" >CC1-TransformedMap</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="CC1-TransformedMap"><a href="#CC1-TransformedMap" class="headerlink" title="CC1-TransformedMap"></a>CC1-TransformedMap</h2><p>CC1链对JDK版本有要求，需在8u71之前</p>
+<p>Jdk1.8.0.65: <a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html</a></p>
+<p>sun包: <a target="_blank" rel="noopener" href="https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4">https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4</a><br>src\share\classes\sun，放到Jdk下解压的src包内，Idea添加</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231114132357257.png" alt="image-20231114132357257"></p>
+<p>导入maven依赖（pom.xml）</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113194232916.png" alt="image-20231113194232916"></p>
+<h3 id="Transformer-执行类"><a href="#Transformer-执行类" class="headerlink" title="Transformer-执行类"></a>Transformer-执行类</h3><p>主要利用方法 <code>Transform()</code>，看那些类实现了这个类</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231113213642842.png" alt="image-20231113213642842"></p>
+	
+	</div>
+  <a type="button" href="/2023/11/12/java/cc/CC1-TransformedMap/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/11/11/java/base/URLDNS/" >URLDNS</a>
 		</h3>
 		</div>
@@ -165,41 +199,6 @@
 	
 	</div>
   <a type="button" href="/2023/11/11/java/base/URLDNS/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/11/10/java/base/Java反序列化-WebGoat/" >Java反序列化-WebGoat</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-11-10  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Java反序列化-WebGoat"><a href="#Java反序列化-WebGoat" class="headerlink" title="Java反序列化-WebGoat"></a>Java反序列化-WebGoat</h2><p>源项目：webgoat-server-8.2.2（<a target="_blank" rel="noopener" href="https://github.com/WebGoat/WebGoat/releases%EF%BC%89">https://github.com/WebGoat/WebGoat/releases）</a></p>
-<p>Jdk：&gt;&#x3D;15（11不行）</p>
-<p>启动命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar webgoat-server-8.2.2.jar</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="http://127.0.0.1:8080/WebGoat/login">http://127.0.0.1:8080/WebGoat/login</a></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20231112185914293.png" alt="image-20231112185914293"></p>
-<p>题目java文件：webgoat-server-8.2.2.jar 解包，webgoat-server-8.2.2&#x2F;BOOT-INF&#x2F;lib&#x2F;insecure-deserialization-8.2.2.jar再次解包，org&#x2F;org.owasp.webgoat.deserialization下的文件</p>
-<h3 id="分析源码"><a href="#分析源码" class="headerlink" title="分析源码"></a>分析源码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// InsecureDeserializationTask</span></span><br><span class="line"><span class="keyword">package</span> org.owasp.webgoat.deserialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InvalidClassException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> org.dummy.insecure.framework.VulnerableTaskHolder;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AssignmentEndpoint;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AssignmentHints;</span><br><span class="line"><span class="keyword">import</span> org.owasp.webgoat.assignments.AttackResult;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PostMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@AssignmentHints(&#123;&quot;insecure-deserialization.hints.1&quot;, &quot;insecure-deserialization.hints.2&quot;, &quot;insecure-deserialization.hints.3&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InsecureDeserializationTask</span> <span class="keyword">extends</span> <span class="title class_">AssignmentEndpoint</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">InsecureDeserializationTask</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&#123;&quot;/InsecureDeserialization/task&quot;&#125;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> AttackResult <span class="title function_">completed</span><span class="params">(<span class="meta">@RequestParam</span> String token)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">b64token</span> <span class="operator">=</span> token.replace(<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;+&#x27;</span>).replace(<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;/&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> before;</span><br><span class="line">        <span class="type">long</span> after;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            label71: &#123;</span><br><span class="line">                <span class="comment">// base64解码，通过字节流反序列化对象</span></span><br><span class="line">                <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(Base64.getDecoder().decode(b64token)));</span><br><span class="line"></span><br><span class="line">                AttackResult var10;</span><br><span class="line">                label64: &#123;</span><br><span class="line">                    label63: &#123;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            before = System.currentTimeMillis();</span><br><span class="line">                            <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> ois.readObject();</span><br><span class="line">                            <span class="comment">// 类必须是VulnerableTaskHolder</span></span><br><span class="line">                            <span class="keyword">if</span> (!(o <span class="keyword">instanceof</span> VulnerableTaskHolder)) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (o <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                                    var10 = <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.stringobject&quot;</span>).build();</span><br><span class="line">                                    <span class="keyword">break</span> label64;</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                var10 = <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.wrongobject&quot;</span>).build();</span><br><span class="line">                                <span class="keyword">break</span> label63;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            after = System.currentTimeMillis();</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Throwable var12) &#123;</span><br><span class="line">                            <span class="keyword">try</span> &#123;</span><br><span class="line">                                ois.close();</span><br><span class="line">                            &#125; <span class="keyword">catch</span> (Throwable var11) &#123;</span><br><span class="line">                                var12.addSuppressed(var11);</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">throw</span> var12;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        ois.close();</span><br><span class="line">                        <span class="keyword">break</span> label71;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    ois.close();</span><br><span class="line">                    <span class="keyword">return</span> var10;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                ois.close();</span><br><span class="line">                <span class="keyword">return</span> var10;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvalidClassException var13) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.invalidversion&quot;</span>).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException var14) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.expired&quot;</span>).build();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception var15) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).feedback(<span class="string">&quot;insecure-deserialization.invalidversion&quot;</span>).build();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">delay</span> <span class="operator">=</span> (<span class="type">int</span>)(after - before);</span><br><span class="line">        <span class="keyword">if</span> (delay &gt; <span class="number">7000</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.failed(<span class="built_in">this</span>).build();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> delay &lt; <span class="number">3000</span> ? <span class="built_in">this</span>.failed(<span class="built_in">this</span>).build() : <span class="built_in">this</span>.success(<span class="built_in">this</span>).build();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2023/11/10/java/base/Java反序列化-WebGoat/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -277,45 +276,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
 		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -331,6 +330,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -344,10 +347,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -377,7 +376,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

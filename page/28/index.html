@@ -137,6 +137,166 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/06/30/php/Unserialize/" >Php Unserialize</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-06-30  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Php-Unserialize"><a href="#Php-Unserialize" class="headerlink" title="Php Unserialize"></a>Php Unserialize</h1><h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">S</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="variable">$test</span>=<span class="string">&quot;pikachu&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$s</span>=<span class="keyword">new</span> <span class="title function_ invoke__">S</span>();  <span class="comment"># 创建一个对象</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$s</span>);  <span class="comment"># 把这个对象进行序列化</span></span><br><span class="line"></span><br><span class="line">序列化后得到的结果是这个样子的:</span><br><span class="line">O:<span class="number">1</span>:<span class="string">&quot;S&quot;</span>:<span class="number">1</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;test&quot;</span>;s:<span class="number">7</span>:<span class="string">&quot;pikachu&quot;</span>;&#125;</span><br><span class="line"></span><br><span class="line">O:代表<span class="keyword">object</span></span><br><span class="line"><span class="number">1</span>:代表对象名字长度为一个字符</span><br><span class="line">S:对象的名称</span><br><span class="line"><span class="number">1</span>:代表对象里面有一个变量</span><br><span class="line">s:数据类型</span><br><span class="line"><span class="number">4</span>:变量名称的长度</span><br><span class="line">test:变量名称</span><br><span class="line">s:数据类型</span><br><span class="line"><span class="number">7</span>:变量值的长度</span><br><span class="line">pikachu:变量值</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>private</code> 和 <code>protected</code> 详解</p>
+<p>PHP序列化的时候 private 和 protected 变量会引入不可见字符%00，<br><code>%00类名%00属性名</code> 为private，<code>%00*%00属性名</code> 为protected，注意这两个 %00就是 ascii 码为0 的字符。</p>
+<p>这个字符显示和输出可能看不到，甚至导致截断，但是url编码后就可以看得清楚.我们可以将序列化的字符用urlencode编码之后,打印出来查看。</p>
+</blockquote>
+<p><strong>魔术方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>触发条件</th>
+<th>参数</th>
+<th>返回值</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__construct</td>
+<td>实例化对象</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__destruct</td>
+<td>反序列化之后 销毁之后</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__sleep</td>
+<td>序列化之前</td>
+<td></td>
+<td>需要被序列化的成员属性</td>
+<td></td>
+</tr>
+<tr>
+<td>__wakeup</td>
+<td>反序列化之前</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__toString</td>
+<td>把对象当成字符串使用</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__invoke</td>
+<td>把对象当成函数调用</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__clone</td>
+<td>当使用clone关键字拷贝完一个对象</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>__call</td>
+<td>调用不存在的方法或者私有的属性</td>
+<td>$arg1,$arg2</td>
+<td>不存在的方法名称&amp;参数</td>
+<td></td>
+</tr>
+<tr>
+<td>__callStatic</td>
+<td>静态调用不存在的方法</td>
+<td>$arg1,$arg2</td>
+<td>不存在的方法名称&amp;参数</td>
+<td></td>
+</tr>
+<tr>
+<td>__get</td>
+<td>调用成员属性不存在</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+<tr>
+<td>__set</td>
+<td>给不存在的成员属性赋值</td>
+<td>$arg1,$arg2</td>
+<td>不存在的成员名称&amp;值</td>
+<td></td>
+</tr>
+<tr>
+<td>__isset</td>
+<td>对不可访问属性使用isset()或empty</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+<tr>
+<td>__unset</td>
+<td>对不可访问属性使用unset()</td>
+<td>$arg1</td>
+<td>不存在的成员属性名称</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>__wakeup()</code>函数漏洞绕过原理：当序列化字符串表示对象属性个数的值大于真实个数的属性时就不会执行</p>
+</blockquote>
+<h2 id="反序列化逃逸"><a href="#反序列化逃逸" class="headerlink" title="反序列化逃逸"></a>反序列化逃逸</h2><p><strong>str_replace</strong> — 子字符串替换</p>
+<blockquote>
+<p><strong>str_replace</strong>(<br>array|string <code>$search</code>,<br>array|string <code>$replace</code>,<br>string|array <code>$subject</code>,<br>int <code>&amp;$count</code> &#x3D; <strong><code>null</code></strong><br>): string|array</p>
+<ul>
+<li><p><code>search</code></p>
+<p>查找的目标值，也就是 <em>needle</em>，一个数组可以指定多个目标。       </p>
+</li>
+<li><p><code>replace</code></p>
+<p><code>search</code> 的替换值，一个数组可以被用来指定多重替换       </p>
+</li>
+<li><p><code>subject</code></p>
+<p>执行替换的数组或者字符串。也就是 <em>haystack</em></p>
+<p>如果 <code>subject</code> 是一个数组，替换操作将遍历整个 <code>subject</code>，返回值也将是一个数组。       </p>
+</li>
+<li><p><code>count</code></p>
+<p>如果被指定，它的值将被设置为替换发生的次数</p>
+</li>
+</ul>
+<p><strong>返回值</strong></p>
+<p>该函数返回替换后的数组或者字符串。 </p>
+</blockquote>
+	
+	</div>
+  <a type="button" href="/2023/06/30/php/Unserialize/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/06/25/others/IP Spoofing/" >IP Spoofing</a>
 		</h3>
 		</div>
@@ -157,237 +317,6 @@
 	
 	</div>
   <a type="button" href="/2023/06/25/others/IP Spoofing/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/06/20/php/Hash Compare/" >Php Hash Compare</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-06-20  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="Php-Hash-Compare"><a href="#Php-Hash-Compare" class="headerlink" title="Php Hash Compare"></a>Php Hash Compare</h1><p><strong>散列算法（Hash Algorithm）</strong>，是一种从任意文件中创造小的数字「指纹」的方法。常见 Hash 算法有 MD5 和 SHA 系列：MD5 和 SHA1 ，SHA2-256 算法。</p>
-<h2 id="Php-特性"><a href="#Php-特性" class="headerlink" title="Php 特性"></a>Php 特性</h2><h3 id="Php字符串比较"><a href="#Php字符串比较" class="headerlink" title="Php字符串比较"></a>Php字符串比较</h3><p>字符串 与 字符串：判断值是否相等。</p>
-<p>字符串 与 数值：判断字符串第一个字母前的数字是否与比较的数值相等。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="number">123</span>)   <span class="comment">//bool(ture)</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="string">&quot;123a&quot;</span>==<span class="string">&quot;123&quot;</span>) <span class="comment">//bool(false) </span></span><br></pre></td></tr></table></figure>
-
-<h3 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较 (&#x3D;&#x3D;)"></a>松散比较 (&#x3D;&#x3D;)</h3><table>
-<thead>
-<tr>
-<th align="left">松散</th>
-<th align="left"><strong><code>TRUE</code></strong></th>
-<th align="left"><strong><code>FALSE</code></strong></th>
-<th align="left"><em>1</em></th>
-<th align="left"><em>0</em></th>
-<th align="left"><em>-1</em></th>
-<th align="left"><em>“1”</em></th>
-<th align="left"><em>“0”</em></th>
-<th align="left"><em>“-1”</em></th>
-<th align="left"><strong><code>NULL</code></strong></th>
-<th align="left"><em>array()</em></th>
-<th align="left"><em>“php”</em></th>
-<th align="left"><em>“”</em></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>1</em></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>0</em></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>-1</em></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>“1”</em></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>“0”</em></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>“-1”</em></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><strong><code>NULL</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>array()</em></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>“php”</em></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-</tr>
-<tr>
-<td align="left"><em>“”</em></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>FALSE</code></strong></td>
-<td align="left"><strong><code>TRUE</code></strong></td>
-</tr>
-</tbody></table>
-<h3 id="严格比较"><a href="#严格比较" class="headerlink" title="严格比较 (&#x3D;&#x3D;&#x3D;)"></a>严格比较 (&#x3D;&#x3D;&#x3D;)</h3>
-	
-	</div>
-  <a type="button" href="/2023/06/20/php/Hash Compare/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -465,45 +394,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -519,6 +448,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -532,10 +465,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -565,7 +494,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

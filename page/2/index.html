@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" >Linux Privilege Escalation</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-25  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Linux 系统上的 root 帐户提供对操作系统的完全管理级别访问权限。在评估期间，可能会在 Linux 主机上获得低权限 shell，并需要将权限提升到 root 帐户。</p>
+<h1 id="Environment-Enumeration"><a href="#Environment-Enumeration" class="headerlink" title="Environment Enumeration"></a>Environment Enumeration</h1><p>枚举是特权提升的关键。有多个辅助脚本（如<a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPEAS</a>和<a target="_blank" rel="noopener" href="https://github.com/rebootuser/LinEnum">LinEnum）</a>可用于协助枚举。</p>
+<h2 id="Operating-system-and-version"><a href="#Operating-system-and-version" class="headerlink" title="Operating system and version"></a>Operating system and version</h2><p><a target="_blank" rel="noopener" href="https://ubuntu.com/about/release-cycle">Ubuntu 维护周期</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/os-release</span><br><span class="line"></span><br><span class="line">NAME=&quot;Ubuntu&quot;</span><br><span class="line">VERSION=&quot;20.04.4 LTS (Focal Fossa)&quot;</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">PRETTY_NAME=&quot;Ubuntu 20.04.4 LTS&quot;</span><br><span class="line">VERSION_ID=&quot;20.04&quot;</span><br><span class="line">HOME_URL=&quot;https://www.ubuntu.com/&quot;</span><br><span class="line">SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;</span><br><span class="line">BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;</span><br><span class="line">PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span><br><span class="line">VERSION_CODENAME=focal</span><br><span class="line">UBUNTU_CODENAME=focal</span><br></pre></td></tr></table></figure>
+
+<h2 id="PATH"><a href="#PATH" class="headerlink" title="PATH"></a>PATH</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PATH</span><br><span class="line"></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="env"><a href="#env" class="headerlink" title="env"></a>env</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ env</span><br><span class="line"></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PWD=/home/htb-student</span><br><span class="line">LOGNAME=htb-student</span><br><span class="line">XDG_SESSION_TYPE=tty</span><br><span class="line">MOTD_SHOWN=pam</span><br><span class="line">HOME=/home/htb-student</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line"></span><br><span class="line">&lt;SNIP&gt;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/10/18/pentest/lateral/Active Directory Enumeration & Attacks/" >Active Directory Enumeration &amp; Attacks</a>
 		</h3>
 		</div>
@@ -188,163 +222,6 @@
 	
 	</div>
   <a type="button" href="/2024/10/18/pentest/lateral/Active Directory Enumeration & Attacks/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/10/16/pentest/web-pentest/Command Injections/" >Command Injections</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-10-16  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>常见的注入类型：</p>
-<table>
-<thead>
-<tr>
-<th>Injection</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>OS Command Injection</td>
-<td>当用户输入直接用作操作系统命令的一部分时发生。</td>
-</tr>
-<tr>
-<td>Code Injection</td>
-<td>当用户输入直接位于评估代码的函数内时发生。</td>
-</tr>
-<tr>
-<td>SQL Injection</td>
-<td>当用户输入直接用作 SQL 查询的一部分时发生。</td>
-</tr>
-<tr>
-<td>Cross-Site Scripting&#x2F;HTML Injection</td>
-<td>当网页上显示准确的用户输入时发生。</td>
-</tr>
-<tr>
-<td>…</td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="Detection"><a href="#Detection" class="headerlink" title="Detection"></a>Detection</h1><h2 id="OS-Command-Injection"><a href="#OS-Command-Injection" class="headerlink" title="OS Command Injection"></a>OS Command Injection</h2><table>
-<thead>
-<tr>
-<th>Character</th>
-<th>URL-Encoded Character</th>
-<th>Executed Command</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>;</code></td>
-<td><code>%3b</code></td>
-<td>两个都</td>
-</tr>
-<tr>
-<td><code>\n</code></td>
-<td><code>%0a</code></td>
-<td>两个都</td>
-</tr>
-<tr>
-<td><code>&amp;</code></td>
-<td><code>%26</code></td>
-<td>两者（第二个输出通常首先显示）</td>
-</tr>
-<tr>
-<td><code>|</code></td>
-<td><code>%7c</code></td>
-<td>两者（仅显示第二个输出）</td>
-</tr>
-<tr>
-<td><code>&amp;&amp;</code></td>
-<td><code>%26%26</code></td>
-<td>两者（仅当第一个成功时）</td>
-</tr>
-<tr>
-<td><code>|</code></td>
-<td><code>%7c%7c</code></td>
-<td>第二（仅当第一失败时）</td>
-</tr>
-<tr>
-<td><code>``</code></td>
-<td><code>%60%60</code></td>
-<td>两者（仅限 Linux）</td>
-</tr>
-<tr>
-<td><code>$()</code></td>
-<td><code>%24%28%29</code></td>
-<td>两者（仅限 Linux）</td>
-</tr>
-</tbody></table>
-<h2 id="Other-Injection"><a href="#Other-Injection" class="headerlink" title="Other Injection"></a>Other Injection</h2><table>
-<thead>
-<tr>
-<th><strong>Injection Type</strong></th>
-<th><strong>Operators</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SQL Injection</td>
-<td><code>&#39;</code> <code>,</code> <code>;</code> <code>--</code> <code>/* */</code></td>
-</tr>
-<tr>
-<td>Command Injection</td>
-<td><code>;</code> <code>&amp;&amp;</code></td>
-</tr>
-<tr>
-<td>LDAP Injection</td>
-<td><code>*</code> <code>(</code> <code>)</code> <code>&amp;</code> <code>|</code></td>
-</tr>
-<tr>
-<td>XPath Injection</td>
-<td><code>&#39;</code> <code>or</code> <code>and</code> <code>not</code> <code>substring</code> <code>concat</code> <code>count</code></td>
-</tr>
-<tr>
-<td>OS Command Injection</td>
-<td><code>;</code> <code>&amp;</code> <code>|</code></td>
-</tr>
-<tr>
-<td>Code Injection</td>
-<td><code>&#39;</code> <code>;</code> <code>--</code> <code>/* */</code> <code>$()</code> <code>$&#123;&#125;</code> <code>#&#123;&#125;</code> <code>%&#123;&#125;</code> <code>^</code></td>
-</tr>
-<tr>
-<td>Directory Traversal&#x2F;File Path Traversal</td>
-<td><code>../</code> <code>..\\</code> <code>%00</code></td>
-</tr>
-<tr>
-<td>Object Injection</td>
-<td><code>;</code> <code>&amp;</code> <code>|</code></td>
-</tr>
-<tr>
-<td>XQuery Injection</td>
-<td><code>&#39;</code> <code>;</code> <code>--</code> <code>/* */</code></td>
-</tr>
-<tr>
-<td>Shellcode Injection</td>
-<td><code>\x</code> <code>\u</code> <code>%u</code> <code>%n</code></td>
-</tr>
-<tr>
-<td>Header Injection</td>
-<td><code>\n</code> <code>\r\n</code> <code>\t</code> <code>%0d</code> <code>%0a</code> <code>%09</code></td>
-</tr>
-</tbody></table>
-<h1 id="Bypassing"><a href="#Bypassing" class="headerlink" title="Bypassing"></a>Bypassing</h1><h2 id="Character-Filters"><a href="#Character-Filters" class="headerlink" title="Character Filters"></a>Character Filters</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3>
-	
-	</div>
-  <a type="button" href="/2024/10/16/pentest/web-pentest/Command Injections/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -422,45 +299,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -476,6 +353,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/03/08/HTB CPTS/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
+      </li>
+    
+      <li>
         <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
@@ -489,10 +370,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
@@ -522,7 +399,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2024 n2ryx's Blog
+  &copy; 2025 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>
