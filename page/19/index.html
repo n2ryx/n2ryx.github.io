@@ -137,6 +137,46 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/03/20/java/RMI/" >RMI</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-03-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RMI（Remote Method Invocation）是计算机之间通过网络实现对象调用的一种通讯机制。它允许在Java虚拟机（JVM）之间进行通信，使得在一个JVM中的对象可以调用另一个JVM中的对象的方法，就像这些对象都在同一个JVM中一样。	</p>
+<p><strong>服务端（Server）：</strong></p>
+<ul>
+<li>服务端创建一个远程对象，并实现一个或多个远程接口。</li>
+<li>服务端启动 RMI 注册表，并将远程对象绑定到注册表中。</li>
+</ul>
+<p><strong>客户端（Client）：</strong></p>
+<ul>
+<li>客户端从 RMI 注册表中查找所需的远程对象。</li>
+<li>客户端获取远程对象的引用，并调用其方法。</li>
+</ul>
+<p><strong>测试环境：JDK8u41</strong></p>
+<p>RMIServer.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.rmi.Naming;</span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.LocateRegistry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.registry.Registry;</span><br><span class="line"><span class="keyword">import</span> java.rmi.server.UnicastRemoteObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RMIServer</span> &#123;</span><br><span class="line">    <span class="comment">// 接口</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IRemoteObj</span> <span class="keyword">extends</span> <span class="title class_">Remote</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">(String para)</span> <span class="keyword">throws</span> RemoteException;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RemoteObjImpl</span> <span class="keyword">extends</span> <span class="title class_">UnicastRemoteObject</span> <span class="keyword">implements</span> <span class="title class_">IRemoteObj</span> &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="title function_">RemoteObjImpl</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">            <span class="built_in">super</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">hello</span><span class="params">(String para)</span> <span class="keyword">throws</span> RemoteException &#123;</span><br><span class="line">            System.out.println(para);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;over&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 实例化远程对象</span></span><br><span class="line">        <span class="type">RemoteObjImpl</span> <span class="variable">h</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RemoteObjImpl</span>();</span><br><span class="line">        <span class="comment">// 创建注册中心</span></span><br><span class="line">        LocateRegistry.createRegistry(<span class="number">1099</span>);</span><br><span class="line">        <span class="comment">// 绑定对象示例到注册中心</span></span><br><span class="line">        Naming.rebind(<span class="string">&quot;rmi://127.0.0.1:1099/Remote&quot;</span>, h);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Naming.rebind(静态方法) 和 registry.bind(实例方法) 都是将一个远程对象绑定到 RMI 注册表中,Naming.rebind()方法是JNDI的一部分</span></span><br><span class="line"><span class="comment">//        RemoteObjImpl h = new RemoteObjImpl();</span></span><br><span class="line"><span class="comment">//        Registry registry = LocateRegistry.createRegistry(1099);</span></span><br><span class="line"><span class="comment">//        registry.bind(&quot;Remote&quot;, h);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">RMIServer</span>().start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/03/20/java/RMI/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/02/20/python/Python Prototype Pollution/" >Python Prototype Pollution</a>
 		</h3>
 		</div>
@@ -163,40 +203,6 @@
 	
 	</div>
   <a type="button" href="/2024/02/20/python/Python Prototype Pollution/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/02/02/javascript/Javascript Prototype Pollution/" >JavaScript Prototype Pollution</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-02-02  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="JavaScript-Prototype-Pollution"><a href="#JavaScript-Prototype-Pollution" class="headerlink" title="JavaScript Prototype Pollution"></a>JavaScript Prototype Pollution</h2><p>JavaScript中的原型链污染是指攻击者通过覆盖或修改对象的原型链上的属性，从而改变对象的行为或者访问不应该访问的属性或方法</p>
-<p>原型链污染通常发生在JavaScript对象的继承机制中，因为JavaScript是一种基于原型的语言，对象会继承其原型链上的所有属性和方法</p>
-<p>JS原型链污染分，客户端原型污染、服务端原型污染</p>
-<h3 id="JavaScript-原型"><a href="#JavaScript-原型" class="headerlink" title="JavaScript 原型"></a>JavaScript 原型</h3><p>JavaScript 中的原型是一个对象，它在创建新对象时被用来作为新对象的初始属性</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">username = <span class="string">&quot;&quot;</span></span><br><span class="line">username.<span class="property">__proto__</span></span><br><span class="line">username[<span class="string">&#x27;__proto__&#x27;</span>]</span><br><span class="line"></span><br><span class="line">username.<span class="property">__proto__</span>                        <span class="comment">// String.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>              <span class="comment">// Object.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>.<span class="property">__proto__</span>    <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/prototype-pollution-prototype-chain.svg" alt="JavaScript 原型链"></p>
-<h3 id="原型链实现继承"><a href="#原型链实现继承" class="headerlink" title="原型链实现继承"></a>原型链实现继承</h3><p>当一个新对象被创建时，它会从构造函数的 <code>prototype</code> 属性指向的对象那里继承属性和方法</p>
-	
-	</div>
-  <a type="button" href="/2024/02/02/javascript/Javascript Prototype Pollution/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -247,13 +253,15 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
 			<li><a href="/categories/Others/">Others<span>1</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -263,7 +271,7 @@
 		
 			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
 		
-			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+			<li><a href="/categories/Writeup/">Writeup<span>12</span></a></li>
 		
 		</ul>
 	</div>
@@ -274,45 +282,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>

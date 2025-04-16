@@ -137,6 +137,136 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/08/tools/enum/nmap/" >nmap</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-08  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">Usage: nmap [Scan Type(s)] [Options] &#123;target specification&#125;</span><br><span class="line"></span><br><span class="line">目标规范：</span><br><span class="line">Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1, 10.0.0-255.1-254</span><br><span class="line">-iL &lt;输入文件名&gt;: 从文件中读取主机/网络列表</span><br><span class="line">-iR &lt;数量&gt;: 随机选择目标</span><br><span class="line">--exclude &lt;主机1[,主机2][,主机3],...&gt;: 排除指定主机/网络</span><br><span class="line">--excludefile &lt;排除文件&gt;: 从文件中排除列表</span><br><span class="line"></span><br><span class="line">主机发现：</span><br><span class="line">-sL: 列出扫描 - 仅列出扫描目标</span><br><span class="line">-sn: Ping 扫描 - 禁用端口扫描</span><br><span class="line">-Pn: 假设所有主机在线 - 禁用 ICMP Echo 请求 - 跳过主机发现</span><br><span class="line">-PS/PA/PU/PY[端口列表]: TCP SYN、TCP ACK、UDP 或 SCTP 发现至指定端口</span><br><span class="line">-PE/PP/PM: ICMP 回显、时间戳和网络掩码请求发现探针</span><br><span class="line">-PO[协议列表]: IP 协议 Ping</span><br><span class="line">-n/-R: 不进行 DNS 解析 / 始终解析 [默认：有时]</span><br><span class="line">--dns-servers &lt;服务器1[,服务器2],...&gt;: 指定自定义 DNS 服务器</span><br><span class="line">--system-dns: 使用操作系统的 DNS 解析器</span><br><span class="line">--traceroute: 跟踪每个主机的跳跃路径</span><br><span class="line"></span><br><span class="line">扫描技术：</span><br><span class="line">-sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scan</span><br><span class="line">-sU: UDP 扫描</span><br><span class="line">-sN/sF/sX: TCP 空、FIN 和 Xmas 扫描</span><br><span class="line">--scanflags &lt;标志&gt;: 自定义 TCP 扫描标志</span><br><span class="line">-sI &lt;僵尸主机[:探针端口]&gt;: 空闲扫描</span><br><span class="line">-sY/sZ: SCTP INIT/COOKIE-ECHO 扫描</span><br><span class="line">-sO: IP 协议扫描</span><br><span class="line">-b &lt;FTP 中继主机&gt;: FTP 中继扫描</span><br><span class="line"></span><br><span class="line">端口规范和扫描顺序：</span><br><span class="line">-p &lt;端口范围&gt;: 仅扫描指定端口</span><br><span class="line">  示例: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span><br><span class="line">--exclude-ports &lt;端口范围&gt;: 排除指定端口</span><br><span class="line">-F: 快速模式 - 扫描的端口比默认扫描少</span><br><span class="line">-r: 顺序扫描端口 - 不随机化</span><br><span class="line">--top-ports &lt;数量&gt;: 扫描最常见的 &lt;数量&gt; 个端口</span><br><span class="line">--port-ratio &lt;比例&gt;: 扫描超过指定比例的常见端口</span><br><span class="line"></span><br><span class="line">服务/版本检测：</span><br><span class="line">-sV: 探测开放端口的服务/版本信息</span><br><span class="line">--version-intensity &lt;等级&gt;: 设置从 0 (轻) 到 9 (尽量探测)</span><br><span class="line">--version-light: 限制为最可能的探测 (强度 2)</span><br><span class="line">--version-all: 尝试所有探测 (强度 9)</span><br><span class="line">--version-trace: 显示详细的版本扫描活动 (用于调试)</span><br><span class="line"></span><br><span class="line">脚本扫描：</span><br><span class="line">-sC: 相当于 --script=default</span><br><span class="line">--script=&lt;Lua 脚本&gt;: &lt;Lua 脚本&gt; 为目录、脚本文件或脚本类别的逗号分隔列表</span><br><span class="line">--script-args=&lt;n1=v1,[n2=v2,...]&gt;: 为脚本提供参数</span><br><span class="line">--script-args-file=文件名: 从文件中提供 NSE 脚本参数</span><br><span class="line">--script-trace: 显示所有发送和接收的数据</span><br><span class="line">--script-updatedb: 更新脚本数据库</span><br><span class="line">--script-help=&lt;Lua 脚本&gt;: 显示关于脚本的帮助</span><br><span class="line">&lt;Lua 脚本&gt; 为脚本文件或脚本类别的逗号分隔列表</span><br><span class="line"></span><br><span class="line">操作系统检测：</span><br><span class="line">-O: 启用操作系统检测</span><br><span class="line">--osscan-limit: 将操作系统检测限制在潜在目标上</span><br><span class="line">--osscan-guess: 更积极地猜测操作系统</span><br><span class="line"></span><br><span class="line">时间和性能：</span><br><span class="line">-T&lt;0-5&gt;: 设置时间模板 (数值越高越快)</span><br><span class="line">--min-hostgroup/max-hostgroup &lt;大小&gt;: 并行主机扫描组大小</span><br><span class="line">--min-parallelism/max-parallelism &lt;数目&gt;: 探针并行化</span><br><span class="line">--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lt;时间&gt;: 设置探针往返时间</span><br><span class="line">--max-retries &lt;次数&gt;: 限制端口扫描探针的重传次数</span><br><span class="line">--host-timeout &lt;时间&gt;: 达到指定时间后放弃目标</span><br><span class="line">--scan-delay/--max-scan-delay &lt;时间&gt;: 调整探针之间的延迟</span><br><span class="line">--min-rate &lt;数量&gt;: 以每秒不少于 &lt;数量&gt; 的速度发送数据包</span><br><span class="line">--max-rate &lt;数量&gt;: 以每秒不超过 &lt;数量&gt; 的速度发送数据包</span><br><span class="line"></span><br><span class="line">防火墙/IDS 规避和伪装：</span><br><span class="line">-f; --mtu &lt;值&gt;: 分段数据包 (可选指定 MTU)</span><br><span class="line">-D &lt;诱饵1,诱饵2[,ME],...&gt;: 使用诱饵进行扫描</span><br><span class="line">-S &lt;IP 地址&gt;: 伪装源地址</span><br><span class="line">-e &lt;接口&gt;: 使用指定接口</span><br><span class="line">-g/--source-port &lt;端口号&gt;: 使用指定端口号</span><br><span class="line">--proxies &lt;url1,[url2],...&gt;: 通过 HTTP/SOCKS4 代理连接</span><br><span class="line">--data &lt;十六进制字符串&gt;: 向数据包中附加自定义负载</span><br><span class="line">--data-string &lt;字符串&gt;: 向数据包中附加自定义 ASCII 字符串</span><br><span class="line">--data-length &lt;长度&gt;: 向数据包中附加随机数据</span><br><span class="line">--ip-options &lt;选项&gt;: 使用指定 IP 选项发送数据包</span><br><span class="line">--ttl &lt;值&gt;: 设置 IP 生存时间字段</span><br><span class="line">--spoof-mac &lt;mac 地址/前缀/厂商名称&gt;: 伪装 MAC 地址</span><br><span class="line">--badsum: 发送伪造的 TCP/UDP/SCTP 校验和的数据包</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">-oN/-oX/-oS/-oG &lt;文件&gt;: 以 .nmap/.xml/s|&lt;rIpt kIddi3/.gnmap 格式输出扫描到文件</span><br><span class="line">-oA &lt;基本名&gt;: 同时输出为三种主要格式</span><br><span class="line">-v: 增加详细级别 (使用 -vv 或更多)</span><br><span class="line">-d: 增加调试级别 (使用 -dd 或更多)</span><br><span class="line">--reason: 显示端口处于特定状态的原因</span><br><span class="line">--open: 仅显示开放 (或可能开放) 的端口</span><br><span class="line">--packet-trace: 显示所有发送和接收的数据包</span><br><span class="line">--iflist: 打印主机接口和路由 (用于调试)</span><br><span class="line">--append-output: 附加到指定的输出文件，而非覆盖</span><br><span class="line">--resume &lt;文件名&gt;: 恢复中断的扫描</span><br><span class="line">--noninteractive: 禁用通过键盘的运行时交互</span><br><span class="line">--stylesheet &lt;路径/URL&gt;: XSL 样式表，用于将 XML 输出转换为 HTML</span><br><span class="line">--webxml: 从 Nmap.Org 引用样式表，以提高 XML 的可移植性</span><br><span class="line">--no-stylesheet: 不将 XSL 样式表关联到 XML 输出</span><br><span class="line"></span><br><span class="line">其他：</span><br><span class="line">-6: 启用 IPv6 扫描</span><br><span class="line">-A: 启用操作系统检测、版本检测、脚本扫描和 traceroute</span><br><span class="line">--datadir &lt;目录名&gt;: 指定自定义 Nmap 数据文件位置</span><br><span class="line">--send-eth/--send-ip: 使用原始以太网帧或 IP 数据包发送</span><br><span class="line">--privileged: 假设用户具备完全权限</span><br><span class="line">--unprivileged: 假设用户缺乏原始套接字权限</span><br><span class="line">-V: 显示版本号</span><br><span class="line">-h: 显示帮助摘要页面</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--disable-arp-ping	禁用 ARP ping</span><br><span class="line">-D RND:5			生成5个随机 IP 地址，指示连接来自的源</span><br><span class="line">-S &lt;ip&gt;				使用不同的源IP地址扫描目标</span><br><span class="line">--source-port 53	从 DNS 端口执行扫描</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>脚本类别</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>auth</code></td>
+<td>确定身份验证凭证。</td>
+</tr>
+<tr>
+<td><code>broadcast</code></td>
+<td>通过广播来发现主机的脚本以及发现的主机可以自动添加到剩余的扫描中。</td>
+</tr>
+<tr>
+<td><code>brute</code></td>
+<td>执行脚本，尝试通过使用凭证进行暴力破解来登录相应的服务。</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>使用该<code>-sC</code>选项执行的默认脚本。</td>
+</tr>
+<tr>
+<td><code>discovery</code></td>
+<td>无障碍服务的评估。</td>
+</tr>
+<tr>
+<td><code>dos</code></td>
+<td>这些脚本用于检查服务是否存在拒绝服务漏洞，由于它会损害服务，因此使用较少。</td>
+</tr>
+<tr>
+<td><code>exploit</code></td>
+<td>此类脚本尝试利用扫描端口的已知漏洞。</td>
+</tr>
+<tr>
+<td><code>external</code></td>
+<td>使用外部服务进行进一步处理的脚本。</td>
+</tr>
+<tr>
+<td><code>fuzzer</code></td>
+<td>这使用脚本通过发送不同的字段来识别漏洞和意外的数据包处理，这可能需要很长时间。</td>
+</tr>
+<tr>
+<td><code>intrusive</code></td>
+<td>可能对目标系统产生负面影响的侵入性脚本。</td>
+</tr>
+<tr>
+<td><code>malware</code></td>
+<td>检查某些恶意软件是否感染了目标系统。</td>
+</tr>
+<tr>
+<td><code>safe</code></td>
+<td>不执行侵入性和破坏性访问的防御脚本。</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>服务检测的扩展。</td>
+</tr>
+<tr>
+<td><code>vuln</code></td>
+<td>识别特定的漏洞。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>状态</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>open</code></td>
+<td>这表示已建立与扫描端口的连接。这些连接可以是<strong>TCP 连接</strong>、<strong>UDP 数据报</strong>以及<strong>SCTP 关联</strong>。</td>
+</tr>
+<tr>
+<td><code>closed</code></td>
+<td>当端口显示为关闭时，TCP 协议会指示我们收到的数据包包含一个<code>RST</code>标志。这种扫描方法还可用于确定我们的目标是否还活着。</td>
+</tr>
+<tr>
+<td><code>filtered</code></td>
+<td>Nmap 无法正确识别扫描的端口是打开还是关闭，因为目标没有返回该端口的响应，或者我们从目标收到错误代码。</td>
+</tr>
+<tr>
+<td><code>unfiltered</code></td>
+<td>端口的这种状态仅在<strong>TCP-ACK</strong>扫描期间发生，表示该端口可访问，但无法确定它是开放还是关闭。</td>
+</tr>
+<tr>
+<td>&#96;open</td>
+<td>filtered&#96;</td>
+</tr>
+<tr>
+<td>&#96;closed</td>
+<td>filtered&#96;</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nmap-egrep</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主机和开放端口</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27;  | \</span><br><span class="line">awk &#x27;&#123;print &quot;Host: &quot; $1 &quot; Ports: &quot; NF-1; $1=&quot;&quot;; for(i=2; i&lt;=NF; i++) &#123; a=a&quot; &quot;$i; &#125;; split(a,s,&quot;,&quot;); for(e in s) &#123; split(s[e],v,&quot;/&quot;); printf &quot;%-8s %s/%-7s %s\n&quot; , v[2], v[3], v[1], v[5]&#125;; a=&quot;&quot; &#125;&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印端口</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27; | tr &#x27;,&#x27; &#x27;\n&#x27; | sed -e &#x27;s/^[ \t]*//&#x27; | \</span><br><span class="line">sort -n | uniq -c | sort -k 1 -r | head -n 10</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">统计端口数</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27; | \</span><br><span class="line">awk -F, &#x27;&#123;split($0,a,&quot; &quot;); printf &quot;Host: %-20s Ports Open: %d\n&quot; , a[1], NF&#125;&#x27; \</span><br><span class="line">| sort -k 5 -g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">横幅爬取</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">awk -F, &#x27;&#123;split($1,a,&quot; &quot;); split(a[2],b,&quot;/&quot;); print a[1] &quot; &quot; b[1]; for(i=2; i&lt;=NF; i++) &#123; split($i,c,&quot;/&quot;); print a[1] c[1] &#125;&#125;&#x27; \</span><br><span class="line"> | xargs -L1 nc -v -w1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">顶级服务标识符</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d &#x27; &#x27; -f4- | tr &#x27;,&#x27; &#x27;\n&#x27; | \</span><br><span class="line">sed -e &#x27;s/^[ \t]*//&#x27; | awk -F &#x27;/&#x27; &#x27;&#123;print $7&#125;&#x27; | grep -v &quot;^$&quot; | sort | uniq -c \</span><br><span class="line">| sort -k 1 -nr</span><br></pre></td></tr></table></figure>
+
+<p>…</p>
+
+	
+	</div>
+  <a type="button" href="/2024/09/08/tools/enum/nmap/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/08/tools/enum/gobuster/" >gobuster</a>
 		</h3>
 		</div>
@@ -162,197 +292,6 @@
 	
 	</div>
   <a type="button" href="/2024/09/08/tools/enum/gobuster/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/08/tools/enum/sqlmap/" >sqlmap</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-08  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line">$ sqlmap -hh  </span><br><span class="line">        ___  </span><br><span class="line">       __H__                                                                                                               </span><br><span class="line"> ___ ___[.]_____ ___ ___  &#123;1.8.11#stable&#125;                                                                               </span><br><span class="line">|_ -| . [&#x27;]     | .&#x27;| . |                                                                                               </span><br><span class="line">|___|_  [,]_|_|_|__,|  _|                                                                                               </span><br><span class="line">      |_|V...       |_|   https://sqlmap.org  </span><br><span class="line">  </span><br><span class="line">Usage: python3 sqlmap [options]  </span><br><span class="line">  </span><br><span class="line">Options:  </span><br><span class="line">-h, --help            显示基本帮助信息并退出  </span><br><span class="line">-hh                   显示高级帮助信息并退出  </span><br><span class="line">--version             显示程序版本号并退出  </span><br><span class="line">-v VERBOSE            日志详细级别：0-6（默认 1）  </span><br><span class="line">  </span><br><span class="line">Target:  </span><br><span class="line">-u URL, --url=URL      目标 URL（例如：&quot;http://www.site.com/vuln.php?id=1&quot;）  </span><br><span class="line">-d DIRECT              直接数据库连接的连接字符串  </span><br><span class="line">-l LOGFILE             从 Burp 或 WebScarab 代理日志文件解析目标  </span><br><span class="line">-m BULKFILE            从文本文件中加载多个目标  </span><br><span class="line">-r REQUESTFILE         从文件加载 HTTP 请求  </span><br><span class="line">-g GOOGLEDORK          处理 Google Dork 结果作为目标 URL  </span><br><span class="line">-c CONFIGFILE          从配置 INI 文件加载选项  </span><br><span class="line">  </span><br><span class="line">Request:  </span><br><span class="line">-A AGENT, --user-agent=AGENT         HTTP User-Agent 请求头的值  </span><br><span class="line">-H HEADER, --header=HEADER           附加的请求头（例如：&quot;X-Forwarded-For: 127.0.0.1&quot;）  </span><br><span class="line">--method=METHOD                      强制使用指定的 HTTP 方法（例如：PUT）  </span><br><span class="line">--data=DATA                          通过 POST 发送的数据（例如：&quot;id=1&quot;）  </span><br><span class="line">--param-del=PARAM_DELIMITER          用于拆分参数值的字符（例如：&amp;）  </span><br><span class="line">--cookie=COOKIE                      HTTP Cookie 请求头值（例如：&quot;PHPSESSID=a8d127e..&quot;）  </span><br><span class="line">--cookie-del=COOKIE_DELIMITER        用于拆分 Cookie 值的字符（例如：;）  </span><br><span class="line">--live-cookies=LIVE_COOKIES_FILE     用于加载实时 Cookie 的文件  </span><br><span class="line">--load-cookies=LOAD_COOKIES_FILE     以 Netscape/wget 格式加载 Cookie 的文件  </span><br><span class="line">--drop-set-cookie                    忽略响应中的 Set-Cookie 请求头  </span><br><span class="line">--mobile                             模拟智能手机的 HTTP User-Agent 请求头  </span><br><span class="line">--random-agent                       使用随机选择的 HTTP User-Agent 请求头值  </span><br><span class="line">--host=HOST                          HTTP Host 请求头值  </span><br><span class="line">--referer=REFERER                    HTTP Referer 请求头值  </span><br><span class="line">--headers=HEADERS                    附加请求头（例如：&quot;Accept-Language: fr\nETag: 123&quot;）  </span><br><span class="line">--auth-type=AUTH_TYPE                HTTP 验证类型（Basic, Digest, Bearer 等）  </span><br><span class="line">--auth-cred=AUTH_CREDENTIALS         HTTP 验证凭据（用户名:密码）  </span><br><span class="line">--auth-file=AUTH_FILE                HTTP 验证的 PEM 证书/私钥文件  </span><br><span class="line">--proxy=PROXY                        使用代理连接目标 URL  </span><br><span class="line">--proxy-cred=PROXY_CREDENTIALS       代理认证凭据（用户名:密码）  </span><br><span class="line">--tor                                使用 Tor 匿名网络  </span><br><span class="line">--tor-port=TORPORT                   设置 Tor 代理端口（默认值）  </span><br><span class="line">--delay=DELAY                        每个 HTTP 请求之间的延迟（秒）  </span><br><span class="line">--timeout=TIMEOUT                    连接超时时间（默认 30 秒）  </span><br><span class="line">  </span><br><span class="line">Optimization:  </span><br><span class="line">-o                        开启所有优化选项  </span><br><span class="line">--predict-output          预测常见查询输出  </span><br><span class="line">--keep-alive              使用持久的 HTTP(S) 连接  </span><br><span class="line">--null-connection         在没有实际 HTTP 响应主体的情况下获取页面长度  </span><br><span class="line">--threads=THREADS         最大并发 HTTP(S) 请求数（默认值 1）  </span><br><span class="line">  </span><br><span class="line">Injection:  </span><br><span class="line">-p TESTPARAMETER          可测试的参数  </span><br><span class="line">--skip=SKIP               跳过测试指定的参数  </span><br><span class="line">--skip-static             跳过测试看起来是静态的参数  </span><br><span class="line">--param-exclude=REGEXP    使用正则表达式排除指定的参数（例如：&quot;ses&quot;）  </span><br><span class="line">--param-filter=FILTER     按参数位置选择可测试的参数（例如：&quot;POST&quot;）  </span><br><span class="line">--dbms=DBMS               强制后端 DBMS 使用指定的值  </span><br><span class="line">--dbms-cred=DBMS_CREDENTIALS  DBMS 身份验证凭据（用户名:密码）  </span><br><span class="line">--os=OS                   强制后端 DBMS 操作系统为指定的值  </span><br><span class="line">--invalid-bignum          使用大数字来无效化值  </span><br><span class="line">--invalid-logical         使用逻辑运算来无效化值  </span><br><span class="line">--invalid-string          使用随机字符串来无效化值  </span><br><span class="line">--no-cast                 关闭有效负载的强制转换机制  </span><br><span class="line">--no-escape               关闭字符串转义机制  </span><br><span class="line">--prefix=PREFIX           注入有效负载的前缀字符串  </span><br><span class="line">--suffix=SUFFIX           注入有效负载的后缀字符串  </span><br><span class="line">--tamper=TAMPER           使用指定的脚本篡改注入数据  </span><br><span class="line">  </span><br><span class="line">Detection:  </span><br><span class="line">--level=LEVEL             要执行的测试级别（1-5，默认值为 1）  </span><br><span class="line">--risk=RISK               要执行的测试风险级别（1-3，默认值为 1）  </span><br><span class="line">--smart                   仅在启发式方法为正时执行全面测试  </span><br><span class="line">--text-only               仅基于文本内容比较页面  </span><br><span class="line">--titles                  仅基于标题比较页面  </span><br><span class="line">  </span><br><span class="line">Techniques:  </span><br><span class="line">--technique=TECHNIQUES    要使用的 SQL 注入技术（默认值 &quot;BEUSTQ&quot;）  </span><br><span class="line">--time-sec=TIMESEC        后端数据库响应的延迟时间（默认值 5 秒）  </span><br><span class="line">--union-cols=UCOLS        用于测试 UNION 查询 SQL 注入的列范围  </span><br><span class="line">--union-char=UCHAR        用于暴力破解列数的字符  </span><br><span class="line">--union-from=UFROM        UNION 查询 SQL 注入中使用的表名  </span><br><span class="line">--union-values=UVALUES    UNION 查询 SQL 注入中使用的列值  </span><br><span class="line">--dns-domain=DNSDOMAIN    用于 DNS 数据外传攻击的域名  </span><br><span class="line">--second-url=SECONDURL    用于搜索二阶响应的结果页面 URL  </span><br><span class="line">--second-req=SECONDREQ    从文件加载二阶 HTTP 请求  </span><br><span class="line">  </span><br><span class="line">Fingerprint:  </span><br><span class="line">-f, --fingerprint   执行全面的 DBMS 版本指纹识别  </span><br><span class="line">  </span><br><span class="line">Enumeration:  </span><br><span class="line">-a, --all                  检索所有内容  </span><br><span class="line">-b, --banner               检索 DBMS 横幅信息  </span><br><span class="line">--current-user             检索 DBMS 当前用户  </span><br><span class="line">--current-db               检索 DBMS 当前数据库  </span><br><span class="line">--hostname                 检索 DBMS 服务器主机名  </span><br><span class="line">--is-dba                   检测 DBMS 当前用户是否为 DBA  </span><br><span class="line">--users                    枚举 DBMS 用户  </span><br><span class="line">--passwords                枚举 DBMS 用户密码哈希  </span><br><span class="line">--privileges               枚举 DBMS 用户权限  </span><br><span class="line">--roles                    枚举 DBMS 用户角色  </span><br><span class="line">--dbs                      枚举 DBMS 数据库  </span><br><span class="line">--tables                   枚举 DBMS 数据库表  </span><br><span class="line">--columns                  枚举 DBMS 数据库表的列  </span><br><span class="line">--schema                   枚举 DBMS 模式  </span><br><span class="line">--count                    检索表中条目的数量  </span><br><span class="line">--dump                     导出 DBMS 数据库表中的条目  </span><br><span class="line">--dump-all                 导出所有 DBMS 数据库表中的条目  </span><br><span class="line">--search                   搜索列、表或数据库名称  </span><br><span class="line">--comments                 检查枚举过程中的 DBMS 注释  </span><br><span class="line">--statements               检索 DBMS 中运行的 SQL 语句  </span><br><span class="line">-D DB                      指定要枚举的 DBMS 数据库  </span><br><span class="line">-T TBL                     指定要枚举的 DBMS 数据库表  </span><br><span class="line">-C COL                     指定要枚举的 DBMS 数据库表列  </span><br><span class="line">-X EXCLUDE                 排除指定的 DBMS 标识符  </span><br><span class="line">-U USER                    指定要枚举的 DBMS 用户  </span><br><span class="line">--exclude-sysdbs           枚举表时排除 DBMS 系统数据库  </span><br><span class="line">--pivot-column=PIVOTCOL    指定透视列名称  </span><br><span class="line">--where=DUMPWHERE          在导出表时使用 WHERE 条件  </span><br><span class="line">--start=LIMITSTART         指定导出表时要检索的第一条记录  </span><br><span class="line">--stop=LIMITSTOP           指定导出表时要检索的最后一条记录  </span><br><span class="line">--first=FIRSTCHAR          指定查询输出的首字符  </span><br><span class="line">--last=LASTCHAR            指定查询输出的尾字符  </span><br><span class="line">--sql-query=SQLQUERY       执行指定的 SQL 查询  </span><br><span class="line">--sql-shell                提示交互式 SQL Shell  </span><br><span class="line">--sql-file=SQLFILE         从指定文件执行 SQL 查询  </span><br><span class="line">  </span><br><span class="line">Brute force:  </span><br><span class="line">--common-tables     检查常见表的存在  </span><br><span class="line">--common-columns    检查常见列的存在  </span><br><span class="line">--common-files      检查常见文件的存在  </span><br><span class="line">  </span><br><span class="line">User-defined function injection:  </span><br><span class="line">--udf-inject        注入自定义用户定义函数  </span><br><span class="line">--shared-lib=SHLIB  共享库的本地路径  </span><br><span class="line">  </span><br><span class="line">File system access:  </span><br><span class="line">--file-read=FILE..  从后端 DBMS 文件系统读取文件  </span><br><span class="line">--file-write=FIL..  在后端 DBMS 文件系统上写入本地文件  </span><br><span class="line">--file-dest=FILE..  后端 DBMS 绝对路径用于写入文件  </span><br><span class="line">  </span><br><span class="line">Operating system access:  </span><br><span class="line">--os-cmd=OSCMD      执行操作系统命令  </span><br><span class="line">--os-shell          提示交互式操作系统 Shell  </span><br><span class="line">--os-pwn            提示 OOB Shell、Meterpreter 或 VNC  </span><br><span class="line">--os-smbrelay       一键提示 OOB Shell、Meterpreter 或 VNC  </span><br><span class="line">--os-bof            存储过程缓冲区溢出利用  </span><br><span class="line">--priv-esc          数据库进程用户权限提升  </span><br><span class="line">--msf-path=MSFPATH  Metasploit 框架安装的本地路径  </span><br><span class="line">--tmp-path=TMPPATH  远程临时文件目录的绝对路径  </span><br><span class="line">  </span><br><span class="line">Windows registry access:  </span><br><span class="line">--reg-read          读取 Windows 注册表项的值  </span><br><span class="line">--reg-add           写入 Windows 注册表项的值数据  </span><br><span class="line">--reg-del           删除 Windows 注册表项的值  </span><br><span class="line">--reg-key=REGKEY    Windows 注册表项  </span><br><span class="line">--reg-value=REGVAL  Windows 注册表项的值  </span><br><span class="line">--reg-data=REGDATA  Windows 注册表项的值数据  </span><br><span class="line">--reg-type=REGTYPE  Windows 注册表项的值类型  </span><br><span class="line">  </span><br><span class="line">General:  </span><br><span class="line">-s SESSIONFILE      从存储的会话（.sqlite）文件加载会话  </span><br><span class="line">-t TRAFFICFILE      将所有 HTTP 流量记录到文本文件  </span><br><span class="line">--abort-on-empty    在结果为空时中止数据检索  </span><br><span class="line">--answers=ANSWERS   设置预定义答案（例如：&quot;quit=N,follow=N&quot;）  </span><br><span class="line">--base64=BASE64P..  包含 Base64 编码数据的参数  </span><br><span class="line">--base64-safe       使用 URL 和文件名安全的 Base64 字母表（RFC 4648）  </span><br><span class="line">--batch             永不询问用户输入，使用默认行为  </span><br><span class="line">--binary-fields=..  结果字段具有二进制值（例如：&quot;digest&quot;）  </span><br><span class="line">--check-internet    在评估目标之前检查互联网连接  </span><br><span class="line">--cleanup           清理 DBMS 中的 sqlmap 特定 UDF 和表  </span><br><span class="line">--crawl=CRAWLDEPTH  从目标 URL 开始爬取网站  </span><br><span class="line">--crawl-exclude=..  使用正则表达式排除不需要爬取的页面（例如：&quot;logout&quot;）  </span><br><span class="line">--csv-del=CSVDEL    CSV 输出中使用的分隔符（默认：&quot;,&quot;）  </span><br><span class="line">--charset=CHARSET   使用的盲 SQL 注入字符集（例如：&quot;0123456789abcdef&quot;）  </span><br><span class="line">--dump-file=DUMP..  将导出的数据存储到自定义文件  </span><br><span class="line">--dump-format=DU..  导出数据的格式（CSV（默认）、HTML 或 SQLITE）  </span><br><span class="line">--encoding=ENCOD..  数据检索时使用的字符编码（例如 GBK）  </span><br><span class="line">--eta               显示每个输出的预计到达时间  </span><br><span class="line">--flush-session     清除当前目标的会话文件  </span><br><span class="line">--forms             解析并测试目标 URL 上的表单  </span><br><span class="line">--fresh-queries     忽略会话文件中存储的查询结果  </span><br><span class="line">--gpage=GOOGLEPAGE  使用来自指定页面编号的 Google Dork 结果  </span><br><span class="line">--har=HARFILE       将所有 HTTP 流量记录到 HAR 文件  </span><br><span class="line">--hex               在数据检索期间使用十六进制转换  </span><br><span class="line">--output-dir=OUT..  自定义输出目录路径  </span><br><span class="line">--parse-errors      从响应中解析并显示 DBMS 错误消息  </span><br><span class="line">--preprocess=PRE..  使用给定的脚本进行预处理（请求）  </span><br><span class="line">--postprocess=PO..  使用给定的脚本进行后处理（响应）  </span><br><span class="line">--repair            重新导出具有未知字符标记（？）的条目  </span><br><span class="line">--save=SAVECONFIG   将选项保存到配置 INI 文件  </span><br><span class="line">--scope=SCOPE       用正则表达式过滤目标  </span><br><span class="line">--skip-heuristics   跳过漏洞的启发式检测  </span><br><span class="line">--skip-waf          跳过 WAF/IPS 保护的启发式检测  </span><br><span class="line">--table-prefix=T..  临时表使用的前缀（默认值：&quot;sqlmap&quot;）  </span><br><span class="line">--test-filter=TE..  按有效负载和/或标题选择测试（例如 ROW）  </span><br><span class="line">--test-skip=TEST..  按有效负载和/或标题跳过测试（例如 BENCHMARK）  </span><br><span class="line">--time-limit=TIM..  设置运行时限（例如：3600 秒）  </span><br><span class="line">--unsafe-naming     禁用 DBMS 标识符转义（例如：&quot;user&quot;）  </span><br><span class="line">--web-root=WEBROOT  Web 服务器文档根目录路径（例如：&quot;/var/www&quot;）  </span><br><span class="line">  </span><br><span class="line">Miscellaneous:  </span><br><span class="line">-z MNEMONICS        使用简短的助记符（例如：&quot;flu,bat,ban,tec=EU&quot;）  </span><br><span class="line">--alert=ALERT       在发现 SQL 注入时执行主机操作系统命令  </span><br><span class="line">--beep              在提问时和/或发现漏洞时发出蜂鸣声  </span><br><span class="line">--dependencies      检查缺少的（可选）sqlmap 依赖项  </span><br><span class="line">--disable-coloring  禁用控制台输出颜色  </span><br><span class="line">--list-tampers      显示可用的篡改脚本列表  </span><br><span class="line">--no-logging        禁用日志记录到文件  </span><br><span class="line">--offline           离线模式下工作（仅使用会话数据）  </span><br><span class="line">--purge             安全地删除 sqlmap 数据目录中的所有内容  </span><br><span class="line">--results-file=R..  多目标模式下的 CSV 结果文件位置  </span><br><span class="line">--shell             提示交互式 sqlmap Shell  </span><br><span class="line">--tmp-dir=TMPDIR    用于存储临时文件的本地目录  </span><br><span class="line">--unstable          调整不稳定连接的选项  </span><br><span class="line">--update            更新 sqlmap  </span><br><span class="line">--wizard            为初学者提供简单的向导界面</span><br></pre></td></tr></table></figure>
-
-<p>SQLMap 完全支持以下 DBMS：</p>
-<table>
-<thead>
-<tr>
-<th>SQLMap</th>
-<th>fully</th>
-<th>supports</th>
-<th>DBMSes</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>MySQL</code></td>
-<td><code>Oracle</code></td>
-<td><code>PostgreSQL</code></td>
-<td><code>Microsoft SQL Server</code></td>
-</tr>
-<tr>
-<td><code>SQLite</code></td>
-<td><code>IBM DB2</code></td>
-<td><code>Microsoft Access</code></td>
-<td><code>Firebird</code></td>
-</tr>
-<tr>
-<td><code>Sybase</code></td>
-<td><code>SAP MaxDB</code></td>
-<td><code>Informix</code></td>
-<td><code>MariaDB</code></td>
-</tr>
-<tr>
-<td><code>HSQLDB</code></td>
-<td><code>CockroachDB</code></td>
-<td><code>TiDB</code></td>
-<td><code>MemSQL</code></td>
-</tr>
-<tr>
-<td><code>H2</code></td>
-<td><code>MonetDB</code></td>
-<td><code>Apache Derby</code></td>
-<td><code>Amazon Redshift</code></td>
-</tr>
-<tr>
-<td><code>Vertica</code>，<code>Mckoi</code></td>
-<td><code>Presto</code></td>
-<td><code>Altibase</code></td>
-<td><code>MimerSQL</code></td>
-</tr>
-<tr>
-<td><code>CrateDB</code></td>
-<td><code>Greenplum</code></td>
-<td><code>Drizzle</code></td>
-<td><code>Apache Ignite</code></td>
-</tr>
-<tr>
-<td><code>Cubrid</code></td>
-<td><code>InterSystems Cache</code></td>
-<td><code>IRIS</code></td>
-<td><code>eXtremeDB</code></td>
-</tr>
-<tr>
-<td><code>FrontBase</code></td>
-<td>…</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"># GET  </span><br><span class="line">sqlmap -u &#x27;http://www.example.com/?id=1&#x27;  </span><br><span class="line">  </span><br><span class="line"># POST  </span><br><span class="line">sqlmap &#x27;http://www.example.com/&#x27; --data &#x27;id=*&#x27;  </span><br><span class="line">  </span><br><span class="line"># Cookie  </span><br><span class="line">sqlmap &#x27;http://www.example.com/&#x27; --cookie &#x27;id=*&#x27;  </span><br><span class="line">  </span><br><span class="line"># Json  </span><br><span class="line">sqlmap &#x27;http://www.example.com/&#x27; -H &#x27;Content-Type: application/json&#x27; --data &#x27;&#123;&quot;id&quot;: 1&#125;&#x27;  </span><br><span class="line">  </span><br><span class="line"># 前缀/后缀  </span><br><span class="line">sqlmap -u &quot;www.example.com/?q=test&quot; --prefix=&quot;&#x27;&quot; --suffix=&quot;-- -&quot;  </span><br><span class="line">  </span><br><span class="line"># Request  </span><br><span class="line">sqlmap -r req.txt  </span><br><span class="line">  </span><br><span class="line">GET /?id=1 HTTP/1.1  </span><br><span class="line">Host: www.example.com  </span><br><span class="line">User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0  </span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8  </span><br><span class="line">Accept-Language: en-US,en;q=0.5  </span><br><span class="line">Accept-Encoding: gzip, deflate  </span><br><span class="line">Connection: close  </span><br><span class="line">Upgrade-Insecure-Requests: 1  </span><br><span class="line">DNT: 1  </span><br><span class="line">If-Modified-Since: Thu, 17 Oct 2019 07:18:26 GMT  </span><br><span class="line">If-None-Match: &quot;3147526947&quot;  </span><br><span class="line">Cache-Control: max-age=0  </span><br><span class="line"># 或  </span><br><span class="line">HTTP / HTTP/1.0  </span><br><span class="line">Host: www.example.com  </span><br><span class="line">  </span><br><span class="line">&#123;  </span><br><span class="line">  &quot;data&quot;: [&#123;  </span><br><span class="line">    &quot;type&quot;: &quot;articles&quot;,  </span><br><span class="line">    &quot;id&quot;: &quot;1&quot;,  </span><br><span class="line">    &quot;attributes&quot;: &#123;  </span><br><span class="line">      &quot;title&quot;: &quot;Example JSON&quot;,  </span><br><span class="line">      &quot;body&quot;: &quot;Just an example&quot;,  </span><br><span class="line">      &quot;created&quot;: &quot;2020-05-22T14:56:29.000Z&quot;,  </span><br><span class="line">      &quot;updated&quot;: &quot;2020-05-22T14:56:28.000Z&quot;  </span><br><span class="line">    &#125;,  </span><br><span class="line">    &quot;relationships&quot;: &#123;  </span><br><span class="line">      &quot;author&quot;: &#123;  </span><br><span class="line">        &quot;data&quot;: &#123;&quot;id&quot;: &quot;42&quot;, &quot;type&quot;: &quot;user&quot;&#125;  </span><br><span class="line">      &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;]  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># CSRF-Token  </span><br><span class="line">sqlmap -u &quot;http://www.example.com/&quot; --csrf-token=&quot;csrf-token&quot; --data=&quot;id=1&amp;csrf-token=WfF1szMUHhiokx9AHFply5L2xAOfjRkE&quot;  </span><br><span class="line">  </span><br><span class="line"># randomiz  </span><br><span class="line">sqlmap -u &quot;http://www.example.com/?id=1&amp;rp=29125&quot; --randomize=rp --batch  </span><br><span class="line">  </span><br><span class="line"># MD5  </span><br><span class="line">sqlmap -u &quot;http://www.example.com/?id=1&amp;h=c4ca4238a0b923820dcc509a6f75849b&quot; --eval=&quot;import hashlib; h=hashlib.md5(id).hexdigest()&quot; --batch</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 随机 User-Agent  </span><br><span class="line">--random-agent  </span><br><span class="line">  </span><br><span class="line"># 绕过 WAF  </span><br><span class="line">--skip-waf  </span><br><span class="line">  </span><br><span class="line"># 设置代理，隐藏IP  </span><br><span class="line">--proxy=&quot;socks5://127.0.0.1:7890&quot;  </span><br><span class="line">--proxy-file file  # 代理列表</span><br></pre></td></tr></table></figure>
-
-<p>篡改脚本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--tamper  </span><br><span class="line">--tamper=between,randomcase</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>篡改脚本</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>0eunion</code></td>
-<td>替换实例与 UNIONe0UNION</td>
-</tr>
-<tr>
-<td><code>base64encode</code></td>
-<td>对给定有效载荷中的所有字符进行 Base64 编码</td>
-</tr>
-<tr>
-<td><code>between</code></td>
-<td>将大于运算符 ( <code>&gt;</code>) 替换为<code>NOT BETWEEN 0 AND #</code>并将等于运算符 ( <code>=</code>) 替换为<code>BETWEEN # AND #</code></td>
-</tr>
-<tr>
-<td><code>commalesslimit</code></td>
-<td><code>LIMIT M, N</code>用<code>LIMIT N OFFSET M</code>对应的实例替换（MySQL）</td>
-</tr>
-<tr>
-<td><code>equaltolike</code></td>
-<td>用对应的运算符替换所有出现的相等运算符 ( <code>=</code>)<code>LIKE</code></td>
-</tr>
-<tr>
-<td><code>halfversionedmorekeywords</code></td>
-<td>在每个关键字前添加（MySQL）版本注释</td>
-</tr>
-<tr>
-<td><code>modsecurityversioned</code></td>
-<td>包含带有（MySQL）版本注释的完整查询</td>
-</tr>
-<tr>
-<td><code>modsecurityzeroversioned</code></td>
-<td>使用（MySQL）零版本注释来包含完整查询</td>
-</tr>
-<tr>
-<td><code>percentage</code></td>
-<td><code>%</code>在每个字符前面添加百分号 ( )（例如 SELECT -&gt; %S%E%L%E%C%T）</td>
-</tr>
-<tr>
-<td><code>plus2concat</code></td>
-<td>将加法运算符 ( <code>+</code>) 替换为 (MsSQL) 函数 CONCAT() 对应项</td>
-</tr>
-<tr>
-<td><code>randomcase</code></td>
-<td>用随机大小写值替换每个关键字字符（例如 SELECT -&gt; SEleCt）</td>
-</tr>
-<tr>
-<td><code>space2comment</code></td>
-<td>将空格字符 ( ) 替换为注释 &#96;&#x2F;</td>
-</tr>
-<tr>
-<td><code>space2dash</code></td>
-<td>将空格字符 ( ) 替换为破折号注释 ( <code>--</code>)，后跟随机字符串和新行 ( <code>\n</code>)</td>
-</tr>
-<tr>
-<td><code>space2hash</code></td>
-<td>将 (MySQL) 空格字符 ( ) 替换为井号字符 ( <code>#</code>)，后跟随机字符串和换行符 ( <code>\n</code>)</td>
-</tr>
-<tr>
-<td><code>space2mssqlblank</code></td>
-<td>使用有效替代字符集中的随机空白字符替换 (MsSQL) 空格字符 ( ) 的实例</td>
-</tr>
-<tr>
-<td><code>space2plus</code></td>
-<td>将空格字符 ( ) 替换为加号 ( <code>+</code>)</td>
-</tr>
-<tr>
-<td><code>space2randomblank</code></td>
-<td>使用一组有效替代字符中的随机空白字符替换空格字符 ( )</td>
-</tr>
-<tr>
-<td><code>symboliclogical</code></td>
-<td>将 AND 和 OR 逻辑运算符替换为相应的符号运算符 ( <code>&amp;&amp;</code>and <code>|</code>)</td>
-</tr>
-<tr>
-<td><code>versionedkeywords</code></td>
-<td>将每个非函数关键字括在 (MySQL) 版本注释中</td>
-</tr>
-<tr>
-<td><code>versionedmorekeywords</code></td>
-<td>将每个关键字括在（MySQL）版本注释中</td>
-</tr>
-</tbody></table>
-<p>读文件</p>
-	
-	</div>
-  <a type="button" href="/2024/09/08/tools/enum/sqlmap/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -403,13 +342,15 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
 			<li><a href="/categories/Others/">Others<span>1</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -419,7 +360,7 @@
 		
 			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
 		
-			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+			<li><a href="/categories/Writeup/">Writeup<span>12</span></a></li>
 		
 		</ul>
 	</div>
@@ -430,45 +371,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
+			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>

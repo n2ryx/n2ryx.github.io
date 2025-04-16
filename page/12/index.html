@@ -137,6 +137,42 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/08/02/writeup/htb/HTB Runner/" >HTB Runner</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-08-02  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Runner-Linux-·-Medium"><a href="#Runner-Linux-·-Medium" class="headerlink" title="Runner (Linux · Medium)"></a>Runner (Linux · Medium)</h1><p>CVE-2023-42793 + CVE-2024-21626</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -T4 -Pn 10.10.11.13</span><br><span class="line"></span><br><span class="line">Nmap scan report for runner.htb (10.10.11.13)</span><br><span class="line">Host is up (0.51s latency).</span><br><span class="line">Not shown: 979 closed tcp ports (conn-refused)</span><br><span class="line">PORT      STATE    SERVICE       VERSION</span><br><span class="line">22/tcp    open     ssh           OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)</span><br><span class="line">|_  256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)</span><br><span class="line">43/tcp    filtered whois</span><br><span class="line">80/tcp    open     http          nginx 1.18.0 (Ubuntu)</span><br><span class="line">|_http-title: Runner - CI/CD Specialists</span><br><span class="line">|_http-server-header: nginx/1.18.0 (Ubuntu)</span><br><span class="line">84/tcp    filtered ctf</span><br><span class="line">1053/tcp  filtered remote-as</span><br><span class="line">1119/tcp  filtered bnetgame</span><br><span class="line">1145/tcp  filtered x9-icue</span><br><span class="line">1272/tcp  filtered cspmlockmgr</span><br><span class="line">1503/tcp  filtered imtc-mcs</span><br><span class="line">1971/tcp  filtered netop-school</span><br><span class="line">2383/tcp  filtered ms-olap4</span><br><span class="line">3851/tcp  filtered spectraport</span><br><span class="line">6510/tcp  filtered mcer-port</span><br><span class="line">7007/tcp  filtered afs3-bos</span><br><span class="line">8000/tcp  open     nagios-nsca   Nagios NSCA</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: OPTIONS</span><br><span class="line">|_http-title: Site doesn&#x27;t have a title (text/plain; charset=utf-8).</span><br><span class="line">8087/tcp  filtered simplifymedia</span><br><span class="line">9917/tcp  filtered unknown</span><br><span class="line">20222/tcp filtered ipulse-ics</span><br><span class="line">32782/tcp filtered unknown</span><br><span class="line">49154/tcp filtered unknown</span><br><span class="line">52869/tcp filtered unknown</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+
+<p>80</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl http://10.10.11.13 -I</span><br><span class="line"></span><br><span class="line">HTTP/1.1 302 Moved Temporarily</span><br><span class="line">Server: nginx/1.18.0 (Ubuntu)</span><br><span class="line">Date: Tue, 13 Aug 2024 10:00:10 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 154</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Location: http://runner.htb/</span><br></pre></td></tr></table></figure>
+
+<p>添加hosts</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.13 runner.htb&quot; | sudo tee -a /etc/host</span><br></pre></td></tr></table></figure>
+
+<h3 id="ffuf"><a href="#ffuf" class="headerlink" title="ffuf"></a>ffuf</h3>
+	
+	</div>
+  <a type="button" href="/2024/08/02/writeup/htb/HTB Runner/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/07/31/writeup/htb/HTB SolarLab/" >HTB SolarLab</a>
 		</h3>
 		</div>
@@ -163,41 +199,6 @@
 	
 	</div>
   <a type="button" href="/2024/07/31/writeup/htb/HTB SolarLab/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/07/26/writeup/htb/HTB IClean/" >HTB IClean</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-07-26  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="IClean-Linux-·-Medium"><a href="#IClean-Linux-·-Medium" class="headerlink" title="IClean (Linux · Medium)"></a>IClean (Linux · Medium)</h1><p>SSTI + <a target="_blank" rel="noopener" href="https://qpdf.readthedocs.io/en/stable/cli.htm">qpdf</a></p>
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -v -T4 10.10.11.12</span><br><span class="line"></span><br><span class="line">Nmap scan report for capiclean.htb (10.10.11.12)</span><br><span class="line">Host is up (0.28s latency).</span><br><span class="line">Not shown: 976 closed tcp ports (conn-refused)</span><br><span class="line">PORT      STATE    SERVICE          VERSION</span><br><span class="line">22/tcp    open     ssh              OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 2c:f9:07:77:e3:f1:3a:36:db:f2:3b:94:e3:b7:cf:b2 (ECDSA)</span><br><span class="line">|_  256 4a:91:9f:f2:74:c0:41:81:52:4d:f1:ff:2d:01:78:6b (ED25519)</span><br><span class="line">80/tcp    open     http             Apache httpd 2.4.52 ((Ubuntu))</span><br><span class="line">|_http-favicon: Unknown favicon MD5: 59A6DBEA095D69E461CAC2D85CE6999A</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Supported Methods: HEAD OPTIONS GET</span><br><span class="line">|_http-title: Capiclean</span><br><span class="line">| http-server-header: </span><br><span class="line">|   Apache/2.4.52 (Ubuntu)</span><br><span class="line">|_  Werkzeug/2.3.7 Python/3.10.12</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>访问<code>10.10.11.12</code>，重定向到<code>capiclean.htb</code>，添加hosts</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.12 capiclean.htb&quot; | sudo tee -a /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<h3 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gobuster vhost -u http://capiclean.htb/ --append-domain -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt</span><br><span class="line">Nothing</span><br></pre></td></tr></table></figure>
-
-<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3>
-	
-	</div>
-  <a type="button" href="/2024/07/26/writeup/htb/HTB IClean/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -248,13 +249,15 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
 			<li><a href="/categories/Others/">Others<span>1</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -264,7 +267,7 @@
 		
 			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
 		
-			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+			<li><a href="/categories/Writeup/">Writeup<span>12</span></a></li>
 		
 		</ul>
 	</div>
@@ -275,45 +278,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>

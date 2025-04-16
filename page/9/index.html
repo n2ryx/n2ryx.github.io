@@ -137,6 +137,118 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/09/tools/crack/medusa/" >medusa</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">medusa [-h 主机名|-H 文件] [-u 用户名|-U 文件] [-p 密码|-P 文件] [-C 文件] -M 模块 [选项]</span><br><span class="line"></span><br><span class="line">-h [TEXT]    : 目标主机名或IP地址</span><br><span class="line">-H [FILE]    : 包含目标主机名或IP地址的文件</span><br><span class="line">-u [TEXT]    : 要测试的用户名</span><br><span class="line">-U [FILE]    : 包含要测试的用户名的文件</span><br><span class="line">-p [TEXT]    : 要测试的密码</span><br><span class="line">-P [FILE]    : 包含要测试的密码的文件</span><br><span class="line">-C [FILE]    : 包含组合项的文件。更多信息见README。</span><br><span class="line">-O [FILE]    : 将日志信息附加到指定文件</span><br><span class="line">-e [n/s/ns]  : 额外的密码检查选项（`n` 无密码，`s` 密码 = 用户名）</span><br><span class="line">-M [TEXT]    : 要执行的模块名称（不包括 `.mod` 扩展名）</span><br><span class="line">-m [TEXT]    : 传递给模块的参数。可以多次传递不同参数（如 `-m 参数1 -m 参数2` 等）</span><br><span class="line">-d           : 列出所有已知的模块</span><br><span class="line">-n [NUM]     : 使用非默认的TCP端口号</span><br><span class="line">-s           : 启用SSL</span><br><span class="line">-g [NUM]     : 连接超时的最大等待时间，单位为秒（默认 3 秒）</span><br><span class="line">-r [NUM]     : 重试之间的睡眠时间，单位为秒（默认 3 秒）</span><br><span class="line">-R [NUM]     : 重试次数，达到该次数后放弃，总尝试次数为 `NUM + 1`</span><br><span class="line">-c [NUM]     : 验证套接字可用时的等待时间，单位为微秒（默认 500 微秒）</span><br><span class="line">-t [NUM]     : 同时测试的登录数量</span><br><span class="line">-T [NUM]     : 同时测试的主机数量</span><br><span class="line">-L           : 每个线程使用一个用户名并行登录。默认是先处理所有用户名后再进行</span><br><span class="line">-f           : 找到第一个有效的用户名/密码后停止扫描主机</span><br><span class="line">-F           : 找到任何主机上的第一个有效用户名/密码后停止审计</span><br><span class="line">-b           : 屏蔽启动横幅</span><br><span class="line">-q           : 显示模块的使用信息</span><br><span class="line">-v [NUM]     : 设置详细输出级别 [0 - 6，数字越大越详细]</span><br><span class="line">-w [NUM]     : 错误调试输出级别 [0 - 10，数字越大越详细]</span><br><span class="line">-V           : 显示版本信息</span><br><span class="line">-Z [TEXT]    : 根据先前扫描的结果图恢复扫描</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th align="left">模块</th>
+<th>服务&#x2F;协议</th>
+<th>描述</th>
+<th>使用示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">FTP</td>
+<td>文件传输协议</td>
+<td>暴力破解 FTP 登录凭据，用于通过网络传输文件。</td>
+<td><code>medusa -M ftp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">HTTP</td>
+<td>超文本传输协议</td>
+<td>通过 HTTP（GET&#x2F;POST）对 Web 应用程序上的登录表单进行暴力破解。</td>
+<td><code>medusa -M http -h www.example.com -U users.txt -P passwords.txt -m DIR:/login.php -m FORM:username=^USER^&amp;password=^PASS^</code></td>
+</tr>
+<tr>
+<td align="left">IMAP</td>
+<td>互联网消息访问协议</td>
+<td>暴力破解 IMAP 登录，通常用于访问电子邮件服务器。</td>
+<td><code>medusa -M imap -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">MySQL</td>
+<td>MySQL 数据库</td>
+<td>暴力破解 MySQL 数据库凭证，常用于 Web 应用程序和数据库。</td>
+<td><code>medusa -M mysql -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">POP3</td>
+<td>邮局协议 3</td>
+<td>强制 POP3 登录，通常用于从邮件服务器检索电子邮件。</td>
+<td><code>medusa -M pop3 -h mail.example.com -U users.txt -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">RDP</td>
+<td>远程桌面协议</td>
+<td>暴力破解 RDP 登录，常用于 Windows 系统的远程桌面访问。</td>
+<td><code>medusa -M rdp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SSH</td>
+<td>安全外壳 (SSH)</td>
+<td>暴力破解 SSH 登录，常用于安全远程访问。</td>
+<td><code>medusa -M ssh -h 192.168.1.100 -u root -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">SVN</td>
+<td>版本控制系统</td>
+<td>强制使用 Subversion（SVN）存储库进行版本控制。</td>
+<td><code>medusa -M svn -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Telnet</td>
+<td>Telnet 协议</td>
+<td>在旧系统上强制执行 Telnet 服务以执行远程命令。</td>
+<td><code>medusa -M telnet -h 192.168.1.100 -u admin -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">vnc</td>
+<td>虚拟网络计算</td>
+<td>强制获取远程桌面访问的 VNC 登录凭据。</td>
+<td><code>medusa -M vnc -h 192.168.1.100 -P passwords.txt</code></td>
+</tr>
+<tr>
+<td align="left">Web form</td>
+<td>暴力破解 Web 登录表单</td>
+<td>使用 HTTP POST 请求强制破解网站上的登录表单。</td>
+<td><code>medusa -M web-form -h www.example.com -U users.txt -P passwords.txt -m FORM:&quot;username=^USER^&amp;password=^PASS^:F=Invalid&quot;</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">爆破 ssh</span></span><br><span class="line">medusa -h 192.168.0.100 -U usernames.txt -P passwords.txt -M ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">medusa -H web_servers.txt -U usernames.txt -P passwords.txt -M http -m GET</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试空密码</span></span><br><span class="line">medusa -h 10.0.0.5 -U usernames.txt -e ns -M service_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>…</p>
+
+	
+	</div>
+  <a type="button" href="/2024/09/09/tools/crack/medusa/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/08/tools/enum/ffuf/" >ffuf</a>
 		</h3>
 		</div>
@@ -168,136 +280,6 @@
 	
 	</div>
   <a type="button" href="/2024/09/08/tools/enum/ffuf/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/08/tools/enum/nmap/" >nmap</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-08  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">Usage: nmap [Scan Type(s)] [Options] &#123;target specification&#125;</span><br><span class="line"></span><br><span class="line">目标规范：</span><br><span class="line">Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1, 10.0.0-255.1-254</span><br><span class="line">-iL &lt;输入文件名&gt;: 从文件中读取主机/网络列表</span><br><span class="line">-iR &lt;数量&gt;: 随机选择目标</span><br><span class="line">--exclude &lt;主机1[,主机2][,主机3],...&gt;: 排除指定主机/网络</span><br><span class="line">--excludefile &lt;排除文件&gt;: 从文件中排除列表</span><br><span class="line"></span><br><span class="line">主机发现：</span><br><span class="line">-sL: 列出扫描 - 仅列出扫描目标</span><br><span class="line">-sn: Ping 扫描 - 禁用端口扫描</span><br><span class="line">-Pn: 假设所有主机在线 - 禁用 ICMP Echo 请求 - 跳过主机发现</span><br><span class="line">-PS/PA/PU/PY[端口列表]: TCP SYN、TCP ACK、UDP 或 SCTP 发现至指定端口</span><br><span class="line">-PE/PP/PM: ICMP 回显、时间戳和网络掩码请求发现探针</span><br><span class="line">-PO[协议列表]: IP 协议 Ping</span><br><span class="line">-n/-R: 不进行 DNS 解析 / 始终解析 [默认：有时]</span><br><span class="line">--dns-servers &lt;服务器1[,服务器2],...&gt;: 指定自定义 DNS 服务器</span><br><span class="line">--system-dns: 使用操作系统的 DNS 解析器</span><br><span class="line">--traceroute: 跟踪每个主机的跳跃路径</span><br><span class="line"></span><br><span class="line">扫描技术：</span><br><span class="line">-sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scan</span><br><span class="line">-sU: UDP 扫描</span><br><span class="line">-sN/sF/sX: TCP 空、FIN 和 Xmas 扫描</span><br><span class="line">--scanflags &lt;标志&gt;: 自定义 TCP 扫描标志</span><br><span class="line">-sI &lt;僵尸主机[:探针端口]&gt;: 空闲扫描</span><br><span class="line">-sY/sZ: SCTP INIT/COOKIE-ECHO 扫描</span><br><span class="line">-sO: IP 协议扫描</span><br><span class="line">-b &lt;FTP 中继主机&gt;: FTP 中继扫描</span><br><span class="line"></span><br><span class="line">端口规范和扫描顺序：</span><br><span class="line">-p &lt;端口范围&gt;: 仅扫描指定端口</span><br><span class="line">  示例: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span><br><span class="line">--exclude-ports &lt;端口范围&gt;: 排除指定端口</span><br><span class="line">-F: 快速模式 - 扫描的端口比默认扫描少</span><br><span class="line">-r: 顺序扫描端口 - 不随机化</span><br><span class="line">--top-ports &lt;数量&gt;: 扫描最常见的 &lt;数量&gt; 个端口</span><br><span class="line">--port-ratio &lt;比例&gt;: 扫描超过指定比例的常见端口</span><br><span class="line"></span><br><span class="line">服务/版本检测：</span><br><span class="line">-sV: 探测开放端口的服务/版本信息</span><br><span class="line">--version-intensity &lt;等级&gt;: 设置从 0 (轻) 到 9 (尽量探测)</span><br><span class="line">--version-light: 限制为最可能的探测 (强度 2)</span><br><span class="line">--version-all: 尝试所有探测 (强度 9)</span><br><span class="line">--version-trace: 显示详细的版本扫描活动 (用于调试)</span><br><span class="line"></span><br><span class="line">脚本扫描：</span><br><span class="line">-sC: 相当于 --script=default</span><br><span class="line">--script=&lt;Lua 脚本&gt;: &lt;Lua 脚本&gt; 为目录、脚本文件或脚本类别的逗号分隔列表</span><br><span class="line">--script-args=&lt;n1=v1,[n2=v2,...]&gt;: 为脚本提供参数</span><br><span class="line">--script-args-file=文件名: 从文件中提供 NSE 脚本参数</span><br><span class="line">--script-trace: 显示所有发送和接收的数据</span><br><span class="line">--script-updatedb: 更新脚本数据库</span><br><span class="line">--script-help=&lt;Lua 脚本&gt;: 显示关于脚本的帮助</span><br><span class="line">&lt;Lua 脚本&gt; 为脚本文件或脚本类别的逗号分隔列表</span><br><span class="line"></span><br><span class="line">操作系统检测：</span><br><span class="line">-O: 启用操作系统检测</span><br><span class="line">--osscan-limit: 将操作系统检测限制在潜在目标上</span><br><span class="line">--osscan-guess: 更积极地猜测操作系统</span><br><span class="line"></span><br><span class="line">时间和性能：</span><br><span class="line">-T&lt;0-5&gt;: 设置时间模板 (数值越高越快)</span><br><span class="line">--min-hostgroup/max-hostgroup &lt;大小&gt;: 并行主机扫描组大小</span><br><span class="line">--min-parallelism/max-parallelism &lt;数目&gt;: 探针并行化</span><br><span class="line">--min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lt;时间&gt;: 设置探针往返时间</span><br><span class="line">--max-retries &lt;次数&gt;: 限制端口扫描探针的重传次数</span><br><span class="line">--host-timeout &lt;时间&gt;: 达到指定时间后放弃目标</span><br><span class="line">--scan-delay/--max-scan-delay &lt;时间&gt;: 调整探针之间的延迟</span><br><span class="line">--min-rate &lt;数量&gt;: 以每秒不少于 &lt;数量&gt; 的速度发送数据包</span><br><span class="line">--max-rate &lt;数量&gt;: 以每秒不超过 &lt;数量&gt; 的速度发送数据包</span><br><span class="line"></span><br><span class="line">防火墙/IDS 规避和伪装：</span><br><span class="line">-f; --mtu &lt;值&gt;: 分段数据包 (可选指定 MTU)</span><br><span class="line">-D &lt;诱饵1,诱饵2[,ME],...&gt;: 使用诱饵进行扫描</span><br><span class="line">-S &lt;IP 地址&gt;: 伪装源地址</span><br><span class="line">-e &lt;接口&gt;: 使用指定接口</span><br><span class="line">-g/--source-port &lt;端口号&gt;: 使用指定端口号</span><br><span class="line">--proxies &lt;url1,[url2],...&gt;: 通过 HTTP/SOCKS4 代理连接</span><br><span class="line">--data &lt;十六进制字符串&gt;: 向数据包中附加自定义负载</span><br><span class="line">--data-string &lt;字符串&gt;: 向数据包中附加自定义 ASCII 字符串</span><br><span class="line">--data-length &lt;长度&gt;: 向数据包中附加随机数据</span><br><span class="line">--ip-options &lt;选项&gt;: 使用指定 IP 选项发送数据包</span><br><span class="line">--ttl &lt;值&gt;: 设置 IP 生存时间字段</span><br><span class="line">--spoof-mac &lt;mac 地址/前缀/厂商名称&gt;: 伪装 MAC 地址</span><br><span class="line">--badsum: 发送伪造的 TCP/UDP/SCTP 校验和的数据包</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">-oN/-oX/-oS/-oG &lt;文件&gt;: 以 .nmap/.xml/s|&lt;rIpt kIddi3/.gnmap 格式输出扫描到文件</span><br><span class="line">-oA &lt;基本名&gt;: 同时输出为三种主要格式</span><br><span class="line">-v: 增加详细级别 (使用 -vv 或更多)</span><br><span class="line">-d: 增加调试级别 (使用 -dd 或更多)</span><br><span class="line">--reason: 显示端口处于特定状态的原因</span><br><span class="line">--open: 仅显示开放 (或可能开放) 的端口</span><br><span class="line">--packet-trace: 显示所有发送和接收的数据包</span><br><span class="line">--iflist: 打印主机接口和路由 (用于调试)</span><br><span class="line">--append-output: 附加到指定的输出文件，而非覆盖</span><br><span class="line">--resume &lt;文件名&gt;: 恢复中断的扫描</span><br><span class="line">--noninteractive: 禁用通过键盘的运行时交互</span><br><span class="line">--stylesheet &lt;路径/URL&gt;: XSL 样式表，用于将 XML 输出转换为 HTML</span><br><span class="line">--webxml: 从 Nmap.Org 引用样式表，以提高 XML 的可移植性</span><br><span class="line">--no-stylesheet: 不将 XSL 样式表关联到 XML 输出</span><br><span class="line"></span><br><span class="line">其他：</span><br><span class="line">-6: 启用 IPv6 扫描</span><br><span class="line">-A: 启用操作系统检测、版本检测、脚本扫描和 traceroute</span><br><span class="line">--datadir &lt;目录名&gt;: 指定自定义 Nmap 数据文件位置</span><br><span class="line">--send-eth/--send-ip: 使用原始以太网帧或 IP 数据包发送</span><br><span class="line">--privileged: 假设用户具备完全权限</span><br><span class="line">--unprivileged: 假设用户缺乏原始套接字权限</span><br><span class="line">-V: 显示版本号</span><br><span class="line">-h: 显示帮助摘要页面</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--disable-arp-ping	禁用 ARP ping</span><br><span class="line">-D RND:5			生成5个随机 IP 地址，指示连接来自的源</span><br><span class="line">-S &lt;ip&gt;				使用不同的源IP地址扫描目标</span><br><span class="line">--source-port 53	从 DNS 端口执行扫描</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th><strong>脚本类别</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>auth</code></td>
-<td>确定身份验证凭证。</td>
-</tr>
-<tr>
-<td><code>broadcast</code></td>
-<td>通过广播来发现主机的脚本以及发现的主机可以自动添加到剩余的扫描中。</td>
-</tr>
-<tr>
-<td><code>brute</code></td>
-<td>执行脚本，尝试通过使用凭证进行暴力破解来登录相应的服务。</td>
-</tr>
-<tr>
-<td><code>default</code></td>
-<td>使用该<code>-sC</code>选项执行的默认脚本。</td>
-</tr>
-<tr>
-<td><code>discovery</code></td>
-<td>无障碍服务的评估。</td>
-</tr>
-<tr>
-<td><code>dos</code></td>
-<td>这些脚本用于检查服务是否存在拒绝服务漏洞，由于它会损害服务，因此使用较少。</td>
-</tr>
-<tr>
-<td><code>exploit</code></td>
-<td>此类脚本尝试利用扫描端口的已知漏洞。</td>
-</tr>
-<tr>
-<td><code>external</code></td>
-<td>使用外部服务进行进一步处理的脚本。</td>
-</tr>
-<tr>
-<td><code>fuzzer</code></td>
-<td>这使用脚本通过发送不同的字段来识别漏洞和意外的数据包处理，这可能需要很长时间。</td>
-</tr>
-<tr>
-<td><code>intrusive</code></td>
-<td>可能对目标系统产生负面影响的侵入性脚本。</td>
-</tr>
-<tr>
-<td><code>malware</code></td>
-<td>检查某些恶意软件是否感染了目标系统。</td>
-</tr>
-<tr>
-<td><code>safe</code></td>
-<td>不执行侵入性和破坏性访问的防御脚本。</td>
-</tr>
-<tr>
-<td><code>version</code></td>
-<td>服务检测的扩展。</td>
-</tr>
-<tr>
-<td><code>vuln</code></td>
-<td>识别特定的漏洞。</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th><strong>状态</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>open</code></td>
-<td>这表示已建立与扫描端口的连接。这些连接可以是<strong>TCP 连接</strong>、<strong>UDP 数据报</strong>以及<strong>SCTP 关联</strong>。</td>
-</tr>
-<tr>
-<td><code>closed</code></td>
-<td>当端口显示为关闭时，TCP 协议会指示我们收到的数据包包含一个<code>RST</code>标志。这种扫描方法还可用于确定我们的目标是否还活着。</td>
-</tr>
-<tr>
-<td><code>filtered</code></td>
-<td>Nmap 无法正确识别扫描的端口是打开还是关闭，因为目标没有返回该端口的响应，或者我们从目标收到错误代码。</td>
-</tr>
-<tr>
-<td><code>unfiltered</code></td>
-<td>端口的这种状态仅在<strong>TCP-ACK</strong>扫描期间发生，表示该端口可访问，但无法确定它是开放还是关闭。</td>
-</tr>
-<tr>
-<td>&#96;open</td>
-<td>filtered&#96;</td>
-</tr>
-<tr>
-<td>&#96;closed</td>
-<td>filtered&#96;</td>
-</tr>
-</tbody></table>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">nmap-egrep</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主机和开放端口</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27;  | \</span><br><span class="line">awk &#x27;&#123;print &quot;Host: &quot; $1 &quot; Ports: &quot; NF-1; $1=&quot;&quot;; for(i=2; i&lt;=NF; i++) &#123; a=a&quot; &quot;$i; &#125;; split(a,s,&quot;,&quot;); for(e in s) &#123; split(s[e],v,&quot;/&quot;); printf &quot;%-8s %s/%-7s %s\n&quot; , v[2], v[3], v[1], v[5]&#125;; a=&quot;&quot; &#125;&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印端口</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27; | tr &#x27;,&#x27; &#x27;\n&#x27; | sed -e &#x27;s/^[ \t]*//&#x27; | \</span><br><span class="line">sort -n | uniq -c | sort -k 1 -r | head -n 10</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">统计端口数</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">sed -n -e &#x27;s/Ignored.*//p&#x27; | \</span><br><span class="line">awk -F, &#x27;&#123;split($0,a,&quot; &quot;); printf &quot;Host: %-20s Ports Open: %d\n&quot; , a[1], NF&#125;&#x27; \</span><br><span class="line">| sort -k 5 -g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">横幅爬取</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d&#x27; &#x27; -f2,4- | \</span><br><span class="line">awk -F, &#x27;&#123;split($1,a,&quot; &quot;); split(a[2],b,&quot;/&quot;); print a[1] &quot; &quot; b[1]; for(i=2; i&lt;=NF; i++) &#123; split($i,c,&quot;/&quot;); print a[1] c[1] &#125;&#125;&#x27; \</span><br><span class="line"> | xargs -L1 nc -v -w1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">顶级服务标识符</span></span><br><span class="line">egrep -v &quot;^#|Status: Up&quot; file.gnmap | cut -d &#x27; &#x27; -f4- | tr &#x27;,&#x27; &#x27;\n&#x27; | \</span><br><span class="line">sed -e &#x27;s/^[ \t]*//&#x27; | awk -F &#x27;/&#x27; &#x27;&#123;print $7&#125;&#x27; | grep -v &quot;^$&quot; | sort | uniq -c \</span><br><span class="line">| sort -k 1 -nr</span><br></pre></td></tr></table></figure>
-
-<p>…</p>
-
-	
-	</div>
-  <a type="button" href="/2024/09/08/tools/enum/nmap/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -348,13 +330,15 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
 			<li><a href="/categories/Others/">Others<span>1</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>15</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -364,7 +348,7 @@
 		
 			<li><a href="/categories/Vuln/">Vuln<span>3</span></a></li>
 		
-			<li><a href="/categories/Writeup/">Writeup<span>13</span></a></li>
+			<li><a href="/categories/Writeup/">Writeup<span>12</span></a></li>
 		
 		</ul>
 	</div>
@@ -375,43 +359,43 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>3</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>8</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
