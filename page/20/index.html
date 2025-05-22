@@ -157,7 +157,7 @@
 <h3 id="JavaScript-原型"><a href="#JavaScript-原型" class="headerlink" title="JavaScript 原型"></a>JavaScript 原型</h3><p>JavaScript 中的原型是一个对象，它在创建新对象时被用来作为新对象的初始属性</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">username = <span class="string">&quot;&quot;</span></span><br><span class="line">username.<span class="property">__proto__</span></span><br><span class="line">username[<span class="string">&#x27;__proto__&#x27;</span>]</span><br><span class="line"></span><br><span class="line">username.<span class="property">__proto__</span>                        <span class="comment">// String.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>              <span class="comment">// Object.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>.<span class="property">__proto__</span>    <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/prototype-pollution-prototype-chain.svg" alt="JavaScript 原型链"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/prototype-pollution-prototype-chain.svg" alt="JavaScript 原型链"></p>
 <h3 id="原型链实现继承"><a href="#原型链实现继承" class="headerlink" title="原型链实现继承"></a>原型链实现继承</h3><p>当一个新对象被创建时，它会从构造函数的 <code>prototype</code> 属性指向的对象那里继承属性和方法</p>
 	
 	</div>
@@ -185,7 +185,7 @@
   <div class="row">
 	
 	
-		<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-1727233862238.png" alt="img"></p>
+		<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1727233862238.png" alt="img"></p>
 <p>example</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span>(<span class="params"><span class="variable">$url</span></span>)</span>&#123;  </span><br><span class="line">    <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">    <span class="variable">$result</span>=<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">curl</span>(<span class="variable">$url</span>);</span><br></pre></td></tr></table></figure>
 
@@ -280,45 +280,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>

