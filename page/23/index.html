@@ -137,38 +137,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2023/11/17/java/cc/CC6/" >CC6</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-11-17  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="CC6"><a href="#CC6" class="headerlink" title="CC6"></a>CC6</h2><h3 id="Gadget-chain"><a href="#Gadget-chain" class="headerlink" title="Gadget chain"></a>Gadget chain</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Gadget chain:</span></span><br><span class="line"><span class="comment">	    java.io.ObjectInputStream.readObject()</span></span><br><span class="line"><span class="comment">            java.util.HashSet.readObject()</span></span><br><span class="line"><span class="comment">                java.util.HashMap.put()</span></span><br><span class="line"><span class="comment">                java.util.HashMap.hash()</span></span><br><span class="line"><span class="comment">                    org.apache.commons.collections.keyvalue.TiedMapEntry.hashCode()</span></span><br><span class="line"><span class="comment">                    org.apache.commons.collections.keyvalue.TiedMapEntry.getValue()</span></span><br><span class="line"><span class="comment">                        org.apache.commons.collections.map.LazyMap.get()</span></span><br><span class="line"><span class="comment">                       		org.apache.commons.collections.functors.ChainedTransformer.transform()</span></span><br><span class="line"><span class="comment">                       		org.apache.commons.collections.functors.InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment">                            java.lang.reflect.Method.invoke()</span></span><br><span class="line"><span class="comment">                                java.lang.Runtime.exec()</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    From：</span></span><br><span class="line"><span class="comment">    	ysoserial</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>后面跟CC1一样，关注变化</p>
-<h3 id="TiedMapEntry"><a href="#TiedMapEntry" class="headerlink" title="TiedMapEntry"></a>TiedMapEntry</h3><h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231117203128744.png" alt="image-20231117203128744"></p>
-<h4 id="getValue"><a href="#getValue" class="headerlink" title="getValue()"></a>getValue()</h4><p>利用成：<code>LazyMap.get()</code></p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231117203125346.png" alt="image-20231117203125346"></p>
-	
-	</div>
-  <a type="button" href="/2023/11/17/java/cc/CC6/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2023/11/15/java/cc/CC1-LazyMap/" >CC1-LazyMap</a>
 		</h3>
 		</div>
@@ -193,6 +161,40 @@
 	
 	</div>
   <a type="button" href="/2023/11/15/java/cc/CC1-LazyMap/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/11/12/java/cc/CC1-TransformedMap/" >CC1-TransformedMap</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="CC1-TransformedMap"><a href="#CC1-TransformedMap" class="headerlink" title="CC1-TransformedMap"></a>CC1-TransformedMap</h2><p>CC1链对JDK版本有要求，需在8u71之前</p>
+<p>Jdk1.8.0.65: <a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/cn/java/technologies/javase/javase8-archive-downloads.html</a></p>
+<p>sun包: <a target="_blank" rel="noopener" href="https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4">https://hg.openjdk.org/jdk8u/jdk8u/jdk/rev/af660750b2f4</a><br>src\share\classes\sun，放到Jdk下解压的src包内，Idea添加</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231114132357257.png" alt="image-20231114132357257"></p>
+<p>导入maven依赖（pom.xml）</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231113194232916.png" alt="image-20231113194232916"></p>
+<h3 id="Transformer-执行类"><a href="#Transformer-执行类" class="headerlink" title="Transformer-执行类"></a>Transformer-执行类</h3><p>主要利用方法 <code>Transform()</code>，看那些类实现了这个类</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231113213642842.png" alt="image-20231113213642842"></p>
+	
+	</div>
+  <a type="button" href="/2023/11/12/java/cc/CC1-TransformedMap/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -243,8 +245,6 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
-		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -272,45 +272,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -326,10 +326,6 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2025/01/29/htb-cpts/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
-      </li>
-    
-      <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
       </li>
     
@@ -343,6 +339,10 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>

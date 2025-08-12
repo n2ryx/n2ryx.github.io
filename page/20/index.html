@@ -137,40 +137,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/02/02/javascript/Javascript Prototype Pollution/" >JavaScript Prototype Pollution</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-02-02  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="JavaScript-Prototype-Pollution"><a href="#JavaScript-Prototype-Pollution" class="headerlink" title="JavaScript Prototype Pollution"></a>JavaScript Prototype Pollution</h2><p>JavaScript中的原型链污染是指攻击者通过覆盖或修改对象的原型链上的属性，从而改变对象的行为或者访问不应该访问的属性或方法</p>
-<p>原型链污染通常发生在JavaScript对象的继承机制中，因为JavaScript是一种基于原型的语言，对象会继承其原型链上的所有属性和方法</p>
-<p>JS原型链污染分，客户端原型污染、服务端原型污染</p>
-<h3 id="JavaScript-原型"><a href="#JavaScript-原型" class="headerlink" title="JavaScript 原型"></a>JavaScript 原型</h3><p>JavaScript 中的原型是一个对象，它在创建新对象时被用来作为新对象的初始属性</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">username = <span class="string">&quot;&quot;</span></span><br><span class="line">username.<span class="property">__proto__</span></span><br><span class="line">username[<span class="string">&#x27;__proto__&#x27;</span>]</span><br><span class="line"></span><br><span class="line">username.<span class="property">__proto__</span>                        <span class="comment">// String.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>              <span class="comment">// Object.prototype</span></span><br><span class="line">username.<span class="property">__proto__</span>.<span class="property">__proto__</span>.<span class="property">__proto__</span>    <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/prototype-pollution-prototype-chain.svg" alt="JavaScript 原型链"></p>
-<h3 id="原型链实现继承"><a href="#原型链实现继承" class="headerlink" title="原型链实现继承"></a>原型链实现继承</h3><p>当一个新对象被创建时，它会从构造函数的 <code>prototype</code> 属性指向的对象那里继承属性和方法</p>
-	
-	</div>
-  <a type="button" href="/2024/02/02/javascript/Javascript Prototype Pollution/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
 			<a href="/2024/01/29/pentest/web-pentest/SSRF/" >Server-Side Request Forgery (SSRF)</a>
 		</h3>
 		</div>
@@ -201,6 +167,40 @@
 	
 	</div>
   <a type="button" href="/2024/01/29/pentest/web-pentest/SSRF/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2024/01/20/writeup/ciscn/2023CISCN初赛/" >2023CISCN初赛</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-01-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="2023CISCN初赛"><a href="#2023CISCN初赛" class="headerlink" title="2023CISCN初赛"></a>2023CISCN初赛</h1><h2 id="Unzip"><a href="#Unzip" class="headerlink" title="Unzip"></a>Unzip</h2><p>题型：文件上传（软连接）</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240326122623734.png" alt="image-20240326122623734"></p>
+<p>点击上传，跳转到upload.php，高亮源码</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240326122625315.png" alt="image-20240326122625315"></p>
+<p>软连接</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240326123325173.png" alt="image-20240326123325173"></p>
+<p>依次上传 1.zip、2.zip</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-20240326123701286.png" alt="image-20240326123701286"></p>
+	
+	</div>
+  <a type="button" href="/2024/01/20/writeup/ciscn/2023CISCN初赛/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -251,8 +251,6 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Certifications/">Certifications<span>1</span></a></li>
-		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -280,45 +278,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
 			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>21</span></a></li>
@@ -334,10 +332,6 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2025/01/29/htb-cpts/" ><i class="fa fa-file-o"></i>HTB CPTS</a>
-      </li>
-    
-      <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
       </li>
     
@@ -351,6 +345,10 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
+      </li>
+    
+      <li>
+        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
