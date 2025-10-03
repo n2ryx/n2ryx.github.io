@@ -151,10 +151,10 @@
   <div class="row">
 	
 	
-		<h2 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a>Hello Ethernaut</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>查看这个合约的 info 函数 <code>contract.info()</code>，如果你使用的是 Chrome v62, 可以使用 <code>await contract.info()</code>。你应该已经在合约内找到帮你通过关卡的东西了。 当你知道你已经完成了这个关卡，通过这个页面的橙色按钮提交合约。 这会将你的实例发送回给 ethernaut， 然后来判断你是否完成了任务。</p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info</span>()</span><br><span class="line"><span class="string">&#x27;You will find what you need in info1().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info1</span>()</span><br><span class="line"><span class="string">&#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info2</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="string">&#x27;The property infoNum holds the number of the next info method to call.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">infoNum</span>()</span><br><span class="line">i &#123;<span class="attr">negative</span>: <span class="number">0</span>, <span class="attr">words</span>: <span class="title class_">Array</span>(<span class="number">2</span>), <span class="attr">length</span>: <span class="number">1</span>, <span class="attr">red</span>: <span class="literal">null</span>&#125;<span class="attr">length</span>: 1<span class="attr">negative</span>: 0<span class="attr">red</span>: <span class="attr">nullwords</span>: (<span class="number">2</span>) [<span class="number">42</span>, 空白][[<span class="title class_">Prototype</span>]]: <span class="title class_">Object</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info42</span>()</span><br><span class="line"><span class="string">&#x27;theMethodName is the name of the next method.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">theMethodName</span>()</span><br><span class="line"><span class="string">&#x27;The method name is method7123949.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">method7123949</span>()</span><br><span class="line"><span class="string">&#x27;If you know the password, submit it to authenticate().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">password</span>()</span><br><span class="line"><span class="string">&#x27;ethernaut0&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">authenticate</span>(<span class="string">&#x27;ethernaut0&#x27;</span>)  <span class="comment">// 校验凭证并执行链上交易</span></span><br><span class="line">&#123;<span class="attr">tx</span>: <span class="string">&#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;</span>, <span class="attr">receipt</span>: &#123;…&#125;, <span class="attr">logs</span>: <span class="title class_">Array</span>(<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
+		<h1 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a>Hello Ethernaut</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>查看这个合约的 info 函数 <code>contract.info()</code>，如果你使用的是 Chrome v62, 可以使用 <code>await contract.info()</code>。你应该已经在合约内找到帮你通过关卡的东西了。 当你知道你已经完成了这个关卡，通过这个页面的橙色按钮提交合约。 这会将你的实例发送回给 ethernaut， 然后来判断你是否完成了任务。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info</span>()</span><br><span class="line"><span class="string">&#x27;You will find what you need in info1().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info1</span>()</span><br><span class="line"><span class="string">&#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info2</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="string">&#x27;The property infoNum holds the number of the next info method to call.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">infoNum</span>()</span><br><span class="line">i &#123;<span class="attr">negative</span>: <span class="number">0</span>, <span class="attr">words</span>: <span class="title class_">Array</span>(<span class="number">2</span>), <span class="attr">length</span>: <span class="number">1</span>, <span class="attr">red</span>: <span class="literal">null</span>&#125;<span class="attr">length</span>: 1<span class="attr">negative</span>: 0<span class="attr">red</span>: <span class="attr">nullwords</span>: (<span class="number">2</span>) [<span class="number">42</span>, 空白][[<span class="title class_">Prototype</span>]]: <span class="title class_">Object</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info42</span>()</span><br><span class="line"><span class="string">&#x27;theMethodName is the name of the next method.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">theMethodName</span>()</span><br><span class="line"><span class="string">&#x27;The method name is method7123949.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">method7123949</span>()</span><br><span class="line"><span class="string">&#x27;If you know the password, submit it to authenticate().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">password</span>()</span><br><span class="line"><span class="string">&#x27;ethernaut0&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">authenticate</span>(<span class="string">&#x27;ethernaut0&#x27;</span>)  <span class="comment">// 校验凭证并执行链上交易</span></span><br><span class="line">&#123;<span class="attr">tx</span>: <span class="string">&#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;</span>, <span class="attr">receipt</span>: &#123;…&#125;, <span class="attr">logs</span>: <span class="title class_">Array</span>(<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Memo"><a href="#Memo" class="headerlink" title="Memo"></a>Memo</h3><p><strong>Ethernaut help()</strong></p>
+<h2 id="Memo"><a href="#Memo" class="headerlink" title="Memo"></a>Memo</h2><p><strong>Ethernaut help()</strong></p>
 <table>
 <thead>
 <tr>
@@ -359,43 +359,43 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
