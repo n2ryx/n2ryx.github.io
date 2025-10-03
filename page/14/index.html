@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/07/22/writeup/htb/HTB PermX/" >HTB PermX</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-07-22  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="PermX-Linux-·-Easy"><a href="#PermX-Linux-·-Easy" class="headerlink" title="PermX (Linux · Easy)"></a>PermX (Linux · Easy)</h1><p>CVE-2023-4220 + sudo提权(符号链接)</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">nmap -sC -sV -sT -T4 10.10.11.23</span><br><span class="line"></span><br><span class="line">Nmap scan report for permx.htb (10.10.11.23)</span><br><span class="line">Host is up (0.10s latency).</span><br><span class="line">Not shown: 998 closed tcp ports (conn-refused)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.10 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   256 e2:5c:5d:8c:47:3e:d8:72:f7:b4:80:03:49:86:6d:ef (ECDSA)</span><br><span class="line">|_  256 1f:41:02:8e:6b:17:18:9c:a0:ac:54:23:e9:71:30:17 (ED25519)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.52</span><br><span class="line">|_http-title: eLEARNING</span><br><span class="line">|_http-server-header: Apache/2.4.52 (Ubuntu)</span><br><span class="line">Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="ffuf"><a href="#ffuf" class="headerlink" title="ffuf"></a>ffuf</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hosts绑定: 10.10.11.23	permx.htb</span><br><span class="line"></span><br><span class="line">ffuf -c -u &#x27;http://permx.htb&#x27; -H &#x27;host: FUZZ.permx.htb&#x27; -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -fc 301,302 -mc all</span><br><span class="line">__________________________________________________</span><br><span class="line">www                     [Status: 200, Size: 36182, Words: 12829, Lines: 587, Duration: 1716ms]</span><br><span class="line">lms                     [Status: 200, Size: 19347, Words: 4910, Lines: 353, Duration: 120ms]</span><br><span class="line"></span><br><span class="line">lms绑一下hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://permx.htb</span><br><span class="line">Nothing</span><br><span class="line">dirsearch -u http://lms.permx.htb</span><br></pre></td></tr></table></figure>
+
+<p>permx.htb</p>
+	
+	</div>
+  <a type="button" href="/2024/07/22/writeup/htb/HTB PermX/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/07/20/writeup/htb/HTB Cap/" >HTB Cap</a>
 		</h3>
 		</div>
@@ -162,44 +196,6 @@
 	
 	</div>
   <a type="button" href="/2024/07/20/writeup/htb/HTB Cap/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/06/20/writeup/ciscn/2024CISCN初赛/" >2024CISCN初赛</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-06-20  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="2024CISCN初赛"><a href="#2024CISCN初赛" class="headerlink" title="2024CISCN初赛"></a>2024CISCN初赛</h1><h2 id="ezjava"><a href="#ezjava" class="headerlink" title="ezjava"></a>ezjava</h2><blockquote>
-<p>JDBC-Attack-SQLite加载恶意so文件</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1727236081282.png" alt="image-20240525171429854"></p>
-<p>分析JdbcController，<code>com.example.jdbctest.controller.JdbcController#connect</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&#123;&quot;/connect&quot;&#125;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> ResultBean <span class="title function_">connect</span><span class="params">(<span class="meta">@RequestBody</span> JdbcBean jdbcBean)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">1</span>, String.join(<span class="string">&quot;,&quot;</span>, <span class="built_in">this</span>.datasourceServiceImpl.testDatasourceConnectionAble(jdbcBean)));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var3) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResultBean</span>(<span class="number">0</span>, <span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>实例化连接测试，跟进<code>com.example.jdbctest.services.datasourceServiceImpl#testDatasourceConnectionAble</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] testDatasourceConnectionAble(JdbcBean jdbcBean) <span class="keyword">throws</span> ClassNotFoundException, SQLException &#123;</span><br><span class="line">    <span class="type">DatasourceLoadConfig</span> <span class="variable">var10000</span> <span class="operator">=</span> <span class="built_in">this</span>.datasourceLoadConfig;</span><br><span class="line">    Map&lt;String, String&gt; config = DatasourceLoadConfig.getConfig();</span><br><span class="line">    <span class="keyword">switch</span> (jdbcBean.getType()) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-MYSQL&quot;</span>));</span><br><span class="line">            <span class="type">MysqlDatasourceConnector</span> <span class="variable">mysqlDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MysqlDatasourceConnector</span>(DriverManager.getConnection(jdbcBean.getUrl()));</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> mysqlDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> mysqlDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-POSTGRES&quot;</span>));</span><br><span class="line">            <span class="type">PostgresDatasourceConnector</span> <span class="variable">postgresDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PostgresDatasourceConnector</span>(DriverManager.getConnection(jdbcBean.getUrl()));</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> postgresDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> postgresDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="type">SqliteDatasourceConnector</span> <span class="variable">sqliteDatasourceConnector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqliteDatasourceConnector</span>(jdbcBean.getUrl());</span><br><span class="line">            <span class="keyword">if</span> (jdbcBean.getTableName() != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> sqliteDatasourceConnector.getTableContent(jdbcBean.getTableName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> sqliteDatasourceConnector.getTables();</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            Class.forName((String)config.get(<span class="string">&quot;JDBC-SQLITE&quot;</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;&quot;</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>根据<code>sqliteDatasourceConnector.getTableContent</code>，跟进到<code>com.example.jdbctest.services.DatasourceServiceImpl#getTableContent</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] getTableContent(String tableName) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;select * from &quot;</span> + tableName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 创建了一个Statement对象，Statement是JDBC API中用于执行SQL语句和查询数据库的一个类</span></span><br><span class="line">        <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> <span class="built_in">this</span>.connection.createStatement();</span><br><span class="line">        <span class="type">Throwable</span> <span class="variable">var4</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 执行SQL查询</span></span><br><span class="line">            <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> statement.executeQuery(sql);</span><br><span class="line">            <span class="type">Throwable</span> <span class="variable">var6</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125; <span class="comment">// catch</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125; <span class="comment">// catch</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2024/06/20/writeup/ciscn/2024CISCN初赛/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -250,6 +246,8 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/BlockChain/">BlockChain<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -277,48 +275,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
 			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
 		 
 		</ul>
 	</div>
@@ -329,6 +327,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
+      </li>
     
       <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
@@ -344,10 +346,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>

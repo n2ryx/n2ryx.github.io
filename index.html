@@ -137,6 +137,98 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2025/09/01/blockchain/Ethernaut/" >Ethernaut</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2025-09-01  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a>Hello Ethernaut</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>查看这个合约的 info 函数 <code>contract.info()</code>，如果你使用的是 Chrome v62, 可以使用 <code>await contract.info()</code>。你应该已经在合约内找到帮你通过关卡的东西了。 当你知道你已经完成了这个关卡，通过这个页面的橙色按钮提交合约。 这会将你的实例发送回给 ethernaut， 然后来判断你是否完成了任务。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info</span>()</span><br><span class="line"><span class="string">&#x27;You will find what you need in info1().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info1</span>()</span><br><span class="line"><span class="string">&#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info2</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="string">&#x27;The property infoNum holds the number of the next info method to call.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">infoNum</span>()</span><br><span class="line">i &#123;<span class="attr">negative</span>: <span class="number">0</span>, <span class="attr">words</span>: <span class="title class_">Array</span>(<span class="number">2</span>), <span class="attr">length</span>: <span class="number">1</span>, <span class="attr">red</span>: <span class="literal">null</span>&#125;<span class="attr">length</span>: 1<span class="attr">negative</span>: 0<span class="attr">red</span>: <span class="attr">nullwords</span>: (<span class="number">2</span>) [<span class="number">42</span>, 空白][[<span class="title class_">Prototype</span>]]: <span class="title class_">Object</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info42</span>()</span><br><span class="line"><span class="string">&#x27;theMethodName is the name of the next method.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">theMethodName</span>()</span><br><span class="line"><span class="string">&#x27;The method name is method7123949.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">method7123949</span>()</span><br><span class="line"><span class="string">&#x27;If you know the password, submit it to authenticate().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">password</span>()</span><br><span class="line"><span class="string">&#x27;ethernaut0&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">authenticate</span>(<span class="string">&#x27;ethernaut0&#x27;</span>)  <span class="comment">// 校验凭证并执行链上交易</span></span><br><span class="line">&#123;<span class="attr">tx</span>: <span class="string">&#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;</span>, <span class="attr">receipt</span>: &#123;…&#125;, <span class="attr">logs</span>: <span class="title class_">Array</span>(<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Memo"><a href="#Memo" class="headerlink" title="Memo"></a>Memo</h3><p><strong>Ethernaut help()</strong></p>
+<table>
+<thead>
+<tr>
+<th>（索引）</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>player</td>
+<td>‘当前玩家地址’</td>
+</tr>
+<tr>
+<td>ethernaut</td>
+<td>‘主游戏合约’</td>
+</tr>
+<tr>
+<td>level</td>
+<td>‘当前关卡合约地址’</td>
+</tr>
+<tr>
+<td>contract</td>
+<td>‘当前关卡合约实例 (如果已创建)’</td>
+</tr>
+<tr>
+<td>instance</td>
+<td>‘当前关卡合约实例地址 (如果已创建)’</td>
+</tr>
+<tr>
+<td>version</td>
+<td>‘当前游戏版本’</td>
+</tr>
+<tr>
+<td>getBalance(address)</td>
+<td>‘获知地址可用ether数’</td>
+</tr>
+<tr>
+<td>getBlockNumber()</td>
+<td>‘获取当前网络区块数’</td>
+</tr>
+<tr>
+<td>sendTransaction({options})</td>
+<td>‘发送交易到’</td>
+</tr>
+<tr>
+<td>getNetworkId()</td>
+<td>‘获得以太网id’</td>
+</tr>
+<tr>
+<td>toWei(ether)</td>
+<td>‘从ether转换到wei’</td>
+</tr>
+<tr>
+<td>fromWei(wei)</td>
+<td>‘从wei转换到ether’</td>
+</tr>
+<tr>
+<td>deployAllContracts()</td>
+<td>‘Deploy all the remaining contracts on the current network.’</td>
+</tr>
+</tbody></table>
+<p><strong>交易对象</strong></p>
+<p>ethers.js &#x2F; web3.js 调用写入链上函数后返回的交易对象：</p>
+	
+	</div>
+  <a type="button" href="/2025/09/01/blockchain/Ethernaut/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/11/20/pentest/lateral/Active Directory Enumeration & Attacks/" >Active Directory Enumeration &amp; Attacks</a>
 		</h3>
 		</div>
@@ -191,125 +283,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" >Windows Privilege Escalation</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-10-30  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>Windows 权限提升的总体目标是进一步将系统的访问权限提升到 <code>Local Administrators</code> 组或 <code>NT AUTHORITY\SYSTEM</code> <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/services/localsystem-account">LocalSystem</a> 账户。</p>
-<p><strong>Privilege Escalation Ways</strong></p>
-<table>
-<thead>
-<tr>
-<th>Privilege</th>
-<th>Escalation</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Abusing Windows group privileges</td>
-<td>滥用 Windows 组权限</td>
-</tr>
-<tr>
-<td>Abusing Windows user privileges</td>
-<td>滥用 Windows 用户权限</td>
-</tr>
-<tr>
-<td>Bypassing User Account Control</td>
-<td>绕过用户账户控制</td>
-</tr>
-<tr>
-<td>Abusing weak service&#x2F;file permissions</td>
-<td>滥用弱服务&#x2F;文件权限</td>
-</tr>
-<tr>
-<td>Leveraging unpatched kernel exploits</td>
-<td>利用未修补的内核漏洞</td>
-</tr>
-<tr>
-<td>Credential theft</td>
-<td>凭证盗窃</td>
-</tr>
-<tr>
-<td>Traffic Capture</td>
-<td>流量捕获</td>
-</tr>
-<tr>
-<td>and more.</td>
-<td>…</td>
-</tr>
-</tbody></table>
-<p><strong>Tools</strong></p>
-<table>
-<thead>
-<tr>
-<th>Tools</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/GhostPack/Seatbelt">Seatbelt</a></td>
-<td>用于执行各种本地特权升级检查的 C# 项目</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS">winPEAS</a></td>
-<td>WinPEAS 是一个脚本，用于搜索在 Windows 主机上提升权限的可能路径。所有检查均<a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation">在此处说明</a></td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1">PowerUp.ps1</a></td>
-<td>PowerShell 脚本用于查找依赖于错误配置的常见 Windows 特权提升向量。它还可用于利用发现的一些问题</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/GhostPack/SharpUp">SharpUp</a></td>
-<td>C# 版本的 PowerUp</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/411Hall/JAWS">JAWS</a></td>
-<td>使用 PowerShell 2.0 编写的用于枚举特权升级向量的 PowerShell 脚本</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/Arvanaghi/SessionGopher">SessionGopher</a></td>
-<td>SessionGopher 是一个 PowerShell 工具，用于查找和解密远程访问工具的已保存会话信息。它提取 PuTTY、WinSCP、SuperPuTTY、FileZilla 和 RDP 已保存的会话信息</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/rasta-mouse/Watson">Watson</a></td>
-<td>Watson 是一个 .NET 工具，旨在枚举缺失的 KB 并建议利用权限提升漏洞。</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/AlessandroZ/LaZagne">LaZagne</a></td>
-<td>用于从 Web 浏览器、聊天工具、数据库、Git、电子邮件、内存转储、PHP、系统管理工具、无线网络配置、内部 Windows 密码存储机制等检索存储在本地机器上的密码的工具</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://github.com/bitsadmin/wesng">Windows Exploit Suggester - Next Generation</a></td>
-<td>WES-NG 是一款基于 Windows<code>systeminfo</code>实用程序输出的工具，它提供了操作系统易受攻击的漏洞列表，包括针对这些漏洞的任何攻击。Windows XP 和 Windows 10 之间的所有 Windows 操作系统（包括其 Windows Server 对应版本）均受支持</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite">sysinternals-suite</a></td>
-<td>将在枚举中使用 Sysinternals 的几种工具，包括<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/accesschk">AccessChk</a>、<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/pipelist">PipeList</a>和<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/psservice">PsService</a></td>
-</tr>
-</tbody></table>
-<p>已编译好的项目 <a target="_blank" rel="noopener" href="https://github.com/r3motecontrol/Ghostpack-CompiledBinaries">https://github.com/r3motecontrol/Ghostpack-CompiledBinaries</a></p>
-<h1 id="Situational-Awareness"><a href="#Situational-Awareness" class="headerlink" title="Situational Awareness"></a>Situational Awareness</h1><h2 id="Network-Information"><a href="#Network-Information" class="headerlink" title="Network Information"></a>Network Information</h2><h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt; <span class="title">ipconfig</span> /<span class="title">all</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet1</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . :</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">vmxnet3</span> <span class="title">Ethernet</span> <span class="title">Adapter</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-<span class="title">C5</span>-4<span class="title">B</span></span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">No</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">f055:fefd</span>:<span class="title">b1b</span>:9919%9(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 192.168.20.56(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.255.0</span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : 192.168.20.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 151015510</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet0</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . : .\</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">Intel</span>(<span class="title">R</span>) 82574<span class="title">L</span> <span class="title">Gigabit</span> <span class="title">Network</span> <span class="title">Connection</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">IPv6</span> <span class="title">Address</span>. . . . . . . . . . . : <span class="title">dead:beef</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>%4(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 10.129.43.8(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.0.0</span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Obtained</span>. . . . . . . . . . : <span class="title">Thursday</span>, <span class="title">March</span> 25, 2021 9:24:45 <span class="title">AM</span></span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Expires</span> . . . . . . . . . . : <span class="title">Monday</span>, <span class="title">March</span> 29, 2021 1:28:44 <span class="title">PM</span></span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : <span class="title">fe80</span>::250:56<span class="title">ff:feb9</span>:4<span class="title">ddf</span>%4</span></span><br><span class="line"><span class="function">                                       10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Server</span> . . . . . . . . . . . : 10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 50352214</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 1.1.1.1</span></span><br><span class="line"><span class="function">                                       8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function">   </span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -357,6 +330,8 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/BlockChain/">BlockChain<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -384,48 +359,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
 		 
 		</ul>
 	</div>
@@ -436,6 +411,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
+      </li>
     
       <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
@@ -451,10 +430,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>

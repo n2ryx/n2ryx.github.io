@@ -137,6 +137,163 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/10/16/pentest/web-pentest/Command Injections/" >Command Injections</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>常见的注入类型：</p>
+<table>
+<thead>
+<tr>
+<th>Injection</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OS Command Injection</td>
+<td>当用户输入直接用作操作系统命令的一部分时发生。</td>
+</tr>
+<tr>
+<td>Code Injection</td>
+<td>当用户输入直接位于评估代码的函数内时发生。</td>
+</tr>
+<tr>
+<td>SQL Injection</td>
+<td>当用户输入直接用作 SQL 查询的一部分时发生。</td>
+</tr>
+<tr>
+<td>Cross-Site Scripting&#x2F;HTML Injection</td>
+<td>当网页上显示准确的用户输入时发生。</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="Detection"><a href="#Detection" class="headerlink" title="Detection"></a>Detection</h1><h2 id="OS-Command-Injection"><a href="#OS-Command-Injection" class="headerlink" title="OS Command Injection"></a>OS Command Injection</h2><table>
+<thead>
+<tr>
+<th>Character</th>
+<th>URL-Encoded Character</th>
+<th>Executed Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>;</code></td>
+<td><code>%3b</code></td>
+<td>两个都</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td><code>%0a</code></td>
+<td>两个都</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td><code>%26</code></td>
+<td>两者（第二个输出通常首先显示）</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td><code>%7c</code></td>
+<td>两者（仅显示第二个输出）</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td><code>%26%26</code></td>
+<td>两者（仅当第一个成功时）</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td><code>%7c%7c</code></td>
+<td>第二（仅当第一失败时）</td>
+</tr>
+<tr>
+<td><code>``</code></td>
+<td><code>%60%60</code></td>
+<td>两者（仅限 Linux）</td>
+</tr>
+<tr>
+<td><code>$()</code></td>
+<td><code>%24%28%29</code></td>
+<td>两者（仅限 Linux）</td>
+</tr>
+</tbody></table>
+<h2 id="Other-Injection"><a href="#Other-Injection" class="headerlink" title="Other Injection"></a>Other Injection</h2><table>
+<thead>
+<tr>
+<th><strong>Injection Type</strong></th>
+<th><strong>Operators</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SQL Injection</td>
+<td><code>&#39;</code> <code>,</code> <code>;</code> <code>--</code> <code>/* */</code></td>
+</tr>
+<tr>
+<td>Command Injection</td>
+<td><code>;</code> <code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td>LDAP Injection</td>
+<td><code>*</code> <code>(</code> <code>)</code> <code>&amp;</code> <code>|</code></td>
+</tr>
+<tr>
+<td>XPath Injection</td>
+<td><code>&#39;</code> <code>or</code> <code>and</code> <code>not</code> <code>substring</code> <code>concat</code> <code>count</code></td>
+</tr>
+<tr>
+<td>OS Command Injection</td>
+<td><code>;</code> <code>&amp;</code> <code>|</code></td>
+</tr>
+<tr>
+<td>Code Injection</td>
+<td><code>&#39;</code> <code>;</code> <code>--</code> <code>/* */</code> <code>$()</code> <code>$&#123;&#125;</code> <code>#&#123;&#125;</code> <code>%&#123;&#125;</code> <code>^</code></td>
+</tr>
+<tr>
+<td>Directory Traversal&#x2F;File Path Traversal</td>
+<td><code>../</code> <code>..\\</code> <code>%00</code></td>
+</tr>
+<tr>
+<td>Object Injection</td>
+<td><code>;</code> <code>&amp;</code> <code>|</code></td>
+</tr>
+<tr>
+<td>XQuery Injection</td>
+<td><code>&#39;</code> <code>;</code> <code>--</code> <code>/* */</code></td>
+</tr>
+<tr>
+<td>Shellcode Injection</td>
+<td><code>\x</code> <code>\u</code> <code>%u</code> <code>%n</code></td>
+</tr>
+<tr>
+<td>Header Injection</td>
+<td><code>\n</code> <code>\r\n</code> <code>\t</code> <code>%0d</code> <code>%0a</code> <code>%09</code></td>
+</tr>
+</tbody></table>
+<h1 id="Bypassing"><a href="#Bypassing" class="headerlink" title="Bypassing"></a>Bypassing</h1><h2 id="Character-Filters"><a href="#Character-Filters" class="headerlink" title="Character Filters"></a>Character Filters</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3>
+	
+	</div>
+  <a type="button" href="/2024/10/16/pentest/web-pentest/Command Injections/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/10/14/pentest/web-pentest/File Upload/" >File Upload</a>
 		</h3>
 		</div>
@@ -162,63 +319,6 @@
 	
 	</div>
   <a type="button" href="/2024/10/14/pentest/web-pentest/File Upload/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/10/12/pentest/web-pentest/XSS/" >Cross-Site Scripting (XSS)</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-10-12  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>XSS 漏洞主要有三种类型：</p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Stored (Persistent) XSS</code></td>
-<td>最严重的 XSS 类型，发生在用户输入存储在后端数据库并在检索时显示（例如，帖子或评论）时</td>
-</tr>
-<tr>
-<td><code>Reflected (Non-Persistent) XSS</code></td>
-<td>用户输入经过后端服务器处理后显示在页面上，但未被存储（例如搜索结果或错误信息）时发生</td>
-</tr>
-<tr>
-<td><code>DOM-based XSS</code></td>
-<td>另一种非持久性 XSS 类型，当用户输入直接显示在浏览器中并完全在客户端处理，而无需到达后端服务器（例如，通过客户端 HTTP 参数或锚标记）时发生</td>
-</tr>
-</tbody></table>
-<h1 id="污染页面元素"><a href="#污染页面元素" class="headerlink" title="污染页面元素"></a>污染页面元素</h1><p>更改背景</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span> = <span class="string">&quot;#141d2b&quot;</span>&lt;/script&gt;  </span><br><span class="line">  </span><br><span class="line"># or  </span><br><span class="line">  </span><br><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">style</span>.<span class="property">background</span> = <span class="string">&quot;https://www.hackthebox.eu/images/logo-htb.svg&quot;</span>&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>更改标题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="variable language_">document</span>.<span class="property">title</span> = <span class="string">&#x27;HackTheBox Academy&#x27;</span>&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>更改文本</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;todo&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;New Text&quot;</span>  </span><br><span class="line">  </span><br><span class="line"># or  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;body&#x27;</span>)[<span class="number">0</span>].<span class="property">innerHTML</span> = <span class="string">&quot;New Text&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p> XSS payload</p>
-	
-	</div>
-  <a type="button" href="/2024/10/12/pentest/web-pentest/XSS/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -269,6 +369,8 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/BlockChain/">BlockChain<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -296,48 +398,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
 		 
 		</ul>
 	</div>
@@ -348,6 +450,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
+      </li>
     
       <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
@@ -363,10 +469,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>

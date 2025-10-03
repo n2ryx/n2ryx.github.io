@@ -137,6 +137,41 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/09/12/tools/tunnel/ligolo-ng/" >ligolo-ng</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-09-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">ligolo-ng » help</span><br><span class="line">    __    _             __                       </span><br><span class="line">   / /   (_)___ _____  / /___        ____  ____ _</span><br><span class="line">  / /   / / __ `/ __ \/ / __ \______/ __ \/ __ `/</span><br><span class="line"> / /___/ / /_/ / /_/ / / /_/ /_____/ / / / /_/ / </span><br><span class="line">/_____/_/\__, /\____/_/\____/     /_/ /_/\__, /  </span><br><span class="line">        /____/                          /____/   </span><br><span class="line"></span><br><span class="line">  Made in France ♥            by @Nicocha30!</span><br><span class="line">  Version: 0.6.2</span><br><span class="line"></span><br><span class="line">Ligolo-ng - An advanced, yet simple tunneling tool</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">=========</span><br><span class="line">  certificate_fingerprint   Show the current selfcert fingerprint</span><br><span class="line">  clear                     clear the screen</span><br><span class="line">  connect_agent             Attempt to connect to a bind agent</span><br><span class="line">  exit                      exit the shell</span><br><span class="line">  help                      use &#x27;help [command]&#x27; for command help</span><br><span class="line">  ifconfig                  Show agent interfaces</span><br><span class="line">  session                   Change the current relay agent</span><br><span class="line"></span><br><span class="line">Interfaces</span><br><span class="line">==========</span><br><span class="line">  interface_create, ifcreate                Create a new tuntap interface</span><br><span class="line">  interface_delete, ifdel                   Delete a tuntap interface</span><br><span class="line">  interface_list, iflist, route_list        List available tun interfaces</span><br><span class="line">  route_add, add_route, interface_route_add, interface_add_route  Add a route to a network interface</span><br><span class="line">  route_del, del_route, interface_route_del, interface_del_route  Delete a route</span><br><span class="line"></span><br><span class="line">Listeners</span><br><span class="line">=========</span><br><span class="line">  listener_add          Listen on the agent and redirect connections to the desired address</span><br><span class="line">  listener_list         List currently running listeners</span><br><span class="line">  listener_stop         Stop a listener</span><br><span class="line"></span><br><span class="line">Tunneling</span><br><span class="line">=========</span><br><span class="line">  tunnel_list           List active tunnels</span><br><span class="line">  tunnel_start, start   Start relaying connection to the current agent</span><br><span class="line">  tunnel_stop, stop     Stop the tunnel</span><br></pre></td></tr></table></figure>
+
+<h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Attack Host: 172.16.2.2/16</span><br><span class="line">Target Host1: 172.16.2.3/16 | 192.168.3.3/24</span><br><span class="line">Target Host2: 192.168.3.4/24 | 192.168.4.4/24</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="Pivot"><a href="#Pivot" class="headerlink" title="Pivot"></a>Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ./proxy -selfcert [-laddr 0.0.0.0:11601]</span><br><span class="line">ligolo-ng » ifcreate --name ligolo1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target Host1</span></span><br><span class="line">./agent -connect 172.16.2.2:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host ligolo-ng</span></span><br><span class="line">ligolo-ng » INFO[0008] Agent joined ......</span><br><span class="line">ligolo-ng » session</span><br><span class="line">[Agent : SESSION] » start --tun ligolo1</span><br><span class="line">[Agent : SESSION] » ifconfig  # 查看 Target Interface</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ip route add 192.168.3.0/24 dev ligolo1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">[Agent : SESSION] » route_add --name ligolo1 --route 192.168.3.0/24</span><br></pre></td></tr></table></figure>
+
+<h3 id="Double-Pivot"><a href="#Double-Pivot" class="headerlink" title="Double Pivot"></a>Double Pivot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 Interface</span></span><br><span class="line">ligolo-ng » ifcreate --name ligolo2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加监听器，将此 Agent:11601 端口的流量转发到 Proxy:11601 端口</span></span><br><span class="line">[Agent : SESSION] » listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Target Host2</span></span><br><span class="line">./agent- connect 192.168.3.3:11601 -ignore-cert</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host ligolo-ng</span></span><br><span class="line">[Agent : SESSION] » session  # 切换会话</span><br><span class="line">[Agent : SESSION-2] » start --tun ligolo2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Attack Host</span></span><br><span class="line">sudo ip route add 192.168.4.0/24 dev ligolo2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">[Agent : SESSION] » route_add --name ligolo2 --route 192.168.4.0/24</span><br></pre></td></tr></table></figure>
+
+<h3 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">listener 将此 Agent:2222 端口的流量转发到 Proxy:2222 端口</span></span><br><span class="line">[Agent : SESSION] » listener_add --addr 0.0.0.0:2222 --to 127.0.0.1:2222 --tcp </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">File Transfer or ...</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">python3 -m http.server 2222</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Bind Pivot Box</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">访问 240.0.0.1 可直接与绑定的 Pivot 交互</span></span><br><span class="line">sudo ip route add 240.0.0.1/32 dev ligolo</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Delete Interface</span></span><br><span class="line">ligolo-ng » interface_delete --name ligolo</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">OR</span></span><br><span class="line">sudo ip link delete ligolo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">OR</span></span><br><span class="line">sudo ifconfig ligolo down</span><br><span class="line">sudo ifconfig ligolo delete</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/09/12/tools/tunnel/ligolo-ng/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/09/tools/crack/hydra/" >hydra</a>
 		</h3>
 		</div>
@@ -235,118 +270,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/09/tools/crack/medusa/" >medusa</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-09  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">medusa [-h 主机名|-H 文件] [-u 用户名|-U 文件] [-p 密码|-P 文件] [-C 文件] -M 模块 [选项]</span><br><span class="line"></span><br><span class="line">-h [TEXT]    : 目标主机名或IP地址</span><br><span class="line">-H [FILE]    : 包含目标主机名或IP地址的文件</span><br><span class="line">-u [TEXT]    : 要测试的用户名</span><br><span class="line">-U [FILE]    : 包含要测试的用户名的文件</span><br><span class="line">-p [TEXT]    : 要测试的密码</span><br><span class="line">-P [FILE]    : 包含要测试的密码的文件</span><br><span class="line">-C [FILE]    : 包含组合项的文件。更多信息见README。</span><br><span class="line">-O [FILE]    : 将日志信息附加到指定文件</span><br><span class="line">-e [n/s/ns]  : 额外的密码检查选项（`n` 无密码，`s` 密码 = 用户名）</span><br><span class="line">-M [TEXT]    : 要执行的模块名称（不包括 `.mod` 扩展名）</span><br><span class="line">-m [TEXT]    : 传递给模块的参数。可以多次传递不同参数（如 `-m 参数1 -m 参数2` 等）</span><br><span class="line">-d           : 列出所有已知的模块</span><br><span class="line">-n [NUM]     : 使用非默认的TCP端口号</span><br><span class="line">-s           : 启用SSL</span><br><span class="line">-g [NUM]     : 连接超时的最大等待时间，单位为秒（默认 3 秒）</span><br><span class="line">-r [NUM]     : 重试之间的睡眠时间，单位为秒（默认 3 秒）</span><br><span class="line">-R [NUM]     : 重试次数，达到该次数后放弃，总尝试次数为 `NUM + 1`</span><br><span class="line">-c [NUM]     : 验证套接字可用时的等待时间，单位为微秒（默认 500 微秒）</span><br><span class="line">-t [NUM]     : 同时测试的登录数量</span><br><span class="line">-T [NUM]     : 同时测试的主机数量</span><br><span class="line">-L           : 每个线程使用一个用户名并行登录。默认是先处理所有用户名后再进行</span><br><span class="line">-f           : 找到第一个有效的用户名/密码后停止扫描主机</span><br><span class="line">-F           : 找到任何主机上的第一个有效用户名/密码后停止审计</span><br><span class="line">-b           : 屏蔽启动横幅</span><br><span class="line">-q           : 显示模块的使用信息</span><br><span class="line">-v [NUM]     : 设置详细输出级别 [0 - 6，数字越大越详细]</span><br><span class="line">-w [NUM]     : 错误调试输出级别 [0 - 10，数字越大越详细]</span><br><span class="line">-V           : 显示版本信息</span><br><span class="line">-Z [TEXT]    : 根据先前扫描的结果图恢复扫描</span><br></pre></td></tr></table></figure>
-
-
-
-<table>
-<thead>
-<tr>
-<th align="left">模块</th>
-<th>服务&#x2F;协议</th>
-<th>描述</th>
-<th>使用示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">FTP</td>
-<td>文件传输协议</td>
-<td>暴力破解 FTP 登录凭据，用于通过网络传输文件。</td>
-<td><code>medusa -M ftp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">HTTP</td>
-<td>超文本传输协议</td>
-<td>通过 HTTP（GET&#x2F;POST）对 Web 应用程序上的登录表单进行暴力破解。</td>
-<td><code>medusa -M http -h www.example.com -U users.txt -P passwords.txt -m DIR:/login.php -m FORM:username=^USER^&amp;password=^PASS^</code></td>
-</tr>
-<tr>
-<td align="left">IMAP</td>
-<td>互联网消息访问协议</td>
-<td>暴力破解 IMAP 登录，通常用于访问电子邮件服务器。</td>
-<td><code>medusa -M imap -h mail.example.com -U users.txt -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">MySQL</td>
-<td>MySQL 数据库</td>
-<td>暴力破解 MySQL 数据库凭证，常用于 Web 应用程序和数据库。</td>
-<td><code>medusa -M mysql -h 192.168.1.100 -u root -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">POP3</td>
-<td>邮局协议 3</td>
-<td>强制 POP3 登录，通常用于从邮件服务器检索电子邮件。</td>
-<td><code>medusa -M pop3 -h mail.example.com -U users.txt -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">RDP</td>
-<td>远程桌面协议</td>
-<td>暴力破解 RDP 登录，常用于 Windows 系统的远程桌面访问。</td>
-<td><code>medusa -M rdp -h 192.168.1.100 -u admin -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">SSH</td>
-<td>安全外壳 (SSH)</td>
-<td>暴力破解 SSH 登录，常用于安全远程访问。</td>
-<td><code>medusa -M ssh -h 192.168.1.100 -u root -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">SVN</td>
-<td>版本控制系统</td>
-<td>强制使用 Subversion（SVN）存储库进行版本控制。</td>
-<td><code>medusa -M svn -h 192.168.1.100 -u admin -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">Telnet</td>
-<td>Telnet 协议</td>
-<td>在旧系统上强制执行 Telnet 服务以执行远程命令。</td>
-<td><code>medusa -M telnet -h 192.168.1.100 -u admin -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">vnc</td>
-<td>虚拟网络计算</td>
-<td>强制获取远程桌面访问的 VNC 登录凭据。</td>
-<td><code>medusa -M vnc -h 192.168.1.100 -P passwords.txt</code></td>
-</tr>
-<tr>
-<td align="left">Web form</td>
-<td>暴力破解 Web 登录表单</td>
-<td>使用 HTTP POST 请求强制破解网站上的登录表单。</td>
-<td><code>medusa -M web-form -h www.example.com -U users.txt -P passwords.txt -m FORM:&quot;username=^USER^&amp;password=^PASS^:F=Invalid&quot;</code></td>
-</tr>
-</tbody></table>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">爆破 ssh</span></span><br><span class="line">medusa -h 192.168.0.100 -U usernames.txt -P passwords.txt -M ssh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">针对多个服务器</span></span><br><span class="line">medusa -H web_servers.txt -U usernames.txt -P passwords.txt -M http -m GET</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试空密码</span></span><br><span class="line">medusa -h 10.0.0.5 -U usernames.txt -e ns -M service_name</span><br></pre></td></tr></table></figure>
-
-
-
-<p>…</p>
-
-	
-	</div>
-  <a type="button" href="/2024/09/09/tools/crack/medusa/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -394,6 +317,8 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
+			<li><a href="/categories/BlockChain/">BlockChain<span>1</span></a></li>
+		
 			<li><a href="/categories/Java/">Java<span>12</span></a></li>
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
@@ -421,48 +346,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
-		   <li><a href="/tags">...<span>21</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>22</span></a></li>
 		 
 		</ul>
 	</div>
@@ -473,6 +398,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
+      </li>
     
       <li>
         <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
@@ -488,10 +417,6 @@
     
       <li>
         <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/14/pentest/web-pentest/File Upload/" ><i class="fa fa-file-o"></i>File Upload</a>
       </li>
     
   </ul>
