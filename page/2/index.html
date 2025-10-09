@@ -137,11 +137,11 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" >Windows Privilege Escalation</a>
+			<a href="/2024/11/11/pentest/privesc/Windows Privilege Escalation/" >Windows Privilege Escalation</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
-		<div class="date">post @ 2024-10-30  </div>
+		<div class="date">post @ 2024-11-11  </div>
 		</div>
 	</div>
 	
@@ -246,7 +246,7 @@
 <h1 id="Situational-Awareness"><a href="#Situational-Awareness" class="headerlink" title="Situational Awareness"></a>Situational Awareness</h1><h2 id="Network-Information"><a href="#Network-Information" class="headerlink" title="Network Information"></a>Network Information</h2><h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt; <span class="title">ipconfig</span> /<span class="title">all</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet1</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . :</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">vmxnet3</span> <span class="title">Ethernet</span> <span class="title">Adapter</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-<span class="title">C5</span>-4<span class="title">B</span></span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">No</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">f055:fefd</span>:<span class="title">b1b</span>:9919%9(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 192.168.20.56(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.255.0</span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : 192.168.20.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 151015510</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Ethernet</span> <span class="title">adapter</span> <span class="title">Ethernet0</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">   <span class="title">Connection</span>-<span class="title">specific</span> <span class="title">DNS</span> <span class="title">Suffix</span>  . : .\</span></span><br><span class="line"><span class="function">   <span class="title">Description</span> . . . . . . . . . . . : <span class="title">Intel</span>(<span class="title">R</span>) 82574<span class="title">L</span> <span class="title">Gigabit</span> <span class="title">Network</span> <span class="title">Connection</span></span></span><br><span class="line"><span class="function">   <span class="title">Physical</span> <span class="title">Address</span>. . . . . . . . . : 00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Enabled</span>. . . . . . . . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">Autoconfiguration</span> <span class="title">Enabled</span> . . . . : <span class="title">Yes</span></span></span><br><span class="line"><span class="function">   <span class="title">IPv6</span> <span class="title">Address</span>. . . . . . . . . . . : <span class="title">dead:beef</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Link</span>-<span class="title">local</span> <span class="title">IPv6</span> <span class="title">Address</span> . . . . . : <span class="title">fe80</span>::<span class="title">e4db</span>:5<span class="title">ea3</span>:2775:8<span class="title">d4d</span>%4(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">IPv4</span> <span class="title">Address</span>. . . . . . . . . . . : 10.129.43.8(<span class="title">Preferred</span>)</span></span><br><span class="line"><span class="function">   <span class="title">Subnet</span> <span class="title">Mask</span> . . . . . . . . . . . : 255.255.0.0</span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Obtained</span>. . . . . . . . . . : <span class="title">Thursday</span>, <span class="title">March</span> 25, 2021 9:24:45 <span class="title">AM</span></span></span><br><span class="line"><span class="function">   <span class="title">Lease</span> <span class="title">Expires</span> . . . . . . . . . . : <span class="title">Monday</span>, <span class="title">March</span> 29, 2021 1:28:44 <span class="title">PM</span></span></span><br><span class="line"><span class="function">   <span class="title">Default</span> <span class="title">Gateway</span> . . . . . . . . . : <span class="title">fe80</span>::250:56<span class="title">ff:feb9</span>:4<span class="title">ddf</span>%4</span></span><br><span class="line"><span class="function">                                       10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCP</span> <span class="title">Server</span> . . . . . . . . . . . : 10.129.0.1</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">IAID</span> . . . . . . . . . . . : 50352214</span></span><br><span class="line"><span class="function">   <span class="title">DHCPv6</span> <span class="title">Client</span> <span class="title">DUID</span>. . . . . . . . : 00-01-00-01-27-<span class="title">ED</span>-<span class="title">DB</span>-68-00-50-56-<span class="title">B9</span>-90-94</span></span><br><span class="line"><span class="function">   <span class="title">DNS</span> <span class="title">Servers</span> . . . . . . . . . . . : 1.1.1.1</span></span><br><span class="line"><span class="function">                                       8.8.8.8</span></span><br><span class="line"><span class="function">   <span class="title">NetBIOS</span> <span class="title">over</span> <span class="title">Tcpip</span>. . . . . . . . : <span class="title">Enabled</span></span></span><br><span class="line"><span class="function">   </span></span><br><span class="line"><span class="function">...<span class="title">SNPI</span>...</span></span><br></pre></td></tr></table></figure>
 	
 	</div>
-  <a type="button" href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/11/11/pentest/privesc/Windows Privilege Escalation/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -360,45 +360,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
 			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
 		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>22</span></a></li>
@@ -418,11 +418,11 @@
       </li>
     
       <li>
-        <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+        <a href="/2024/12/21/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
       </li>
     
       <li>
-        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+        <a href="/2024/11/11/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
       <li>

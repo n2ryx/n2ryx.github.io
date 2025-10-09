@@ -151,72 +151,14 @@
   <div class="row">
 	
 	
-		<h1 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a>Hello Ethernaut</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>查看这个合约的 info 函数 <code>contract.info()</code>，如果你使用的是 Chrome v62, 可以使用 <code>await contract.info()</code>。你应该已经在合约内找到帮你通过关卡的东西了。 当你知道你已经完成了这个关卡，通过这个页面的橙色按钮提交合约。 这会将你的实例发送回给 ethernaut， 然后来判断你是否完成了任务。</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info</span>()</span><br><span class="line"><span class="string">&#x27;You will find what you need in info1().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info1</span>()</span><br><span class="line"><span class="string">&#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info2</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="string">&#x27;The property infoNum holds the number of the next info method to call.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">infoNum</span>()</span><br><span class="line">i &#123;<span class="attr">negative</span>: <span class="number">0</span>, <span class="attr">words</span>: <span class="title class_">Array</span>(<span class="number">2</span>), <span class="attr">length</span>: <span class="number">1</span>, <span class="attr">red</span>: <span class="literal">null</span>&#125;<span class="attr">length</span>: 1<span class="attr">negative</span>: 0<span class="attr">red</span>: <span class="attr">nullwords</span>: (<span class="number">2</span>) [<span class="number">42</span>, 空白][[<span class="title class_">Prototype</span>]]: <span class="title class_">Object</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info42</span>()</span><br><span class="line"><span class="string">&#x27;theMethodName is the name of the next method.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">theMethodName</span>()</span><br><span class="line"><span class="string">&#x27;The method name is method7123949.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">method7123949</span>()</span><br><span class="line"><span class="string">&#x27;If you know the password, submit it to authenticate().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">password</span>()</span><br><span class="line"><span class="string">&#x27;ethernaut0&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">authenticate</span>(<span class="string">&#x27;ethernaut0&#x27;</span>)  <span class="comment">// 校验凭证并执行链上交易</span></span><br><span class="line">&#123;<span class="attr">tx</span>: <span class="string">&#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;</span>, <span class="attr">receipt</span>: &#123;…&#125;, <span class="attr">logs</span>: <span class="title class_">Array</span>(<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
+		<h1 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a>Hello Ethernaut</h1><p>查看这个合约的 info 函数 <code>contract.info()</code>，如果你使用的是 Chrome v62, 可以使用 <code>await contract.info()</code>。你应该已经在合约内找到帮你通过关卡的东西了。 当你知道你已经完成了这个关卡，通过这个页面的橙色按钮提交合约。 这会将你的实例发送回给 ethernaut， 然后来判断你是否完成了任务。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info</span>()</span><br><span class="line"><span class="string">&#x27;You will find what you need in info1().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info1</span>()</span><br><span class="line"><span class="string">&#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info2</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line"><span class="string">&#x27;The property infoNum holds the number of the next info method to call.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">infoNum</span>()</span><br><span class="line">i &#123;<span class="attr">negative</span>: <span class="number">0</span>, <span class="attr">words</span>: <span class="title class_">Array</span>(<span class="number">2</span>), <span class="attr">length</span>: <span class="number">1</span>, <span class="attr">red</span>: <span class="literal">null</span>&#125;<span class="attr">length</span>: 1<span class="attr">negative</span>: 0<span class="attr">red</span>: <span class="attr">nullwords</span>: (<span class="number">2</span>) [<span class="number">42</span>, 空白][[<span class="title class_">Prototype</span>]]: <span class="title class_">Object</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">info42</span>()</span><br><span class="line"><span class="string">&#x27;theMethodName is the name of the next method.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">theMethodName</span>()</span><br><span class="line"><span class="string">&#x27;The method name is method7123949.&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">method7123949</span>()</span><br><span class="line"><span class="string">&#x27;If you know the password, submit it to authenticate().&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">password</span>()</span><br><span class="line"><span class="string">&#x27;ethernaut0&#x27;</span></span><br><span class="line"><span class="keyword">await</span> contract.<span class="title function_">authenticate</span>(<span class="string">&#x27;ethernaut0&#x27;</span>)  <span class="comment">// 校验凭证并执行链上交易</span></span><br><span class="line">&#123;<span class="attr">tx</span>: <span class="string">&#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;</span>, <span class="attr">receipt</span>: &#123;…&#125;, <span class="attr">logs</span>: <span class="title class_">Array</span>(<span class="number">0</span>)&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Memo"><a href="#Memo" class="headerlink" title="Memo"></a>Memo</h2><p><strong>Ethernaut help()</strong></p>
-<table>
-<thead>
-<tr>
-<th>（索引）</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>player</td>
-<td>‘当前玩家地址’</td>
-</tr>
-<tr>
-<td>ethernaut</td>
-<td>‘主游戏合约’</td>
-</tr>
-<tr>
-<td>level</td>
-<td>‘当前关卡合约地址’</td>
-</tr>
-<tr>
-<td>contract</td>
-<td>‘当前关卡合约实例 (如果已创建)’</td>
-</tr>
-<tr>
-<td>instance</td>
-<td>‘当前关卡合约实例地址 (如果已创建)’</td>
-</tr>
-<tr>
-<td>version</td>
-<td>‘当前游戏版本’</td>
-</tr>
-<tr>
-<td>getBalance(address)</td>
-<td>‘获知地址可用ether数’</td>
-</tr>
-<tr>
-<td>getBlockNumber()</td>
-<td>‘获取当前网络区块数’</td>
-</tr>
-<tr>
-<td>sendTransaction({options})</td>
-<td>‘发送交易到’</td>
-</tr>
-<tr>
-<td>getNetworkId()</td>
-<td>‘获得以太网id’</td>
-</tr>
-<tr>
-<td>toWei(ether)</td>
-<td>‘从ether转换到wei’</td>
-</tr>
-<tr>
-<td>fromWei(wei)</td>
-<td>‘从wei转换到ether’</td>
-</tr>
-<tr>
-<td>deployAllContracts()</td>
-<td>‘Deploy all the remaining contracts on the current network.’</td>
-</tr>
-</tbody></table>
-<p><strong>交易对象</strong></p>
-<p>ethers.js &#x2F; web3.js 调用写入链上函数后返回的交易对象：</p>
+<h2 id="Memo"><a href="#Memo" class="headerlink" title="Memo"></a>Memo</h2><h3 id="交易对象"><a href="#交易对象" class="headerlink" title="交易对象"></a>交易对象</h3><p>ethers.js &#x2F; web3.js 调用写入链上函数后返回的交易对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;tx: &#x27;0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5&#x27;, receipt: &#123;…&#125;, logs: Array(0)&#125;</span><br><span class="line">/*</span><br><span class="line">	tx → 交易哈希</span><br><span class="line">	receipt → 交易回执</span><br><span class="line">	logs → 合约事件</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>可以在 <a target="_blank" rel="noopener" href="https://sepolia.etherscan.io/tx/0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5">Etherscan</a> 中查询 <code>0x62719934031a6ca365b6666f0e011ce0d28ee8ee5b93980bc7f480fdf6ea6ad5</code> 交易详情。</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2025/202510020012663.png" alt="image.png"></p>
 	
 	</div>
   <a type="button" href="/2025/09/01/blockchain/Ethernaut/#more" class="btn btn-default more">Read More</a>
@@ -229,11 +171,11 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2024/11/20/pentest/lateral/Active Directory Enumeration & Attacks/" >Active Directory Enumeration &amp; Attacks</a>
+			<a href="/2024/12/21/pentest/lateral/Active Directory Enumeration & Attacks/" >Active Directory Enumeration &amp; Attacks</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
-		<div class="date">post @ 2024-11-20  </div>
+		<div class="date">post @ 2024-12-21  </div>
 		</div>
 	</div>
 	
@@ -279,7 +221,7 @@
 </ul>
 	
 	</div>
-  <a type="button" href="/2024/11/20/pentest/lateral/Active Directory Enumeration & Attacks/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2024/12/21/pentest/lateral/Active Directory Enumeration & Attacks/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -359,45 +301,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
 			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>22</span></a></li>
@@ -417,11 +359,11 @@
       </li>
     
       <li>
-        <a href="/2024/11/20/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
+        <a href="/2024/12/21/pentest/lateral/Active Directory Enumeration &amp; Attacks/" ><i class="fa fa-file-o"></i>Active Directory Enumeratio...</a>
       </li>
     
       <li>
-        <a href="/2024/10/30/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
+        <a href="/2024/11/11/pentest/privesc/Windows Privilege Escalation/" ><i class="fa fa-file-o"></i>Windows Privilege Escalation</a>
       </li>
     
       <li>
