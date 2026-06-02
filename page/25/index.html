@@ -137,6 +137,43 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/11/11/java/base/URLDNS/" >URLDNS</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-11  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="URLDNS"><a href="#URLDNS" class="headerlink" title="URLDNS"></a>URLDNS</h2><p>触发反序列化的方法是readObject，直奔 HashMap 类的 readObject ⽅法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(ObjectInputStream s)</span></span><br><span class="line">    <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">    ObjectInputStream.<span class="type">GetField</span> <span class="variable">fields</span> <span class="operator">=</span> s.readFields();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Read loadFactor (ignore threshold)</span></span><br><span class="line">    <span class="type">float</span> <span class="variable">lf</span> <span class="operator">=</span> fields.get(<span class="string">&quot;loadFactor&quot;</span>, <span class="number">0.75f</span>);</span><br><span class="line">    <span class="keyword">if</span> (lf &lt;= <span class="number">0</span> || Float.isNaN(lf))</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidObjectException</span>(<span class="string">&quot;Illegal load factor: &quot;</span> + lf);</span><br><span class="line"></span><br><span class="line">    lf = Math.min(Math.max(<span class="number">0.25f</span>, lf), <span class="number">4.0f</span>);</span><br><span class="line">    HashMap.UnsafeHolder.putLoadFactor(<span class="built_in">this</span>, lf);</span><br><span class="line"></span><br><span class="line">    reinitialize();</span><br><span class="line"></span><br><span class="line">    s.readInt();                <span class="comment">// Read and ignore number of buckets</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">mappings</span> <span class="operator">=</span> s.readInt(); <span class="comment">// Read number of mappings (size)</span></span><br><span class="line">    <span class="keyword">if</span> (mappings &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidObjectException</span>(<span class="string">&quot;Illegal mappings count: &quot;</span> + mappings);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mappings == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// use defaults</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mappings &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">float</span> <span class="variable">fc</span> <span class="operator">=</span> (<span class="type">float</span>)mappings / lf + <span class="number">1.0f</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cap</span> <span class="operator">=</span> ((fc &lt; DEFAULT_INITIAL_CAPACITY) ?</span><br><span class="line">                   DEFAULT_INITIAL_CAPACITY :</span><br><span class="line">                   (fc &gt;= MAXIMUM_CAPACITY) ?</span><br><span class="line">                   MAXIMUM_CAPACITY :</span><br><span class="line">                   tableSizeFor((<span class="type">int</span>)fc));</span><br><span class="line">        <span class="type">float</span> <span class="variable">ft</span> <span class="operator">=</span> (<span class="type">float</span>)cap * lf;</span><br><span class="line">        threshold = ((cap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; MAXIMUM_CAPACITY) ?</span><br><span class="line">                     (<span class="type">int</span>)ft : Integer.MAX_VALUE);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Check Map.Entry[].class since it&#x27;s the nearest public type to</span></span><br><span class="line">        <span class="comment">// what we&#x27;re actually creating.</span></span><br><span class="line">        SharedSecrets.getJavaObjectInputStreamAccess().checkArray(s, Map.Entry[].class, cap);</span><br><span class="line">        <span class="meta">@SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span></span><br><span class="line">        Node&lt;K,V&gt;[] tab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> <span class="title class_">Node</span>[cap];</span><br><span class="line">        table = tab;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Read the keys and values, and put the mappings in the HashMap</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; mappings; i++) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            <span class="type">K</span> <span class="variable">key</span> <span class="operator">=</span> (K) s.readObject();</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">            <span class="type">V</span> <span class="variable">value</span> <span class="operator">=</span> (V) s.readObject();</span><br><span class="line">            putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一段for循环</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023//image-20231113120658086.png" alt="image-20231113120658086"></p>
+<p>注释：读取键和值，并将映射放在HashMap中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里计算了键名的hash值，跟进</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023//image-20231113121133713.png" alt="image-20231113121133713"></p>
+<p>键值不为空，会调用 hashCode，hashCode 初始值为 -1，跟进</p>
+	
+	</div>
+  <a type="button" href="/2023/11/11/java/base/URLDNS/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/11/10/java/base/Java反序列化-WebGoat/" >Java反序列化-WebGoat</a>
 		</h3>
 		</div>
@@ -163,56 +200,6 @@
 	
 	</div>
   <a type="button" href="/2023/11/10/java/base/Java反序列化-WebGoat/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/10/17/java/base/Java反序列化原理/" >Java反序列化原理</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-10-17  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Java反序列化原理"><a href="#Java反序列化原理" class="headerlink" title="Java反序列化原理"></a>Java反序列化原理</h2><h3 id="Serializable-接口的使用"><a href="#Serializable-接口的使用" class="headerlink" title="Serializable 接口的使用"></a>Serializable 接口的使用</h3><p>类需要被序列化和反序列化，需要实现接口 <code>java.io.Serializable</code></p>
-<p>Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Serializable</span> &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>序列化 调用 <code>ObjectOutputStream</code> 类的 <code>writeObject </code> 方法</p>
-<p>反序列化 调用 <code>ObjectInputStream</code> 类的 <code>readObject </code> 方法</p>
-</blockquote>
-<p><strong>注意：</strong></p>
-<blockquote>
-<p>只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。</p>
-<ol>
-<li>它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量</li>
-<li>一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口）</li>
-<li>一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化</li>
-<li>序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性）</li>
-<li>transient 标识的对象成员变量不参与序列化</li>
-<li>Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片</li>
-</ol>
-<p><strong>注：</strong>JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面</p>
-</blockquote>
-<h4 id="Person"><a href="#Person" class="headerlink" title="Person"></a>Person</h4>
-	
-	</div>
-  <a type="button" href="/2023/10/17/java/base/Java反序列化原理/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -271,7 +258,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -292,45 +279,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
 			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+		
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -346,6 +333,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -359,10 +350,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -392,7 +379,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

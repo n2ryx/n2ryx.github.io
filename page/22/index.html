@@ -137,6 +137,40 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/12/12/vuln/2016 Shiro 1.2.4反序列化漏洞/" >Shiro 1.2.4反序列化漏洞(CVE-2016-4437)</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-12-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Shiro-1-2-4反序列化漏洞-CVE-2016-4437"><a href="#Shiro-1-2-4反序列化漏洞-CVE-2016-4437" class="headerlink" title="Shiro 1.2.4反序列化漏洞(CVE-2016-4437)"></a>Shiro 1.2.4反序列化漏洞(CVE-2016-4437)</h2><h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>Apache Shiro 1.2.4及以前版本中，加密的用户信息序列化后存储在名为remember-me的Cookie中。攻击者可以使用Shiro的默认密钥伪造用户Cookie，触发Java反序列化漏洞，进而在目标机器上执行任意命令。</p>
+<p>Shiro1.2.4：<a target="_blank" rel="noopener" href="https://github.com/apache/shiro/releases/tag/shiro-root-1.2.4">https://github.com/apache/shiro/releases/tag/shiro-root-1.2.4</a></p>
+<p>编辑 shiro&#x2F;web 目录下的 pom.xml，将 jstl 的版本修改为1.2</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>IDEA导入 mvn 项目，配置 tomcat 环境</p>
+<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231205101411888.png" alt="image-20231205101411888">	</p>
+<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>根据漏洞描述，Shiro≤1.2.4 版本默认使用 <code>CookieRememberMeManager</code>，当获取用户请求时，大致的关键处理过程如下：</p>
+	
+	</div>
+  <a type="button" href="/2023/12/12/vuln/2016 Shiro 1.2.4反序列化漏洞/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/11/30/java/cc/CommonsCollections/" >CommonsCollections</a>
 		</h3>
 		</div>
@@ -164,36 +198,6 @@
 	
 	</div>
   <a type="button" href="/2023/11/30/java/cc/CommonsCollections/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/11/20/java/cc/CC3/" >CC3</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-11-20  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="CC3"><a href="#CC3" class="headerlink" title="CC3"></a>CC3</h2><h3 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h3><h4 id="defineClass"><a href="#defineClass" class="headerlink" title="defineClass()"></a>defineClass()</h4><p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231120165750378.png" alt="image-20231120165750378"></p>
-<h3 id="TemplatesImpl"><a href="#TemplatesImpl" class="headerlink" title="TemplatesImpl"></a>TemplatesImpl</h3><h4 id="defineClass-1"><a href="#defineClass-1" class="headerlink" title="defineClass()"></a>defineClass()</h4><p>default，本类调用</p>
-<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2023/image-20231120171117187.png" alt="image-20231120171117187"></p>
-<h4 id="defineTransletClasses"><a href="#defineTransletClasses" class="headerlink" title="defineTransletClasses()"></a>defineTransletClasses()</h4><p>private，继续找</p>
-	
-	</div>
-  <a type="button" href="/2023/11/20/java/cc/CC3/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -252,7 +256,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -273,45 +277,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
-		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -327,6 +331,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -340,10 +348,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -373,7 +377,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

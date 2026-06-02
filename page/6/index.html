@@ -137,6 +137,43 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/10/02/pentest/lateral/File Transfer/" >File Transfer</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-10-02  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">php -S 0.0.0.0:port</span><br><span class="line">python3 -m http.server [port]		# 默认端口为 8000</span><br><span class="line">ruby -run -e httpd . [-p port]		# 默认端口为 8080</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">wget http://ip/file</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">curl -O http://ip/file</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx-PUT"><a href="#Nginx-PUT" class="headerlink" title="Nginx PUT"></a>Nginx PUT</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /var/www/uploads/SecretUploadDirectory</span><br><span class="line">sudo chown -R www-data:www-data /var/www/uploads/SecretUploadDirectory</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;upload.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 9001;</span><br><span class="line">    </span><br><span class="line">    location /SecretUploadDirectory/ &#123;</span><br><span class="line">        root    /var/www/uploads;</span><br><span class="line">        dav_methods PUT;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>链接到<code>sites-enabled</code>目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /etc/nginx/sites-available/upload.conf /etc/nginx/sites-enabled/</span><br></pre></td></tr></table></figure>
+
+<p>启动服务</p>
+	
+	</div>
+  <a type="button" href="/2024/10/02/pentest/lateral/File Transfer/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/09/30/pentest/lateral/Shells/" >Shells</a>
 		</h3>
 		</div>
@@ -167,73 +204,6 @@
 	
 	</div>
   <a type="button" href="/2024/09/30/pentest/lateral/Shells/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/09/25/pentest/web-pentest/XXE/" >XML External Entity (XXE)</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-09-25  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>当 XML 数据未经适当清理或安全解析而从用户控制的输入中获取时，就会出现 <code>XML External Entity (XXE)</code> 漏洞。</p>
-<h1 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h1><p><code>Extensible Markup Language (XML)</code>是一种通用标记语言（类似于 HTML 和 SGML），旨在各种类型的应用程序中灵活地传输和存储数据和文档。</p>
-<h2 id="XML-Document"><a href="#XML-Document" class="headerlink" title="XML Document"></a>XML Document</h2><p>XML 文档的基本示例：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">email</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">date</span>&gt;</span>01-01-2022<span class="tag">&lt;/<span class="name">date</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">time</span>&gt;</span>10:00 am UTC<span class="tag">&lt;/<span class="name">time</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">sender</span>&gt;</span>john@inlanefreight.com<span class="tag">&lt;/<span class="name">sender</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">recipients</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">to</span>&gt;</span>HR@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">cc</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">to</span>&gt;</span>billing@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">to</span>&gt;</span>payslips@inlanefreight.com<span class="tag">&lt;/<span class="name">to</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">cc</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">recipients</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>  </span><br><span class="line">  Hello,  </span><br><span class="line">      Kindly share with me the invoice for the payment made on January 1, 2022.  </span><br><span class="line">  Regards,  </span><br><span class="line">  John  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>XML 文档的一些关键元素：</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Definition</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Tag</code></td>
-<td>XML 文档的键，通常用 ( <code>&lt;</code>&#x2F; <code>&gt;</code>) 字符括起来。</td>
-<td><code>&lt;date&gt;</code></td>
-</tr>
-<tr>
-<td><code>Entity</code></td>
-<td>XML 变量，通常用 ( <code>&amp;</code>&#x2F; <code>;</code>) 字符括起来。</td>
-<td><code>&amp;lt;</code></td>
-</tr>
-<tr>
-<td><code>Element</code></td>
-<td>根元素或其任何子元素，其值存储在开始标记和结束标记之间。</td>
-<td><code>&lt;date&gt;01-01-2022&lt;/date&gt;</code></td>
-</tr>
-<tr>
-<td><code>Attribute</code></td>
-<td>存储在标签中的任何元素的可选规范，可供 XML 解析器使用。</td>
-<td><code>version=&quot;1.0&quot;</code>&#x2F;<code>encoding=&quot;UTF-8&quot;</code></td>
-</tr>
-<tr>
-<td><code>Declaration</code></td>
-<td>通常是 XML 文档的第一行，定义解析时使用的 XML 版本和编码。</td>
-<td><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</code></td>
-</tr>
-</tbody></table>
-<h2 id="XML-Document-Type-Definition-DTD"><a href="#XML-Document-Type-Definition-DTD" class="headerlink" title="XML Document Type Definition (DTD)"></a>XML Document Type Definition (DTD)</h2><p><code>XML Document Type Definition (DTD)</code> 允许根据预定义的文档结构验证 XML 文档。预定义的文档结构可以在文档本身或外部文件中定义。</p>
-	
-	</div>
-  <a type="button" href="/2024/09/25/pentest/web-pentest/XXE/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -292,7 +262,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -313,45 +283,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
-		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
 			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
-		
-			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
-		
-			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
-			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/General/">General<span>1</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -367,6 +337,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -380,10 +354,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -413,7 +383,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

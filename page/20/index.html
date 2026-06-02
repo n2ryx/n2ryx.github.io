@@ -137,6 +137,41 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2024/02/20/python/Python Prototype Pollution/" >Python Prototype Pollution</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2024-02-20  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Python-Prototype-Pollution"><a href="#Python-Prototype-Pollution" class="headerlink" title="Python Prototype Pollution"></a>Python Prototype Pollution</h2><p>Python原型链污染通常是指通过某种方式非法地修改了对象的原型链，导致对象访问到了不应该访问到的属性或方法，或者对象的属性被非法地修改</p>
+<p>Python中，这通常意味着通过修改类的<code>__dict__</code>或对象的<code>__class__</code>属性，来实现对类或对象属性的非法修改</p>
+<h3 id="基类"><a href="#基类" class="headerlink" title="基类"></a>基类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__) <span class="comment"># &lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(string.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">function</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__) <span class="comment"># &lt;class &#x27;function&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(function.__class__.__base__) <span class="comment"># &lt;class &#x27;object&#x27;&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">father</span>:</span><br><span class="line">    secret = <span class="string">&quot;xxxx&quot;</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_a</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">son_b</span>(<span class="title class_ inherited__">father</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将源字典 src 中的键值对合并到目标对象 dst 中</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">src, dst</span>):</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> src.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(dst, <span class="string">&#x27;__getitem__&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> dst.get(k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">                merge(v, dst.get(k))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dst[k] = v</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">hasattr</span>(dst, k) <span class="keyword">and</span> <span class="built_in">type</span>(v) == <span class="built_in">dict</span>:</span><br><span class="line">            merge(v, <span class="built_in">getattr</span>(dst, k))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">setattr</span>(dst, k, v)</span><br><span class="line"></span><br><span class="line">instance = son_b()</span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">&quot;__class__&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;__base__&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;secret&quot;</span>: <span class="string">&quot;no&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># xxxx</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># xxxx</span></span><br><span class="line"></span><br><span class="line">merge(payload, instance)</span><br><span class="line"><span class="built_in">print</span>(son_a.secret) <span class="comment"># no</span></span><br><span class="line"><span class="built_in">print</span>(instance.secret) <span class="comment"># no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 污染内置属性</span></span><br><span class="line"><span class="comment"># payload = &#123;</span></span><br><span class="line"><span class="comment">#     &quot;__class__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#         &quot;__base__&quot; : &#123;</span></span><br><span class="line"><span class="comment">#             &quot;__str__&quot; : &quot;Polluted&quot;</span></span><br><span class="line"><span class="comment">#         &#125;</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># print(father.__str__) #&lt;slot wrapper &#x27;__str__&#x27; of &#x27;object&#x27; objects&gt;</span></span><br><span class="line"><span class="comment"># merge(payload, instance)</span></span><br><span class="line"><span class="comment"># print(father.__str__) #Polluted</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="无法污染的Object"><a href="#无法污染的Object" class="headerlink" title="无法污染的Object"></a>无法污染的Object</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge(payload, <span class="built_in">object</span>)</span><br><span class="line"><span class="comment"># 报错：TypeError: can&#x27;t set attributes of built-in/extension type &#x27;object&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="全局变量获取"><a href="#全局变量获取" class="headerlink" title="全局变量获取"></a>全局变量获取</h3>
+	
+	</div>
+  <a type="button" href="/2024/02/20/python/Python Prototype Pollution/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2024/02/02/javascript/Javascript Prototype Pollution/" >JavaScript Prototype Pollution</a>
 		</h3>
 		</div>
@@ -162,45 +197,6 @@
 	
 	</div>
   <a type="button" href="/2024/02/02/javascript/Javascript Prototype Pollution/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2024/01/29/pentest/web-pentest/SSRF/" >Server-Side Request Forgery (SSRF)</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2024-01-29  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p><img src="https://raw.githubusercontent.com/n2ryx/images/main/2024/image-1727233862238.png" alt="img"></p>
-<p>example</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span>(<span class="params"><span class="variable">$url</span></span>)</span>&#123;  </span><br><span class="line">    <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$curlobj</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">    <span class="variable">$result</span>=<span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">curl</span>(<span class="variable">$url</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssrf.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&quot;REMOTE_ADDR&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> === <span class="string">&quot;127.0.0.1&quot;</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;passwd&quot;</span>] === <span class="string">&quot;adminTrue&quot;</span>)&#123;</span><br><span class="line">		<span class="title function_ invoke__">readfile</span>(<span class="string">&quot;/flag&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;no&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;not 127.0.0.1&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?url=http://127.0.0.1/ssrf.php?passwd=adminTrue</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h2 id="利用协议"><a href="#利用协议" class="headerlink" title="利用协议"></a>利用协议</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">dict://</span><br><span class="line">gopher://</span><br><span class="line">ftp://</span><br><span class="line">sftp://</span><br><span class="line">ldap://</span><br><span class="line">tftp://</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>file:&#x2F;&#x2F;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file://</span><br><span class="line">file:///etc/passwd</span><br><span class="line">file:///etc/hosts</span><br><span class="line">file:///proc/net/arp</span><br><span class="line">file:///proc/net/fib_trie</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2024/01/29/pentest/web-pentest/SSRF/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -259,7 +255,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -280,45 +276,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
 		
-			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
+			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
+		
+			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
 		
 			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
 		
 			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
 		
 			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
 		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+		
+			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
 		
 			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
 		
-			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
+			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/Http/">Http<span>1</span></a></li>
-		
-			<li><a href="/tags/General/">General<span>1</span></a></li>
-		
-			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
-		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -334,6 +330,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -347,10 +347,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -380,7 +376,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>

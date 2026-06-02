@@ -137,6 +137,56 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/10/17/java/base/Java反序列化原理/" >Java反序列化原理</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-10-17  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Java反序列化原理"><a href="#Java反序列化原理" class="headerlink" title="Java反序列化原理"></a>Java反序列化原理</h2><h3 id="Serializable-接口的使用"><a href="#Serializable-接口的使用" class="headerlink" title="Serializable 接口的使用"></a>Serializable 接口的使用</h3><p>类需要被序列化和反序列化，需要实现接口 <code>java.io.Serializable</code></p>
+<p>Java 提供的序列化接口 Serializable ，是一个空接口，没有成员方法和变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Serializable</span> &#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Example</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>序列化 调用 <code>ObjectOutputStream</code> 类的 <code>writeObject </code> 方法</p>
+<p>反序列化 调用 <code>ObjectInputStream</code> 类的 <code>readObject </code> 方法</p>
+</blockquote>
+<p><strong>注意：</strong></p>
+<blockquote>
+<p>只有实现了Serializable或者Externalizable接口的类的对象才能被序列化为字节序列，否则会抛出异常。Externalizable 接口继承自Serializable接口，实现 Externalizable接口的类完全由自身来控制序列化的行为，而仅实现 Serializable 接口的类可以采用默认的序列化方式。</p>
+<ol>
+<li>它是Java 提供的序列化接口，是一个空接口，没有成员方法和变量</li>
+<li>一个类要想序列化就必须继承java.io.Serializable接口，同时它的子类也可以序列化（不用再继承Serializable接口）</li>
+<li>一个实现Serializable 接口的子类也是可以被序列化的。在反序列化过程中，它的父类如果没有实现序列化接口，那么父类将需要提供无参构造函数来重新创建对象，这样做的目的是重新初始化父类的属性，父类对应的属性不会被序列化</li>
+<li>序列化只能保存对象的非静态成员变量，不能保存任何的成员方法和静态的成员变量，而且序列化保存的只是变量的值，对于变量的任何修饰符都不能保存。即序列化是保存对象的状态（对象属性）</li>
+<li>transient 标识的对象成员变量不参与序列化</li>
+<li>Serializable 在序列化和反序列化过程中大量使用了反射，因此其过程会产生的大量的内存碎片</li>
+</ol>
+<p><strong>注：</strong>JAVA会被称为八股文，原因在于它的一个小知识点里会有很多细节在里面</p>
+</blockquote>
+<h4 id="Person"><a href="#Person" class="headerlink" title="Person"></a>Person</h4>
+	
+	</div>
+  <a type="button" href="/2023/10/17/java/base/Java反序列化原理/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/10/13/java/base/Java反射&动态代理/" >Java反射&amp;动态代理</a>
 		</h3>
 		</div>
@@ -180,43 +230,6 @@
 	
 	</div>
   <a type="button" href="/2023/10/13/java/base/Java反射&动态代理/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/10/10/java/base/Java基础/" >Java基础</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-10-10  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h3><p><strong>编译运行</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java源文件 -&gt; class字节码文件 -&gt; java运行class文件</span><br><span class="line">javac java文件  # 输出class字节码文件</span><br><span class="line">java class文件</span><br></pre></td></tr></table></figure>
-
-<p><strong>Hello World</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWord</span> &#123;  <span class="comment">// 与文件名一致</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;  <span class="comment">// 主函数</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>主函数</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>输入输出</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner</span><br><span class="line"></span><br><span class="line"><span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">q</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line"><span class="type">String</span> <span class="variable">c</span> <span class="operator">=</span> sc.next();</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">System.out.println(值);  <span class="comment">// 换行</span></span><br><span class="line">sout  <span class="comment">// 匹配 </span></span><br><span class="line"></span><br><span class="line">System.out.print(值);    <span class="comment">// 不换行</span></span><br></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2023/10/10/java/base/Java基础/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -275,7 +288,7 @@
 		
 			<li><a href="/categories/Others/">Others<span>2</span></a></li>
 		
-			<li><a href="/categories/Pentest/">Pentest<span>16</span></a></li>
+			<li><a href="/categories/Pentest/">Pentest<span>17</span></a></li>
 		
 			<li><a href="/categories/Php/">Php<span>2</span></a></li>
 		
@@ -298,43 +311,43 @@
 		
 			<li><a href="/tags/Service-Test/">Service-Test<span>1</span></a></li>
 		
-			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
-		
-			<li><a href="/tags/Tunnel/">Tunnel<span>1</span></a></li>
-		
-			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
-		
-			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
-		
-			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
-		
-			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
+			<li><a href="/tags/Base/">Base<span>5</span></a></li>
 		
 			<li><a href="/tags/Payload/">Payload<span>1</span></a></li>
 		
-			<li><a href="/tags/Base/">Base<span>5</span></a></li>
+			<li><a href="/tags/Pollution/">Pollution<span>2</span></a></li>
 		
-			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
+			<li><a href="/tags/JNDI/">JNDI<span>1</span></a></li>
+		
+			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
+		
+			<li><a href="/tags/Lateral-Movement/">Lateral-Movement<span>3</span></a></li>
+		
+			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
+		
+			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
+		
+			<li><a href="/tags/Enumeration/">Enumeration<span>4</span></a></li>
+		
+			<li><a href="/tags/Crack/">Crack<span>2</span></a></li>
+		
+			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
+		
+			<li><a href="/tags/Hash/">Hash<span>1</span></a></li>
+		
+			<li><a href="/tags/RMI/">RMI<span>1</span></a></li>
 		
 			<li><a href="/tags/Shiro/">Shiro<span>1</span></a></li>
 		
-			<li><a href="/tags/HTB/">HTB<span>10</span></a></li>
+			<li><a href="/tags/Http/">Http<span>1</span></a></li>
+		
+			<li><a href="/tags/CommonsCollections/">CommonsCollections<span>5</span></a></li>
 		
 			<li><a href="/tags/Ethernaut/">Ethernaut<span>1</span></a></li>
 		
 			<li><a href="/tags/General/">General<span>1</span></a></li>
 		
-			<li><a href="/tags/Deserialize/">Deserialize<span>7</span></a></li>
-		
-			<li><a href="/tags/CISCN/">CISCN<span>2</span></a></li>
-		
-			<li><a href="/tags/Log4j2/">Log4j2<span>1</span></a></li>
-		
 			<li><a href="/tags/Web-Pentest/">Web-Pentest<span>9</span></a></li>
-		
-			<li><a href="/tags/Fastjson/">Fastjson<span>1</span></a></li>
-		
-			<li><a href="/tags/Privesc/">Privesc<span>3</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>23</span></a></li>
@@ -350,6 +363,10 @@
   <ul class="entry list-unstyled">
     
       <li>
+        <a href="/2025/12/31/pentest/full-pentest/" ><i class="fa fa-file-o"></i>Full-Pentest</a>
+      </li>
+    
+      <li>
         <a href="/2025/09/01/blockchain/Ethernaut/" ><i class="fa fa-file-o"></i>Ethernaut</a>
       </li>
     
@@ -363,10 +380,6 @@
     
       <li>
         <a href="/2024/10/25/pentest/privesc/Linux Privilege Escalation/" ><i class="fa fa-file-o"></i>Linux Privilege Escalation</a>
-      </li>
-    
-      <li>
-        <a href="/2024/10/16/pentest/web-pentest/Command Injections/" ><i class="fa fa-file-o"></i>Command Injections</a>
       </li>
     
   </ul>
@@ -396,7 +409,7 @@
   <div class="container-narrow">
   <footer> <p>
   
-  &copy; 2025 n2ryx's Blog
+  &copy; 2026 n2ryx's Blog
   
       powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
 </p>
